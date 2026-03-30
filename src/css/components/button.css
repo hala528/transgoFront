@@ -1,0 +1,14 @@
+.btn{
+    background-color: white;
+    outline: none;
+    border: 0;
+    padding: 20px 20px;
+    border-radius: 6px;
+}
+.btn-primary{
+    background-color: green;
+    color: white;
+    font-size: 15px ;
+    cursor: pointer;
+    width: 41%;
+}

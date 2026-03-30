@@ -1,0 +1,108 @@
+import { useState } from "react";
+import { LOGIN } from "../../api/api";
+import { Axios } from "../../api/axios";
+import LoadingSubmit from "../../components/laoding/loading";
+import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom";
+
+export default function Login() {
+  // States
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
+
+  const cookie = new Cookies();
+
+  // handle change
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  // handle submit
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    setErr("");
+
+    try {
+      const res = await Axios.post(`/${LOGIN}`, form);
+
+      const token = res.data.data.token;
+      const user = res.data.data.user;
+
+      
+      cookie.set("transtop", token, { path: "/dashboard" });
+
+    
+      cookie.set("user", user, { path: "/dashboard" });
+
+      setLoading(false);
+
+    
+     navigate('/dashboard' , {replace : true});
+    } catch (error) {
+      setLoading(false);
+
+      if (error.response && error.response.status === 422) {
+        setErr("email or password failed");
+      } else {
+        setErr("internet server error");
+      }
+    }
+  }
+
+  return (
+    <>
+      {loading && <LoadingSubmit />}
+
+      <div className="login-page">
+        <div className="login-card">
+
+          {/* LEFT SIDE */}
+          <div className="logo-box"></div>
+
+          {/* RIGHT SIDE */}
+          <div className="login-right">
+            <form className="form" onSubmit={handleSubmit}>
+              <h2>Welcome Back</h2>
+              <p className="subtitle">Login to continue your journey</p>
+
+              <div className="form-custom">
+                <input
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="Enter Email :"
+                  required
+                />
+              </div>
+
+              <div className="form-custom">
+                <input
+                  name="password"
+                  type="password"
+                  value={form.password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                  required
+                />
+              </div>
+
+              <span className="forgot">Forgot Password?</span>
+
+              <button className="btn-login">Login →</button>
+
+              {err !== "" && <span className="error">{err}</span>}
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}

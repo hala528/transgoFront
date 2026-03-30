@@ -1,0 +1,4 @@
+export const beasURL = "http://127.0.0.1:8000/api/v1/admin";
+
+export const REGISTER = "register";
+export const LOGIN = "login";

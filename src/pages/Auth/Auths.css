@@ -1,0 +1,178 @@
+/* الخلفية العامة */
+.login-page{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+padding: 20px;
+    background: radial-gradient(circle at top left, var(--bg-gradient-start), var(--bg-dark));
+}
+
+/* الكارد */
+.login-card{
+    
+    display: flex;
+    width: 100%;
+    height: 32rem;
+
+    border-radius: 10px;
+    overflow: hidden;
+   
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+.logo-box{
+    width: 50%;
+  background-image:
+     url(../../assest/logo.jpg);
+    background-position: center;/*مكان الصووة بالنسبة للتعنصر */
+    background-size: cover;/*تغطي كامل العنصر */
+    background-repeat: no-repeat;
+}
+
+/* LEFT */
+.login-left{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    position: relative;
+}
+
+.logo-box h1{
+    font-size: 40px;
+    color: white;
+    letter-spacing: 2px;
+}
+
+/* RIGHT */
+.login-right{
+    flex: 1;
+    padding: 40px;
+    color: white;
+}
+
+/* النصوص */
+.login-right h2{
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.subtitle{
+    font-size: 14px;
+    color: #cbd5f5;
+    margin-bottom: 25px;
+}
+.form-custom {
+    margin-bottom: 20px;/*مسافة بين العناصر */
+    position: relative;
+  }
+   .form-custom label ,  .form-custom input{
+     display: block;
+  }
+
+/* الفورم */
+ .form-custom input {
+padding: 20px 20px;
+    outline: none;
+    border-radius: 3px;
+    border: 0;
+   background-color: rgba(255, 255, 255, 0.08);
+    width: 100%;
+    border-bottom: 3px solid transparent;
+    font-family: "Lato" , sans-serif;
+    color: #cbd5f5;
+   
+  }
+  .form-custom input:focus:valid{
+    border-bottom: 3px solid green;
+  }
+  .form-custom input:focus:not(valid){
+
+     border-bottom: 3px solid red;
+  }
+   .form-custom input:placeholder-shown + label{
+    opacity: 0;
+    visibility: hidden;
+    top: 20px;
+    left: 20px;
+
+  }
+  .form-custom label{
+    position: absolute;
+    top: -20px;
+    left: 0px;
+    font-size: 13px;
+    color: #cbd5f5;
+    font-weight: bold;
+    transition: 0.3s;
+   
+  }
+/* forgot */
+.forgot{
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: #93c5fd;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+/* زر login */
+.btn-login{
+    
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+
+    margin-bottom: 15px;
+}
+.otp-container input {
+  
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  text-align: center;
+  font-size: 50px;
+  border-radius: 2px;
+  border: 1px solid var(--border-light);
+background-color: rgba(255, 255, 255, 0.08);
+ 
+}
+
+.otp-container input:focus {
+  border-color: var(--primary-purple);
+}
+
+
+
+
+/* error */
+.error{
+    color: #f87171;
+    margin-top: 10px;
+    display: block;
+}
+
+/* responsive */
+@media(max-width: 768px){
+    .login-card{
+        flex-direction: column;
+        height: auto;
+        width: 90%;
+    }
+
+    .login-left{
+        height: 150px;
+    }
+}
