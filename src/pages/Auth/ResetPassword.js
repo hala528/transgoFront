@@ -1,19 +1,21 @@
-import axios from "axios";
+
 import { useState } from "react"
-import { beasURL , LOGIN} from "../../api/api";
+import { beasURL , RESETPASSWORD} from "../../api/api";
 import LoadingSubmit from "../../components/laoding/loading";
+import { Axios } from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 export default function RestPassword(){
     //States
-   const[form,setForm] = useState({
-          
-          
-           password:"",
-           newpassword:"",
-       
-       });
+   const [form, setForm] = useState({
+  email: "",
+  password: "",
+  password_confirmation: "",
+});
+const [success, setSuccess] = useState("");
        //loading 
        const [loading,setLoading] = useState(false);
+       const navigate = useNavigate();
        //رسالة الخطا
         const[err,errset]=useState("")
        //handleChange 
@@ -22,24 +24,34 @@ export default function RestPassword(){
    
        }
        //hand submit
-      async function handleSubmit(e){
-         e.preventDefault();
-         setLoading(true);
-         try{
-            await axios.post(`${beasURL}/${LOGIN}`, form)
-            setLoading(false);
-            window.location.pathname="/" ;
+    async function handleSubmit(e) {
+  e.preventDefault();
+  setLoading(true);
+  errset("");
+  setSuccess("");
+
+  try {
+    const res = await Axios.post(`${beasURL}/${RESETPASSWORD}`, form);
+
+    setLoading(false);
+
+    setSuccess(res.data.message || "تم تغيير كلمة المرور بنجاح");
+
    
-         }
-         catch(err){
-           setLoading(false);
-           if(err.response.status=== 422){
-             errset('email or password failed')
-           }else{
-             errset('internet server error')
-           }
-         }
-       }
+    setTimeout(() => {
+     navigate("/login");
+    }, 2000);
+
+  } catch (err) {
+    setLoading(false);
+
+    if (err.response) {
+      errset(err.response.data.message || "حدث خطأ");
+    } else {
+      errset("Server error");
+    }
+  }
+}
    
        return (
         <>
@@ -60,30 +72,40 @@ export default function RestPassword(){
 
             <h2>Updata Your Password</h2>
             <p className="subtitle">Set a secure password for your first login</p>
-
            <div className="form-custom">
-              <input
-                name="password"
-                type="password"
-                value={form.password}
-                onChange={handleChange}
-                placeholder="Conforam Password"
-                required
-              />
-           
-            </div>
-            <p className="subtitle">confarm your password</p>
+  <input
+    name="email"
+    type="email"
+    value={form.email}
+    onChange={handleChange}
+    placeholder="Enter email"
+    required
+  />
+</div>
 
-            <div className="form-custom">
-              <input
-                name="newpassword"
-                type="password"
-                value={form.password}
-                onChange={handleChange}
-                placeholder="Conforam Password"
-                required
-              />
-            </div>
+<div className="form-custom">
+  <input
+    name="password"
+    type="password"
+    value={form.password}
+    onChange={handleChange}
+    placeholder="Enter new password"
+    required
+  />
+</div>
+
+<p className="subtitle">Confirm your password</p>
+
+<div className="form-custom">
+  <input
+    name="password_confirmation"
+    type="password"
+    value={form.password_confirmation}
+    onChange={handleChange}
+    placeholder="Confirm password"
+    required
+  />
+</div>
 
          
 
@@ -91,7 +113,8 @@ export default function RestPassword(){
 
            
 
-            {err !== "" && <span className="error">{err}</span>}
+            {success !== "" && <span className="success">{success}</span>}
+{err !== "" && <span className="error">{err}</span>}
           </form>
         </div>
 

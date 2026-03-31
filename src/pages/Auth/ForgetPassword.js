@@ -1,17 +1,21 @@
-import axios from "axios";
+
 import { useState } from "react"
-import { beasURL , LOGIN} from "../../api/api";
+import { beasURL , SENDOTP} from "../../api/api";
 import LoadingSubmit from "../../components/laoding/loading";
+import { useNavigate } from "react-router-dom";
+import { Axios } from "../../api/axios";
 
 
 export default function ForgetPassword(){
      //States
    const[form,setForm] = useState({
           
-           number:"",
+           email:"",
           
        
        });
+       const [success, setSuccess] = useState("");
+         const navigate = useNavigate();
        //loading 
        const [loading,setLoading] = useState(false);
        //رسالة الخطا
@@ -22,24 +26,33 @@ export default function ForgetPassword(){
    
        }
        //hand submit
-      async function handleSubmit(e){
-         e.preventDefault();
-         setLoading(true);
-         try{
-            await axios.post(`${beasURL}/${LOGIN}`, form)
-            setLoading(false);
-            window.location.pathname="/" ;
+     async function handleSubmit(e) {
+  e.preventDefault();
+  setLoading(true);
+  errset("");
+  setSuccess("");
+
+  try {
+    const res = await Axios.post(`${beasURL}/${SENDOTP}`, form);
+
+    setLoading(false);
+
+    // رسالة نجاح من السيرفر
+    setSuccess(res.data.message || "تم إرسال الرمز بنجاح");
+
    
-         }
-         catch(err){
-           setLoading(false);
-           if(err.response.status=== 422){
-             errset('email or password failed')
-           }else{
-             errset('internet server error')
-           }
-         }
-       }
+     navigate("/otp");
+
+  } catch (err) {
+    setLoading(false);
+
+    if (err.response) {
+      errset(err.response.data.message || "حدث خطأ");
+    } else {
+      errset("Server error");
+    }
+  }
+}
    
        return (
         <>
@@ -59,15 +72,15 @@ export default function ForgetPassword(){
           <form className="form" onSubmit={handleSubmit}>
 
             <h2>Forget Password</h2>
-            <p className="subtitle">enter your number :</p>
+            <p className="subtitle">enter your Email :</p>
 
             <div className="form-custom">
               <input
-                name="number"
-                type="number"
-                value={form.number}
+                name="email"
+                type="email"
+                value={form.email}
                 onChange={handleChange}
-                placeholder="Phone Number"
+                placeholder="Enter email"
                 required
               />
             </div>
@@ -78,7 +91,8 @@ export default function ForgetPassword(){
             <button className="btn-login">OK →</button>
 
            
-
+            {success !== "" && <span className="success">{success}</span>}
+{err !== "" && <span className="error">{err}</span>}
             {err !== "" && <span className="error">{err}</span>}
           </form>
         </div>

@@ -3,7 +3,7 @@ import { LOGIN } from "../../api/api";
 import { Axios } from "../../api/axios";
 import LoadingSubmit from "../../components/laoding/loading";
 import Cookies from "universal-cookie";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   // States
@@ -36,10 +36,10 @@ export default function Login() {
       const user = res.data.data.user;
 
       
-      cookie.set("transtop", token, { path: "/dashboard" });
+      cookie.set("transtop", token, { path: "/" });
 
     
-      cookie.set("user", user, { path: "/dashboard" });
+      cookie.set("user", user, { path: "/" });
 
       setLoading(false);
 
@@ -94,7 +94,7 @@ export default function Login() {
                 />
               </div>
 
-              <span className="forgot">Forgot Password?</span>
+              <Link to="/forgetPassword" className="forgot" > Forgot Password? </Link>
 
               <button className="btn-login">Login →</button>
 
