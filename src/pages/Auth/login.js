@@ -43,8 +43,15 @@ export default function Login() {
 
       setLoading(false);
 
+
+
+if (user.must_change_password) {
+  navigate("/first", { replace: true } ,  { email: user.email });
+} else {
+  navigate("/dashboard", { replace: true } );
+}
     
-     navigate('/dashboard' , {replace : true});
+   
     } catch (error) {
       setLoading(false);
 

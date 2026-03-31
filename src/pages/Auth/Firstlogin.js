@@ -1,111 +1,143 @@
-import axios from "axios";
-import { useState } from "react"
-import { beasURL , LOGIN} from "../../api/api";
+import { useState } from "react";
+import { Axios } from "../../api/axios";
+import { beasURL ,FIRSTLOGIN } from "../../api/api"; // إذا لازلت تحتاج baseURL
 import LoadingSubmit from "../../components/laoding/loading";
+import { useNavigate } from "react-router-dom";
 
-export default function FirstLogin(){
-    //States
-   const[form,setForm] = useState({
-          
-           email:"",
-           password:""
-       
-       });
-       //loading 
-       const [loading,setLoading] = useState(false);
-       //رسالة الخطا
-        const[err,errset]=useState("")
-       //handleChange 
-       function handleChange(e){
-   setForm({...form, [e.target.name]:e.target.value})
-   
-       }
-       //hand submit
-      async function handleSubmit(e){
-         e.preventDefault();
-         setLoading(true);
-         try{
-            await axios.post(`${beasURL}/${LOGIN}`, form)
-            setLoading(false);
-            window.location.pathname="/" ;
-   
-         }
-         catch(err){
-           setLoading(false);
-           if(err.response.status=== 422){
-             errset('email or password failed')
-           }else{
-             errset('internet server error')
-           }
-         }
-       }
-   
-       return (
-        <>
-    {loading && <LoadingSubmit />}
-    
-    <div className="login-page">
-      <div className="login-card">
+export default function FirstLogin() {
+  const [form, setForm] = useState({
+    email: "",
+    current_password: "",
+    new_password: "",
+    new_password_confirmation: "",
+  });
 
-        {/* LEFT SIDE */}
-       <div className="logo-box">
-  
-  
-</div>
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
+  const [success, setSuccess] = useState("");
 
-        {/* RIGHT SIDE */}
-        <div className="login-right">
-          <form className="form" onSubmit={handleSubmit}>
+  const navigate = useNavigate();
 
-            <h2>Updata Your Password</h2>
-           
-             <div className="form-custom">
-              <input
-                name="oldpassword"
-                type="password"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="Old Password"
-                required
-              />
-            </div>
-             <p className="subtitle">enter your new password</p>
+  // handle input changes
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
 
-            <div className="form-custom">
-              <input
-                name="password"
-                type="password"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="New Password"
-                required
-              />
-            </div>
-            <p className="subtitle">confarm your password</p>
+  // handle submit
+async function handleSubmit(e) {
+  e.preventDefault();
+  setLoading(true);
+  setErr("");
+  setSuccess("");
 
-            <div className="form-custom">
-              <input
-                name="password"
-                type="password"
-                value={form.password}
-                onChange={handleChange}
-                placeholder="Conforam Password"
-                required
-              />
-            </div>
+  // تحقق محلي قبل الإرسال
+  if (form.new_password !== form.new_password_confirmation) {
+    setErr("Password confirmation does not match.");
+    setLoading(false);
+    return;
+  }
 
-         
+  try {
+    const data = new FormData();
+    data.append("email", form.email);
+    data.append("current_password", form.current_password);
+    data.append("new_password", form.new_password);
+    data.append("new_password_confirmation", form.new_password_confirmation);
 
-            <button className="btn-login">Login →</button>
+    const res = await Axios.post(`${beasURL}/${FIRSTLOGIN}`, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
-           
+    setLoading(false);
 
-            {err !== "" && <span className="error">{err}</span>}
-          </form>
+    if (res.data.success) {
+      setSuccess(res.data.message || "Password changed successfully!");
+      console.log("Success Response:", res.data);
+      setTimeout(() => navigate("/login"), 1500);
+    }
+  } catch (error) {
+    setLoading(false);
+    console.log("Full Error Object:", error);
+    if (error.response) {
+      console.log("Error Response Data:", error.response.data);
+      setErr(
+        error.response.data.message ||
+        (error.response.data.errors
+          ? Object.values(error.response.data.errors).flat().join(", ")
+          : "Server error")
+      );
+    } else {
+      setErr("Network error, check your connection.");
+    }
+  }
+}
+
+  return (
+    <>
+      {loading && <LoadingSubmit />}
+
+      <div className="login-page">
+        <div className="login-card">
+          {/* LEFT SIDE */}
+          <div className="logo-box"></div>
+
+          {/* RIGHT SIDE */}
+          <div className="login-right">
+            <form className="form" onSubmit={handleSubmit}>
+              <h2>Update Your Password</h2>
+
+              <div className="form-custom">
+                <input
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder="email"
+                  required
+                />
+              </div>
+
+              <div className="form-custom">
+                <input
+                  name="current_password"
+                  type="password"
+                  value={form.current_password}
+                  onChange={handleChange}
+                  placeholder="Old Password"
+                  required
+                />
+              </div>
+
+              <div className="form-custom">
+                <input
+                  name="new_password"
+                  type="password"
+                  value={form.new_password}
+                  onChange={handleChange}
+                  placeholder="New Password"
+                  required
+                />
+              </div>
+
+              <div className="form-custom">
+                <input
+                  name="new_password_confirmation"
+                  type="password"
+                  value={form.new_password_confirmation}
+                  onChange={handleChange}
+                  placeholder="Confirm New Password"
+                  required
+                />
+              </div>
+
+              <button className="btn-login">Update Password →</button>
+
+              {err && <span className="error">{err}</span>}
+              {success && <span className="success">{success}</span>}
+            </form>
+          </div>
         </div>
-
       </div>
-    </div>
-  </>
-);
-   } 
+    </>
+  );
+}
