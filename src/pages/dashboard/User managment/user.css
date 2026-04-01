@@ -3,7 +3,7 @@
     --bs-table-color: white;
     --bs-table-border-color: #cbd5f5;
 
-    --bs-table-striped-bg: #9591c7; /* الصف الثاني */
+    --bs-table-striped-bg: #9591c77e; /* الصف الثاني */
     --bs-table-striped-color: white;
 
     --bs-table-hover-bg: rgba(255, 255, 255, 0.15);

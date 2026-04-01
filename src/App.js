@@ -10,7 +10,7 @@ import RestPassword from './pages/Auth/ResetPassword';
 import FirstLogin from './pages/Auth/Firstlogin';
 import ManagmentDriver from './pages/dashboard/User managment/Driver';
 import AddDriver from './pages/dashboard/User managment/AddDriver';
-//import RequireAuth from './pages/Auth/RequireAuths';
+import RequireAuth from './pages/Auth/RequireAuths';
 
 function App() {
   return (
@@ -25,13 +25,13 @@ function App() {
 
 
          {/*route react */}
-       { /* <Route element={<RequireAuth />}>*/}
+         <Route element={<RequireAuth />}>
        <Route path='/dashboard' element={<Dashborad />}>
          <Route path='driver' element={<ManagmentDriver />} />
          <Route path='driver/:id'  element={<AddDriver />}  />
        </Route>
        
-      {/*</Route>*/}
+      </Route>
     </Routes>
      
 

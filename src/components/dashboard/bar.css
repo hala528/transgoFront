@@ -32,7 +32,7 @@
 }
 
 .side-bar{
-    position: sticky;
+   
     top: 70px;
     left: 0;
       background: radial-gradient(circle at top left, var(--bg-gradient-start), var(--bg-dark));
@@ -74,3 +74,10 @@
 a{
     text-decoration: none !important;
 }
+.subtitlebar{
+    font-size: 18px;
+    color: #cbd5f5;
+    font-weight: bold;
+   
+}
+

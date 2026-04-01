@@ -48,7 +48,7 @@ export default function Login() {
 if (user.must_change_password) {
   navigate("/first", { replace: true } ,  { email: user.email });
 } else {
-  navigate("/dashboard", { replace: true } );
+  navigate("/dashboard/driver", { replace: true } );
 }
     
    
