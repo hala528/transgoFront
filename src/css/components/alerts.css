@@ -1,9 +1,18 @@
 .error {
-    background-color: white;
+    background-color: #1e1b4b;
     color: #842029;
     padding: 15px 20px;
     margin-top: 20px;
     border-radius: 12px;
-    width: 80%;
+    width: 100%;
+    display: block;
+}
+.success {
+    background-color: #1e1b4b;
+    color: #08b12d;
+    padding: 15px 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    width: 100%;
     display: block;
 }

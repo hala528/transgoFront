@@ -11,30 +11,39 @@ import FirstLogin from './pages/Auth/Firstlogin';
 import ManagmentDriver from './pages/dashboard/User managment/Driver';
 import AddDriver from './pages/dashboard/User managment/AddDriver';
 import RequireAuth from './pages/Auth/RequireAuths';
+import Err403 from './pages/Auth/403';
+
 
 function App() {
   return (
     <div className="App">
-    <Routes>
-      <Route path='/' element={< Login />}></Route>
-      <Route path='/login' element={<Login />}></Route>
- <Route path='/forgetPassword' element={<ForgetPassword />}></Route>
-  <Route path='/otp' element={< CodePassword />}></Route>
-  <Route path='/resetPassword' element={< RestPassword />}></Route>
-      <Route path='/first' element={< FirstLogin />}></Route>
+      <Routes>
+        {/* Public */}
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="/otp" element={<CodePassword />} />
+        <Route path="/resetPassword" element={<RestPassword />} />
+        <Route path="/first" element={<FirstLogin />} />
 
+        {/* Protected */}
+        <Route element={<RequireAuth />}>
+          <Route path="/dashboard" element={<Dashborad />}>
+            
+            {/* Admin only */}
+            <Route element={<RequireAuth allowedRole="admin" />}>
+              <Route path="driver" element={<ManagmentDriver />} />
+              <Route path="driver/:id" element={<AddDriver />} />
+            </Route>
 
-         {/*route react */}
-         <Route element={<RequireAuth />}>
-       <Route path='/dashboard' element={<Dashborad />}>
-         <Route path='driver' element={<ManagmentDriver />} />
-         <Route path='driver/:id'  element={<AddDriver />}  />
-       </Route>
-       
-      </Route>
-    </Routes>
-     
+            {/* Shared */}
+           {/*<Route path="trips" element={<Trips />} />*/} 
 
+            {/* 403 */}
+            <Route path="403" element={<Err403 />} />
+          </Route>
+        </Route>
+      </Routes>
     </div>
   );
 }

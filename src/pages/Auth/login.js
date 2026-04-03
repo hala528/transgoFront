@@ -15,6 +15,7 @@ export default function Login() {
 
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+  const [success, setSuccess] = useState("");
 
   const cookie = new Cookies();
 
@@ -28,6 +29,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     setErr("");
+      setSuccess("");
 
     try {
       const res = await Axios.post(`/${LOGIN}`, form);
@@ -42,6 +44,7 @@ export default function Login() {
       cookie.set("user", user, { path: "/" });
 
       setLoading(false);
+      setSuccess(res.data.message || "تم تسجيل الدخول");
 
 
 
@@ -104,7 +107,7 @@ if (user.must_change_password) {
               <Link to="/forgetPassword" className="forgot" > Forgot Password? </Link>
 
               <button className="btn-login">Login →</button>
-
+{success && <span className="success">{success}</span>}
               {err !== "" && <span className="error">{err}</span>}
             </form>
           </div>
