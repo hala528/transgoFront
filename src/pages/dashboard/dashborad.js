@@ -2,8 +2,8 @@ import { Outlet } from "react-router-dom";
 
 import SideBar from "../../components/dashboard/sideBar";
 import TopBar from "../../components/dashboard/topBar";
-import "C:/Users/User/Desktop/tranGo/frontend/src/pages/dashboard/dashborad.css"
-
+// import "C:/Users/User/Desktop/tranGo/frontend/src/pages/dashboard/dashborad.css"
+import "../dashboard/dashborad.css"
 export default function Dashborad(){
     return(
 

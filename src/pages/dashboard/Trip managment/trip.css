@@ -1,192 +1,215 @@
-/* Trips.css */
-
-
-
-/* أزرار الفلترة */
-.card-driver button {
-  transition: 0.3s;
-}
-.card-driver button:hover {
-  opacity: 0.8;
+.t-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:14px;
 }
 
-/* زر Live Map */
-.live-map-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(0, 255, 0, 0.2);
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 1px solid rgba(0, 255, 0, 0.5);
-  color: white;
-  font-size: 12px;
-}
-.live-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: limegreen;
-  animation: blink 1s infinite;
-}
-.live-text {
-  font-weight: 500;
+.t-card{
+  background:rgba(30,27,75,0.7);
+  border-radius:12px;
+  padding:14px;
+  border:1px solid rgba(255,255,255,0.05);
 }
 
-/* Delayed Trips */
-.delayed-trips-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 0, 0, 0.2);
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: 1px solid rgba(255, 0, 0, 0.5);
-  color: white;
-  font-size: 12px;
-}
-.delayed-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: red;
-  animation: blink 1s infinite;
-}
-.delayed-text {
-  font-weight: 500;
+.t-card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:6px;
 }
 
-/* Animation Blink */
-@keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75% { opacity: 0; }
+.t-id{
+  color:white;
+  font-weight:600;
 }
 
-/* Search Input */
-.custom-input-driver {
-  transition: 0.3s;
-}
-.custom-input-driver:focus {
-  outline: none;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+.t-route{
+  color:#cbd5f5;
+  font-size:13px;
 }
 
-/* الكروت */
-.t-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+.t-driver{
+  color:white;
+  font-size:13px;
+  margin-top:6px;
 }
 
-.t-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: transform 0.2s;
-}
-.t-card:hover {
-  transform: translateY(-3px);
+.t-type{
+  color:#cbd5f5;
+  font-size:12px;
 }
 
-/* هيدر الكرت */
-.t-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.t-id {
-  font-size: 12px;
-  color: #cbd5f5;
-  font-weight: 500;
+.t-time{
+  color:#94a3b8;
+  font-size:12px;
+  margin-top:4px;
 }
 
-/* صورة السيارة */
-.t-car-img {
+.t-actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+
+.t-btn-view{
+  background:linear-gradient(90deg,var(--primary-blue),var(--primary-purple));
+  border:none;
+  width:100%;
+}
+
+.t-btn-cancel{
+  width:90px;
+}
+
+.t-driver-row{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:6px;
+}
+
+.t-driver-img{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid rgba(255,255,255,0.15);
+}
+
+.t-driver-name{
+  color:white;
+  font-size:13px;
+  font-weight:500;
+}
+
+.t-car-img{
   width: 100%;
-  height: 100px;
+  max-width: 250px;
+  height: 70px;
   object-fit: contain;
-  margin: 4px 0;
+  margin:6px 0;
+  opacity:0.9;
+  border-radius: 12px;
 }
 
-/* Route Visual */
 .t-route-visual {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: flex-start;
+  position: relative;
+  margin: 10px 0;
+  gap: 20px;
 }
+
 .t-stop-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-}
-.t-stop {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: white;
-}
-.t-stop-from { background: #4ade80; }
-.t-stop-to { background: #f87171; }
-.t-line {
-  height: 2px;
-  background: #cbd5f5;
-  margin-left: 4px;
-  margin-right: 4px;
-}
-
-/* سطر السائق */
-.t-driver-row {
-  display: flex;
-  align-items: center;
   gap: 8px;
+  position: relative;
 }
-.t-driver-img {
-  width: 24px;
-  height: 24px;
+
+.t-line {
+  position: absolute;
+  left: 6px;
+  top: 14px;
+  height: calc(100% - 28px);
+  width: 3px;
+  background: #888;
+  border-radius: 2px;
+  z-index: 0;
+}
+
+.t-stop {
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
+  background: transparent;
+  border-width: 2px;
+  border-style: solid;
+  flex-shrink: 0;
 }
-.t-driver-name {
+
+.t-stop-from { border-color: #3b82f6; }
+.t-stop-to { border-color: #a855f7; }
+
+.t-stop-label {
   font-size: 12px;
-  color: #cbd5f5;
-  font-weight: 500;
-}
-
-/* نوع الرحلة */
-.t-type {
-  font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  text-align: center;
-  font-weight: 500;
-}
-.t-type-right {
-  align-self: flex-end;
-}
-
-/* الوقت والتاريخ */
-.t-time {
-  font-size: 11px;
-  color: #cbd5f5;
-}
-
-/* أزرار الكرت */
-.t-actions {
-  display: flex;
-  gap: 6px;
-  margin-top: 4px;
-}
-.t-btn-view {
-  background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
-  border: none;
   color: white;
-  font-size: 11px;
 }
-.t-btn-cancel {
+
+.delayed-trips-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(248, 113, 113, 0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
   font-size: 11px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+}
+
+.delayed-trips-btn .delayed-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f87171;
+  animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.delayed-trips-btn .delayed-text {
+  white-space: nowrap;
+}
+
+.driver-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.t-type-right {
+  text-align: right;
+  margin-top: 4px;
+  color: #cbd5f5;
+  font-size: 12px;
+}
+
+.live-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(132, 250, 176, 0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+}
+
+.live-map-btn .live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.live-map-btn .live-text {
+  white-space: nowrap;
 }
