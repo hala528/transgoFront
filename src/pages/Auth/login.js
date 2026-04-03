@@ -36,10 +36,10 @@ export default function Login() {
 
       const token = res.data.data.token;
       const user = res.data.data.user;
-
+     const role = res.data.data.role;
       
       cookie.set("transtop", token, { path: "/" });
-
+   cookie.set("role", role, { path: "/" });
     
       cookie.set("user", user, { path: "/" });
 

@@ -12,6 +12,7 @@ import ManagmentDriver from './pages/dashboard/User managment/Driver';
 import AddDriver from './pages/dashboard/User managment/AddDriver';
 import RequireAuth from './pages/Auth/RequireAuths';
 import Err403 from './pages/Auth/403';
+import Trips from './pages/dashboard/Trip managment/Trips';
 
 
 function App() {
@@ -33,11 +34,12 @@ function App() {
             {/* Admin only */}
             <Route element={<RequireAuth allowedRole="admin" />}>
               <Route path="driver" element={<ManagmentDriver />} />
-              <Route path="driver/:id" element={<AddDriver />} />
+              <Route path='driver/:id' element={<AddDriver />} />
+             
             </Route>
 
             {/* Shared */}
-           {/*<Route path="trips" element={<Trips />} />*/} 
+           <Route path="trips" element={<Trips />} />
 
             {/* 403 */}
             <Route path="403" element={<Err403 />} />

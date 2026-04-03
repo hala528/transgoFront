@@ -1,0 +1,192 @@
+/* Trips.css */
+
+
+
+/* أزرار الفلترة */
+.card-driver button {
+  transition: 0.3s;
+}
+.card-driver button:hover {
+  opacity: 0.8;
+}
+
+/* زر Live Map */
+.live-map-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 255, 0, 0.2);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid rgba(0, 255, 0, 0.5);
+  color: white;
+  font-size: 12px;
+}
+.live-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: limegreen;
+  animation: blink 1s infinite;
+}
+.live-text {
+  font-weight: 500;
+}
+
+/* Delayed Trips */
+.delayed-trips-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 0, 0, 0.2);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  color: white;
+  font-size: 12px;
+}
+.delayed-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: red;
+  animation: blink 1s infinite;
+}
+.delayed-text {
+  font-weight: 500;
+}
+
+/* Animation Blink */
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+/* Search Input */
+.custom-input-driver {
+  transition: 0.3s;
+}
+.custom-input-driver:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+/* الكروت */
+.t-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.t-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s;
+}
+.t-card:hover {
+  transform: translateY(-3px);
+}
+
+/* هيدر الكرت */
+.t-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.t-id {
+  font-size: 12px;
+  color: #cbd5f5;
+  font-weight: 500;
+}
+
+/* صورة السيارة */
+.t-car-img {
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  margin: 4px 0;
+}
+
+/* Route Visual */
+.t-route-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.t-stop-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.t-stop {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+}
+.t-stop-from { background: #4ade80; }
+.t-stop-to { background: #f87171; }
+.t-line {
+  height: 2px;
+  background: #cbd5f5;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+/* سطر السائق */
+.t-driver-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.t-driver-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+.t-driver-name {
+  font-size: 12px;
+  color: #cbd5f5;
+  font-weight: 500;
+}
+
+/* نوع الرحلة */
+.t-type {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  text-align: center;
+  font-weight: 500;
+}
+.t-type-right {
+  align-self: flex-end;
+}
+
+/* الوقت والتاريخ */
+.t-time {
+  font-size: 11px;
+  color: #cbd5f5;
+}
+
+/* أزرار الكرت */
+.t-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.t-btn-view {
+  background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
+  border: none;
+  color: white;
+  font-size: 11px;
+}
+.t-btn-cancel {
+  font-size: 11px;
+}
