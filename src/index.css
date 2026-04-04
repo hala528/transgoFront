@@ -1,12 +1,12 @@
-/* global rules */
+
 :root{
-    /* الالوان الاساسية*/
+    
    --primary-blue: #3b82f6;
     --primary-purple: #a855f7;
      --primary-bluee: 59, 130, 246;
   --primary-purplee: 168, 85, 247;
 
-    /* الوان الخلفية*/
+    
     --bg-dark: #020617;
     --bg-gradient-start: #1e1b4b;
     

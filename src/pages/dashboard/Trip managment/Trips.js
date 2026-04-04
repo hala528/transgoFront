@@ -2,6 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import carImg from "../../../assest/CAR.PNG";
+import LiveMap from "./LiveMap";
 
 export default function Trips() {
   const [filter, setFilter] = useState("all");
@@ -9,11 +10,11 @@ export default function Trips() {
   const [activeView, setActiveView] = useState("");
 
   const trips = [
-    { id: 1042, status: "pending", from: "Damascus", to: "Aleppo", driver: "Ahmad Karimi", type: "Shared", time: "10:30 AM", date: "14 Apr" },
-    { id: 1043, status: "active", from: "Homs", to: "Latakia", driver: "Sara Mahmoud", type: "Private", time: "11:00 AM", date: "14 Apr" },
-    { id: 1044, status: "completed", from: "Aleppo", to: "Damascus", driver: "Khalid Omar", type: "Shared", time: "09:00 AM", date: "13 Apr" },
-    { id: 1045, status: "cancelled", from: "Tartus", to: "Homs", driver: "Lina Hassan", type: "Private", time: "02:00 PM", date: "12 Apr" },
-    { id: 1046, status: "active", from: "Damascus", to: "Tartus", driver: "Mohamad Rami", type: "Shared", time: "01:00 PM", date: "14 Apr" },
+    { id: 1042, status: "pending", from: "Damascus", to: "Aleppo", driver: "Ahmad Karimi", type: "Shared", time: "10:30 AM", date: "14 Apr", lat: 33.5138, lng: 36.2765 },
+    { id: 1043, status: "active", from: "Homs", to: "Latakia", driver: "Sara Mahmoud", type: "Private", time: "11:00 AM", date: "14 Apr", lat: 34.7300, lng: 36.7100 },
+    { id: 1044, status: "active", from: "Aleppo", to: "Damascus", driver: "Khalid Omar", type: "Shared", time: "09:00 AM", date: "13 Apr", lat: 36.2021, lng: 37.1343 },
+    { id: 1045, status: "cancelled", from: "Tartus", to: "Homs", driver: "Lina Hassan", type: "Private", time: "02:00 PM", date: "12 Apr", lat: 34.8970, lng: 36.7200 },
+    { id: 1046, status: "active", from: "Damascus", to: "Tartus", driver: "Mohamad Rami", type: "Shared", time: "01:00 PM", date: "14 Apr", lat: 33.5138, lng: 36.2765 },
   ];
 
   const statusStyle = {
@@ -37,16 +38,14 @@ export default function Trips() {
   return (
     <div className="w-100 p-2">
       <h2 style={{ color: "white", flex: 1, padding: 5 }}>Management Trips :</h2>
+
       <div className="card-driver d-flex justify-content-between align-items-center px-3 mb-3">
         <div className="d-flex gap-2 align-items-center">
           {["all", "pending", "active", "completed", "cancelled"].map((f) => (
             <Button
               key={f}
               size="sm"
-              onClick={() => {
-                setFilter(f);
-                setActiveView(""); // رجّع activeView فارغ عند الضغط على فلتر
-              }}
+              onClick={() => { setFilter(f); setActiveView(""); }}
               style={{
                 background: filter === f ? "linear-gradient(90deg, var(--primary-blue), var(--primary-purple))" : "rgba(255,255,255,0.08)",
                 border: "none",
@@ -59,18 +58,12 @@ export default function Trips() {
             </Button>
           ))}
 
-          <div
-            className="live-map-btn"
-            onClick={() => setActiveView("live")}
-          >
+          <div className="live-map-btn" onClick={() => setActiveView("live")}>
             <span className="live-dot"></span>
             <span className="live-text">Live Map</span>
           </div>
 
-          <div
-            className="delayed-trips-btn"
-            onClick={() => setActiveView("delayed")}
-          >
+          <div className="delayed-trips-btn" onClick={() => setActiveView("delayed")}>
             <span className="delayed-dot"></span>
             <span className="delayed-text">Delayed Trips</span>
           </div>
@@ -81,23 +74,17 @@ export default function Trips() {
           placeholder="Search by ID or driver..."
           className="custom-input-driver"
           value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setActiveView(""); // رجّع activeView فارغ عند البحث
-          }}
-          style={{
-            width: "220px",
-            borderRadius: "10px",
-            color: "white",
-            background: "rgba(255,255,255,0.08)",
-          }}
+          onChange={(e) => { setSearch(e.target.value); setActiveView(""); }}
+          style={{ width: "220px", borderRadius: "10px", color: "white", background: "rgba(255,255,255,0.08)" }}
         />
       </div>
 
       <div className="t-grid">
-        {activeView === "live" || activeView === "delayed" ? (
+        {activeView === "live" ? (
+          <LiveMap trips={filtered.filter(t => (t.status === "active" || t.status === "pending") && t.lat && t.lng)} />
+        ) : activeView === "delayed" ? (
           <div style={{ color: "#cbd5f5", textAlign: "center", width: "100%", padding: "20px 0" }}>
-            Nothing
+            Delayed trips view (يمكن لاحقاً إضافة خريطة أو قائمة للرحلات المتأخرة)
           </div>
         ) : filtered.length === 0 ? (
           <div style={{ color: "#cbd5f5", textAlign: "center", width: "100%", padding: "20px 0" }}>
@@ -108,9 +95,13 @@ export default function Trips() {
             <div key={trip.id} className="t-card">
               <div className="t-card-header">
                 <span className="t-id">#{trip.id}</span>
-                <span style={{ ...statusStyle[trip.status], fontSize: 12, fontWeight: 500 }}>
-                  {trip.status.charAt(0).toUpperCase() + trip.status.slice(1)}
-                </span>
+              <div className={`t-status t-status-${trip.status}`}>
+  <span className="t-status-dot"></span>
+  <span className="t-status-text">
+    {trip.status.charAt(0).toUpperCase() + trip.status.slice(1)}
+  </span>
+</div>
+
               </div>
 
               <img src={carImg} className="t-car-img" alt="car" />
