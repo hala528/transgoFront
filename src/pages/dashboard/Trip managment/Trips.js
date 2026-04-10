@@ -130,7 +130,9 @@ export default function Trips() {
               <div className="t-time">{trip.time} · {trip.date}</div>
 
               <div className="t-actions">
-                <Link to={`/${trip.id}`} style={{ flex: 1 }}>
+              <Link to={`${trip.id}`} style={{ flex: 1 }}>
+
+
                   <Button size="sm" className="t-btn-view">view details</Button>
                 </Link>
                 <Button

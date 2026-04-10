@@ -14,6 +14,9 @@ import RequireAuth from './pages/Auth/RequireAuths';
 import Err403 from './pages/Auth/403';
 import Trips from './pages/dashboard/Trip managment/Trips';
 
+import TripDetails from "./pages/dashboard/Trip managment/TripDetails";
+
+
 
 function App() {
   return (
@@ -40,7 +43,7 @@ function App() {
 
             {/* Shared */}
            <Route path="trips" element={<Trips />} />
-
+<Route path="trips/:id" element={<TripDetails />} />
             {/* 403 */}
             <Route path="403" element={<Err403 />} />
           </Route>

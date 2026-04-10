@@ -1,0 +1,464 @@
+.trip-details-page{
+    padding:20px;
+    color:white;
+}
+
+/* header */
+.td-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.td-breadcrumb{
+    font-size:12px;
+    color:#8b8fc7;
+}
+
+.td-header h2{
+    font-size:20px;
+    margin-top:5px;
+}
+
+.td-badge{
+    background:#1f9d55;
+    color:white;
+    font-size:12px;
+    padding:4px 10px;
+    border-radius:20px;
+    margin-left:8px;
+}
+
+/* ===== HEADER ACTION BUTTONS (SAME AS VIEW DETAILS STYLE) ===== */
+
+.td-header-actions button {
+  width: 120px;
+  height: 34px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* Track on Map (بنفس البنفسجي تبع View Details) */
+.td-btn-map {
+  background: linear-gradient(90deg, #5b6cff, #7b3fe4);
+  color: white;
+  width: 10PX;
+}
+
+/* Cancel Trip (نفس الحجم بس لون مختلف لطيف) */
+.td-btn-cancel {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #ff6b6b;
+}
+
+/* hover موحد */
+.td-header-actions button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+
+/* layout */
+.td-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr; /* اليسار أعرض */
+  gap: 20px;
+  align-items: start;
+}
+
+.td-left,
+.td-right{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* cards */
+.td-card{
+    background:#14123a;
+    border-radius:14px;
+    padding:18px;
+    /* min-width:500px; */
+}
+
+/* info grid */
+.td-info-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:10px;
+}
+
+.td-info-box{
+    background:#0f0d30;
+    padding:12px;
+    border-radius:10px;
+}
+
+.td-info-box span{
+    font-size:11px;
+    color:#8b8fc7;
+}
+
+.td-info-box strong{
+    display:block;
+    margin-top:5px;
+}
+
+/* route */
+.td-route{
+    margin-top:15px;
+}
+
+.td-stop{
+    padding:10px;
+    border-radius:8px;
+    background:#0f0d30;
+    margin-bottom:8px;
+}
+
+/* table */
+.td-table{
+    width:100%;
+    margin-top:10px;
+    border-collapse:collapse;
+}
+
+.td-table th{
+    text-align:left;
+    font-size:12px;
+    color:#8b8fc7;
+    padding:8px;
+}
+
+.td-table td{
+    padding:10px;
+    border-top:1px solid rgba(255,255,255,0.05);
+}
+
+.td-confirmed{
+    color:#4ade80;
+}
+
+/* driver */
+.td-driver{
+    text-align:center;
+}
+
+.td-avatar{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:linear-gradient(90deg,#5b6cff,#7b3fe4);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.td-profile-btn{
+    width:100%;
+    margin-top:12px;
+    background:linear-gradient(90deg,#5b6cff,#7b3fe4);
+    border:none;
+}
+
+/* vehicle */
+.td-vehicle p{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+}
+
+.td-vehicle span{
+    color:#8b8fc7;
+}
+.td-title-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.td-back{
+    cursor:pointer;
+    color:#9ca3af;
+    font-size:18px;
+}
+
+.td-back:hover{
+    color:white;
+}
+
+.td-breadcrumb{
+    color:#9ca3af;
+    font-size:13px;
+}
+
+.td-separator{
+    color:#6b7280;
+}
+
+.td-title-row h2{
+    margin:0;
+    font-size:18px;
+}
+.td-title-icon {
+  margin-right: 8px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.td-title-icon.purple {
+  color: #8b7fff;
+}
+
+.td-title-icon.green {
+  color: #22c55e;
+}
+
+.td-box-icon {
+  margin-right: 6px;
+  font-size: 12px;
+  color: #8b7fff;
+}
+
+.td-right .td-card {
+  width: 360px;
+  max-width: 100%;
+}
+
+.td-route {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.td-route-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* top row (icon + text) */
+.td-route-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* text block */
+.td-route-text {
+  font-weight: 500;
+}
+
+.td-route-sub {
+  font-size: 12px;
+  color: #9ca3af; /* gray */
+  font-weight: 300;
+  margin-top: 2px;
+}
+
+/* gray line between stops */
+.td-line {
+  width: 2px;
+  height: 22px;
+  background: #d1d5db;
+  margin-left: 13px; /* aligns under circle */
+}
+.td-stop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+/* common badge style */
+.td-badge-a,
+.td-badge-b,
+.td-badge-c {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 14px;
+}
+
+/* A = green */
+.td-badge-a {
+  background: #22c55e;
+}
+
+/* B = yellow */
+.td-badge-b {
+  background: #facc15;
+  color: #111;
+}
+
+/* C = red */
+.td-badge-c {
+  background: #ef4444;
+}
+/* ===== BOOKINGS TABLE FULL DESIGN ===== */
+
+.td-booking-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 14px;
+  overflow: hidden;
+  color: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  margin-top: 10px;
+}
+
+/* HEADER */
+.td-booking-table thead {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.td-booking-table thead th {
+  padding: 14px;
+  text-align: left;
+  color: #cbd5e1;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  border: none;
+}
+
+/* ROWS */
+.td-booking-table tbody tr {
+  transition: 0.2s ease;
+}
+
+.td-booking-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* CELLS */
+.td-booking-table td {
+  padding: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: #e5e7eb;
+  font-size: 13px;
+}
+
+/* ===== STATUS COLORS ===== */
+
+/* Confirmed = Green */
+.td-status-confirmed {
+  color: #22c55e;
+  font-weight: 600;
+}
+/* STATUS TEXT ONLY */
+
+.td-status-confirmed {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.td-status-pending {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.td-status-cancelled {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+
+/* ===== ACTION BUTTON ===== */
+
+.td-btn-action {
+  background: linear-gradient(90deg, #4f46e5, #a855f7);
+  border: none;
+  width: 90px;
+  font-size: 12px;
+  border-radius: 8px;
+  color: white;
+  padding: 6px 10px;
+  transition: 0.2s ease;
+}
+
+.td-btn-action:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ===== TABLE ROUND FIX ===== */
+.td-booking-table thead th:first-child {
+  border-top-left-radius: 14px;
+}
+
+.td-booking-table thead th:last-child {
+  border-top-right-radius: 14px;
+}
+/* ===== VEHICLE IMAGE SMALL ===== */
+
+.td-vehicle-img{
+  width:300px;
+  height:200px;
+  display:block;
+  margin:10px auto;
+   border-radius: 20px
+}
+/* ===== DRIVER ENHANCED CARD ===== */
+
+.td-driver-img{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  object-fit:cover;
+  margin:auto;
+  border:2px solid #7b3fe4;
+}
+
+.td-driver-name{
+  margin-top:10px;
+  font-weight:600;
+  font-size:16px;
+}
+
+.td-driver-phone{
+  font-size:12px;
+  color:#8b8fc7;
+}
+
+.td-driver-rating{
+  color:#facc15;
+  margin:8px 0;
+  font-size:14px;
+}
+
+.td-driver-view-btn{
+  width:100%;
+  margin-top:10px;
+  padding:8px;
+  border-radius:8px;
+  border:none;
+  color:white;
+   background: linear-gradient(90deg, #5b6cff, #7b3fe4);
+  cursor:pointer;
+}
+/* confirmed = نفس active */
+.t-status-confirmed {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+}
+
+.t-status-confirmed .t-status-dot {
+  background: #4ade80;
+}
