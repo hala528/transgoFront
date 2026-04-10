@@ -17,10 +17,10 @@ import {
 export default function TripDetails() {
   const { id } = useParams();
 
-  // 🔴 الحالة الرئيسية (من الباك لاحقاً)
+  
   const status = "active";
 
-  // 🔴 bookings data
+  
   const bookings = [
     {
       id: "B-201",
@@ -61,7 +61,7 @@ export default function TripDetails() {
           <h2>
             Trip #{id}
 
-            {/* 🔥 STATUS SAME AS TRIPS */}
+            
             <span className={`t-status t-status-${status}`}>
               <span className="t-status-dot"></span>
               {status}
@@ -199,7 +199,7 @@ export default function TripDetails() {
                     <td>{b.seats}</td>
                     <td>{b.payment}</td>
 
-                    {/* 🔥 STATUS SAME SYSTEM */}
+                    
                     <td>
                       <span className={`t-status t-status-${b.status}`}>
                         <span className="t-status-dot"></span>
