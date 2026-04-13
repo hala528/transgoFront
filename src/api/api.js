@@ -9,3 +9,5 @@ export const ADDDRIVER = "admin/drivers";
 export const FIRSTLOGIN = "auth/change-initial-password";
 export const LOGOUT = "auth/logout";
 export const ADDEMPLOYEE = "admin/employees";    
+export const FIRSTLOGIN = "auth/change-initial-password"
+export const GETTRIPS = "admin/trips";

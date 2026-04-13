@@ -3,19 +3,17 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import carImg from "../../../assest/CAR.PNG";
 import LiveMap from "./LiveMap";
+import { useEffect } from "react";
+import { Axios } from "../../../api/axios";
+import { GETTRIPS } from "../../../api/api";
 
 export default function Trips() {
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [activeView, setActiveView] = useState("");
 
-  const trips = [
-    { id: 1042, status: "pending", from: "Damascus", to: "Aleppo", driver: "Ahmad Karimi", type: "Shared", time: "10:30 AM", date: "14 Apr", lat: 33.5138, lng: 36.2765 },
-    { id: 1043, status: "active", from: "Homs", to: "Latakia", driver: "Sara Mahmoud", type: "Private", time: "11:00 AM", date: "14 Apr", lat: 34.7300, lng: 36.7100 },
-    { id: 1044, status: "active", from: "Aleppo", to: "Damascus", driver: "Khalid Omar", type: "Shared", time: "09:00 AM", date: "13 Apr", lat: 36.2021, lng: 37.1343 },
-    { id: 1045, status: "cancelled", from: "Tartus", to: "Homs", driver: "Lina Hassan", type: "Private", time: "02:00 PM", date: "12 Apr", lat: 34.8970, lng: 36.7200 },
-    { id: 1046, status: "active", from: "Damascus", to: "Tartus", driver: "Mohamad Rami", type: "Shared", time: "01:00 PM", date: "14 Apr", lat: 33.5138, lng: 36.2765 },
-  ];
+  const [trips, setTrips] = useState([]);
+const [loading, setLoading] = useState(false);
 
   const statusStyle = {
     pending: { color: "#fbbf24" },
@@ -24,16 +22,55 @@ export default function Trips() {
     cancelled: { color: "#f87171" },
   };
 
-  const filtered = trips.filter((t) => {
-    const matchFilter = filter === "all" ? true : t.status === filter;
-    const matchSearch =
-      search === "" ||
-      String(t.id).includes(search) ||
-      t.driver.toLowerCase().includes(search.toLowerCase());
-    return matchFilter && matchSearch;
-  });
-
   const canCancel = (status) => status === "active" || status === "pending";
+useEffect(() => {
+  async function getTrips() {
+    setLoading(true);
+    try {
+      const res = await Axios.get(`/${GETTRIPS}`);
+      setTrips(res.data.data.items); // 🔥 هاي أهم سطر
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  getTrips();
+}, []);
+const formattedTrips = trips.map((trip) => {
+  const dateObj = new Date(trip.departure.at);
+
+  return {
+    id: trip.trip_id,
+    status: trip.status.key,
+    statusColor: trip.status.color,
+    from: trip.departure.from,
+    to: trip.departure.to,
+    driver: trip.driver.full_name,
+    type: trip.trip_type,
+    time: dateObj.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    date: dateObj.toLocaleDateString(),
+    driverImg: trip.driver.photo
+      ? `http://127.0.0.1:8000/${trip.driver.photo}`
+      : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+    carImg: trip.vehicle.image
+      ? `http://127.0.0.1:8000/${trip.vehicle.image}`
+      : "",
+    canCancel: !!trip.actions.cancel_endpoint,
+  };
+});
+
+const filtered = formattedTrips.filter((t) => {
+  const matchFilter = filter === "all" ? true : t.status === filter;
+
+  const matchSearch =
+    search === "" ||
+    String(t.id).includes(search) ||
+    t.driver.toLowerCase().includes(search.toLowerCase());
+
+  return matchFilter && matchSearch;
+});
 
   return (
     <div className="w-100 p-2">
@@ -95,7 +132,11 @@ export default function Trips() {
             <div key={trip.id} className="t-card">
               <div className="t-card-header">
                 <span className="t-id">#{trip.id}</span>
-              <div className={`t-status t-status-${trip.status}`}>
+              <div 
+  className="t-status"
+  style={{ color: trip.statusColor }}
+>
+
   <span className="t-status-dot"></span>
   <span className="t-status-text">
     {trip.status.charAt(0).toUpperCase() + trip.status.slice(1)}
@@ -104,7 +145,8 @@ export default function Trips() {
 
               </div>
 
-              <img src={carImg} className="t-car-img" alt="car" />
+             <img src={trip.carImg} className="t-car-img" alt="car" />
+
               <div className="t-route-visual">
                 <div className="t-stop-row">
                   <div className="t-stop t-stop-from"></div>
@@ -119,7 +161,8 @@ export default function Trips() {
 
               <div className="t-driver-row">
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                 src={trip.driverImg}
+
                   className="t-driver-img"
                   alt="driver"
                 />
@@ -137,7 +180,8 @@ export default function Trips() {
                 </Link>
                 <Button
                   size="sm"
-                  disabled={!canCancel(trip.status)}
+                  disabled={!trip.canCancel}
+
                   className="t-btn-cancel"
                   style={{
                     background: canCancel(trip.status) ? "rgba(239,68,68,0.15)" : "rgba(255,255,255,0.05)",
