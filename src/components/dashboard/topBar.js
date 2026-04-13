@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu } from "../../context/MnueContext";
 import { useContext, useEffect, useState } from "react";
 
-
-
- import {  DropdownButton ,Dropdown } from 'react-bootstrap';
+import { DropdownButton, Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-  import Cookies from "universal-cookie";
+import Cookies from "universal-cookie";
+import { Axios } from "../../api/axios";
+import { LOGOUT, beasURL } from "../../api/api";
+
+
 export default function TopBar() {
   const menu = useContext(Menu);
   const setIsOpen = menu.setIsOpen;
@@ -24,6 +26,16 @@ export default function TopBar() {
       navigate("/login");
     }
   }, [user, navigate]); 
+  async function handelLogout() {
+      try{
+           await Axios.post(`${beasURL}/${LOGOUT}`, {}, {
+      })
+      window.location.href = "/login";
+  }
+      catch(err){
+          console.log(err);
+     }
+     }
 
   return (
     <div className="top-bar">
@@ -45,7 +57,7 @@ export default function TopBar() {
           variant="primary"
           title={name}
         >
-          <Dropdown.Item href="#/action-1">Logout</Dropdown.Item>
+          <Dropdown.Item onClick={handelLogout}>logout</Dropdown.Item>
         </DropdownButton>
       </div>
     </div>

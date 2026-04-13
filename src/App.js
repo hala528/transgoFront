@@ -8,15 +8,15 @@ import ForgetPassword from './pages/Auth/ForgetPassword';
 import CodePassword from './pages/Auth/CodePassword';
 import RestPassword from './pages/Auth/ResetPassword';
 import FirstLogin from './pages/Auth/Firstlogin';
-import ManagmentDriver from './pages/dashboard/User managment/Driver';
-import AddDriver from './pages/dashboard/User managment/AddDriver';
+import ManagmentDriver from './pages/dashboard/User managment/driversmanagment/Driver';
+import AddDriver from './pages/dashboard/User managment/driversmanagment/AddDriver';
 import RequireAuth from './pages/Auth/RequireAuths';
 import Err403 from './pages/Auth/403';
 import Trips from './pages/dashboard/Trip managment/Trips';
 
 import TripDetails from "./pages/dashboard/Trip managment/TripDetails";
-import ManagmentEmployee from './pages/dashboard/User managment/employee';
-import AddEmployee from './pages/dashboard/User managment/AddEmployee';
+import ManagmentEmployee from './pages/dashboard/User managment/employeeManagment/employee';
+import AddEmployee from './pages/dashboard/User managment/employeeManagment/AddEmployee';
 
 
 function App() {

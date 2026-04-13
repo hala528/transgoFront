@@ -1,6 +1,6 @@
 import { Col, Form, Row } from "react-bootstrap";
-import { Axios } from "../../../api/axios";
-import { ADDDRIVER, beasURL } from "../../../api/api";
+import { Axios } from "../../../../api/axios";
+import { ADDDRIVER, beasURL } from "../../../../api/api";
 import { useState } from "react";
 
 
@@ -11,10 +11,12 @@ export default function AddDriver(){
   email: "",
   address: "",
   car_type: "",
+  id_card:"",
+  seat_capacity:""
 });
 
 const [files, setFiles] = useState({
-  id_card_image: null,
+  
   license_image: null,
   personal_photo: null,
   mechanical_car: null,
@@ -54,9 +56,10 @@ async function handleSubmit(e) {
     data.append("email", form.email);
     data.append("address", form.address);
     data.append("car_type", form.car_type);
-
+    data.append("id_card", form.id_card);
+    data.append("seat_capacity", form.seat_capacity);
    
-    data.append("id_card_image", files.id_card_image);
+   
     data.append("license_image", files.license_image);
     data.append("personal_photo", files.personal_photo);
     data.append("mechanical_car", files.mechanical_car);
@@ -148,18 +151,8 @@ async function handleSubmit(e) {
       </Row>
     </Form>
        <p className="subtitle-driver">enter a photo of personal Id :</p>
-    <Form.Group   controlId="formFileMultiple" className="mb-3" >
-    <Form.Control  type="file"
-     name="id_card_image"
-     onChange={handleFileChange}
-     multiple  className="custom-input-driver"
-    style={{
-      borderRadius: '3px',
-      color: 'white',
-      background:'rgba(255, 255, 255, 0.15)'
-    }} />
-      </Form.Group>
-       <p className="subtitle-driver">enter a copy of the driving cerifiticate :</p>
+   
+      
     <Form.Group   controlId="formFileMultiple" className="mb-3" >
     <Form.Control  type="file"
     name="license_image"
@@ -190,7 +183,7 @@ async function handleSubmit(e) {
     }}>
 
           <h3 className="subtitle-driver-bold">enter vehicle information :</h3>
-    
+      <Row>
         <Col >
           <Form.Control 
           placeholder="enter type car"
@@ -206,6 +199,33 @@ async function handleSubmit(e) {
     }}
           />
         </Col>
+         <Col>
+          <Form.Control placeholder="id-card"
+          name="id_card"
+          onChange={handleChange}
+           className="custom-input-driver"
+    style={{
+     
+      borderRadius: '3px',
+    
+      color: 'white',
+      background:'rgba(255, 255, 255, 0.15)'
+     
+    }}
+          />
+        </Col>
+        <Col>
+          <Form.Control placeholder="enter seat capacity"
+          name="seat_capacity"
+          onChange={handleChange}
+           className="custom-input-driver"
+    style={{
+      borderRadius: '3px',
+      color: 'white',
+      background:'rgba(255, 255, 255, 0.15)' }}
+          />
+        </Col>
+        </Row>
         
         
     

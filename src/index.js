@@ -5,7 +5,7 @@ import './index.css';
 import "./css/components/alerts.css";
 import "./css/components/loading.css";
 import "./pages/Auth/Auths.css";
-import "./pages/dashboard/User managment/user.css";
+import "./pages/dashboard/User managment/cssUser/user.css";
 import './css/components/button.css';
 import './pages/dashboard/Trip managment/trip.css';
 import 'bootstrap/dist/css/bootstrap.min.css';

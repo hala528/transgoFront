@@ -1,6 +1,6 @@
 import { Col, Form,  } from "react-bootstrap";
-import { Axios } from "../../../api/axios";
-import { ADDDRIVER, beasURL } from "../../../api/api";
+import { Axios } from "../../../../api/axios";
+import {  ADDEMPLOYEE, beasURL } from "../../../../api/api";
 import { useState } from "react";
 
 
@@ -50,12 +50,12 @@ async function handleSubmit(e) {
    
    
 
-    const res = await Axios.post(`${beasURL}/${ADDDRIVER}`, data, {
+    const res = await Axios.post(`${beasURL}/${ADDEMPLOYEE}`, data, {
       
     });
 
     setLoading(false);
-    setSuccess(res.data.message || "تم إضافة السائق بنجاح");
+    setSuccess(res.data.message || "تم إضافة الموظف بنجاح");
 
   } catch (err) {
     setLoading(false);
@@ -172,7 +172,7 @@ async function handleSubmit(e) {
      
    
       <button className="btn-login" onClick={handleSubmit} disabled={loading}>
-  {loading ? "Loading..." : "Add Driver"}
+  {loading ? "Loading..." : "Add Employee"}
 </button>
 {success && <span className="success">{success}</span>}
 {err && <span className="error">{err}</span>}

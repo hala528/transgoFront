@@ -6,4 +6,6 @@ export const SENDOTP = "auth/send-otp";
 export const VERFIEotp = "auth/verify-otp";
 export const RESETPASSWORD = "auth/reset-password";
 export const ADDDRIVER = "admin/drivers";
-export const FIRSTLOGIN = "auth/change-initial-password"
+export const FIRSTLOGIN = "auth/change-initial-password";
+export const LOGOUT = "auth/logout";
+export const ADDEMPLOYEE = "admin/employees";    
