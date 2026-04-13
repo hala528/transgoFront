@@ -15,7 +15,8 @@ import Err403 from './pages/Auth/403';
 import Trips from './pages/dashboard/Trip managment/Trips';
 
 import TripDetails from "./pages/dashboard/Trip managment/TripDetails";
-
+import ManagmentEmployee from './pages/dashboard/User managment/employee';
+import AddEmployee from './pages/dashboard/User managment/AddEmployee';
 
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
             <Route element={<RequireAuth allowedRole="admin" />}>
               <Route path="driver" element={<ManagmentDriver />} />
               <Route path='driver/:id' element={<AddDriver />} />
+              
+              <Route path="employee" element={<ManagmentEmployee />} />
+              <Route path='employee/:id' element={<AddEmployee />} />
              
             </Route>
 
