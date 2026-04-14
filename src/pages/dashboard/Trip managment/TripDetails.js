@@ -1,6 +1,9 @@
 import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./TripDetails.css";
+import { useState, useEffect } from "react";
+import { TRIP_DETAILS, IMAGE_BASE } from "../../../api/api";
+import { Axios } from "../../../api/axios";
 
 import {
   FaRegClipboard,
@@ -17,30 +20,38 @@ import {
 export default function TripDetails() {
   const { id } = useParams();
 
-  
-  const status = "active";
+  const [trip, setTrip] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  
-  const bookings = [
-    {
-      id: "B-201",
-      passengerNo: "P-1001",
-      name: "Rami Saleh",
-      pickup: "Damascus",
-      seats: 1,
-      payment: "Cash",
-      status: "confirmed",
-    },
-    {
-      id: "B-202",
-      passengerNo: "P-1002",
-      name: "Omar Ali",
-      pickup: "Homs",
-      seats: 2,
-      payment: "Card",
-      status: "pending",
-    },
-  ];
+  useEffect(() => {
+    async function getTrip() {
+      try {
+        const res = await Axios.get(TRIP_DETAILS(id));
+        setTrip(res.data.data);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    getTrip();
+  }, [id]);
+
+  if (loading) return <div className="empty-state">Loading...</div>;
+  if (!trip) return <div className="empty-state">Trip not found</div>;
+
+  // ✅ استخراج البيانات بعد التأكد أن trip موجود
+  const status = trip.status?.key;
+
+  const bookings = trip.booking_info?.bookings || [];
+
+  const departureDate = new Date(trip.general?.departure_at);
+  const arrivalDate = new Date(trip.general?.expected_arrival_at);
+
+  const driver = trip.driver;
+  const vehicle = trip.vehicle;
+  const routePoints = trip.route?.points || [];
 
   return (
     <div className="trip-details-page">
@@ -61,7 +72,6 @@ export default function TripDetails() {
           <h2>
             Trip #{id}
 
-            
             <span className={`t-status t-status-${status}`}>
               <span className="t-status-dot"></span>
               {status}
@@ -97,27 +107,41 @@ export default function TripDetails() {
 
               <div className="td-info-box">
                 <span><FaRegCalendarAlt /> Departure Date</span>
-                <strong>14 Apr 2026</strong>
+                <strong>
+                  {departureDate.toLocaleDateString()}
+                </strong>
               </div>
 
               <div className="td-info-box">
                 <span><FaRegClock /> Departure Time</span>
-                <strong>08:00 AM</strong>
+                <strong>
+                  {departureDate.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </strong>
               </div>
 
               <div className="td-info-box">
                 <span><FaRoute /> Trip Type</span>
-                <strong>Shared</strong>
+                <strong>{trip.booking_info?.trip_type}</strong>
               </div>
 
               <div className="td-info-box">
                 <span><FaRegClock /> Expected Arrival</span>
-                <strong>12:30 PM</strong>
+                <strong>
+                  {arrivalDate.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </strong>
               </div>
 
               <div className="td-info-box">
                 <span><FaUsers /> Seats</span>
-                <strong>3 / 5 booked</strong>
+                <strong>
+                  {vehicle.seats - trip.booking_info.remaining_seats} / {vehicle.seats}
+                </strong>
               </div>
 
             </div>
@@ -132,37 +156,29 @@ export default function TripDetails() {
 
             <div className="td-route">
 
-              <div className="td-route-item">
-                <div className="td-route-top">
-                  <span className="td-badge-a">A</span>
-                  <div>
-                    Damascus - Umayyad Square
-                    <div className="td-route-sub">Departure · 08:00 AM</div>
-                  </div>
-                </div>
-                <div className="td-line" />
-              </div>
+              {routePoints.map((p, index) => (
+                <div key={p.point_id} className="td-route-item">
 
-              <div className="td-route-item">
-                <div className="td-route-top">
-                  <span className="td-badge-b">B</span>
-                  <div>
-                    Homs - Clock Tower
-                    <div className="td-route-sub">Stop · 10:00 AM</div>
-                  </div>
-                </div>
-                <div className="td-line" />
-              </div>
+                  <div className="td-route-top">
+                    <span className={`td-badge-${String.fromCharCode(97 + index)}`}>
+                      {String.fromCharCode(65 + index)}
+                    </span>
 
-              <div className="td-route-item">
-                <div className="td-route-top">
-                  <span className="td-badge-c">C</span>
-                  <div>
-                    Aleppo - Saadallah Square
-                    <div className="td-route-sub">Arrival · 12:30 PM</div>
+                    <div>
+                      {p.address}
+                      <div className="td-route-sub">
+                        {p.type} ·{" "}
+                        {new Date(p.expected_arrival_at).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </div>
+                    </div>
                   </div>
+
+                  {index !== routePoints.length - 1 && <div className="td-line" />}
                 </div>
-              </div>
+              ))}
 
             </div>
           </div>
@@ -178,42 +194,34 @@ export default function TripDetails() {
 
               <thead>
                 <tr>
-                  <th>Booking ID</th>
-                  <th>Passenger No</th>
-                  <th>Passenger</th>
-                  <th>Pickup</th>
+                  <th>ID</th>
+                  <th>Name</th>
                   <th>Seats</th>
-                  <th>Payment</th>
                   <th>Status</th>
-                  <th>Action</th>
                 </tr>
               </thead>
 
               <tbody>
-                {bookings.map((b) => (
-                  <tr key={b.id}>
-                    <td>{b.id}</td>
-                    <td>{b.passengerNo}</td>
-                    <td>{b.name}</td>
-                    <td>{b.pickup}</td>
-                    <td>{b.seats}</td>
-                    <td>{b.payment}</td>
-
-                    
-                    <td>
-                      <span className={`t-status t-status-${b.status}`}>
-                        <span className="t-status-dot"></span>
-                        {b.status}
-                      </span>
-                    </td>
-
-                    <td>
-                      <Button className="td-btn-action" size="sm">
-                        Details
-                      </Button>
-                    </td>
+                {bookings.length === 0 ? (
+                  <tr>
+                    <td colSpan="4">No bookings</td>
                   </tr>
-                ))}
+                ) : (
+                  bookings.map((b, i) => (
+                    <tr key={i}>
+                      <td>{b.id}</td>
+                      <td>{b.name}</td>
+                      <td>{b.seats}</td>
+
+                      <td>
+                        <span className={`t-status t-status-${b.status}`}>
+                          <span className="t-status-dot"></span>
+                          {b.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
 
             </table>
@@ -235,20 +243,16 @@ export default function TripDetails() {
 
               <img
                 className="td-driver-img"
-                src={require("../../../assest/PERSON.PNG")}
+                src={`${IMAGE_BASE}/${driver.photo}`}
                 alt="driver"
               />
 
-              <h6 className="td-driver-name">Ahmad Karimi</h6>
-              <span className="td-driver-phone">0955 123 456</span>
+              <h6 className="td-driver-name">{driver.full_name}</h6>
+              <span className="td-driver-phone">{driver.phone}</span>
 
               <div className="td-driver-rating">
-                ⭐⭐⭐⭐☆
+                ⭐ {driver.profile?.rating}
               </div>
-
-              <button className="td-driver-view-btn">
-                View Profile
-              </button>
 
             </div>
           </div>
@@ -261,14 +265,14 @@ export default function TripDetails() {
             </h5>
 
             <div className="td-vehicle">
-              <p><span>Type</span> Kia Cerato</p>
-              <p><span>Plate</span> Damascus 456789</p>
-              <p><span>Seats</span> 5</p>
-              <p><span>Amenities</span> AC, USB</p>
+              <p><span>Type</span> {vehicle.type}</p>
+              <p><span>Plate</span> {vehicle.id_card}</p>
+              <p><span>Seats</span> {vehicle.seats}</p>
+              <p><span>Amenities</span> {vehicle.amenities.join(", ")}</p>
 
               <img
                 className="td-vehicle-img"
-                src={require("../../../assest/CAR.PNG")}
+                src={`${IMAGE_BASE}/${vehicle.image}`}
                 alt="car"
               />
             </div>

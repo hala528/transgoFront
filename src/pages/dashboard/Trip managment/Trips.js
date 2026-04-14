@@ -13,7 +13,14 @@ const [date, setDate] = useState("");
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  
+  const statusMap = {
+  all: undefined,
+  pending: "pending",
+  active: "active",
+  completed: "completed",
+  canceled: "canceled", 
+};
+
   useEffect(() => {
     async function getTrips() {
       setLoading(true);
@@ -21,7 +28,8 @@ const [date, setDate] = useState("");
       
       console.log("FILTER SENT:", {
         search: search || undefined,
-        status: filter !== "all" ? filter : undefined,
+        status: statusMap[filter],
+
  departure_date: date || undefined
       });
 
@@ -94,7 +102,11 @@ const [date, setDate] = useState("");
     };
   });
 
-  const filtered = formattedTrips;
+  const filtered = formattedTrips.filter((trip) => {
+  if (filter === "all") return true;
+  return trip.status === filter;
+});
+
 
   return (
     <div className="w-100 p-2">
@@ -106,7 +118,7 @@ const [date, setDate] = useState("");
       
       <div className="card-driver d-flex justify-content-between align-items-center px-3 mb-3">
         <div className="d-flex gap-2 align-items-center">
-          {["all", "pending", "active", "completed", "cancelled"].map(
+          {["all", "pending", "active", "completed", "canceled"].map(
             (f) => (
               <Button
                 key={f}
@@ -266,7 +278,7 @@ const [date, setDate] = useState("");
               </div>
 
               <div className="t-actions">
-                <Link to={`/trips/${trip.id}`} style={{ flex: 1 }}>
+               <Link to={`/dashboard/trips/${trip.id}`} style={{ flex: 1 }}>
                   <Button size="sm" className="t-btn-view">
                     view details
                   </Button>
