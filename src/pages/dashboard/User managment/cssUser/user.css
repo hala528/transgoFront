@@ -31,3 +31,21 @@
     margin-bottom: 15px;
     font-weight: bold;
 }
+
+.custom-select {
+   width:  150px!important;
+   border-radius: 10px !important;
+    color: white !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid #cbd5f5 !important;
+
+
+  appearance: auto !important;
+  
+}ء
+
+
+.custom-select option {
+  color: black;
+  background: white;
+}

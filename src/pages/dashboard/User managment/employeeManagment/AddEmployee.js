@@ -2,6 +2,7 @@ import { Col, Form,  } from "react-bootstrap";
 import { Axios } from "../../../../api/axios";
 import {  ADDEMPLOYEE, beasURL } from "../../../../api/api";
 import { useState } from "react";
+import { useNavigate} from "react-router-dom";
 
 
 export default function AddEmployee(){
@@ -13,7 +14,7 @@ export default function AddEmployee(){
   password: "",
 });
 
-
+const Navigate = useNavigate();
 
 const [loading, setLoading] = useState(false);
 const [err, errset] = useState("");
@@ -56,6 +57,9 @@ async function handleSubmit(e) {
 
     setLoading(false);
     setSuccess(res.data.message || "تم إضافة الموظف بنجاح");
+    setTimeout(() => {
+    Navigate("/dashboard/employee"); // غيرها حسب الراوت عندك
+    }, 2000);
 
   } catch (err) {
     setLoading(false);
