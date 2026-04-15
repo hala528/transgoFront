@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./TripDetails.css";
 import { useState, useEffect } from "react";
-import { TRIP_DETAILS, IMAGE_BASE } from "../../../api/api";
+import { TRIP_DETAILS, IMAGE_BASE,CANCEL_TRIP  } from "../../../api/api";
 import { Axios } from "../../../api/axios";
 
 import {
@@ -19,17 +19,55 @@ import {
 
 export default function TripDetails() {
   const { id } = useParams();
+const [success, setSuccess] = useState("");
+const [err, setErr] = useState("");
 
-  const [trip, setTrip] = useState(null);
+  const [trip, setTrip] = useState();
   const [loading, setLoading] = useState(true);
+
+ const handleCancel = async (id) => {
+  try {
+    const res = await Axios.post(CANCEL_TRIP(id));
+
+    console.log("CANCEL RESPONSE:", res.data);
+
+    
+    setSuccess(res.data?.message || "Trip canceled successfully");
+    setErr("");
+    setTimeout(() => setSuccess(""), 3000);
+
+    const refreshed = await Axios.get(TRIP_DETAILS(id));
+    setTrip(refreshed.data.data);
+
+  } catch (err) {
+    console.log("CANCEL ERROR:", err);
+
+    setErr(
+      err.response?.data?.message || "Failed to cancel trip"
+    );
+    setSuccess("");
+    setTimeout(() => setErr(""), 3000);
+  }
+};
+
 
   useEffect(() => {
     async function getTrip() {
       try {
         const res = await Axios.get(TRIP_DETAILS(id));
-        setTrip(res.data.data);
+        
+             
+        console.log("FULL RESPONSE:", res);
+
+      
+        console.log("RAW DATA:", res.data);
+
+      
+        console.log("FILTERED ITEMS FROM BACKEND:", res.data?.data?.items);
+
+    setTrip(res.data.data);
       } catch (err) {
-        console.log(err);
+        console.log("ERROR:", err);
       } finally {
         setLoading(false);
       }
@@ -41,7 +79,7 @@ export default function TripDetails() {
   if (loading) return <div className="empty-state">Loading...</div>;
   if (!trip) return <div className="empty-state">Trip not found</div>;
 
-  // ✅ استخراج البيانات بعد التأكد أن trip موجود
+  
   const status = trip.status?.key;
 
   const bookings = trip.booking_info?.bookings || [];
@@ -55,6 +93,8 @@ export default function TripDetails() {
 
   return (
     <div className="trip-details-page">
+{success && <span className="success">{success}</span>}
+{err && <span className="error">{err}</span>}
 
       {/* HEADER */}
       <div className="td-header">
@@ -82,7 +122,14 @@ export default function TripDetails() {
 
         <div className="td-header-actions">
           <Button className="td-btn-map">Track on Map</Button>
-          <Button className="td-btn-cancel">Cancel Trip</Button>
+    <Button
+  className="td-btn-cancel"
+  onClick={() => handleCancel(id)}
+>
+  Cancel Trip
+</Button>
+
+
         </div>
       </div>
 
