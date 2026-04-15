@@ -36,6 +36,7 @@ function handleFilterChange(e) {
       <td>{u.email}</td>
       <td>{u.roles[0]?.name}</td>
       <td>
+        <Link to={`details/${u.user_id}`}>
         <Button
           style={{
             background: 'linear-gradient(90deg, var(--primary-blue), var(--primary-purple))',
@@ -46,6 +47,7 @@ function handleFilterChange(e) {
         >
           view details
         </Button>
+        </Link>
       </td>
     </tr>
   ));

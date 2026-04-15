@@ -17,6 +17,7 @@ import Trips from './pages/dashboard/Trip managment/Trips';
 import TripDetails from "./pages/dashboard/Trip managment/TripDetails";
 import ManagmentEmployee from './pages/dashboard/User managment/employeeManagment/employee';
 import AddEmployee from './pages/dashboard/User managment/employeeManagment/AddEmployee';
+import DetailsEmployee from './pages/dashboard/User managment/employeeManagment/detailsEmployee';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
               
               <Route path="employee" element={<ManagmentEmployee />} />
               <Route path='employee/:id' element={<AddEmployee />} />
+              <Route path='employee/details/:id' element={<DetailsEmployee />} /> 
              
             </Route>
 
