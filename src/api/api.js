@@ -12,7 +12,7 @@ export const LOGOUT = "auth/logout";
 
 export const ADDEMPLOYEE = "admin/employees";  
 export const EMPLOYEE = "admin/employees"  
-
+export const GETEMPLOYEES = (id) => `admin/employees/${id}`;
   
 export const FIRSTLOGIN = "auth/change-initial-password";
 export const GETTRIPS = "admin/trips";
