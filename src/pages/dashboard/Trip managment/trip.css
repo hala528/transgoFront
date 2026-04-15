@@ -40,7 +40,7 @@
 }
 
 .t-time{
-  color:#94a3b8;
+  color:#f3f4f5;
   font-size:12px;
   margin-top:4px;
 }
@@ -98,6 +98,8 @@
   align-items: flex-start;
   position: relative;
   margin: 10px 0;
+ 
+
   gap: 20px;
 }
 
@@ -263,4 +265,91 @@
 
 .live-map-btn .live-text {
   white-space: nowrap;
+}
+/* ===== BRANCH FROM MIDDLE OF VERTICAL ROUTE ===== */
+
+.t-route-branch {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* 🔥 هذا السر الحقيقي */
+  left: 14px;
+  display: flex;
+  align-items: center;
+}
+.t-btn-cancel {
+  background: rgba(239, 68, 68, 0.15) !important; /* أحمر شفاف */
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.t-btn-cancel:hover {
+  background: rgba(239, 68, 68, 0.25) !important;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.25);
+  transform: translateY(-1px);
+}
+
+.t-btn-cancel:disabled {
+  background: rgba(239, 68, 68, 0.08) !important;
+  color: rgba(239, 68, 68, 0.4) !important;
+  border: 1px solid rgba(239, 68, 68, 0.1) !important;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+.t-route-branch-line {
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    #ef4444,
+    rgba(239, 68, 68, 0.4)
+  );
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.35);
+  position: relative;
+  border-radius: 2px;
+  
+}
+
+/* الدائرة في نهاية الخط */
+.t-route-branch-line::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+}
+
+/* Delay box */
+.t-delay-box {
+  margin-left: 10px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid #f97316;
+  background: rgba(249, 115, 22, 0.12);
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.25);
+  display: flex;
+  flex-direction: column;
+  min-width: 95px;
+}
+
+.t-delay-label {
+  font-size: 10px;
+  color: #f97316;
+  font-weight: 600;
+}
+
+.t-delay-time {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 500;
 }

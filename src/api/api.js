@@ -17,5 +17,6 @@ export const GETEMPLOYEES = (id) => `admin/employees/${id}`;
 export const FIRSTLOGIN = "auth/change-initial-password";
 export const GETTRIPS = "admin/trips";
 export const TRIP_DETAILS = (id) => `admin/trips/${id}`;
+export const CANCEL_TRIP = (id) => `admin/trips/${id}/cancel`;
 
 export const DELAYED_TRIPS = "admin/trips/delayed";
