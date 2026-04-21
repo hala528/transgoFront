@@ -13,10 +13,14 @@ import AddDriver from './pages/dashboard/User managment/driversmanagment/AddDriv
 import RequireAuth from './pages/Auth/RequireAuths';
 import Err403 from './pages/Auth/403';
 import Trips from './pages/dashboard/Trip managment/Trips';
-
 import TripDetails from "./pages/dashboard/Trip managment/TripDetails";
 import ManagmentEmployee from './pages/dashboard/User managment/employeeManagment/employee';
 import AddEmployee from './pages/dashboard/User managment/employeeManagment/AddEmployee';
+import DetailsEmployee from './pages/dashboard/User managment/employeeManagment/detailsEmployee';
+import AuditLog from './pages/dashboard/Audit log/AuditLog';
+//import FreeWallet from './pages/dashboard/driverWalet/walletFree';
+import FinancailLogs from './pages/dashboard/driverWalet/financailLogs';
+import FreeWallet from './pages/dashboard/driverWalet/Freewallet';
 
 
 function App() {
@@ -42,7 +46,10 @@ function App() {
               
               <Route path="employee" element={<ManagmentEmployee />} />
               <Route path='employee/:id' element={<AddEmployee />} />
-             
+              <Route path='employee/details/:id' element={<DetailsEmployee />} /> 
+              <Route path='auditLog' element={<AuditLog />} />
+              <Route path='wallet' element={<FreeWallet />} />
+              <Route path='wallet/:id' element={<FinancailLogs />} />
             </Route>
 
             {/* Shared */}

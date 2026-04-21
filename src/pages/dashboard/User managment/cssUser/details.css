@@ -1,0 +1,73 @@
+.card-details{
+     background-color: #1e1b4b;
+    height: 160px;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+.card-account,
+.card-create {
+  background-color: #1e1b4b;
+  border-radius: 12px;
+  color: white;
+}
+
+
+.card-title {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+
+.badge-role {
+  background: #4f46e5;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+
+.btn-edit {
+  background: #4f46e5 !important;
+  border: none;
+  border-radius: 10px;
+}
+
+.btn-disable {
+  background: #e11d48 !important;
+  border: none;
+  border-radius: 10px;
+}
+.custom-modal .modal-content {
+  background-color: #1e1e2f; /* لون الخلفية */
+  color: #ffffff; /* لون النص */
+}
+
+.custom-modal .modal-header {
+  border-bottom: 1px solid #444;
+}
+
+.custom-modal .modal-footer {
+  border-top: 1px solid #444;
+}
+
+.custom-modal .form-control {
+  background-color: #2c2c3e; /* لون الحقول */
+  color: #fff; /* لون النص داخل الحقول */
+  border: 1px solid #555;
+}
+
+.custom-modal .form-control::placeholder {
+  color: #aaa;
+}
+
+.custom-modal .form-label {
+  color: #ddd;
+}
