@@ -4,6 +4,8 @@ import "./TripDetails.css";
 import { useState, useEffect } from "react";
 import { TRIP_DETAILS, IMAGE_BASE,CANCEL_TRIP  } from "../../../api/api";
 import { Axios } from "../../../api/axios";
+import polyline from "@mapbox/polyline";
+import LiveMap from "./LiveMap";
 
 import {
   FaRegClipboard,
@@ -21,9 +23,16 @@ export default function TripDetails() {
   const { id } = useParams();
 const [success, setSuccess] = useState("");
 const [err, setErr] = useState("");
+const [showMap, setShowMap] = useState(false);
 
   const [trip, setTrip] = useState();
   const [loading, setLoading] = useState(true);
+const path = trip?.route?.polyline
+  ? polyline.decode(trip.route.polyline).map(([lat, lng]) => ({
+      lat,
+      lng,
+    }))
+  : [];
 
  const handleCancel = async (id) => {
   try {
@@ -128,7 +137,7 @@ const [err, setErr] = useState("");
 >
   Cancel Trip
 </Button>
-
+ 
 
         </div>
       </div>
@@ -226,6 +235,71 @@ const [err, setErr] = useState("");
                   {index !== routePoints.length - 1 && <div className="td-line" />}
                 </div>
               ))}
+            
+{/* <div style={{ marginTop: "15px" }}>
+  <LiveMap
+    center={
+      routePoints[0]
+        ? {
+            lat: routePoints[0].latitude,
+            lng: routePoints[0].longitude,
+          }
+        : { lat: 33.5, lng: 36.3 }
+    }
+    zoom={7}
+    markers={[
+      routePoints[0] && {
+        id: 1,
+        lat: routePoints[0].latitude,
+        lng: routePoints[0].longitude,
+        label: "Start",
+      },
+    ].filter(Boolean)}
+    path={path}
+  />
+</div> */}
+
+ <div className="td-map-btn-wrapper">
+  <Button
+  className="td-btn-map w-100"
+  onClick={() => setShowMap(!showMap)}
+>
+  {showMap ? "Close Map" : "Open The Map"}
+</Button>
+{showMap && (
+  <div className="td-map-container">
+    <LiveMap
+      center={
+        routePoints[0]
+          ? {
+              lat: routePoints[0].latitude,
+              lng: routePoints[0].longitude,
+            }
+          : { lat: 33.5, lng: 36.3 }
+      }
+      zoom={7}
+      markers={[
+        routePoints[0] && {
+          id: "start",
+          lat: routePoints[0].latitude,
+          lng: routePoints[0].longitude,
+          label: "A",
+        },
+        routePoints[routePoints.length - 1] && {
+          id: "end",
+          lat: routePoints[routePoints.length - 1].latitude,
+          lng: routePoints[routePoints.length - 1].longitude,
+          label: "B",
+        },
+      ].filter(Boolean)}
+      path={path}
+    />
+  </div>
+)}
+
+
+
+    </div>
 
             </div>
           </div>
