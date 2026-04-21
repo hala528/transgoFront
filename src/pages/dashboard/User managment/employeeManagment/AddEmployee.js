@@ -136,20 +136,21 @@ async function handleSubmit(e) {
         </Col>
         <p className="subtitle-driver">enter role :</p>
         <Col >
-          <Form.Control 
-          placeholder="enter role"
-          name="role"
-          onChange={handleChange}
-          className="custom-input-driver"
+         <Form.Select name="role" onChange={handleChange} className="custom-selectt"
     style={{
       borderRadius: '3px',
-      alignItems:'flex-start',
-      color: 'white',
       
-      background:'rgba(255, 255, 255, 0.15)'
-    }}
-          />
+      color: 'white',
+      background:'rgba(255, 255, 255, 0.15)',
+      width:'100%',
+    }}>
+      <option>Open this select role</option>
+      <option value="employee">employee</option>
+      <option value="admin">admin</option>
+    
+    </Form.Select>
         </Col>
+       
         <p className="subtitle-driver">enter password :</p>
         <Col >
           <Form.Control 
@@ -162,6 +163,7 @@ async function handleSubmit(e) {
       borderRadius: '3px',
       alignItems:'flex-start',
       color: 'white',
+    
       
       background:'rgba(255, 255, 255, 0.15)'
     }}

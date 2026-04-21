@@ -2,8 +2,8 @@ import { Button, Col, Form, Image, Modal, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Axios } from "../../../../api/axios";
-import { beasURL, GETEMPLOYEES } from "../../../../api/api";
-import log from "../../../../assest/logo.jpg";
+import { beasURL, GETEMPLOYEES,UPDATEEMPLOYEES } from "../../../../api/api";
+import personl from "../../../../assest/personal.png";
 
 export default function DetailsEmployee() {
   const { id } = useParams();
@@ -11,8 +11,59 @@ export default function DetailsEmployee() {
   const [loading, setLoading] = useState(true);
  const [show, setShow] = useState(false);
 
+ const [formData, setFormData] = useState({
+  full_name: "",
+  phone: "",
+  role: ""
+});
+
+
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+  setFormData({
+    full_name: employee.full_name,
+    phone: employee.phone,
+    role: employee.roles[0]?.name || ""
+  });
+  setShow(true);
+};
+function handleChange(e) {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  });
+}
+function renderStars(rating) {
+  const totalStars = 5;
+  const fullStars = Math.floor(rating);
+  const emptyStars = totalStars - fullStars;
+
+  return (
+    <>
+      {"★".repeat(fullStars)}
+      {"☆".repeat(emptyStars)}
+    </>
+  );
+}
+function handleToggleStatus() {
+  const url = employee.account_status
+    ? `admin/employees/${id}/disable`
+    : `admin/employees/${id}/enable`;
+
+  Axios.patch(`${beasURL}/${url}`)
+    .then((res) => {
+      setEmployee(res.data.data); 
+    })
+    .catch((err) => console.log(err));
+}
+function handleUpdate() {
+  Axios.patch(`${beasURL}/${UPDATEEMPLOYEES(id)}`, formData)
+    .then((res) => {
+      setEmployee(res.data.data); // تحديث البيانات مباشرة
+      setShow(false);
+    })
+    .catch((err) => console.log(err));
+}
   useEffect(() => {
     Axios.get(`${beasURL}/${GETEMPLOYEES(id)}`)
       .then((res) => {
@@ -41,16 +92,21 @@ export default function DetailsEmployee() {
 
   return (
     <div className="w-100 p-2">
+      <div className=" d-flex align-items-center px-3">
+      
+      <span className="td-back" onClick={() => window.history.back()}>
+            ←
+          </span>
       <h2 style={{ color: "white", padding: 5 }}>
         Employee Details :
       </h2>
-
+</div>
     
       <div className="card-details d-flex  px-3">
         <Row className="gap-3 ">
           <Col xs={5} md={4}>
             <Image
-              src={log}
+              src={personl}
               roundedCircle
               style={{
                 width: "120px",
@@ -165,7 +221,9 @@ export default function DetailsEmployee() {
 
             <div className="info-row">
               <span>Rating</span>
-              <span>{employee.rating}</span>
+             <span style={{ color: "#facc15", fontSize: "18px" }}>
+  {renderStars(employee.rating)}
+</span>
             </div>
 
             <div className="info-row">
@@ -177,39 +235,62 @@ export default function DetailsEmployee() {
         
           <div className="d-flex gap-2 mt-3">
             <Button className="btn-edit flex-fill" onClick={handleShow}>Edit</Button>
-              <Modal show={show} onHide={handleClose}>
+              <Modal className="custom-modal" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
-            </Form.Group>
-          </Form>
+         <Form>
+  <Form.Group className="mb-3">
+    <Form.Label>Full Name</Form.Label>
+    <Form.Control
+      type="text"
+      name="full_name"
+      value={formData.full_name}
+      onChange={handleChange}
+    />
+  </Form.Group>
+
+  <Form.Group className="mb-3">
+    <Form.Label>Phone</Form.Label>
+    <Form.Control
+      type="text"
+      name="phone"
+      value={formData.phone}
+      onChange={handleChange}
+    />
+  </Form.Group>
+
+  <Form.Group className="mb-3">
+    <Form.Label>Role</Form.Label>
+    <Form.Control
+      type="text"
+      name="role"
+      value={formData.role}
+      onChange={handleChange}
+    />
+  </Form.Group>
+</Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
+         <Button variant="primary" onClick={handleUpdate}>
+  Save Changes
+</Button>
         </Modal.Footer>
       </Modal>
-            <Button className="btn-disable flex-fill">Disable</Button>
+           <Button
+  className="flex-fill"
+  onClick={handleToggleStatus}
+  style={{
+    background: employee.account_status ? "red" : "green",
+    border: "none"
+  }}
+>
+  {employee.account_status ? "Disable" : "Enable"}
+</Button>
           </div>
 
         </div>

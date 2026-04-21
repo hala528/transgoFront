@@ -45,3 +45,29 @@
   border: none;
   border-radius: 10px;
 }
+.custom-modal .modal-content {
+  background-color: #1e1e2f; /* لون الخلفية */
+  color: #ffffff; /* لون النص */
+}
+
+.custom-modal .modal-header {
+  border-bottom: 1px solid #444;
+}
+
+.custom-modal .modal-footer {
+  border-top: 1px solid #444;
+}
+
+.custom-modal .form-control {
+  background-color: #2c2c3e; /* لون الحقول */
+  color: #fff; /* لون النص داخل الحقول */
+  border: 1px solid #555;
+}
+
+.custom-modal .form-control::placeholder {
+  color: #aaa;
+}
+
+.custom-modal .form-label {
+  color: #ddd;
+}

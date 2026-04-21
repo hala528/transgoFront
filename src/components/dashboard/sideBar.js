@@ -29,14 +29,14 @@ export default function SideBar() {
       roles: ["admin"],
     },
     {
-      name: "charge Driver",
-      path: "charge",
+      name: "Free Wallet",
+      path: "wallet",
       icon: faUsers,
       roles: ["admin", "employee"],
     },
     {
       name: "Audit Logs",
-      path: "logs",
+      path: "auditLog",
       icon: faUsers,
       roles: ["admin"],
     },
