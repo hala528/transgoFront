@@ -22,7 +22,7 @@
 .card-items{
   display: flex;
   width: 100%;
-  height: 9%;
+  height: 1%;
   align-items:flex-start;
   background: #1e1b4b;
   padding: 20px;
@@ -104,9 +104,9 @@ align-items: center;
 }
 
 .driver-card img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 30px;
 }
 
 .driver-details {
@@ -126,20 +126,88 @@ align-items: center;
   border-radius: 8px;
 }
 
-/* إدخال المبلغ */
+
+
+
+
+
+
+/* زر التنفيذ */
+
+.card-logss {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.driver-email,
+.driver-phone {
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+/* التفاصيل */
+.driver-details {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.balance {
+  background: #2563eb;
+  padding: 5px 10px;
+  border-radius: 30px;
+  color: white;
+}
+
+.status {
+  padding: 5px 10px;
+  width: 80px;
+  height: auto;
+  border-radius: 30px;
+}
+
+.active-status {
+  background: #16a34a;
+}
+
+.inactive-status {
+  background: #dc2626;
+}
+
+/* زر الشحن */
+.charge-btn {
+  margin-top: 10px;
+  width: 80%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+/* نموذج الشحن */
+.charge-box {
+  background: #020617;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+/* الإدخال */
 .amount-box {
   display: flex;
-  align-items: center;
   margin: 15px 0;
 }
 
 .amount-box input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 8px 0 0 8px;
- background-color: rgba(255, 255, 255, 0.08);
- color:white;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  border: none;
 }
 
 .amount-box span {
@@ -150,18 +218,11 @@ align-items: center;
 
 /* زر التنفيذ */
 .submit-btn {
-  background:  linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
   color: white;
+  
   padding: 12px;
   border: none;
-  border-radius: 10px;
-  width: 200px;
+  border-radius: 20px;
 }
-.card-logss {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-body {
-  background-color: #0f0c29;
-}
+

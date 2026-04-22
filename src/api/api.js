@@ -25,4 +25,9 @@ export const DELAYED_TRIPS = "admin/trips/delayed";
 export const AUDIT_LOGS = "admin/audit-logs";
 
 export const SERASH_DRIVER = "admin/drivers";
+export const GET_WALLET = "/admin/wallet-topups"
+export const GET_WALLET_PASSENGER = "admin/passenger-wallet-topups"
+export const GET_WALLET_DRIVER = "admin/driver-wallet-topups"
 export const WALLET_TOP = (id) => `admin/drivers/${id}/wallet/top-up` ;
+export const WALLET_TOP_PASSENGER = (id) => `admin/passengers/${id}/wallet/top-up` ;
+export const SERASH_PASSENGER = "admin/passengers";

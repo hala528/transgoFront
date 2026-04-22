@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { Axios } from "../../../api/axios";
-import { beasURL } from "../../../api/api";
+import { beasURL , GET_WALLET} from "../../../api/api";
 
 export default function FinancailLogs() {
   const [search, setSearch] = useState("");
@@ -18,7 +18,7 @@ export default function FinancailLogs() {
       setLoading(true);
       setErr("");
 
-      const res = await Axios.get(`${beasURL}/admin/wallet-topups`, {
+      const res = await Axios.get(`${beasURL}${GET_WALLET}`, {
         params: {
           search: search || undefined,
           date_from: dateFrom || undefined,
@@ -45,7 +45,7 @@ export default function FinancailLogs() {
   }, [search, dateFrom, dateTo]);
 
   return (
-    <div className="w-100 p-2">
+    <div className="w-100 p-2 ">
     
       <div className="d-flex align-items-center px-3">
         <span className="td-back" onClick={() => window.history.back()}>

@@ -60,18 +60,23 @@ export default function FreeWallet() {
        <div className="card-items">
         <FontAwesomeIcon color="white" icon={faBullhorn} />
          <p className="subtitle" style={{fontSize:'15px'}}>- If you want to charge a driver's wallet ,</p>
+         <Link to="/dashboard/wallet/chargedriver/123">
          <p className="subtitle" style={{
             color:'blue',
             fontSize:'15px'
          }}>  click here.</p>
+          </Link>
        </div>
         <div className="card-items">
             <FontAwesomeIcon color="white" icon={faBullhorn} />
+        
          <p className="subtitle" style={{fontSize:'15px'}}>- If you want to charge a passenger's wallet ,</p>
+         <Link to="/dashboard/wallet/chargepassenger">
          <p className="subtitle" style={{
             color:'blue',
             fontSize:'15px'
          }}>  click here.</p>
+          </Link>
         </div>
     </div>
   );

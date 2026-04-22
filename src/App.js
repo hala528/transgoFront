@@ -18,11 +18,13 @@ import ManagmentEmployee from './pages/dashboard/User managment/employeeManagmen
 import AddEmployee from './pages/dashboard/User managment/employeeManagment/AddEmployee';
 import DetailsEmployee from './pages/dashboard/User managment/employeeManagment/detailsEmployee';
 import AuditLog from './pages/dashboard/Audit log/AuditLog';
-//import FreeWallet from './pages/dashboard/driverWalet/walletFree';
-import FinancailLogs from './pages/dashboard/driverWalet/financailLogs';
-import FreeWallet from './pages/dashboard/driverWalet/Freewallet';
 
-
+import FinancailLogs from './pages/dashboard/FreeWalet/financailLogs';
+import FreeWallet from './pages/dashboard/FreeWalet/Freewallet';
+import WalletDriver from './pages/dashboard/FreeWalet/driver/walletFreedriver';
+import LogeDrivers from './pages/dashboard/FreeWalet/driver/logsDriver';
+import WalletPassenger from './pages/dashboard/FreeWalet/passenger/walletFreepassenger';
+import Logpassenger from './pages/dashboard/FreeWalet/passenger/LogsPassenger';
 function App() {
   return (
     <div className="App">
@@ -50,6 +52,10 @@ function App() {
               <Route path='auditLog' element={<AuditLog />} />
               <Route path='wallet' element={<FreeWallet />} />
               <Route path='wallet/:id' element={<FinancailLogs />} />
+              <Route path='wallet/chargedriver/123' element={<WalletDriver />} />
+              <Route path='wallet/logsdriver' element={<LogeDrivers />} />
+              <Route path='wallet/chargepassenger' element={<WalletPassenger />} />
+              <Route path='wallet/logspassenger' element={<Logpassenger />} />
             </Route>
 
             {/* Shared */}
