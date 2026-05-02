@@ -96,7 +96,7 @@ const [err, setErr] = useState("");
     
     interval = setInterval(() => {
       getTrips();
-    }, 1000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [search, filter, date]);
