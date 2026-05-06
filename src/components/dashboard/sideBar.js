@@ -17,6 +17,12 @@ export default function SideBar() {
 
   const links = [
     {
+      name: "Managment Passenger",
+      path: "passenger",
+      icon: faUsers,
+      roles: ["admin"],
+    },
+    {
       name: "Managment Drivers",
       path: "driver",
       icon: faUsers,

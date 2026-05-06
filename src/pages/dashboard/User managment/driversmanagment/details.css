@@ -1,0 +1,172 @@
+/* 🔹 General */
+.driver-card-details {
+  background: linear-gradient(145deg, #1e1b4b, #15123a);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  color: white;
+  margin-bottom: 15px;
+ 
+  display: flex;
+}
+.driver-details-page {
+  padding: 20px;
+  background: #0f0c29;
+  min-height: 100vh;
+  color: white;
+}
+
+/* 🔹 Title */
+.driver-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* 🔹 Tabs */
+.custom-tabs .nav-link {
+  color: #ccc;
+  border: none;
+  margin: 0 5px;
+  transition: 0.3s;
+}
+
+.custom-tabs .nav-link:hover {
+  color: white;
+}
+
+.custom-tabs .nav-link.active {
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  border-radius: 10px;
+  color: white;
+}
+
+/* 🔹 Cards */
+.driver-card {
+  background: linear-gradient(145deg, #1e1b4b, #15123a);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  margin-bottom: 15px;
+}
+
+/* 🔹 Profile */
+.driver-img {
+  width: 120px;
+  height: 120px;
+  border: 4px solid #6366f1;
+  padding: 4px;
+  background: #0f0c29;
+  margin-bottom: 10px;
+}
+
+/* 🔹 Info text */
+.info-text {
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+/* 🔹 Vehicle images */
+.car-img {
+  width: 90px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.car-img:hover {
+  transform: scale(1.1);
+}
+
+/* 🔹 Stats cards */
+.stat-card {
+  padding: 15px;
+  text-align: center;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  margin-bottom: 10px;
+}
+
+/* 🔹 Documents */
+.doc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* 🔹 Warning box */
+.warning-box {
+  background: #facc15;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* 🔹 Ratings */
+.rating-box {
+  text-align: center;
+}
+
+.rating-number {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+/* 🔹 Stars */
+.stars {
+  color: #facc15;
+  font-size: 18px;
+}
+
+/* 🔹 Breakdown */
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* 🔹 Empty state */
+.empty-box {
+  text-align: center;
+  opacity: 0.6;
+  padding: 20px;
+}
+/* 🔹 Container */
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 🔹 Image */
+.profile-image {
+  flex-shrink: 0;
+  width: 200px;
+}
+
+.driver-imge {
+  width: 200px !important;
+  height: 200px !important;
+  border: 4px solid #6366f1;
+  padding: 4px;
+  background: #0f0c29;
+}
+
+/* 🔹 Info */
+.profile-info {
+  flex: 1;
+}
+
+/* 🔹 Icons */
+.icon {
+  margin-right: 8px;
+  color: #a5b4fc;
+}

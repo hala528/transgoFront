@@ -10,6 +10,7 @@ import RestPassword from './pages/Auth/ResetPassword';
 import FirstLogin from './pages/Auth/Firstlogin';
 import ManagmentDriver from './pages/dashboard/User managment/driversmanagment/Driver';
 import AddDriver from './pages/dashboard/User managment/driversmanagment/AddDriver';
+import DetailsDriver from './pages/dashboard/User managment/driversmanagment/detailsdriver';
 import RequireAuth from './pages/Auth/RequireAuths';
 import Err403 from './pages/Auth/403';
 import Trips from './pages/dashboard/Trip managment/Trips';
@@ -25,6 +26,8 @@ import WalletDriver from './pages/dashboard/FreeWalet/driver/walletFreedriver';
 import LogeDrivers from './pages/dashboard/FreeWalet/driver/logsDriver';
 import WalletPassenger from './pages/dashboard/FreeWalet/passenger/walletFreepassenger';
 import Logpassenger from './pages/dashboard/FreeWalet/passenger/LogsPassenger';
+import Passenger from './pages/dashboard/User managment/passengerManagment/Passenger';
+import DetailsPassenger from './pages/dashboard/User managment/passengerManagment/detailsPassenger';
 function App() {
   return (
     <div className="App">
@@ -45,7 +48,7 @@ function App() {
             <Route element={<RequireAuth allowedRole="admin" />}>
               <Route path="driver" element={<ManagmentDriver />} />
               <Route path='driver/:id' element={<AddDriver />} />
-              
+              <Route path="driver/details/:id" element={<DetailsDriver />} />
               <Route path="employee" element={<ManagmentEmployee />} />
               <Route path='employee/:id' element={<AddEmployee />} />
               <Route path='employee/details/:id' element={<DetailsEmployee />} /> 
@@ -56,6 +59,8 @@ function App() {
               <Route path='wallet/logsdriver' element={<LogeDrivers />} />
               <Route path='wallet/chargepassenger' element={<WalletPassenger />} />
               <Route path='wallet/logspassenger' element={<Logpassenger />} />
+              <Route path='passenger' element={<Passenger />} />
+              <Route path='passenger/:id' element={<DetailsPassenger />} />
             </Route>
 
             {/* Shared */}

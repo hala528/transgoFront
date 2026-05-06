@@ -1,6 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import LiveMap from "./LiveMap";
 import { Axios } from "../../../api/axios";
 import { GETTRIPS, IMAGE_BASE ,CANCEL_TRIP} from "../../../api/api";
