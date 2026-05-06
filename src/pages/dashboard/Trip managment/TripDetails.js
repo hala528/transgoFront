@@ -160,10 +160,10 @@ const arrivalRaw = trip.general?.expected_arrival_at;
 
             <div className="td-info-grid">
 
-              <div className="td-info-box">
+              {/* <div className="td-info-box">
                 <span><FaHashtag /> Trip ID</span>
                 <strong>#{id}</strong>
-              </div>
+              </div> */}
 
               <div className="td-info-box">
                 <span><FaRegCalendarAlt /> Departure Date</span>
@@ -202,16 +202,16 @@ estimated_duration_minutes
 })}
                 </strong>
               </div>
-
+{/* 
               <div className="td-info-box">
                 <span><FaRoute /> Trip Type</span>
                 <strong>{trip.booking_info?.trip_type
 }</strong>
 
-              </div>
+              </div> */}
 
               <div className="td-info-box">
-                <span><FaRegClock /> Expected Arrival</span>
+                <span><FaRegClock /> expected_arrival_at</span>
                 <strong>
                   {new Date(arrivalRaw).toLocaleTimeString([], {
   hour: "2-digit",
@@ -221,7 +221,15 @@ estimated_duration_minutes
 })}
                 </strong>
               </div>
+<div className="td-info-box">
+  <span><FaUsers /> remaining_seats</span>
+  <strong>{trip.booking_info?.remaining_seats}</strong>
+</div>
 
+<div className="td-info-box">
+  <span><FaUsers /> bookings_count</span>
+  <strong>{trip.booking_info?.bookings_count}</strong>
+</div>
               {/* <div className="td-info-box">
                 <span><FaUsers /> Seats</span>
                 <strong>
@@ -357,7 +365,7 @@ estimated_duration_minutes
         {/* Pickup */}
        <td>
   {b.pickup_point?.point_name
-    ? `${b.pickup_point.point_name}، ${b.pickup_point.governorate?.name || b.pickup_point.governorate}`
+    ? `${b.pickup_point.point_name}}`
     : "—"}
 </td>
 

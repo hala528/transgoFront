@@ -278,7 +278,7 @@ export default function BookingDetails() {
               <div className="td-row">
                 <span className="td-label">Departure</span>
                 <strong>
-                  {tripTime.date} - {tripTime.time}
+                  {tripTime.date} , {tripTime.time}
                 </strong>
               </div>
 
