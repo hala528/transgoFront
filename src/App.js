@@ -20,8 +20,8 @@ import AddEmployee from './pages/dashboard/User managment/employeeManagment/AddE
 import DetailsEmployee from './pages/dashboard/User managment/employeeManagment/detailsEmployee';
 import AuditLog from './pages/dashboard/Audit log/AuditLog';
 //import FreeWallet from './pages/dashboard/driverWalet/walletFree';
-import FinancailLogs from './pages/dashboard/driverWalet/financailLogs';
-import FreeWallet from './pages/dashboard/driverWalet/Freewallet';
+// import FinancailLogs from './pages/dashboard/driverWalet/financailLogs';
+// import FreeWallet from './pages/dashboard/driverWalet/Freewallet';
 import BookingDetails from './pages/dashboard/Booking/BookingDetails';
 
 import FinancailLogs from './pages/dashboard/FreeWalet/financailLogs';
