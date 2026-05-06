@@ -5,7 +5,7 @@ import LiveMap from "./LiveMap";
 import { Axios } from "../../../api/axios";
 import { GETTRIPS, IMAGE_BASE ,CANCEL_TRIP} from "../../../api/api";
 import DelayedTrips from "./DelayedTrips";
-
+import TopFilterBar from "../../../components/dashboard/TopFilterBar";
 import TripCard from "./TripCard";
 
 export default function Trips() {
@@ -17,28 +17,13 @@ const [date, setDate] = useState("");
   const [loading, setLoading] = useState(false);
 const [success, setSuccess] = useState("");
 const [err, setErr] = useState("");
-
-//   const statusMap = {
-//   all: undefined,
-//   pending: "pending",
-//   active: "active",
-//   completed: "completed",
-//   canceled: "canceled", 
-// };
-
  const handleCancel = async (id) => {
   try {
     const res = await Axios.post(CANCEL_TRIP(id));
-
     console.log("CANCEL RESPONSE:", res.data);
-
-    
     setSuccess(res.data?.message || "Trip canceled successfully");
     setErr("");
     setTimeout(() => setSuccess(""), 3000);
-
-
-    
     const refreshed = await Axios.get(GETTRIPS, {
       params: {
         search: search || undefined,
@@ -81,7 +66,13 @@ const [err, setErr] = useState("");
             departure_date: date || undefined,
           },
         });
+console.log("FULL RESPONSE:", res);
 
+      
+        console.log("RAW DATA:", res.data);
+
+      
+        console.log("FILTERED ITEMS FROM BACKEND:", res.data?.data?.items);
         setTrips(res.data?.data?.items || []);
       } catch (err) {
         console.log("ERROR:", err);
@@ -96,7 +87,7 @@ const [err, setErr] = useState("");
     
     interval = setInterval(() => {
       getTrips();
-    }, 5000);
+    }, 30000);
 
     return () => clearInterval(interval);
   }, [search, filter, date]);
@@ -105,9 +96,7 @@ const [err, setErr] = useState("");
   //   path ? `${IMAGE_BASE}/${path}` : "";
 
   const formattedTrips = trips.map((trip) => {
-    const dateObj = trip?.departure?.at
-      ? new Date(trip.departure.at)
-      : new Date();
+    const rawDate = trip?.departure?.at;
 
     return {
       id: trip?.trip_id,
@@ -118,13 +107,17 @@ const [err, setErr] = useState("");
       driver: trip?.driver?.full_name,
       type: trip?.trip_type,
 
-      time: dateObj.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+   time: rawDate
+  ? new Date(rawDate).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: "UTC",
+    })
+  : "",
 
-      date: dateObj.toLocaleDateString(),
-
+  
+ date: rawDate?.slice(0, 10),
       driverImg: trip?.driver?.photo
         ? `${IMAGE_BASE}/${trip.driver.photo}`
         : "",
@@ -152,108 +145,46 @@ const [err, setErr] = useState("");
       {success && <span className="success">{success}</span>}
 {err && <span className="error">{err}</span>}
 
-      <div className="card-driver d-flex justify-content-between align-items-center px-3 mb-3">
-        <div className="d-flex gap-2 align-items-center">
-          {["all", "pending", "active", "completed", "canceled"].map(
-            (f) => (
-              <Button
-                key={f}
-                size="sm"
-                onClick={() => {
-                  setFilter(f);
-                  setActiveView("");
-                }}
-                style={{
-                  background:
-                    filter === f
-                      ? "linear-gradient(90deg, var(--primary-blue), var(--primary-purple))"
-                      : "rgba(255,255,255,0.08)",
-                  border: "none",
-                  borderRadius: "20px",
-                  color: filter === f ? "white" : "#cbd5f5",
-                  fontSize: "11px",
-                }}
-              >
-                {f.charAt(0).toUpperCase() + f.slice(1)}
-              </Button>
-            )
-          )}
-          
-  
+    <TopFilterBar
+  filter={filter}
+  setFilter={setFilter}
+  filtersList={["all", "pending", "active", "completed", "canceled"]}
 
-         <div
-  className="live-map-btn"
-  onClick={() => setActiveView("live")}
-  style={{
-    background:
-      activeView === "live"
-        ? "linear-gradient(90deg, var(--primary-blue), var(--primary-purple))"
-        : "rgba(255,255,255,0.08)",
-    color: activeView === "live" ? "white" : "#cbd5f5",
-    borderRadius: "20px",
-    padding: "6px 12px",
-    cursor: "pointer",
-  }}
->
-  <span className="live-dot"></span>
-  <span className="live-text">Live Map</span>
-</div>
+  search={search}
+  setSearch={setSearch}
 
-<div
-  className="delayed-trips-btn"
-  onClick={() => setActiveView("delayed")
-    
-  }
-  style={{
-    background:
-      activeView === "delayed"
-        ? "linear-gradient(90deg, var(--primary-blue), var(--primary-purple))"
-        : "rgba(255,255,255,0.08)",
-    color: activeView === "delayed" ? "white" : "#cbd5f5",
-    borderRadius: "20px",
-    padding: "6px 12px",
-    cursor: "pointer",
-  }}
->
-  <span className="delayed-dot"></span>
-  <span className="delayed-text">Delayed Trips</span>
-</div>
+  date={date}
+  setDate={setDate}
 
-        </div>
+  activeView={activeView}
+  setActiveView={setActiveView}
 
-  {/* DATE */}
-  <Form.Control
-    type="date"
-    value={date}
-    onChange={(e) => {
-      setDate(e.target.value);
-      setActiveView("");
-    }}
-    style={{
-      width: "170px",
-      borderRadius: "10px",
-      color: "white",
-      background: "rgba(255,255,255,0.08)",
-    }}
-  />
-        {/* SEARCH */}
-        <Form.Control
-          type="text"
-          placeholder="Search by ID or driver..."
-          className="custom-input-driver"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setActiveView("");
-          }}
-          style={{
-            width: "220px",
-            borderRadius: "10px",
-            color: "white",
-            background: "rgba(255,255,255,0.08)",
-          }}
-        />
-      </div>
+  extraButtons={[
+    {
+      key: "live",
+      className: "live-map-btn",
+      onClick: () => setActiveView("live"),
+      content: (
+        <>
+          <span className="live-dot"></span>
+          <span className="live-text">Live Map</span>
+        </>
+      ),
+    },
+    {
+      key: "delayed",
+      className: "delayed-trips-btn",
+      onClick: () => setActiveView("delayed"),
+      content: (
+        <>
+          <span className="delayed-dot"></span>
+          <span className="delayed-text">Delayed Trips</span>
+        </>
+      ),
+    },
+  ]}
+/>
+
 
       {/* CONTENT */}
    <div className="t-grid">
@@ -268,92 +199,7 @@ const [err, setErr] = useState("");
   handleCancel={handleCancel}/>
 
   ) 
-//   : filtered.length === 0 ? (
 
-//           <div
-//             style={{
-//               color: "#cbd5f5",
-//               textAlign: "center",
-//               padding: "20px 0",
-//             }}
-//           >
-//             No trips found.
-//           </div>
-//         ) : 
-//         (
-//           filtered.map((trip) => (
-//             <div key={trip.id} className="t-card">
-//               <div className="t-card-header">
-//                 <span className="t-id">#{trip.id}</span>
-
-//                 <div
-//                   className="t-status"
-//                   style={{ color: trip.statusColor }}
-//                 >
-//                   <span className="t-status-dot"></span>
-//                   <span className="t-status-text">
-//                     {trip.status?.charAt(0).toUpperCase() +
-//                       trip.status?.slice(1)}
-//                   </span>
-//                 </div>
-//               </div>
-
-//               {trip.carImg && (
-//                 <img
-//                   src={trip.carImg}
-//                   className="t-car-img"
-//                   alt="car"
-//                 />
-//               )}
-
-//               <div className="t-route-visual">
-//                 <div className="t-stop-row">
-//                   <div className="t-stop t-stop-from"></div>
-//                   <span className="t-stop-label">{trip.from}</span>
-//                 </div>
-//                 <div className="t-line"></div>
-//                 <div className="t-stop-row">
-//                   <div className="t-stop t-stop-to"></div>
-//                   <span className="t-stop-label">{trip.to}</span>
-//                 </div>
-//               </div>
-
-//               <div className="t-driver-row">
-//                 <img
-//                   src={trip.driverImg}
-//                   className="t-driver-img"
-//                   alt="driver"
-//                 />
-//                 <span className="t-driver-name">{trip.driver}</span>
-//               </div>
-
-//               <div className="t-type t-type-right">{trip.type}</div>
-
-//               <div className="t-time">
-//                 {trip.time} · {trip.date}
-//               </div>
-
-//               <div className="t-actions">
-//                <Link to={`/dashboard/trips/${trip.id}`} style={{ flex: 1 }}>
-//                   <Button size="sm" className="t-btn-view">
-//                     view details
-//                   </Button>
-//                 </Link>
-// <Button
-//   size="sm"
-//   disabled={!trip.canCancel}
-//   className="t-btn-cancel"
-//   onClick={() => handleCancel(trip.id)}
-// >
-//   Cancel
-// </Button>
-
-
-
-//               </div>
-//             </div>
-//           ))
-//         )}
 :filtered.length === 0 ? (
   <div
     style={{

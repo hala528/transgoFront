@@ -43,3 +43,6 @@ export const GET_WALLET_DRIVER = "admin/driver-wallet-topups"
 export const WALLET_TOP = (id) => `admin/drivers/${id}/wallet/top-up` ;
 export const WALLET_TOP_PASSENGER = (id) => `admin/passengers/${id}/wallet/top-up` ;
 export const SERASH_PASSENGER = "admin/passengers";
+export const WALLET_TOP = (id) => `admin/drivers/${id}/wallet/top-up` ;
+export const GET_BOOKINGS = 'admin/bookings';
+export const BOOKING_DETAILS = (id) => `admin/bookings/${id}`;

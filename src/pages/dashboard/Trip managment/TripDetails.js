@@ -6,6 +6,9 @@ import { TRIP_DETAILS, IMAGE_BASE,CANCEL_TRIP  } from "../../../api/api";
 import { Axios } from "../../../api/axios";
 import polyline from "@mapbox/polyline";
 import LiveMap from "./LiveMap";
+import { useNavigate } from "react-router-dom";
+
+
 
 import {
   FaRegClipboard,
@@ -24,7 +27,7 @@ export default function TripDetails() {
 const [success, setSuccess] = useState("");
 const [err, setErr] = useState("");
 const [showMap, setShowMap] = useState(false);
-
+const navigate = useNavigate();
   const [trip, setTrip] = useState();
   const [loading, setLoading] = useState(true);
 const path = trip?.route?.polyline
@@ -93,8 +96,8 @@ const path = trip?.route?.polyline
 
   const bookings = trip.booking_info?.bookings || [];
 
-  const departureDate = new Date(trip.general?.departure_at);
-  const arrivalDate = new Date(trip.general?.expected_arrival_at);
+  const departureRaw = trip.general?.departure_at;
+const arrivalRaw = trip.general?.expected_arrival_at;
 
   const driver = trip.driver;
   const vehicle = trip.vehicle;
@@ -123,7 +126,8 @@ const path = trip?.route?.polyline
 
             <span className={`t-status t-status-${status}`}>
               <span className="t-status-dot"></span>
-              {status}
+            {trip.status?.key}
+
             </span>
 
           </h2>
@@ -164,41 +168,66 @@ const path = trip?.route?.polyline
               <div className="td-info-box">
                 <span><FaRegCalendarAlt /> Departure Date</span>
                 <strong>
-                  {departureDate.toLocaleDateString()}
+                  {departureRaw?.slice(0, 10)}
+                </strong>
+              </div>
+
+  <div className="td-info-box">
+                <span><FaRegCalendarAlt /> 
+estimated_distance_km
+</span>
+                <strong>
+                  {trip.general?.estimated_distance_km}
+                </strong>
+              </div>
+              
+  <div className="td-info-box">
+                <span><FaRegCalendarAlt /> 
+estimated_duration_minutes
+:
+</span>
+                <strong>
+                  {trip.general?.estimated_duration_minutes}
                 </strong>
               </div>
 
               <div className="td-info-box">
                 <span><FaRegClock /> Departure Time</span>
                 <strong>
-                  {departureDate.toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
+              {new Date(departureRaw).toLocaleTimeString([], {
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+  timeZone: "UTC",
+})}
                 </strong>
               </div>
 
               <div className="td-info-box">
                 <span><FaRoute /> Trip Type</span>
-                <strong>{trip.booking_info?.trip_type}</strong>
+                <strong>{trip.booking_info?.trip_type
+}</strong>
+
               </div>
 
               <div className="td-info-box">
                 <span><FaRegClock /> Expected Arrival</span>
                 <strong>
-                  {arrivalDate.toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
+                  {new Date(arrivalRaw).toLocaleTimeString([], {
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+  timeZone: "UTC",
+})}
                 </strong>
               </div>
 
-              <div className="td-info-box">
+              {/* <div className="td-info-box">
                 <span><FaUsers /> Seats</span>
                 <strong>
                   {vehicle.seats - trip.booking_info.remaining_seats} / {vehicle.seats}
                 </strong>
-              </div>
+              </div> */}
 
             </div>
           </div>
@@ -224,10 +253,12 @@ const path = trip?.route?.polyline
                       {p.address}
                       <div className="td-route-sub">
                         {p.type} ·{" "}
-                        {new Date(p.expected_arrival_at).toLocaleTimeString([], {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
+                       {new Date(p.expected_arrival_at).toLocaleTimeString([], {
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+  timeZone: "UTC",
+})}
                       </div>
                     </div>
                   </div>
@@ -236,28 +267,7 @@ const path = trip?.route?.polyline
                 </div>
               ))}
             
-{/* <div style={{ marginTop: "15px" }}>
-  <LiveMap
-    center={
-      routePoints[0]
-        ? {
-            lat: routePoints[0].latitude,
-            lng: routePoints[0].longitude,
-          }
-        : { lat: 33.5, lng: 36.3 }
-    }
-    zoom={7}
-    markers={[
-      routePoints[0] && {
-        id: 1,
-        lat: routePoints[0].latitude,
-        lng: routePoints[0].longitude,
-        label: "Start",
-      },
-    ].filter(Boolean)}
-    path={path}
-  />
-</div> */}
+
 
  <div className="td-map-btn-wrapper">
   <Button
@@ -314,36 +324,81 @@ const path = trip?.route?.polyline
             <table className="td-booking-table">
 
               <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Seats</th>
-                  <th>Status</th>
-                </tr>
+               <tr>
+  <th>ID</th>
+  
+  <th>Name</th>
+  <th>booking_code</th>
+  <th>pickup_point</th>
+  <th>seats_reserved</th>
+  <th>Payment</th>
+  <th>Status</th>
+  {/* <th>Amount</th> */}
+  <th>Action</th>
+</tr>
+
               </thead>
 
-              <tbody>
-                {bookings.length === 0 ? (
-                  <tr>
-                    <td colSpan="4">No bookings</td>
-                  </tr>
-                ) : (
-                  bookings.map((b, i) => (
-                    <tr key={i}>
-                      <td>{b.id}</td>
-                      <td>{b.name}</td>
-                      <td>{b.seats}</td>
+             <tbody>
+  {bookings.length === 0 ? (
+    <tr>
+      <td colSpan="7">No bookings</td>
+    </tr>
+  ) : (
+    bookings.map((b) => (
+      <tr key={b.booking_id}>
 
-                      <td>
-                        <span className={`t-status t-status-${b.status}`}>
-                          <span className="t-status-dot"></span>
-                          {b.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
+        {/* ID */}
+        <td>{b.booking_id}</td>
+
+        {/* Name */}
+        <td>{b.passenger?.full_name}</td>
+<td>{b.booking_code}</td>
+        {/* Pickup */}
+       <td>
+  {b.pickup_point?.point_name
+    ? `${b.pickup_point.point_name}، ${b.pickup_point.governorate?.name || b.pickup_point.governorate}`
+    : "—"}
+</td>
+
+
+        {/* Seats */}
+        <td>{b.seats_reserved}</td>
+
+        {/* Payment */}
+        <td>
+          {/* {b.payment?.amount} */}
+           ({b.payment?.method})
+        </td>
+
+        {/* Status */}
+        <td>
+          <span className={`t-status t-status-${b.status?.key}`}>
+            <span className="t-status-dot"></span>
+            {b.status?.key}
+          </span>
+        </td>
+
+        {/* Attendance
+        <td>
+         {b.payment?.amount}
+        </td> */}
+
+        {/* Action */}
+       <td>
+  <button
+    className="td-btn-action"
+    onClick={() => navigate(`/dashboard/BookingDetails/${b.booking_id}`)}
+  >
+    View Details
+  </button>
+</td>
+
+
+      </tr>
+    ))
+  )}
+</tbody>
 
             </table>
           </div>
@@ -369,9 +424,9 @@ const path = trip?.route?.polyline
               />
 
               <h6 className="td-driver-name">{driver.full_name}</h6>
-              <span className="td-driver-phone">{driver.phone}</span>
-
-              <div className="td-driver-rating">
+              <span className="td-driver-phone">PHone:  {driver.phone}</span>
+<h6 className="td-driver-phone">Address:   {driver.profile.address}</h6>
+              <div className="td-driver-rating">Rating:  
                 ⭐ {driver.profile?.rating}
               </div>
 

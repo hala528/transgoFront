@@ -49,35 +49,13 @@
 
 
 
-.td-header-actions button {
-  width: 120px;
-  height: 34px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
+
 
 
 .td-btn-map {
   background: linear-gradient(90deg, #5b6cff, #7b3fe4);
   color: white;
  
-}
-
-
-.td-btn-cancel {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.35);
-  color: #ff6b6b;
-}
-
-
-.td-header-actions button:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
 }
 
 
@@ -157,10 +135,6 @@
 .td-table td{
     padding:10px;
     border-top:1px solid rgba(255,255,255,0.05);
-}
-
-.td-confirmed{
-    color:#4ade80;
 }
 
 /* driver */
@@ -374,29 +348,6 @@
 
 
 
-/* Confirmed = Green */
-.td-status-confirmed {
-  color: #22c55e;
-  font-weight: 600;
-}
-/* STATUS TEXT ONLY */
-
-.td-status-confirmed {
-  color: #22c55e;
-  font-weight: 600;
-}
-
-.td-status-pending {
-  color: #f59e0b;
-  font-weight: 600;
-}
-
-.td-status-cancelled {
-  color: #ef4444;
-  font-weight: 600;
-}
-
-
 
 
 .td-btn-action {
@@ -471,6 +422,18 @@
   cursor:pointer;
 }
 
+/* status */
+/* .td-status-confirmed {
+  color: #22c55e;
+  font-weight: 600;
+} */
+
+/* 
+.td-confirmed{
+    color:#4ade80;
+} */
+
+/* 
 .t-status-confirmed {
   background: rgba(74, 222, 128, 0.15);
   color: #4ade80;
@@ -478,4 +441,40 @@
 
 .t-status-confirmed .t-status-dot {
   background: #4ade80;
+} */
+
+
+/* .td-status-pending {
+  color: #f59e0b;
+  font-weight: 600;
+} */
+
+/* .td-status-cancelled {
+  color: #ef4444;
+  font-weight: 600;
+} */
+
+
+/*action*/
+.td-header-actions button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.td-header-actions button {
+  width: 120px;
+  height: 34px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/*canclled*/
+.td-btn-cancel {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #ff6b6b;
 }

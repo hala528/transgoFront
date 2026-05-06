@@ -1,7 +1,7 @@
 
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-
+import Booking from './pages/dashboard/Booking/booking';
 import Login from './pages/Auth/login';
 import Dashborad from './pages/dashboard/dashborad';
 import ForgetPassword from './pages/Auth/ForgetPassword';
@@ -19,6 +19,10 @@ import ManagmentEmployee from './pages/dashboard/User managment/employeeManagmen
 import AddEmployee from './pages/dashboard/User managment/employeeManagment/AddEmployee';
 import DetailsEmployee from './pages/dashboard/User managment/employeeManagment/detailsEmployee';
 import AuditLog from './pages/dashboard/Audit log/AuditLog';
+//import FreeWallet from './pages/dashboard/driverWalet/walletFree';
+import FinancailLogs from './pages/dashboard/driverWalet/financailLogs';
+import FreeWallet from './pages/dashboard/driverWalet/Freewallet';
+import BookingDetails from './pages/dashboard/Booking/BookingDetails';
 
 import FinancailLogs from './pages/dashboard/FreeWalet/financailLogs';
 import FreeWallet from './pages/dashboard/FreeWalet/Freewallet';
@@ -66,6 +70,12 @@ function App() {
             {/* Shared */}
            <Route path="trips" element={<Trips />} />
 <Route path="trips/:id" element={<TripDetails />} />
+<Route
+  path="booking"
+  element={<Booking />}
+/>
+<Route path="/dashboard/BookingDetails/:id" element={<BookingDetails />} />
+
             {/* 403 */}
             <Route path="403" element={<Err403 />} />
           </Route>

@@ -22,7 +22,7 @@
   color:white;
   font-weight:600;
 }
-
+/*route,driver*/
 .t-route{
   color:#cbd5f5;
   font-size:13px;
@@ -34,32 +34,56 @@
   margin-top:6px;
 }
 
-.t-type{
-  color:#cbd5f5;
-  font-size:12px;
+
+
+/* ===== META BLOCK ===== */
+.t-meta-block{
+  margin-top:10px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
 
-.t-time{
+.t-meta-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+}
+
+/* label */
+.t-label{
+  color:#9ca3af;
+  min-width:90px;
+}
+
+/* value */
+.t-value{
+  color:#ffffff;
+  font-weight:600;
+}
+
+/* icons */
+.t-icon{
+  font-size:14px;
+}
+
+/* colors */
+.t-icon.driver{ color:#a78bfa; }
+.t-icon.time{ color:#60a5fa; }
+.t-icon.type{ color:#fbbf24; }
+
+
+/* .t-type{
+  color:#cbd5f5;
+  font-size:12px;
+} */
+
+/* .t-time{
   color:#f3f4f5;
   font-size:12px;
   margin-top:4px;
-}
-
-.t-actions{
-  display:flex;
-  gap:8px;
-  margin-top:12px;
-}
-
-.t-btn-view{
-  background:linear-gradient(90deg,var(--primary-blue),var(--primary-purple));
-  border:none;
-  width:100%;
-}
-
-.t-btn-cancel{
-  width:90px;
-}
+} */
 
 .t-driver-row{
   display:flex;
@@ -76,11 +100,11 @@
   border:1px solid rgba(255,255,255,0.15);
 }
 
-.t-driver-name{
+/* .t-driver-name{
   color:white;
   font-size:13px;
   font-weight:500;
-}
+} */
 
 .t-car-img{
   width: 100%;
@@ -184,57 +208,6 @@
   color: #cbd5f5;
   font-size: 12px;
 }
-.t-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 500;
-}
-
-.t-status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-}
-
-/* pending */
-.t-status-pending {
-  background: rgba(251, 191, 36, 0.15);
-  color: #fbbf24;
-}
-.t-status-pending .t-status-dot {
-  background: #fbbf24;
-}
-
-/* active */
-.t-status-active {
-  background: rgba(74, 222, 128, 0.15);
-  color: #4ade80;
-}
-.t-status-active .t-status-dot {
-  background: #4ade80;
-}
-
-/* completed */
-.t-status-completed {
-  background: rgba(147, 197, 253, 0.15);
-  color: #93c5fd;
-}
-.t-status-completed .t-status-dot {
-  background: #93c5fd;
-}
-
-/* cancelled */
-.t-status-cancelled {
-  background: rgba(248, 113, 113, 0.15);
-  color: #f87171;
-}
-.t-status-cancelled .t-status-dot {
-  background: #f87171;
-}
 
 .live-map-btn {
   display: inline-flex;
@@ -266,7 +239,7 @@
 .live-map-btn .live-text {
   white-space: nowrap;
 }
-/* ===== BRANCH FROM MIDDLE OF VERTICAL ROUTE ===== */
+/* ===== BRANCH  ===== */
 
 .t-route-branch {
   position: absolute;
@@ -276,29 +249,8 @@
   display: flex;
   align-items: center;
 }
-.t-btn-cancel {
-  background: rgba(239, 68, 68, 0.15) !important; /* أحمر شفاف */
-  color: #ef4444 !important;
-  border: 1px solid rgba(239, 68, 68, 0.3) !important;
 
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
-  transition: all 0.2s ease-in-out;
-}
 
-.t-btn-cancel:hover {
-  background: rgba(239, 68, 68, 0.25) !important;
-  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.25);
-  transform: translateY(-1px);
-}
-
-.t-btn-cancel:disabled {
-  background: rgba(239, 68, 68, 0.08) !important;
-  color: rgba(239, 68, 68, 0.4) !important;
-  border: 1px solid rgba(239, 68, 68, 0.1) !important;
-  box-shadow: none;
-  cursor: not-allowed;
-  transform: none;
-}
 
 
 .t-route-branch-line {
@@ -315,7 +267,7 @@
   
 }
 
-/* الدائرة في نهاية الخط */
+
 .t-route-branch-line::after {
   content: "";
   position: absolute;
@@ -352,4 +304,95 @@
   font-size: 12px;
   color: #fff;
   font-weight: 500;
+}
+/*status*/
+.t-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.t-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+/* pending */
+ .t-status-pending {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+} 
+
+.t-status-pending .t-status-dot {
+  background: #fbbf24;
+} 
+
+/* active */
+.t-status-active {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+}
+.t-status-active .t-status-dot {
+  background: #4ade80;
+} 
+
+/* completed */
+.t-status-completed {
+  background: rgba(147, 197, 253, 0.15);
+  color: #93c5fd;
+}
+.t-status-completed .t-status-dot {
+  background: #93c5fd;
+} 
+
+/* cancelled */
+ .t-status-canceled {
+  background: rgba(248, 113, 113, 0.15);
+  color: #f87171;
+}
+.t-status-canceled .t-status-dot {
+  background: #f87171;
+} 
+/*action*/
+.t-actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+
+.t-btn-view{
+  background:linear-gradient(90deg,var(--primary-blue),var(--primary-purple));
+  border:none;
+  width:100%;
+}
+/* 
+.t-btn-cancel{
+  width:90px;
+} */
+.t-btn-cancel {
+  background: rgba(239, 68, 68, 0.15) !important; 
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+  transition: all 0.2s ease-in-out;
+}
+
+.t-btn-cancel:hover {
+  background: rgba(239, 68, 68, 0.25) !important;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.25);
+  transform: translateY(-1px);
+}
+.t-btn-cancel:disabled {
+  background: rgba(239, 68, 68, 0.08) !important;
+  color: rgba(239, 68, 68, 0.4) !important;
+  border: 1px solid rgba(239, 68, 68, 0.1) !important;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
 }
