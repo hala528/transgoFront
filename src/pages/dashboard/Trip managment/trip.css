@@ -1,7 +1,8 @@
 .t-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  width: 100%;
 }
 
 .t-card{
@@ -106,16 +107,116 @@
   font-weight:500;
 } */
 
-.t-car-img{
-  width: 100%;
-  max-width: 250px;
-  height: 90px;
-  object-fit: contain;
-  margin:6px 0;
-  opacity:0.9;
-  border-radius: 12px;
+.t-card-horizontal{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+
+  background:rgba(30,27,75,0.7);
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.05);
 }
 
+/* ===== AVATAR ===== */
+.t-avatar img{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,0.2);
+}
+
+/* ===== CONTENT ===== */
+.t-content{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+/* HEADER */
+.t-top{
+  display:flex;
+  align-items:center;
+  gap:8px;           /* المسافة بين ID والحالة */
+}
+.t-id{
+  color:white;
+  font-weight:600;
+  font-size:13px;
+}
+
+/* ROUTE */
+.t-route{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  color:#cbd5f5;
+}
+
+.t-route .arrow{
+  color:white;
+}
+
+/* META */
+.t-meta{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  font-size:12px;
+  color:white;
+}
+
+.t-item{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+/* ===== ACTIONS ===== */
+.t-actions{
+  display:flex;
+  flex-direction:column;   /* هذا مهم */
+  gap:6px;
+  align-items:flex-end;
+}
+.t-actions{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  align-items:flex-end;
+}
+.t-actions button{
+  width:110px;
+}
+.t-actions{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.t-actions .btn-row{
+  display:flex;
+  gap:6px;
+}
+
+.t-btn-view{
+  background:linear-gradient(90deg,#3b82f6,#8b5cf6);
+  border:none;
+  font-size:12px;
+  padding:4px 10px;
+}
+
+.t-btn-cancel{
+  background:transparent;
+  border:1px solid #ef4444;
+  color:#ef4444;
+  font-size:12px;
+  padding:4px 10px;
+}
 .t-route-visual {
   display: flex;
   flex-direction: column;

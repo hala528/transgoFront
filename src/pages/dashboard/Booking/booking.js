@@ -56,25 +56,32 @@ console.log("DATA:", res.data);
 console.log("ITEMS:", res.data.data.items);
       const grouped = {};
 
-    items.forEach((item) => {
-      const dateObj = new Date(item.departure_time);
+  items.forEach((item) => {
+
+  const d = new Date(item.departure_time);
+
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+
+  const formattedDate = `${day} - ${month} - ${year}`;
+
   if (!grouped[item.trip_id]) {
     grouped[item.trip_id] = {
       id: item.trip_id,
       from: item.from,
       to: item.to,
-    // time: item.departure_time,
 
-time: item.departure_time
-  ? new Date(item.departure_time).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-      timeZone: "UTC",
-    })
-  : "",
+      time: item.departure_time
+        ? new Date(item.departure_time).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+            timeZone: "UTC",
+          })
+        : "",
 
-date: item.departure_time.slice(0,10),
+      date: formattedDate,   // ✅ هون التعديل
 
       driver_name: item.driver_name,
       status: "Active",
@@ -89,12 +96,12 @@ date: item.departure_time.slice(0,10),
       seats: b.seats_reserved,
       payment_method:
         b.payment_method === "cash" ? "Cash" : "Electronic",
-      status: b.status, 
+      status: b.status,
       amount: b.total_amount,
       date: b.created_at,
-      
     });
   });
+
 });
 
 
@@ -150,7 +157,7 @@ date: item.departure_time.slice(0,10),
                 <FaMapMarkerAlt className="b-icon location" />
                 <span className="b-label">Route:</span>
                 <span className="b-value">
-                  {trip.from} → {trip.to}
+              {trip.to}  →  {trip.from} 
                 </span>
               </div>
 
