@@ -23,7 +23,7 @@ import AuditLog from './pages/dashboard/Audit log/AuditLog';
 // import FinancailLogs from './pages/dashboard/driverWalet/financailLogs';
 // import FreeWallet from './pages/dashboard/driverWalet/Freewallet';
 import BookingDetails from './pages/dashboard/Booking/BookingDetails';
-
+import Reports from './pages/dashboard/Report/Reports';
 import FinancailLogs from './pages/dashboard/FreeWalet/financailLogs';
 import FreeWallet from './pages/dashboard/FreeWalet/Freewallet';
 import WalletDriver from './pages/dashboard/FreeWalet/driver/walletFreedriver';
@@ -73,6 +73,10 @@ function App() {
 <Route
   path="booking"
   element={<Booking />}
+/>
+<Route
+  path="Reports"
+  element={<Reports />}
 />
 <Route path="/dashboard/BookingDetails/:id" element={<BookingDetails />} />
 

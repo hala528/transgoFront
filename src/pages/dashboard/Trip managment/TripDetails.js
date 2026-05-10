@@ -133,17 +133,20 @@ const arrivalRaw = trip.general?.expected_arrival_at;
           </h2>
         </div>
 
-        <div className="td-header-actions">
-          <Button className="td-btn-map">Track on Map</Button>
-    <Button
-  className="td-btn-cancel"
-  onClick={() => handleCancel(id)}
->
-  Cancel Trip
-</Button>
- 
+      <div className="btn-row">
 
-        </div>
+  <Button className="t-btn-view">
+    Track
+  </Button>
+
+  <Button
+    className="t-btn-cancel"
+    onClick={() => handleCancel(id)}
+  >
+    Cancel 
+  </Button>
+
+</div>
       </div>
 
       <div className="td-grid">

@@ -106,7 +106,7 @@ console.log("FULL RESPONSE:", res);
       to: trip?.departure?.to,
       driver: trip?.driver?.full_name,
       type: trip?.trip_type,
-
+ driverPhone: trip?.driver?.phone,
    time: rawDate
   ? new Date(rawDate).toLocaleTimeString([], {
       hour: "2-digit",

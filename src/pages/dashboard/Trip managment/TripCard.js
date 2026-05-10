@@ -9,68 +9,71 @@ export default function TripCard({ trip, onCancel }) {
   return (
     <div className="t-card-horizontal">
 
-      {/* LEFT: CAR AVATAR */}
-      <div className="t-avatar">
-        {(trip.carImg || trip.vehicle?.image) && (
-          <img
-            src={
-              trip.carImg
-                ? trip.carImg
-                : `${IMAGE_BASE}/${trip.vehicle?.image}`
-            }
-            alt="car"
-          />
-        )}
-      </div>
+     {/* SECTION 1 */}
+<div className="t-section-left">
 
-      {/* CENTER: INFO */}
-      <div className="t-content">
-
-        {/* HEADER */}
-        <div className="t-top">
-  <span className="t-id">Trip #{trip.id || trip.trip_id}</span>
+  <span className="t-id">
+    Trip #{trip.id || trip.trip_id}
+  </span>
 
   <span className={`t-status t-status-${statusKey}`}>
     <span className="t-status-dot"></span>
     {trip.status}
   </span>
+
 </div>
-        {/* ROUTE */}
-        <div className="t-route">
-          <FaRoute className="icon" />
-          <span>{trip.from || trip.departure?.from}</span>
-          <span className="arrow">→</span>
-          <span>{trip.to || trip.departure?.to}</span>
-        </div>
 
-        {/* META */}
-        <div className="t-meta">
+{/* SECTION 2 */}
+<div className="t-section-center">
 
-          <div className="t-item">
-            <FaUser />
-            <span>{trip.driver || trip.driver?.full_name}</span>
-          </div>
+  <div className="t-route">
+    <FaRoute className="icon" />
+    <span>{trip.from || trip.departure?.from}</span>
+    <span className="arrow">→</span>
+    <span>{trip.to || trip.departure?.to}</span>
+  </div>
 
-          <div className="t-item">
-            <FaClock />
-            <span>
-              {trip.time} · {trip.date}
-            </span>
-          </div>
+  <div className="t-item">
+    <FaClock />
+    <span>
+      {trip.time} · {trip.date}
+    </span>
+  </div>
 
-          <div className="t-item">
-            <FaCar />
-            <span>{trip.type || trip.trip_type}</span>
-          </div>
+  <div className="t-item">
+    <FaCar />
+    <span>{trip.type || trip.trip_type}</span>
+  </div>
 
-        </div>
+</div>
+
+{/* SECTION 3 */}
+<div className="t-section-right">
+
+  <div className="driver-info">
+
+    <div className="t-avatar">
+      {trip.driverImg && (
+        <img
+          src={trip.driverImg}
+          alt="driver"
+        />
+      )}
+    </div>
+
+    <div className="driver-details">
+
+      <div className="driver-name">
+        {trip.driver}
       </div>
 
-      {/* RIGHT: ACTIONS */}
-      <div className="t-actions">
+      <div className="driver-phone">
+        {trip.driverPhone}
+      </div>
 
+    </div>
 
-
+  </div>
   <div className="btn-row">
     <Link to={`/dashboard/trips/${trip.id || trip.trip_id}`}>
       <Button className="t-btn-view">View</Button>
@@ -85,6 +88,8 @@ export default function TripCard({ trip, onCancel }) {
 
 </div>
 
-    </div>
+</div>
+
+    
   );
 }

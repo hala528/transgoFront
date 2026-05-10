@@ -411,16 +411,7 @@
   font-size:14px;
 }
 
-.td-driver-view-btn{
-  width:100%;
-  margin-top:10px;
-  padding:8px;
-  border-radius:8px;
-  border:none;
-  color:white;
-   background: linear-gradient(90deg, #5b6cff, #7b3fe4);
-  cursor:pointer;
-}
+
 
 /* status */
 /* .td-status-confirmed {
@@ -456,7 +447,7 @@
 
 
 /*action*/
-.td-header-actions button:hover {
+/* .td-header-actions button:hover {
   opacity: 0.9;
   transform: translateY(-1px);
 }
@@ -470,11 +461,6 @@
   border: none;
   cursor: pointer;
   transition: 0.2s ease;
-}
+  gap: 6px;
+} */
 
-/*canclled*/
-.td-btn-cancel {
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.35);
-  color: #ff6b6b;
-}
