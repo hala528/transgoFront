@@ -59,11 +59,25 @@ export default function SideBar() {
       roles: ["admin", "employee"],
     },
     {
+
       name: "Reports & Analytics",
       path: "Reports",
       icon: faUsers,
       roles: ["admin", "employee"],
     },
+      {
+      name: "Managment Booking",
+      path: "booking",
+      icon: faUsers,
+      roles: ["admin", "employee"],
+    },
+    {
+      name: "Managment Complaints",
+      path: "complaints",
+      icon: faUsers,
+      roles: ["admin", "employee"],
+    }
+
   ];
 
  

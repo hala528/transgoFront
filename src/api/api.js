@@ -21,10 +21,12 @@ export const UPDATEEMPLOYEES = (id) => `admin/employees/${id}`;
 export const ADDDRIVER = "admin/drivers";
 export const DRIVER = "admin/drivers";
 export const GETDRIVERS = (id) => `admin/drivers/${id}`;
+export const TOGGLE_DRIVER_STATUS = (id) => `admin/drivers/${id}/toggle-status` ;
 
 //managment passenger
 export const  GET_PASSENGER = "admin/passengers";
 export const GET_PASSENGER_DETAILS = (id) => `admin/passengers/${id}` ;
+export const TOGGLE_PASSENGER_STATUS = (id) => `admin/passengers/${id}/toggle-status` ;
 
 // Trips
 export const GETTRIPS = "admin/trips";
@@ -40,9 +42,10 @@ export const SERASH_DRIVER = "admin/drivers";
 export const GET_WALLET = "/admin/wallet-topups"
 export const GET_WALLET_PASSENGER = "admin/passenger-wallet-topups"
 export const GET_WALLET_DRIVER = "admin/driver-wallet-topups"
-// export const WALLET_TOP = (id) => `admin/drivers/${id}/wallet/top-up` ;
 export const WALLET_TOP_PASSENGER = (id) => `admin/passengers/${id}/wallet/top-up` ;
 export const SERASH_PASSENGER = "admin/passengers";
 export const WALLET_TOP = (id) => `admin/drivers/${id}/wallet/top-up` ;
+
+
 export const GET_BOOKINGS = 'admin/bookings';
 export const BOOKING_DETAILS = (id) => `admin/bookings/${id}`;

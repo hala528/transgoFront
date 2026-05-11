@@ -6,31 +6,89 @@ import {
   Image,
   Badge,
   Button,
-  Tabs,
-  Tab,
+  Modal
 } from "react-bootstrap";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faPhone,
   faEnvelope,
   faLocationDot,
   faCalendar,
+  faCar,
+  faMoneyBill,
+  faRoad,
+  faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
+
 import { useParams } from "react-router-dom";
+
 import { Axios } from "../../../../api/axios";
-import { beasURL , GETDRIVERS } from "../../../../api/api";
-import './details.css';
+import { beasURL, GETDRIVERS, TOGGLE_DRIVER_STATUS } from "../../../../api/api";
+
+import "./details.css";
+
 export default function DetailsDriver() {
-   const { id } = useParams();
+
+  const { id } = useParams();
+
+const [statusLoading, setStatusLoading] = useState(false);
+
   const [data, setData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+const [selectedImage, setSelectedImage] = useState("");
+
+const [modalTitle, setModalTitle] = useState("");
+const handleShowImage = (image, title) => {
+
+  setSelectedImage(image);
+
+  setModalTitle(title);
+
+  setShowModal(true);
+
+};
+const handleToggleStatus = async () => {
+  try {
+    setStatusLoading(true);
+
+    const res = await Axios.patch(
+      `${beasURL}/${TOGGLE_DRIVER_STATUS(id)}`
+    );
+
+    console.log(res.data);
+
+    // تحديث الحالة مباشرة
+    setData((prev) => ({
+      ...prev,
+      personal_information: {
+        ...prev.personal_information,
+        account_status:
+          res.data.data.account_status === 1
+            ? "active"
+            : "inactive",
+      },
+    }));
+
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setStatusLoading(false);
+  }
+};
 
   useEffect(() => {
+
     Axios.get(`${beasURL}/${GETDRIVERS(id)}`)
       .then((res) => setData(res.data.data))
       .catch((err) => console.log(err));
+
   }, [id]);
 
-  if (!data) return <p style={{ color: "white" }}>Loading...</p>;
+  if (!data)
+    return <p style={{ color: "white" }}>Loading...</p>;
 
   const p = data.personal_information;
   const v = data.vehicle_information;
@@ -39,163 +97,384 @@ export default function DetailsDriver() {
   const r = data.ratings_reviews;
 
   return (
-    <div className="w-100 p-2">
-     <h2 style={{ color: "white", padding: 5 }}>Driver Pages :</h2>
+     <div className="w-100 p-2"> 
+               {/* 🔙 Back */}
+        <div className="d-flex align-items-center px-3">
+           <span className="td-back" onClick={() => window.history.back()}> ← </span>
+            <h2 style={{ color: "white", padding: 5 }}> Drivers Details : </h2>
+                 </div> 
+    <div className="driver-page">
 
-      <Tabs defaultActiveKey="profile" className="custom-tabs mb-3">
+      {/* HEADER */}
+      <Card className="top-card">
 
-        {/* 🔹 TAB 1: Profile */}
-        <Tab eventKey="profile" title=" information driver">
-          <Row>
-          
-            <Card className="driver-card-details p-2 ">
-  <div className="profile-container">
+        <div className="top-content">
 
-    {/* 🔹 Image */}
-    <div className="profile-image">
-      <Image
-        src={p.personal_photo}
-        className="driver-imge"
-        roundedCircle
-      />
-    </div>
+          {/* IMAGE */}
+          <div className="driver-avatar">
+            <Image
+              src={p.personal_photo}
+              roundedCircle
+            />
+          </div>
 
-    {/* 🔹 Info */}
-    <div className="profile-info">
-      <h4>{p.full_name}</h4>
+          {/* INFO */}
+          <div className="driver-main-info">
 
-      <Badge bg="success" className="mb-2">
-        {p.account_status}
-      </Badge>
+            <div className="name-row">
 
-      <hr />
+              <h2>{p.full_name}</h2>
 
-      <p>
-        <FontAwesomeIcon icon={faPhone} className="icon" />
-        {p.phone}
-      </p>
+              <Badge
+                bg={
+                  p.account_status === "active"
+                    ? "success"
+                    : "warning"
+                }
+              >
+                {p.account_status}
+              </Badge>
 
-      <p>
-        <FontAwesomeIcon icon={faEnvelope} className="icon" />
-        {p.email}
-      </p>
-
-      <p>
-        <FontAwesomeIcon icon={faLocationDot} className="icon" />
-        {p.address}
-      </p>
-
-      <p>
-        <FontAwesomeIcon icon={faCalendar} className="icon" />
-        {p.created_at.slice(0, 10)}
-      </p>
-    </div>
-
-  </div>
-</Card>
-            
-          </Row>
-        </Tab>
-
-        {/* 🔹 TAB 2: Vehicle */}
-        <Tab eventKey="vehicle" title=" information car">
-          <Card className="driver-card-details p-3">
-            <h5>information car </h5>
-
-            <p>type car : {v.car_type}</p>
-            <p>number plate : {v.plate_number}</p>
-
-            <div className="d-flex gap-3 flex-wrap">
-              {v.car_photos.map((img, i) => (
-                <Image key={i} src={img} width={200} className="car-img" />
-              ))}
-            </div>
-          </Card>
-        </Tab>
-
-        {/* 🔹 TAB 3: Trips */}
-        <Tab eventKey="trips" title=" Trips history">
-          <Row>
-            <Col md={3}>
-              <Card className="stat-card">
-                <h6>all</h6>
-                <h3>{t.total_trips_count}</h3>
-              </Card>
-            </Col>
-
-            <Col md={3}>
-              <Card className="stat-card">
-                <h6>completed</h6>
-                <h3>{t.completed_trips_count}</h3>
-              </Card>
-            </Col>
-
-            <Col md={3}>
-              <Card className="stat-card">
-                <h6>cancelled</h6>
-                <h3>{t.cancelled_trips_count}</h3>
-              </Card>
-            </Col>
-
-            <Col md={3}>
-              <Card className="stat-card">
-                <h6>active</h6>
-                <h3>{t.active_trips_count}</h3>
-              </Card>
-            </Col>
-          </Row>
-        </Tab>
-
-        {/* 🔹 TAB 4: Earnings */}
-        <Tab eventKey="earnings" title=" Earnings">
-          <Card className="driver-card-details p-3">
-            <p>Total Earnings: {f.total_gross_earnings}</p>
-            <p>Commission: {f.total_commission}</p>
-            <p>Net Earnings: {f.total_net_earnings}</p>
-          </Card>
-        </Tab>
-
-        {/* 🔹 TAB 5: Documents */}
-        <Tab eventKey="docs" title="📄 المستندات">
-          <Card className="driver-card p-3">
-
-            <div className="doc-row">
-              <span>رخصة القيادة</span>
-              <Badge bg="success">Verified</Badge>
-              <Button size="sm">عرض</Button>
             </div>
 
-            <div className="doc-row">
-              <span>بطاقة الهوية</span>
-              <Badge bg="success">Verified</Badge>
-              <Button size="sm">عرض</Button>
+            <div className="info-grid">
+
+              <div>
+                <FontAwesomeIcon icon={faPhone} />
+                <span>{p.phone}</span>
+              </div>
+
+              <div>
+                <FontAwesomeIcon icon={faEnvelope} />
+                <span>{p.email}</span>
+              </div>
+
+              <div>
+                <FontAwesomeIcon icon={faLocationDot} />
+                <span>{p.address}</span>
+              </div>
+
+              <div>
+                <FontAwesomeIcon icon={faCalendar} />
+                <span>{p.created_at.slice(0, 10)}</span>
+              </div>
+              
+               <Button
+  onClick={handleToggleStatus}
+  disabled={statusLoading}
+  style={{
+    background:
+      p.account_status === "active"
+        ? "#dc3545"
+        : "#198754",
+    border: "none",
+    width: "300px",
+    fontWeight: "600",
+  }}
+>
+  {statusLoading
+    ? "Loading..."
+    : p.account_status === "active"
+    ? "Deactivate Account"
+    : "Activate Account"}
+</Button>
+              
+
             </div>
 
-            <div className="doc-row">
-              <span>عقد البيع</span>
-              <Badge bg="warning">Pending</Badge>
-              <Button size="sm">عرض</Button>
+          </div>
+
+        </div>
+
+      </Card>
+
+      {/* TOP STATS */}
+      <div className="top-stats">
+
+        <div className="mini-stat">
+          <div className="stat-left">
+            <FontAwesomeIcon icon={faRoad} />
+            <span>Total Trips</span>
+          </div>
+
+          <h4>{t.total_trips_count}</h4>
+        </div>
+
+        <div className="mini-stat">
+          <div className="stat-left">
+            <FontAwesomeIcon icon={faCheckCircle} />
+            <span>Completed</span>
+          </div>
+
+          <h4>{t.completed_trips_count}</h4>
+        </div>
+
+        <div className="mini-stat">
+          <div className="stat-left">
+            <FontAwesomeIcon icon={faCar} />
+            <span>Active</span>
+          </div>
+
+          <h4>{t.active_trips_count}</h4>
+        </div>
+
+        <div className="mini-stat">
+          <div className="stat-left">
+            <FontAwesomeIcon icon={faMoneyBill} />
+            <span>Balance</span>
+          </div>
+
+          <h4>${f.total_net_earnings}</h4>
+        </div>
+
+      </div>
+
+      {/* GRID */}
+      <div className="cards-grid">
+
+        {/* VEHICLE */}
+        <Card className="section-card">
+
+          <div className="section-header">
+            <h4>Vehicle Information</h4>
+          </div>
+
+          <div className="vehicle-grid">
+
+            <div>
+              <span className="label">Car Type</span>
+              <h6>{v.car_type}</h6>
             </div>
 
-          </Card>
-        </Tab>
+            <div>
+              <span className="label">Plate Number</span>
+              <h6>{v.plate_number}</h6>
+            </div>
 
-        {/* 🔹 TAB 6: Reviews */}
-        <Tab eventKey="reviews" title="⭐ التقييمات">
-          <Card className="driver-card p-3">
-            <h4>{r.average_rating}</h4>
+          </div>
 
-            {r.reviews.length === 0 ? (
-              <p>لا توجد تقييمات</p>
-            ) : (
-              r.reviews.map((rev, i) => (
-                <p key={i}>{rev.comment}</p>
-              ))
+          <div className="gallery">
+
+            {v.car_photos.map((img, i) => (
+
+              <Image
+                key={i}
+                src={img}
+                className="gallery-img"
+              />
+
+            ))}
+
+          </div>
+
+        </Card>
+
+        {/* DOCUMENTS */}
+        <Card className="section-card">
+
+          <div className="section-header">
+            <h4>Documents</h4>
+          </div>
+
+          <div className="document-list">
+
+            {/* LICENSE */}
+            <div className="document-item">
+
+              <span>Driving License</span>
+
+              <Badge bg="success">
+                Verified
+              </Badge>
+
+              <Button
+  variant="outline-light"
+  size="sm"
+  onClick={() =>
+    handleShowImage(
+      v.driving_license_image,
+      "Driving License"
+    )
+  }
+>
+  View
+</Button>
+
+            </div>
+
+            {/* ID CARD */}
+            <div className="document-item">
+
+              <span>ID Card</span>
+
+              <Badge bg="success">
+                Verified
+              </Badge>
+
+             <Button
+  variant="outline-light"
+  size="sm"
+  onClick={() =>
+    handleShowImage(
+      p.id_card_image,
+      "ID Card"
+    )
+  }
+>
+  View
+</Button>
+
+            </div>
+
+            {/* SALE CONTRACT */}
+            {v.sale_contract.exists && (
+
+              <div className="document-item">
+
+                <span>Sale Contract</span>
+
+                <Badge
+                  bg={
+                    v.sale_contract.contract_validation_flag
+                      ? "success"
+                      : "danger"
+                  }
+                >
+                  {
+                    v.sale_contract.contract_validation_flag
+                      ? "Valid"
+                      : "Rejected"
+                  }
+                </Badge>
+
+                <Button
+  variant="outline-light"
+  size="sm"
+  onClick={() =>
+    handleShowImage(
+      v.sale_contract.contract_image,
+      "Sale Contract"
+    )
+  }
+>
+  View
+</Button>
+
+              </div>
+
             )}
-          </Card>
-        </Tab>
 
-      </Tabs>
+          </div>
+
+        </Card>
+
+        {/* RATINGS */}
+        <Card className="section-card">
+
+          <div className="section-header">
+            <h4>Ratings & Reviews</h4>
+          </div>
+
+          <div className="rating-wrapper">
+
+            <div className="rating-score">
+
+              <h1>
+                {r.average_rating}
+              </h1>
+
+              <p>
+                {r.total_ratings_count} Reviews
+              </p>
+
+            </div>
+
+            <div className="reviews-list">
+
+              {
+                r.reviews.length === 0
+                  ? (
+                    <div className="empty-state">
+                      No Reviews Yet
+                    </div>
+                  )
+                  : (
+                    r.reviews.map((rev, i) => (
+
+                      <div
+                        key={i}
+                        className="review-box"
+                      >
+                        {rev.comment}
+                      </div>
+
+                    ))
+                  )
+              }
+
+            </div>
+
+          </div>
+
+        </Card>
+
+        {/* FINANCIAL */}
+        <Card className="section-card">
+
+          <div className="section-header">
+            <h4>Financial Details</h4>
+          </div>
+
+          <div className="financial-box">
+
+            <div className="financial-item">
+              <span>Total Earnings</span>
+              <h5>${f.total_gross_earnings}</h5>
+            </div>
+
+            <div className="financial-item">
+              <span>Commission</span>
+              <h5>${f.total_commission}</h5>
+            </div>
+
+            <div className="financial-item">
+              <span>Net Earnings</span>
+              <h5>${f.total_net_earnings}</h5>
+            </div>
+
+          </div>
+
+        </Card>
+
+      </div>
+
     </div>
+    <Modal
+  show={showModal}
+  onHide={() => setShowModal(false)}
+  centered
+  size="lg"
+>
+
+  <Modal.Header closeButton className="custom-modal-header">
+
+    <Modal.Title>
+      {modalTitle}
+    </Modal.Title>
+
+  </Modal.Header>
+
+  <Modal.Body className="custom-modal-body">
+
+    <img
+      src={selectedImage}
+      alt="document"
+      className="modal-image"
+    />
+
+  </Modal.Body>
+
+</Modal>
+      </div>
   );
 }

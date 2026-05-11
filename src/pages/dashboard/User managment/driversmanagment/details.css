@@ -1,172 +1,324 @@
-/* 🔹 General */
-.driver-card-details {
-  background: linear-gradient(145deg, #1e1b4b, #15123a);
-  border-radius: 18px;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  color: white;
-  margin-bottom: 15px;
- 
-  display: flex;
-}
-.driver-details-page {
-  padding: 20px;
-  background: #0f0c29;
+.driver-page {
+
+
   min-height: 100vh;
   color: white;
 }
 
-/* 🔹 Title */
-.driver-title {
-  font-weight: bold;
-  margin-bottom: 20px;
-}
+/* HEADER */
 
-/* 🔹 Tabs */
-.custom-tabs .nav-link {
-  color: #ccc;
+.top-card {
+  background:#1e1b4b ;
   border: none;
-  margin: 0 5px;
-  transition: 0.3s;
-}
-
-.custom-tabs .nav-link:hover {
   color: white;
+  border-radius: 24px;
+  margin-bottom: 25px;
+  padding: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.3);
 }
 
-.custom-tabs .nav-link.active {
-  background: linear-gradient(90deg, #4f46e5, #7c3aed);
-  border-radius: 10px;
-  color: white;
+.top-content {
+  
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-/* 🔹 Cards */
-.driver-card {
-  background: linear-gradient(145deg, #1e1b4b, #15123a);
-  border-radius: 18px;
-  padding: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-  margin-bottom: 15px;
-}
-
-/* 🔹 Profile */
-.driver-img {
-  width: 120px;
-  height: 120px;
-  border: 4px solid #6366f1;
-  padding: 4px;
-  background: #0f0c29;
-  margin-bottom: 10px;
-}
-
-/* 🔹 Info text */
-.info-text {
-  opacity: 0.8;
-  font-size: 14px;
-}
-
-/* 🔹 Vehicle images */
-.car-img {
-  width: 90px;
-  height: 70px;
+.driver-avatar img {
+  
+  width: 150px;
+  height: 150px;
   object-fit: cover;
-  border-radius: 10px;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.car-img:hover {
-  transform: scale(1.1);
-}
-
-/* 🔹 Stats cards */
-.stat-card {
-  padding: 15px;
-  text-align: center;
-  border-radius: 15px;
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
-  color: white;
-  margin-bottom: 10px;
-}
-
-/* 🔹 Documents */
-.doc-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(255,255,255,0.05);
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-/* 🔹 Warning box */
-.warning-box {
-  background: #facc15;
-  color: black;
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-/* 🔹 Ratings */
-.rating-box {
-  text-align: center;
-}
-
-.rating-number {
-  font-size: 30px;
-  font-weight: bold;
-}
-
-/* 🔹 Stars */
-.stars {
-  color: #facc15;
-  font-size: 18px;
-}
-
-/* 🔹 Breakdown */
-.breakdown-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-/* 🔹 Empty state */
-.empty-box {
-  text-align: center;
-  opacity: 0.6;
-  padding: 20px;
-}
-/* 🔹 Container */
-.profile-container {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-/* 🔹 Image */
-.profile-image {
-  flex-shrink: 0;
-  width: 200px;
-}
-
-.driver-imge {
-  width: 200px !important;
-  height: 200px !important;
-  border: 4px solid #6366f1;
+  border: 5px solid #6366f1;
   padding: 4px;
-  background: #0f0c29;
 }
 
-/* 🔹 Info */
-.profile-info {
+/* INFO */
+
+.driver-main-info {
   flex: 1;
 }
 
-/* 🔹 Icons */
-.icon {
-  margin-right: 8px;
-  color: #a5b4fc;
+.name-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.name-row h2 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 15px;
+}
+
+.info-grid div {
+  background: rgba(255,255,255,.05);
+  padding: 14px;
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* TOP STATS */
+
+.top-stats {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+ 
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.mini-stat {
+  background: #1e1b4b ;;
+  border: 1px solid rgba(255,255,255,0.05);
+
+  border-radius: 20px;
+
+  padding: 18px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  transition: .3s;
+}
+
+.mini-stat:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.08);
+}
+
+.stat-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-left svg {
+  color: #818cf8;
+}
+
+.stat-left span {
+  color: #cbd5e1;
+}
+
+.mini-stat h4 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* GRID */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 20px;
+}
+
+/* CARD */
+
+.section-card {
+  background:#1e1b4b ;
+  color: white;
+  border: 1px solid rgba(255,255,255,.05);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+
+/* SECTION */
+
+.section-header {
+  margin-bottom: 20px;
+}
+
+.section-header h4 {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* VEHICLE */
+
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.label {
+  opacity: .7;
+  font-size: 14px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 15px;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.gallery-img:hover {
+  transform: scale(1.03);
+}
+
+/* DOCUMENTS */
+
+.document-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.document-item {
+  background: rgba(255,255,255,.04);
+
+  padding: 16px;
+
+  border-radius: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* RATINGS */
+
+.rating-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.rating-score {
+  min-width: 200px;
+  text-align: center;
+}
+
+.rating-score h1 {
+  font-size: 70px;
+  margin: 0;
+  color: #facc15;
+}
+
+.reviews-list {
+  flex: 1;
+}
+
+.review-box {
+  background: rgba(255,255,255,.04);
+  padding: 15px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+}
+
+.empty-state {
+  padding: 30px;
+  text-align: center;
+  opacity: .6;
+}
+
+/* FINANCIAL */
+
+.financial-box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.financial-item {
+  background: rgba(255,255,255,.04);
+  padding: 18px;
+  border-radius: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.financial-item span {
+  color: #9ca3af;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+
+  .top-stats {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .top-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .name-row {
+    justify-content: center;
+  }
+
+  .document-item {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .top-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+}
+/* MODAL */
+
+.custom-modal-header {
+  background: #111827;
+  color: white;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.custom-modal-body {
+  background: #0f172a;
+  text-align: center;
+  padding: 20px;
+}
+
+.modal-image {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 20px;
 }

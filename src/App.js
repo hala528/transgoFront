@@ -19,9 +19,7 @@ import ManagmentEmployee from './pages/dashboard/User managment/employeeManagmen
 import AddEmployee from './pages/dashboard/User managment/employeeManagment/AddEmployee';
 import DetailsEmployee from './pages/dashboard/User managment/employeeManagment/detailsEmployee';
 import AuditLog from './pages/dashboard/Audit log/AuditLog';
-//import FreeWallet from './pages/dashboard/driverWalet/walletFree';
-// import FinancailLogs from './pages/dashboard/driverWalet/financailLogs';
-// import FreeWallet from './pages/dashboard/driverWalet/Freewallet';
+import Complaints from './pages/complnaits/viewCoplanits';
 import BookingDetails from './pages/dashboard/Booking/BookingDetails';
 import Reports from './pages/dashboard/Report/Reports';
 import FinancailLogs from './pages/dashboard/FreeWalet/financailLogs';
@@ -65,6 +63,7 @@ function App() {
               <Route path='wallet/logspassenger' element={<Logpassenger />} />
               <Route path='passenger' element={<Passenger />} />
               <Route path='passenger/:id' element={<DetailsPassenger />} />
+              <Route path='complaints' element={<Complaints />} />
             </Route>
 
             {/* Shared */}
