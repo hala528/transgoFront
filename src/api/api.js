@@ -53,3 +53,6 @@ export const UPDATE_COMPLAINT_STATUS = (id) => `admin/complaints/${id}/status`;
 
 export const GET_BOOKINGS = 'admin/bookings';
 export const BOOKING_DETAILS = (id) => `admin/bookings/${id}`;
+export const APP_USAGE_REPORT = 'admin/app-usage/report';
+export const DRIVER_PERFORMANCE_REPORT ="admin/driver-performance/report";
+export const COMPLAINTS_REPORT = 'admin/complaints/report';

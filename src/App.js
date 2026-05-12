@@ -31,6 +31,10 @@ import WalletPassenger from './pages/dashboard/FreeWalet/passenger/walletFreepas
 import Logpassenger from './pages/dashboard/FreeWalet/passenger/LogsPassenger';
 import Passenger from './pages/dashboard/User managment/passengerManagment/Passenger';
 import DetailsPassenger from './pages/dashboard/User managment/passengerManagment/detailsPassenger';
+import DriversPerformance from './pages/dashboard/Report/DriversPerformance';
+import ActivityReport from './pages/dashboard/Report/ActivityReport';
+import AppUsageReport from './pages/dashboard/Report/AppUsageReport';
+import ComplaintsReport from './pages/dashboard/Report/complaintsr';
 function App() {
   return (
     <div className="App">
@@ -79,6 +83,10 @@ function App() {
   path="Reports"
   element={<Reports />}
 />
+<Route path="/dashboard/ComplaintsReport" element={<ComplaintsReport />} />
+<Route path="/dashboard/AppUsageReport" element={<AppUsageReport />} />
+<Route path="/dashboard/ActivityReport" element={<ActivityReport />} />
+<Route path="/dashboard/DriversPerformance" element={<DriversPerformance />} />
 <Route path="/dashboard/BookingDetails/:id" element={<BookingDetails />} />
 
             {/* 403 */}
