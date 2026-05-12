@@ -20,6 +20,7 @@ import AddEmployee from './pages/dashboard/User managment/employeeManagment/AddE
 import DetailsEmployee from './pages/dashboard/User managment/employeeManagment/detailsEmployee';
 import AuditLog from './pages/dashboard/Audit log/AuditLog';
 import Complaints from './pages/complnaits/viewCoplanits';
+import ComplanitDetails from './pages/complnaits/complanitDetails';
 import BookingDetails from './pages/dashboard/Booking/BookingDetails';
 import Reports from './pages/dashboard/Report/Reports';
 import FinancailLogs from './pages/dashboard/FreeWalet/financailLogs';
@@ -64,6 +65,7 @@ function App() {
               <Route path='passenger' element={<Passenger />} />
               <Route path='passenger/:id' element={<DetailsPassenger />} />
               <Route path='complaints' element={<Complaints />} />
+              <Route path='complaints/:id' element={<ComplanitDetails />} />
             </Route>
 
             {/* Shared */}

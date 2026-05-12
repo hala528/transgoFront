@@ -46,6 +46,10 @@ export const WALLET_TOP_PASSENGER = (id) => `admin/passengers/${id}/wallet/top-u
 export const SERASH_PASSENGER = "admin/passengers";
 export const WALLET_TOP = (id) => `admin/drivers/${id}/wallet/top-up` ;
 
+//complaints
+export const GET_COMPLAINTS = "admin/complaints";
+export const GET_COMPLAINT_DETAILS = (id) => `admin/complaints/${id}`;
+export const UPDATE_COMPLAINT_STATUS = (id) => `admin/complaints/${id}/status`;
 
 export const GET_BOOKINGS = 'admin/bookings';
 export const BOOKING_DETAILS = (id) => `admin/bookings/${id}`;
