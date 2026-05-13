@@ -1,7 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
-import LiveMap from "./LiveMap";
+import LiveTripsMap from "./LiveTrackingMap";
 import { Axios } from "../../../api/axios";
 import { GETTRIPS, IMAGE_BASE ,CANCEL_TRIP} from "../../../api/api";
 import DelayedTrips from "./DelayedTrips";
@@ -188,38 +188,19 @@ console.log("FULL RESPONSE:", res);
 
       {/* CONTENT */}
    <div className="t-grid">
-  {activeView === "live" ? (
-    <LiveMap
-      trips={filtered.filter(
-        (t) => t.status === "active" || t.status === "pending"
-      )}
-    />
-  ) : activeView === "delayed" ? (
-    <DelayedTrips search={search} date={date}   
-  handleCancel={handleCancel}/>
-
-  ) 
-
-:filtered.length === 0 ? (
-  <div
-    style={{
-      color: "#cbd5f5",
-      textAlign: "center",
-      padding: "20px 0",
-    }}
-  >
+ {activeView === "live" ? (
+  <LiveTripsMap />
+) : activeView === "delayed" ? (
+  <DelayedTrips search={search} date={date} handleCancel={handleCancel} />
+) : filtered.length === 0 ? (
+  <div style={{ color: "#cbd5f5", textAlign: "center", padding: "20px 0" }}>
     No trips found.
   </div>
 ) : (
   filtered.map((trip) => (
-    <TripCard
-      key={trip.id}
-      trip={trip}
-      onCancel={handleCancel}
-    />
+    <TripCard key={trip.id} trip={trip} onCancel={handleCancel} />
   ))
 )}
-
       </div>
     </div>
   );

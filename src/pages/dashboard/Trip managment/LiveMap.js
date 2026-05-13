@@ -57,16 +57,21 @@
 // }
 // LiveMap.js
 import { useJsApiLoader, GoogleMap, Marker, Polyline } from "@react-google-maps/api";
-
+import {  GOOGLE_MAPS_API_KEY} from "../../../api/api"; 
 export default function LiveMap({
   center = { lat: 33.5, lng: 36.3 },
   zoom = 6,
   markers = [],
   path = [],
 }) {
-  const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyACSWABcipQQCG6r95SkwrUjctdU5dFo0A",
-  });
+ 
+ 
+
+ 
+ 
+ const { isLoaded } = useJsApiLoader({
+   googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+ });
 
   if (!isLoaded) return <div>Loading Google Map...</div>;
 

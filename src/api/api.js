@@ -1,7 +1,7 @@
 export const beasURL = "http://127.0.0.1:8000/api/v1";
 
 export const IMAGE_BASE = "http://127.0.0.1:8000";
-
+export const GOOGLE_MAPS_API_KEY = "AIzaSyACSWABcipQQCG6r95SkwrUjctdU5dFo0A";
 // Auth
 export const LOGIN = "admin/login";
 export const SENDOTP = "auth/send-otp";
@@ -56,3 +56,4 @@ export const BOOKING_DETAILS = (id) => `admin/bookings/${id}`;
 export const APP_USAGE_REPORT = 'admin/app-usage/report';
 export const DRIVER_PERFORMANCE_REPORT ="admin/driver-performance/report";
 export const COMPLAINTS_REPORT = 'admin/complaints/report';
+export const TRIPS_TRACKING_ACTIVE  = 'admin/trips/tracking/active';
