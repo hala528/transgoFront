@@ -42,7 +42,38 @@ const [breakdown, setBreakdown] =
     by_complainant_type: [],
     by_day: [],
   });
+const getProgressColor = (type) => {
 
+  switch (type) {
+
+    case "open":
+      return "red";
+
+    case "in_progress":
+      return "orange";
+
+    case "closed":
+      return "green";
+
+    case "ride":
+      return "purple";
+
+    case "driver":
+      return "blue";
+
+    case "passenger":
+      return "pink";
+
+    case "payment":
+      return "cyan";
+
+    case "system":
+      return "orange";
+
+    default:
+      return "purple";
+  }
+};
 const [filters, setFilters] =
   useState({
     from_date: "",
@@ -107,20 +138,32 @@ const fetchReport = async () => {
     setComplaints(
       data.complaints_list || []
     );
+setSuccess(
+  response.data?.message ||
+    "Report loaded successfully"
+);
 
+setErr("");
+
+setTimeout(() => {
+  setSuccess("");
+}, 3000);
     console.log(
       "Complaints Report:",
       response.data
     );
 
   } catch (error) {
+setErr(
+  error.response?.data?.message ||
+    "Failed to load report"
+);
 
-    console.log(
-      "Complaints Error:",
-      error.response?.data ||
-        error
-    );
+setSuccess("");
 
+setTimeout(() => {
+  setErr("");
+}, 3000);
   } finally {
 
     setLoading(false);
@@ -146,10 +189,20 @@ useEffect(() => {
       <div className="report-header">
         <h2>Complaints Report</h2>
 
-       
+       {success && (
+  <span className="success">
+    {success}
+  </span>
+)}
+
+{err && (
+  <span className="error">
+    {err}
+  </span>
+)}
       </div>
 
-      {/* FILTERS */}
+     
 
   
 {/* FILTERS */}
@@ -431,7 +484,7 @@ useEffect(() => {
         <div className="progress-bar">
 
           <div
-            className={`progress ${item.color}`}
+           className={`progress ${getProgressColor(item.status)}`}
             style={{ width: `${item.percentage}%` }}
           ></div>
 
@@ -473,7 +526,7 @@ useEffect(() => {
         <div className="progress-bar">
 
           <div
-            className={`progress ${item.color}`}
+           className={`progress ${getProgressColor(item.status)}`}
             style={{ width: `${item.percentage}%` }}
           ></div>
 
@@ -515,7 +568,7 @@ useEffect(() => {
         <div className="progress-bar">
 
           <div
-            className={`progress ${item.color}`}
+           className={`progress ${getProgressColor(item.status)}`}
             style={{ width: `${item.percentage}%` }}
           ></div>
 

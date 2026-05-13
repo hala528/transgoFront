@@ -25,7 +25,10 @@ function DriversPerformance() {
 
   const [reportData, setReportData] =
     useState([]);
+const [success, setSuccess] =
+    useState("");
 
+  const [err, setErr] = useState("");
   const [driversList, setDriversList] =
     useState([]);
 
@@ -37,12 +40,7 @@ function DriversPerformance() {
       governorate_id: "",
     });
 
-  /* =========================
-      FETCH REPORT
-  ========================= */
-/* =========================
-    FETCH REPORT
-========================= */
+ 
 
 const fetchReport = async () => {
 
@@ -81,10 +79,27 @@ const fetchReport = async () => {
       response.data.data
         .driver_reports || []
     );
+setSuccess(
+  response.data?.message ||
+    "Report loaded successfully"
+);
 
+setErr("");
+
+setTimeout(() => {
+  setSuccess("");
+}, 3000);
   } catch (error) {
+setErr(
+  error.response?.data?.message ||
+    "Failed to load report"
+);
 
-    console.log(error);
+setSuccess("");
+
+setTimeout(() => {
+  setErr("");
+}, 3000);
 
   } finally {
 
@@ -94,9 +109,7 @@ const fetchReport = async () => {
 };
 const [governorates, setGovernorates] =
   useState([]);
-  /* =========================
-      FETCH DRIVERS
-  ========================= */
+ 
 
   const fetchDrivers = async () => {
 
@@ -153,9 +166,7 @@ console.log(res.data);
 
   }, []);
 
-  /* =========================
-      STATS
-  ========================= */
+  
 
   const totalDrivers =
     reportData.length;
@@ -267,9 +278,7 @@ console.log(res.data);
     },
   ];
 
-  /* =========================
-      TOP DRIVERS
-  ========================= */
+
 
   const topDrivers = [...reportData]
     .sort(
@@ -290,9 +299,6 @@ console.log(res.data);
       }px`,
     }));
 
-  /* =========================
-      DONUT
-  ========================= */
 
   const completed =
     reportData.reduce(
@@ -334,7 +340,17 @@ console.log(res.data);
     <div className="drivers-page">
 
       {/* FILTERS */}
+{success && (
+  <span className="success">
+    {success}
+  </span>
+)}
 
+{err && (
+  <span className="error">
+    {err}
+  </span>
+)}
       <div className="filters">
 
         <FilterDate
@@ -817,9 +833,7 @@ console.log(res.data);
 
 export default DriversPerformance;
 
-/* =========================
-    COMPONENTS
-========================= */
+
 
 function FilterInput({
   label,

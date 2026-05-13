@@ -1550,7 +1550,14 @@ tbody tr:hover {
   background: rgba(255, 76, 76, 0.15);
   color: #ff7b7b;
 }
-
+.status.in_progress {
+  background: rgba(255, 177, 76, 0.15);
+  color: orange;
+}
+.status.closed {
+  background: rgba(91, 255, 76, 0.15);
+  color: green;
+}
 /* USER */
 
 .user-cell {
@@ -1693,6 +1700,9 @@ tbody tr:hover {
 
 .progress.orange {
   background: linear-gradient(90deg, #ff9800, #ffb84d);
+}
+.progress.red {
+  background: linear-gradient(90deg, #fd0202, #fd0202);
 }
 
 .progress.green {
