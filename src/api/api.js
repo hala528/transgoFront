@@ -50,6 +50,9 @@ export const WALLET_TOP = (id) => `admin/drivers/${id}/wallet/top-up` ;
 export const GET_COMPLAINTS = "admin/complaints";
 export const GET_COMPLAINT_DETAILS = (id) => `admin/complaints/${id}`;
 export const UPDATE_COMPLAINT_STATUS = (id) => `admin/complaints/${id}/status`;
+///profile
+export const GET_PROFILE = "admin/me";
+
 
 export const GET_BOOKINGS = 'admin/bookings';
 export const BOOKING_DETAILS = (id) => `admin/bookings/${id}`;

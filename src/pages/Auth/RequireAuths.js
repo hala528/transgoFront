@@ -18,8 +18,14 @@ const role = cookie.get("role");
     return <LoadingSubmit />;
   }
 
-  if (allowedRole && role !== allowedRole) {
-  return <Err403 />;
+ if (allowedRole) {
+  const roles = Array.isArray(allowedRole)
+    ? allowedRole
+    : [allowedRole];
+
+  if (!roles.includes(role)) {
+    return <Err403 />;
+  }
 }
 
   return <Outlet />;

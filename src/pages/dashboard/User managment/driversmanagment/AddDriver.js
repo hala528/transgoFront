@@ -2,6 +2,7 @@ import { Col, Form, Row } from "react-bootstrap";
 import { Axios } from "../../../../api/axios";
 import { ADDDRIVER, beasURL } from "../../../../api/api";
 import { useState } from "react";
+import{ useNavigate } from "react-router-dom";
 
 
 export default function AddDriver(){
@@ -26,6 +27,7 @@ const [files, setFiles] = useState({
 const [loading, setLoading] = useState(false);
 const [err, errset] = useState("");
 const [success, setSuccess] = useState("");
+const navigate = useNavigate();
 
 //handchange
 function handleChange(e) {
@@ -75,6 +77,9 @@ async function handleSubmit(e) {
 
     setLoading(false);
     setSuccess(res.data.message || "تم إضافة السائق بنجاح");
+    setTimeout(() => {
+      navigate("/dashboard/driver");
+    }, 2000);
 
   } catch (err) {
     setLoading(false);

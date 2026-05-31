@@ -1,21 +1,29 @@
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Menu } from "../../context/MnueContext";
 import { useContext, useEffect, useState } from "react";
 
-import { DropdownButton, Dropdown } from "react-bootstrap";
+import { DropdownButton, Dropdown, Modal, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { Axios } from "../../api/axios";
-import { LOGOUT, beasURL } from "../../api/api";
-
+import { LOGOUT, beasURL ,  GET_PROFILE} from "../../api/api";
 
 export default function TopBar() {
   const menu = useContext(Menu);
   const setIsOpen = menu.setIsOpen;
-  const [name, setName] = useState("");
-  const navigate = useNavigate();
 
+  const [name, setName] = useState("");
+  const [showProfile, setShowProfile] = useState(false);
+
+  const [profile, setProfile] = useState({
+    photo: null,
+    name: "",
+    email: "",
+    phone_number: "",
+  });
+
+  const navigate = useNavigate();
   const cookie = new Cookies();
   const user = cookie.get("user");
 
@@ -25,23 +33,35 @@ export default function TopBar() {
     } else {
       navigate("/login");
     }
-  }, [user, navigate]); 
+  }, [user, navigate]);
+
+  // logout
   async function handelLogout() {
-      try{
-           await Axios.post(`${beasURL}/${LOGOUT}`, {}, {
-      })
+    try {
+      await Axios.post(`${beasURL}/${LOGOUT}`, {});
       window.location.href = "/login";
+    } catch (err) {
+      console.log(err);
+    }
   }
-      catch(err){
-          console.log(err);
-     }
-     }
+
+  // get profile
+  async function getProfile() {
+    try {
+      const res = await Axios.get(`${beasURL}/${GET_PROFILE}`);
+      setProfile(res.data.data);
+      setShowProfile(true);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="top-bar">
-   
+      {/* left side */}
       <div className="d-flex align-items-center gap-4">
         <h3 className="bar-text mb-0">TransGo</h3>
+
         <FontAwesomeIcon
           onClick={() => setIsOpen((prev) => !prev)}
           cursor="pointer"
@@ -49,17 +69,88 @@ export default function TopBar() {
         />
       </div>
 
-    
-      <div className="user-dropdown">
-        <DropdownButton
-       
-          id="dropdown-basic-button"
-          variant="primary"
-          title={name}
-        >
-          <Dropdown.Item onClick={handelLogout}>logout</Dropdown.Item>
-        </DropdownButton>
+      {/* right side */}
+      <div className="d-flex align-items-center gap-3">
+        {/* profile icon */}
+        <FontAwesomeIcon
+          icon={faUserCircle}
+          size="2x"
+          cursor="pointer"
+          onClick={getProfile}
+        />
+
+        {/* dropdown */}
+        <div className="user-dropdown">
+          <DropdownButton
+            id="dropdown-basic-button"
+            variant="primary"
+            title={name}
+          >
+            <Dropdown.Item onClick={handelLogout}>
+              Logout
+            </Dropdown.Item>
+          </DropdownButton>
+        </div>
       </div>
+
+      {/* Profile Modal */}
+      <Modal 
+        show={showProfile}
+        onHide={() => setShowProfile(false)}
+        centered
+      >
+        <Modal.Header style={{
+            background:'#020617',
+            color:'white'
+          }} closeButton>
+          <Modal.Title >User Profile</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body className="text-center" style={{
+          background:'#1e1b4b',
+          color:'white'
+        }}>
+          {profile.photo ? (
+            <img
+              src={profile.photo}
+              alt="profile"
+              width="100"
+              height="100"
+              className="rounded-circle mb-3"
+            />
+          ) : (
+            <FontAwesomeIcon
+              icon={faUserCircle}
+              size="5x"
+              className="text-secondary mb-3"
+            />
+          )}
+
+          <p>
+            <strong>Name:</strong> {profile.name}
+          </p>
+
+          <p>
+            <strong>Email:</strong> {profile.email}
+          </p>
+
+          <p>
+            <strong>Phone:</strong> {profile.phone_number}
+          </p>
+        </Modal.Body>
+
+        <Modal.Footer style={{
+            background:'#020617',
+            color:'white'
+          }}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowProfile(false)}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

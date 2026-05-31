@@ -40,16 +40,19 @@
 }
 
 .side-bar{
-   
     top: 70px;
     left: 0;
-      background: radial-gradient(circle at top left, var(--bg-gradient-start), var(--bg-dark));
+    background: radial-gradient(circle at top left, var(--bg-gradient-start), var(--bg-dark));
     z-index: 1;
-    height: 100vh;
+
+    /* التعديل هنا */
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+    overflow-x: hidden;
+
     width: 250px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
-      padding: 0 20px;
-
+    padding: 0 20px;
 }
 .side-bar-link{
     color:white;

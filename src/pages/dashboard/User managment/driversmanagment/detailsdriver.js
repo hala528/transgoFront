@@ -106,12 +106,12 @@ const handleToggleStatus = async () => {
     <div className="driver-page">
 
       {/* HEADER */}
-      <Card className="top-card">
+      <Card className="top-carde">
 
-        <div className="top-content">
+        <div className="top-contente">
 
           {/* IMAGE */}
-          <div className="driver-avatar">
+          <div className="driver-avatare">
             <Image
               src={p.personal_photo}
               roundedCircle
@@ -119,9 +119,9 @@ const handleToggleStatus = async () => {
           </div>
 
           {/* INFO */}
-          <div className="driver-main-info">
+          <div className="drivere-main-info">
 
-            <div className="name-row">
+            <div className="namee-row">
 
               <h2>{p.full_name}</h2>
 
@@ -137,7 +137,7 @@ const handleToggleStatus = async () => {
 
             </div>
 
-            <div className="info-grid">
+            <div className="info-gride">
 
               <div>
                 <FontAwesomeIcon icon={faPhone} />
@@ -189,10 +189,10 @@ const handleToggleStatus = async () => {
       </Card>
 
       {/* TOP STATS */}
-      <div className="top-stats">
+      <div className="top-state">
 
-        <div className="mini-stat">
-          <div className="stat-left">
+        <div className="mini-state">
+          <div className="state-left">
             <FontAwesomeIcon icon={faRoad} />
             <span>Total Trips</span>
           </div>
@@ -200,8 +200,8 @@ const handleToggleStatus = async () => {
           <h4>{t.total_trips_count}</h4>
         </div>
 
-        <div className="mini-stat">
-          <div className="stat-left">
+        <div className="mini-state">
+          <div className="state-left">
             <FontAwesomeIcon icon={faCheckCircle} />
             <span>Completed</span>
           </div>
@@ -209,8 +209,8 @@ const handleToggleStatus = async () => {
           <h4>{t.completed_trips_count}</h4>
         </div>
 
-        <div className="mini-stat">
-          <div className="stat-left">
+        <div className="mini-state">
+          <div className="state-left">
             <FontAwesomeIcon icon={faCar} />
             <span>Active</span>
           </div>
@@ -218,8 +218,8 @@ const handleToggleStatus = async () => {
           <h4>{t.active_trips_count}</h4>
         </div>
 
-        <div className="mini-stat">
-          <div className="stat-left">
+        <div className="mini-state">
+          <div className="state-left">
             <FontAwesomeIcon icon={faMoneyBill} />
             <span>Balance</span>
           </div>
@@ -230,37 +230,37 @@ const handleToggleStatus = async () => {
       </div>
 
       {/* GRID */}
-      <div className="cards-grid">
+      <div className="cards-gridee">
 
         {/* VEHICLE */}
-        <Card className="section-card">
+        <Card className="section-cardee">
 
-          <div className="section-header">
+          <div className="section-header-e">
             <h4>Vehicle Information</h4>
           </div>
 
-          <div className="vehicle-grid">
+          <div className="vehiclee-grid">
 
             <div>
-              <span className="label">Car Type</span>
+              <span className="labele">Car Type</span>
               <h6>{v.car_type}</h6>
             </div>
 
             <div>
-              <span className="label">Plate Number</span>
+              <span className="labele">Plate Number</span>
               <h6>{v.plate_number}</h6>
             </div>
 
           </div>
 
-          <div className="gallery">
+          <div className="gallerye">
 
             {v.car_photos.map((img, i) => (
 
               <Image
                 key={i}
                 src={img}
-                className="gallery-img"
+                className="gallery-imge"
               />
 
             ))}
@@ -270,16 +270,16 @@ const handleToggleStatus = async () => {
         </Card>
 
         {/* DOCUMENTS */}
-        <Card className="section-card">
+        <Card className="section-cardee">
 
-          <div className="section-header">
+          <div className="section-header-e">
             <h4>Documents</h4>
           </div>
 
-          <div className="document-list">
+          <div className="documente-list">
 
             {/* LICENSE */}
-            <div className="document-item">
+            <div className="documente-item">
 
               <span>Driving License</span>
 
@@ -303,7 +303,7 @@ const handleToggleStatus = async () => {
             </div>
 
             {/* ID CARD */}
-            <div className="document-item">
+            <div className="documente-item">
 
               <span>ID Card</span>
 
@@ -329,7 +329,7 @@ const handleToggleStatus = async () => {
             {/* SALE CONTRACT */}
             {v.sale_contract.exists && (
 
-              <div className="document-item">
+              <div className="documente-item">
 
                 <span>Sale Contract</span>
 
@@ -369,15 +369,15 @@ const handleToggleStatus = async () => {
         </Card>
 
         {/* RATINGS */}
-        <Card className="section-card">
+        <Card className="section-cardee">
 
-          <div className="section-header">
+          <div className="section-header-e ">
             <h4>Ratings & Reviews</h4>
           </div>
 
           <div className="rating-wrapper">
 
-            <div className="rating-score">
+            <div className="rating-scoree">
 
               <h1>
                 {r.average_rating}
@@ -419,9 +419,9 @@ const handleToggleStatus = async () => {
         </Card>
 
         {/* FINANCIAL */}
-        <Card className="section-card">
+        <Card className="section-cardee">
 
-          <div className="section-header">
+          <div className="section-header-e ">
             <h4>Financial Details</h4>
           </div>
 
