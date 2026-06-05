@@ -26,8 +26,8 @@ export default function TripCard({ trip, onCancel }) {
 {/* SECTION 2 */}
 <div className="t-section-center">
 
-  <div className="t-route">
-    <FaRoute className="icon" />
+  <div className="t-item">
+    <FaRoute  />
     <span>{trip.from || trip.departure?.from}</span>
     <span className="arrow">→</span>
     <span>{trip.to || trip.departure?.to}</span>

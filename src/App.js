@@ -54,6 +54,27 @@ import ComplaintsReport from "./pages/dashboard/Report/complaintsr";
 // Audit
 import AuditLog from "./pages/dashboard/Audit log/AuditLog";
 
+import ManagmentEmployee from './pages/dashboard/User managment/employeeManagment/employee';
+import AddEmployee from './pages/dashboard/User managment/employeeManagment/AddEmployee';
+import DetailsEmployee from './pages/dashboard/User managment/employeeManagment/detailsEmployee';
+import AuditLog from './pages/dashboard/Audit log/AuditLog';
+import Complaints from './pages/complnaits/viewCoplanits';
+import ComplanitDetails from './pages/complnaits/complanitDetails';
+import BookingDetails from './pages/dashboard/Booking/BookingDetails';
+import Reports from './pages/dashboard/Report/Reports';
+import FinancailLogs from './pages/dashboard/FreeWalet/financailLogs';
+import FreeWallet from './pages/dashboard/FreeWalet/Freewallet';
+import WalletDriver from './pages/dashboard/FreeWalet/driver/walletFreedriver';
+import LogeDrivers from './pages/dashboard/FreeWalet/driver/logsDriver';
+import WalletPassenger from './pages/dashboard/FreeWalet/passenger/walletFreepassenger';
+import Logpassenger from './pages/dashboard/FreeWalet/passenger/LogsPassenger';
+import Passenger from './pages/dashboard/User managment/passengerManagment/Passenger';
+import DetailsPassenger from './pages/dashboard/User managment/passengerManagment/detailsPassenger';
+import DriversPerformance from './pages/dashboard/Report/DriversPerformance';
+import ActivityReport from './pages/dashboard/Report/ActivityReport';
+import AppUsageReport from './pages/dashboard/Report/AppUsageReport';
+import ComplaintsReport from './pages/dashboard/Report/complaintsr';
+import TripTracking from './pages/dashboard/Trip managment/TripTracking';
 function App() {
   return (
     <div className="App">
@@ -94,6 +115,26 @@ function App() {
  {/* Passengers */}
               <Route path="passenger" element={<Passenger />} />
               <Route path="passenger/:id" element={<DetailsPassenger />} />
+            {/* Shared */}
+           <Route path="trips" element={<Trips />} />
+           <Route
+  path="/dashboard/trips/:id/track"
+  element={<TripTracking />}
+/>
+<Route path="trips/:id" element={<TripDetails />} />
+<Route
+  path="booking"
+  element={<Booking />}
+/>
+<Route
+  path="Reports"
+  element={<Reports />}
+/>
+<Route path="/dashboard/ComplaintsReport" element={<ComplaintsReport />} />
+<Route path="/dashboard/AppUsageReport" element={<AppUsageReport />} />
+<Route path="/dashboard/ActivityReport" element={<ActivityReport />} />
+<Route path="/dashboard/DriversPerformance" element={<DriversPerformance />} />
+<Route path="/dashboard/BookingDetails/:id" element={<BookingDetails />} />
 
               {/* Wallet */}
               <Route path="wallet" element={<FreeWallet />} />

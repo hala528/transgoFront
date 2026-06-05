@@ -60,3 +60,10 @@ export const APP_USAGE_REPORT = 'admin/app-usage/report';
 export const DRIVER_PERFORMANCE_REPORT ="admin/driver-performance/report";
 export const COMPLAINTS_REPORT = 'admin/complaints/report';
 export const TRIPS_TRACKING_ACTIVE  = 'admin/trips/tracking/active';
+export const TRIPS_BY_GOVERNORATES =
+  "admin/reports/trips-by-governorates";
+
+// Governorates API
+export const GET_GOVERNORATES = "governorates";
+export const TRIP_TRACKING = (id) =>
+  `admin/trips/${id}/tracking`;
