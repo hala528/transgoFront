@@ -13,6 +13,7 @@ import './pages/dashboard/User managment/cssUser/details.css';
 import './pages/dashboard/Audit log/log.css';
 import './pages/dashboard/FreeWalet/wallet.css';
 import './pages/dashboard/User managment/driversmanagment/driver.css';
+import './pages/dashboard/rate_commission/commission.css'
 
 import App from './App';
 import { BrowserRouter as Router} from 'react-router-dom';

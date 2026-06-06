@@ -1,0 +1,95 @@
+
+
+.commission-card,
+.history-card {
+  background: #1e1b4b;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  margin-bottom: 24px;
+}
+
+.commission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.commission-card h1 {
+  font-size: 70px;
+  color: #2563eb;
+  margin: 20px 0;
+}
+
+.commission-info {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.edit-btn {
+  background:  linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.active-badge {
+  background: #dcfce7;
+  color: #15803d;
+  padding: 6px 12px;
+  border-radius: 30px;
+}
+
+.inactive-badge {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 6px 12px;
+  border-radius: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  width: 500px;
+  background: #1e1b4b;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}

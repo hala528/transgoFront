@@ -52,6 +52,10 @@ export const GET_COMPLAINT_DETAILS = (id) => `admin/complaints/${id}`;
 export const UPDATE_COMPLAINT_STATUS = (id) => `admin/complaints/${id}/status`;
 ///profile
 export const GET_PROFILE = "admin/me";
+// commission
+export const COMMISSION_CURRENT = "admin/commission-rates/current";
+export const COMMISSION_RATES = "admin/commission-rates";
+export const CREATE_COMMISSION = "admin/commission-rates";
 
 
 export const GET_BOOKINGS = 'admin/bookings';

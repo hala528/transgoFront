@@ -73,6 +73,18 @@ export default function SideBar() {
       path: "complaints",
       icon: faUsers,
       roles: ["admin", "employee"],
+    },
+    {
+      name: "View Rating",
+      path: "rating",
+      icon: faUsers,
+      roles: ["admin", "employee"],
+    },
+    {
+      name: "Rate Commission",
+      path: "rateCommission",
+      icon: faUsers,
+      roles: ["admin"],
     }
 
   ];

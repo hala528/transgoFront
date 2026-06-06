@@ -54,6 +54,11 @@ import ComplaintsReport from "./pages/dashboard/Report/complaintsr";
 // Audit
 import AuditLog from "./pages/dashboard/Audit log/AuditLog";
 
+//rating
+import ViewRating from "./pages/dashboard/rating/viewRating";
+//rate commission
+import RateCommission from "./pages/dashboard/rate_commission/rate_commission";
+
 function App() {
   return (
     <div className="App">
@@ -83,6 +88,8 @@ function App() {
              
               {/* Audit */}
               <Route path="auditLog" element={<AuditLog />} />
+               {/* Rate Commission */}
+              <Route path="rateCommission" element={<RateCommission />} />
             </Route>
 
             {/* ================= ADMIN + EMPLOYEE ================= */}
@@ -121,6 +128,10 @@ function App() {
               <Route path="AppUsageReport" element={<AppUsageReport />} />
               <Route path="ActivityReport" element={<ActivityReport />} />
               <Route path="DriversPerformance" element={<DriversPerformance />} />
+
+              {/* Rating */}
+              <Route path="rating" element={<ViewRating />} />
+             
             </Route>
 
             {/* ================= ERRORS ================= */}
