@@ -1,7 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
-import LiveTripsMap from "./LiveTrackingMap";
+import LiveTripsMap from "./viewTactive";
 import { Axios } from "../../../api/axios";
 import { GETTRIPS, IMAGE_BASE ,CANCEL_TRIP} from "../../../api/api";
 import DelayedTrips from "./DelayedTrips";

@@ -1,312 +1,598 @@
 import "./Reports.css";
+import { useEffect, useState } from "react";
 
 import {
   Download,
   Filter,
   Clock3,
   Play,
-  CheckCircle2,
+ CheckCircle2,
   XCircle,
   Car,
   Users,
 } from "lucide-react";
 
+import { Axios } from "../../../api/axios";
+
+import {
+  GET_GOVERNORATES,
+  TRIPS_BY_GOVERNORATES,
+} from "../../../api/api";
+
 function ActivityReport() {
+  const [loading, setLoading] =
+    useState(false);
+
+  const [governorates, setGovernorates] =
+    useState([]);
+
+  const [reportData, setReportData] =
+    useState(null);
+
+  const [success, setSuccess] =
+    useState("");
+
+  const [err, setErr] =
+    useState("");
+
+  const [filters, setFilters] =
+    useState({
+      date_from: "",
+      date_to: "",
+      start_governorate_id: "",
+      end_governorate_id: "",
+    });
+
+  // ================= GET GOVERNORATES =================
+
+  const fetchGovernorates =
+    async () => {
+      try {
+        const res =
+          await Axios.get(
+            GET_GOVERNORATES
+          );
+
+        console.log(
+          "Governorates:",
+          res.data
+        );
+
+        setGovernorates(
+          res.data.data.items || []
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+  // ================= GET REPORT =================
+
+  const fetchReport = async () => {
+    setLoading(true);
+
+    try {
+      const params = {};
+
+      if (filters.date_from)
+        params.date_from =
+          filters.date_from;
+
+      if (filters.date_to)
+        params.date_to =
+          filters.date_to;
+
+      if (
+        filters.start_governorate_id
+      )
+        params.start_governorate_id =
+          filters.start_governorate_id;
+
+      if (
+        filters.end_governorate_id
+      )
+        params.end_governorate_id =
+          filters.end_governorate_id;
+
+      const res = await Axios.get(
+        TRIPS_BY_GOVERNORATES,
+        {
+          params,
+        }
+      );
+
+      console.log(
+        "Trips By Governorates Response:",
+        res.data
+      );
+
+      setReportData(res.data.data);
+
+      setSuccess(
+        res.data?.message ||
+          "Report loaded successfully"
+      );
+
+      setErr("");
+
+      setTimeout(() => {
+        setSuccess("");
+      }, 3000);
+    } catch (err) {
+      console.log(err);
+
+      setErr(
+        err.response?.data
+          ?.message ||
+          "Failed to load report"
+      );
+
+      setSuccess("");
+
+      setTimeout(() => {
+        setErr("");
+      }, 3000);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchGovernorates();
+
+    fetchReport();
+  }, []);
+
+  // ================= APPLY FILTER =================
+
+  const applyFilters = () => {
+    fetchReport();
+  };
+
+  // ================= SUMMARY =================
+
+  const summary =
+    reportData?.summary || {};
 
   const stats = [
     {
       title: "Total Trips",
-      value: "12,458",
-      desc: "100% of total",
+      value:
+        summary.total_trips || 0,
+      desc: "All trips",
       icon: <Car size={20} />,
       color: "purple",
     },
+
     {
       title: "Pending",
-      value: "1,245",
-      desc: "10% of total",
-      icon: <Clock3 size={20} />,
+      value:
+        summary.pending_trips || 0,
+      desc: "Pending trips",
+      icon: (
+        <Clock3 size={20} />
+      ),
       color: "orange",
     },
+
     {
       title: "Active",
-      value: "2,341",
-      desc: "18.8% of total",
+      value:
+        summary.active_trips || 0,
+      desc: "Active trips",
       icon: <Play size={20} />,
       color: "green",
     },
+
     {
       title: "Completed",
-      value: "7,654",
-      desc: "61.4% of total",
-      icon: <CheckCircle2 size={20} />,
+      value:
+        summary.completed_trips || 0,
+      desc: "Completed trips",
+      icon: (
+        <CheckCircle2 size={20} />
+      ),
       color: "blue",
     },
+
     {
       title: "Cancelled",
-      value: "1,218",
-      desc: "9.8% of total",
-      icon: <XCircle size={20} />,
+      value:
+        summary.canceled_trips || 0,
+      desc: "Cancelled trips",
+      icon: (
+        <XCircle size={20} />
+      ),
       color: "red",
     },
+
     {
-      title: "Total Bookings",
-      value: "15,862",
-      desc: "100% of total",
+      title: "Bookings_Count",
+      value:
+        summary.bookings_count || 0,
+      desc: "Total bookings",
       icon: <Users size={20} />,
       color: "purple",
     },
+     
   ];
 
-  const bars = [
-    { city: "Damascus", value: 3250, height: "240px" },
-    { city: "Aleppo", value: 2105, height: "180px" },
-    { city: "Homs", value: 1842, height: "160px" },
-    { city: "Latakia", value: 1356, height: "120px" },
-    { city: "Hama", value: 1105, height: "100px" },
-    { city: "Deir Ez-Zor", value: 800, height: "80px" },
-  ];
+  // ================= START GOVERNORATES =================
+
+  const startBars =
+    reportData?.by_start_governorate ||
+    [];
+
+
+  // ================= END GOVERNORATES =================
+
+  const endBars =
+    reportData?.by_end_governorate ||
+    [];
 
   return (
     <>
+      {/* SUCCESS */}
+
+      {success && (
+        <span className="success">
+          {success}
+        </span>
+      )}
+
+      {/* ERROR */}
+
+      {err && (
+        <span className="error">
+          {err}
+        </span>
+      )}
 
       {/* FILTERS */}
 
       <div className="filters">
-
-        <FilterInput label="Time Period" type="select" />
-
-        <FilterInput label="From Date" type="date" />
-
-        <FilterInput label="To Date" type="date" />
-
-        <FilterInput label="Governorate" type="select" />
-
         <FilterInput
-          label="Departure Governorate"
-          type="select"
+          label="From Date"
+          type="date"
+          value={filters.date_from}
+          onChange={(e) =>
+            setFilters({
+              ...filters,
+              date_from:
+                e.target.value,
+            })
+          }
         />
 
         <FilterInput
-          label="Arrival Governorate"
-          type="select"
+          label="To Date"
+          type="date"
+          value={filters.date_to}
+          onChange={(e) =>
+            setFilters({
+              ...filters,
+              date_to:
+                e.target.value,
+            })
+          }
         />
 
-        <button className="apply-btn">
+        {/* START GOVERNORATE */}
+
+        <FilterInput
+          label="Start Governorate"
+          type="select"
+          value={
+            filters.start_governorate_id
+          }
+          onChange={(e) =>
+            setFilters({
+              ...filters,
+              start_governorate_id:
+                e.target.value,
+            })
+          }
+          options={governorates}
+        />
+
+        {/* END GOVERNORATE */}
+
+        <FilterInput
+          label="End Governorate"
+          type="select"
+          value={
+            filters.end_governorate_id
+          }
+          onChange={(e) =>
+            setFilters({
+              ...filters,
+              end_governorate_id:
+                e.target.value,
+            })
+          }
+          options={governorates}
+        />
+
+        <button
+          className="apply-btn"
+          onClick={applyFilters}
+        >
           <Filter size={16} />
+
           Apply Filters
         </button>
-
       </div>
 
       {/* STATS */}
 
       <div className="stats-grid">
-
-        {stats.map((item, index) => (
-          <div className="stat-card" key={index}>
-
-            <div className={`icon-circle ${item.color}`}>
-              {item.icon}
-            </div>
-
-            <h2>{item.value}</h2>
-
-            <p>{item.title}</p>
-
-            <span>{item.desc}</span>
-
-          </div>
-        ))}
-
-      </div>
-
-      {/* CHARTS */}
-
-      <div className="charts">
-
-        {/* BAR CHART */}
-
-        <div className="chart-box">
-
-          <div className="chart-header">
-
-            <h3>Trips by Governorate</h3>
-
-            <select>
-              <option>Total Trips</option>
-            </select>
-
-          </div>
-
-          <div className="bar-chart">
-
-            {bars.map((bar, index) => (
-              <div className="bar-item" key={index}>
-
-                <span>{bar.value}</span>
-
-                <div
-                  className="bar"
-                  style={{ height: bar.height }}
-                ></div>
-
-                <p>{bar.city}</p>
-
+        {stats.map(
+          (item, index) => (
+            <div
+              className="stat-card"
+              key={index}
+            >
+              <div
+                className={`icon-circle ${item.color}`}
+              >
+                {item.icon}
               </div>
-            ))}
 
-          </div>
+              <h2>
+                {item.value}
+              </h2>
 
-        </div>
+              <p>{item.title}</p>
 
-        {/* DONUT */}
-
-        <div className="chart-box">
-
-          <h3 className="donut-title">
-            Activity Share
-          </h3>
-
-          <div className="donut"></div>
-
-          <div className="legend">
-
-            <Legend
-              color="#5b8cff"
-              text="Damascus"
-              value="26.1%"
-            />
-
-            <Legend
-              color="#7c3aed"
-              text="Aleppo"
-              value="16.9%"
-            />
-
-            <Legend
-              color="#00d084"
-              text="Homs"
-              value="14.8%"
-            />
-
-          </div>
-
-        </div>
-
+              <span>
+                {item.desc}
+              </span>
+            </div>
+          )
+        )}
       </div>
 
-      {/* TABLE */}
+    
+      {/* START TABLE */}
+<div className="table-box">
+  <div className="table-header">
+    <h3>
+      Start Governorates
+      Activity
+    </h3>
+  </div>
 
-      <div className="table-box">
+  <table>
+    <thead>
+       <tr>
+        <th>#</th>
+        <th>Governorate</th>
+        <th>Total Trips</th>
+        <th>pending</th>
+         <th>Active</th>
+        <th>Completed</th>
+        <th>Cancelled</th>
+        <th>Bookings</th>
+        <th>Activity</th>
+      </tr>
+    </thead>
 
-        <div className="table-header">
+    <tbody>
+      {startBars.map(
+        (item, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
 
-          <h3>Detailed Activity by Governorate</h3>
+            <td>
+              {
+                item
+                  .governorate
+                  ?.name
+              }
+            </td>
 
-          <button className="download-btn">
-            <Download size={18} />
-          </button>
+            <td>
+              {item.total_trips}
+            </td>
+ <td>
+              {
+                item.pending_trips
+              }
+            </td>
+             <td>
+              {
+                item.active_trips
+              }
+            </td>
+            <td>
+              {
+                item.completed_trips
+              }
+            </td>
 
-        </div>
+            <td>
+              {
+                item.canceled_trips
+              }
+            </td>
 
-        <table>
+            <td>
+              {
+                item.bookings_count
+              }
+            </td>
 
-          <thead>
-
-            <tr>
-
-              <th>#</th>
-              <th>Governorate</th>
-              <th>Total Trips</th>
-              <th>Pending</th>
-              <th>Active</th>
-              <th>Completed</th>
-              <th>Cancelled</th>
-              <th>Bookings</th>
-              <th>Activity</th>
-
-            </tr>
-
-          </thead>
-
-          <tbody>
-
-            <tr>
-
-              <td>1</td>
-              <td>Damascus</td>
-              <td>3250</td>
-              <td>320</td>
-              <td>612</td>
-              <td>2015</td>
-              <td>303</td>
-              <td>4120</td>
-
-              <td>
-
+            <td>
+              <div className="activity-cell">
                 <div className="progress">
-
                   <div
                     className="progress-fill"
-                    style={{ width: "26%" }}
+                    style={{
+                      width: `${item.activity_percentage}%`,
+                    }}
                   ></div>
-
                 </div>
 
-              </td>
+                <span>
+                  {
+                    item.activity_percentage
+                  }
+                  %
+                </span>
+              </div>
+            </td>
+          </tr>
+        )
+      )}
+    </tbody>
+  </table>
+</div>
 
-            </tr>
+      {/* END TABLE */}
 
-          </tbody>
+     <div className="table-box">
+  <div className="table-header">
+    <h3>
+      End Governorates
+      Activity
+    </h3>
+  </div>
 
-        </table>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Governorate</th>
+        <th>Total Trips</th>
+        <th>pending</th>
+         <th>Active</th>
+        <th>Completed</th>
+        <th>Cancelled</th>
+        <th>Bookings</th>
+        <th>Activity</th>
+      </tr>
+    </thead>
 
-      </div>
+    <tbody>
+      {endBars.map(
+        (item, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
 
+            <td>
+              {
+                item
+                  .governorate
+                  ?.name
+              }
+            </td>
+
+            <td>
+              {item.total_trips}
+            </td>
+ <td>
+              {
+                item.pending_trips
+              }
+            </td>
+             <td>
+              {
+                item.active_trips
+              }
+            </td>
+            <td>
+              {
+                item.completed_trips
+              }
+            </td>
+
+            <td>
+              {
+                item.canceled_trips
+              }
+            </td>
+
+            <td>
+              {
+                item.bookings_count
+              }
+            </td>
+
+            <td>
+              <div className="activity-cell">
+                <div className="progress">
+                  <div
+                    className="progress-fill"
+                    style={{
+                      width: `${item.activity_percentage}%`,
+                    }}
+                  ></div>
+                </div>
+
+                <span>
+                  {
+                    item.activity_percentage
+                  }
+                  %
+                </span>
+              </div>
+            </td>
+          </tr>
+        )
+      )}
+    </tbody>
+  </table>
+
+  {loading && (
+    <p className="loading-text">
+      Loading...
+    </p>
+  )}
+</div>
     </>
   );
 }
 
 export default ActivityReport;
 
-/* COMPONENTS */
+/* ================= COMPONENTS ================= */
 
-function FilterInput({ label, type }) {
+function FilterInput({
+  label,
+  type,
+  value,
+  onChange,
+  options = [],
+}) {
   return (
     <div className="filter-box">
-
       <label>{label}</label>
 
       {type === "date" ? (
-        <input type="date" />
+        <input
+          type="date"
+          value={value}
+          onChange={onChange}
+        />
       ) : (
-        <select>
-          <option>All</option>
+        <select
+          value={value}
+          onChange={onChange}
+        >
+          <option value="">
+            All
+          </option>
+
+          {options.map((item) => (
+            <option
+              key={item.id}
+              value={item.id}
+            >
+              {item.name}
+            </option>
+          ))}
         </select>
       )}
-
-    </div>
-  );
-}
-
-function Legend({ color, text, value }) {
-  return (
-    <div className="legend-item">
-
-      <div className="legend-left">
-
-        <div
-          className="legend-color"
-          style={{ background: color }}
-        ></div>
-
-        <span>{text}</span>
-
-      </div>
-
-      <span>{value}</span>
-
     </div>
   );
 }

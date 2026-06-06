@@ -135,9 +135,12 @@ const arrivalRaw = trip.general?.expected_arrival_at;
 
       <div className="btn-row">
 
-  <Button className="t-btn-view">
-    Track
-  </Button>
+  <Button
+  className="t-btn-view"
+  onClick={() => navigate(`/dashboard/trips/${id}/track`)}
+>
+  Track
+</Button>
 
   <Button
     className="t-btn-cancel"

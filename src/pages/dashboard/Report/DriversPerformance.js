@@ -16,6 +16,7 @@ import { Axios } from "../../../api/axios";
 import {
   DRIVER_PERFORMANCE_REPORT,
   DRIVER,
+   GET_GOVERNORATES,
 } from "../../../api/api";
 
 function DriversPerformance() {
@@ -131,41 +132,39 @@ const [governorates, setGovernorates] =
 
     }
   };
-  const fetchGovernorates =
-  async () => {
+ const fetchGovernorates = async () => {
 
-    try {
+  try {
 
-      const res =
-        await Axios.get(
-          "admin/governorates"
-        );
+    const res = await Axios.get(
+      GET_GOVERNORATES
+    );
 
-      console.log(
-        "Governorates:",
-        res.data
-      );
+    console.log(
+      "Governorates:",
+      res.data
+    );
 
-      setGovernorates(
-        res.data.data || []
-      );
-console.log(res.data);
-    } catch (error) {
+    setGovernorates(
+      res.data.data.items || []
+    );
 
-      console.log(error);
+  } catch (error) {
 
-      setGovernorates([]);
-    }
-  };
+    console.log(error);
 
-  useEffect(() => {
+    setGovernorates([]);
+  }
+};
+useEffect(() => {
 
-    fetchReport();
+  fetchReport();
 
-    fetchDrivers();
+  fetchDrivers();
 
-  }, []);
+  fetchGovernorates();
 
+}, []);
   
 
   const totalDrivers =
