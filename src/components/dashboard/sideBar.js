@@ -74,6 +74,7 @@ export default function SideBar() {
       icon: faUsers,
       roles: ["admin", "employee"],
     },
+<<<<<<< HEAD
     {
       name: "View Rating",
       path: "rating",
@@ -85,7 +86,15 @@ export default function SideBar() {
       path: "rateCommission",
       icon: faUsers,
       roles: ["admin"],
+=======
+        {
+      name: "Revenue",
+      path: "RevenueR",
+      icon: faUsers,
+      roles: ["admin", "employee"],
+>>>>>>> 6275681 (any think)
     }
+    
 
   ];
 

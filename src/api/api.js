@@ -71,3 +71,7 @@ export const TRIPS_BY_GOVERNORATES =
 export const GET_GOVERNORATES = "governorates";
 export const TRIP_TRACKING = (id) =>
   `admin/trips/${id}/tracking`;
+export const DRIVER_EARNINGS_REPORT =
+  "admin/reports/driver-earnings";
+  export const Revenue =
+  "admin/reports/revenue";

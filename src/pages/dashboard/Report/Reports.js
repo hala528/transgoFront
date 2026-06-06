@@ -4,6 +4,8 @@ import DriversPerformance from "./DriversPerformance";
 import AppUsageReport from "./AppUsageReport";
 import ComplaintsReport from "./complaintsr";
 import { useState } from "react";
+// import DriverEarnings from "./DriverEarnings";
+// import RevenueReport from "./RevenueReport";
 
 function ReportsSection() {
 
@@ -22,6 +24,7 @@ function ReportsSection() {
 
       <div className="tabs">
 
+       
         <button
           className={`tab ${activeTab === "activity" ? "active" : ""}`}
           onClick={() => setActiveTab("activity")}
@@ -56,6 +59,7 @@ function ReportsSection() {
       {activeTab === "drivers" && <DriversPerformance />}
 {activeTab === "appusage" && <AppUsageReport />}
 {activeTab === "complaints" && <ComplaintsReport />}
+
     </div>
   );
 }

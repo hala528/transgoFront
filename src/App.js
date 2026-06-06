@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
+// Auth
 import Login from "./pages/Auth/login";
 import ForgetPassword from "./pages/Auth/ForgetPassword";
 import CodePassword from "./pages/Auth/CodePassword";
@@ -8,6 +9,7 @@ import FirstLogin from "./pages/Auth/Firstlogin";
 import RequireAuth from "./pages/Auth/RequireAuths";
 import Err403 from "./pages/Auth/403";
 
+// Dashboard
 import Dashborad from "./pages/dashboard/dashborad";
 
 // Drivers
@@ -35,6 +37,7 @@ import Logpassenger from "./pages/dashboard/FreeWalet/passenger/LogsPassenger";
 // Trips
 import Trips from "./pages/dashboard/Trip managment/Trips";
 import TripDetails from "./pages/dashboard/Trip managment/TripDetails";
+import TripTracking from "./pages/dashboard/Trip managment/TripTracking";
 
 // Booking
 import Booking from "./pages/dashboard/Booking/booking";
@@ -50,7 +53,10 @@ import DriversPerformance from "./pages/dashboard/Report/DriversPerformance";
 import ActivityReport from "./pages/dashboard/Report/ActivityReport";
 import AppUsageReport from "./pages/dashboard/Report/AppUsageReport";
 import ComplaintsReport from "./pages/dashboard/Report/complaintsr";
-
+import DriverEarnings from "./pages/dashboard/Revenue/DriverEarnings";
+import RevenueReportMock from "./pages/dashboard/Revenue/RevenueReportMock";
+import RevenueReport from "./pages/dashboard/Revenue/RevenueReportMock"; 
+import RevenueR from "./pages/dashboard/Revenue/RevenueR"; 
 // Audit
 import AuditLog from "./pages/dashboard/Audit log/AuditLog";
 
@@ -85,15 +91,9 @@ function App() {
 
             {/* ================= ADMIN ONLY ================= */}
             <Route element={<RequireAuth allowedRole={["admin"]} />}>
-
-             
-              {/* Employees */}
               <Route path="employee" element={<ManagmentEmployee />} />
               <Route path="employee/:id" element={<AddEmployee />} />
               <Route path="employee/details/:id" element={<DetailsEmployee />} />
-
-             
-              {/* Audit */}
               <Route path="auditLog" element={<AuditLog />} />
                {/* Rate Commission */}
               <Route path="rateCommission" element={<RateCommission />} />
@@ -101,33 +101,23 @@ function App() {
 
             {/* ================= ADMIN + EMPLOYEE ================= */}
             <Route element={<RequireAuth allowedRole={["admin", "employee"]} />}>
- {/* Drivers */}
+              {/* Drivers */}
               <Route path="driver" element={<ManagmentDriver />} />
               <Route path="driver/:id" element={<AddDriver />} />
               <Route path="driver/details/:id" element={<DetailsDriver />} />
- {/* Passengers */}
+
+              {/* Passengers */}
               <Route path="passenger" element={<Passenger />} />
               <Route path="passenger/:id" element={<DetailsPassenger />} />
-            {/* Shared */}
-           <Route path="trips" element={<Trips />} />
-           <Route
-  path="/dashboard/trips/:id/track"
-  element={<TripTracking />}
-/>
-<Route path="trips/:id" element={<TripDetails />} />
-<Route
-  path="booking"
-  element={<Booking />}
-/>
-<Route
-  path="Reports"
-  element={<Reports />}
-/>
-<Route path="/dashboard/ComplaintsReport" element={<ComplaintsReport />} />
-<Route path="/dashboard/AppUsageReport" element={<AppUsageReport />} />
-<Route path="/dashboard/ActivityReport" element={<ActivityReport />} />
-<Route path="/dashboard/DriversPerformance" element={<DriversPerformance />} />
-<Route path="/dashboard/BookingDetails/:id" element={<BookingDetails />} />
+
+              {/* Trips */}
+              <Route path="trips" element={<Trips />} />
+              <Route path="trips/:id" element={<TripDetails />} />
+              <Route path="trips/:id/track" element={<TripTracking />} />
+
+              {/* Booking */}
+              <Route path="booking" element={<Booking />} />
+              <Route path="BookingDetails/:id" element={<BookingDetails />} />
 
               {/* Wallet */}
               <Route path="wallet" element={<FreeWallet />} />
@@ -136,14 +126,6 @@ function App() {
               <Route path="wallet/logsdriver" element={<LogeDrivers />} />
               <Route path="wallet/chargepassenger" element={<WalletPassenger />} />
               <Route path="wallet/logspassenger" element={<Logpassenger />} />
-
-              {/* Trips */}
-              <Route path="trips" element={<Trips />} />
-              <Route path="trips/:id" element={<TripDetails />} />
-
-              {/* Booking */}
-              <Route path="booking" element={<Booking />} />
-              <Route path="BookingDetails/:id" element={<BookingDetails />} />
 
               {/* Complaints */}
               <Route path="complaints" element={<Complaints />} />
@@ -159,6 +141,10 @@ function App() {
               {/* Rating */}
               <Route path="rating" element={<ViewRating />} />
              
+               <Route path="DriverEarnings" element={<DriverEarnings />} />
+               <Route path="RevenueR" element={<RevenueR />} />
+                <Route path="RevenueReport" element={<RevenueReport />} />
+               RevenueReport
             </Route>
 
             {/* ================= ERRORS ================= */}
