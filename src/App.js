@@ -54,35 +54,18 @@ import ComplaintsReport from "./pages/dashboard/Report/complaintsr";
 // Audit
 import AuditLog from "./pages/dashboard/Audit log/AuditLog";
 
-<<<<<<< HEAD
+
 //rating
 import ViewRating from "./pages/dashboard/rating/viewRating";
 //rate commission
-import RateCommission from "./pages/dashboard/rate_commission/rate_commission";
+import RateCommission from "./pages/dashboard/rate_commission/rate_commission"
 
-=======
-import ManagmentEmployee from './pages/dashboard/User managment/employeeManagment/employee';
-import AddEmployee from './pages/dashboard/User managment/employeeManagment/AddEmployee';
-import DetailsEmployee from './pages/dashboard/User managment/employeeManagment/detailsEmployee';
-import AuditLog from './pages/dashboard/Audit log/AuditLog';
-import Complaints from './pages/complnaits/viewCoplanits';
-import ComplanitDetails from './pages/complnaits/complanitDetails';
-import BookingDetails from './pages/dashboard/Booking/BookingDetails';
-import Reports from './pages/dashboard/Report/Reports';
-import FinancailLogs from './pages/dashboard/FreeWalet/financailLogs';
-import FreeWallet from './pages/dashboard/FreeWalet/Freewallet';
-import WalletDriver from './pages/dashboard/FreeWalet/driver/walletFreedriver';
-import LogeDrivers from './pages/dashboard/FreeWalet/driver/logsDriver';
-import WalletPassenger from './pages/dashboard/FreeWalet/passenger/walletFreepassenger';
-import Logpassenger from './pages/dashboard/FreeWalet/passenger/LogsPassenger';
-import Passenger from './pages/dashboard/User managment/passengerManagment/Passenger';
-import DetailsPassenger from './pages/dashboard/User managment/passengerManagment/detailsPassenger';
-import DriversPerformance from './pages/dashboard/Report/DriversPerformance';
-import ActivityReport from './pages/dashboard/Report/ActivityReport';
-import AppUsageReport from './pages/dashboard/Report/AppUsageReport';
-import ComplaintsReport from './pages/dashboard/Report/complaintsr';
+
+
+
+
 import TripTracking from './pages/dashboard/Trip managment/TripTracking';
->>>>>>> a97da4843075c16b7d8c1c991552866c047bb065
+
 function App() {
   return (
     <div className="App">
