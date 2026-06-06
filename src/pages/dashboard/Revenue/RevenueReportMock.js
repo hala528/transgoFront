@@ -2,7 +2,15 @@ import "./DriverEarnings.css";
 import { useEffect, useState } from "react";
 import { Axios } from "../../../api/axios";
 import { Revenue } from "../../../api/api";
-
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 export default function RevenueReportMock() {
 
   const [loading, setLoading] = useState(false);
@@ -86,8 +94,12 @@ export default function RevenueReportMock() {
   if (loading) return <div>Loading...</div>;
   if (!reportData) return <div>No Data</div>;
 
-  const { summary, period, source, chart } = reportData;
+  const { summary, period, source, chart } = reportData || {};
 
+const chartData = (chart || []).map((item) => ({
+  date: item.label,
+  revenue: item.total_revenue,
+}));
   return (
     <div className="earnings-page">
 
@@ -95,7 +107,16 @@ export default function RevenueReportMock() {
       <div className="filters">
 
        
-
+<div className="filter-box">
+          <label>From Date</label>
+          <input
+            type="date"
+            value={filters.date_from}
+            onChange={(e) =>
+              setFilters({ ...filters, date_from: e.target.value })
+            }
+          />
+        </div>
         <div className="filter-box">
           
           <label>To Date</label>
@@ -107,16 +128,7 @@ export default function RevenueReportMock() {
             }
           />
         </div>
- <div className="filter-box">
-          <label>From Date</label>
-          <input
-            type="date"
-            value={filters.date_from}
-            onChange={(e) =>
-              setFilters({ ...filters, date_from: e.target.value })
-            }
-          />
-        </div>
+ 
         <div className="filter-box">
   <label>Period</label>
 
@@ -175,7 +187,24 @@ export default function RevenueReportMock() {
       {/* CHART */}
       <div className="content-grid">
 
+<div className="chart-card">
+    <h3>Revenue Trend</h3>
 
+    <ResponsiveContainer width="100%" height={300}>
+      <LineChart data={chartData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="date" />
+        <YAxis />
+        <Tooltip />
+        <Line
+          type="monotone"
+          dataKey="revenue"
+          stroke="#4f46e5"
+          strokeWidth={2}
+        />
+      </LineChart>
+    </ResponsiveContainer>
+  </div>
         {/* INFO */}
         <div className="info-card">
           <h3>Report Information</h3>
