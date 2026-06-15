@@ -146,7 +146,7 @@ export default function WalletPassenger() {
         </Link>
       </div>
 
-      <div className="wallet-box">
+      <div className="wallett-box">
         {/* 🔍 Search */}
         <Form.Control
           type="text"
@@ -168,7 +168,7 @@ export default function WalletPassenger() {
 
         {/* 👤 Cards */}
         {passengers.map((item) => (
-          <div key={item.user_id} className="driver-card">
+          <div key={item.user_id} className="driverr-card">
            
 
             <div className="driver-info">

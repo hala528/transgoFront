@@ -57,6 +57,15 @@ export const COMMISSION_CURRENT = "admin/commission-rates/current";
 export const COMMISSION_RATES = "admin/commission-rates";
 export const CREATE_COMMISSION = "admin/commission-rates";
 
+//rating
+export const RATINGS_LIST = "admin/ratings/list";
+export const RATINGS_DETAILS = "admin/ratings";
+export const TOGGLE_RATING_VISIBILITY = (id) =>
+  `admin/ratings/${id}/hide`;
+
+export const LOW_RATED_DRIVERS =
+  "admin/drivers/low-rated";
+
 
 export const GET_BOOKINGS = 'admin/bookings';
 export const BOOKING_DETAILS = (id) => `admin/bookings/${id}`;

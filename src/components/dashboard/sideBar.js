@@ -1,6 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../components/dashboard/bar.css";
-import { faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faCar,
+   
+    faUsers,
+     faUserTie, 
+     faWallet ,
+     faClipboardList,
+     faRoute,
+     faTicket,
+     faChartLine,
+     faCommentDots,
+     faStar,
+     faPercent,
+     faMoneyBillTrendUp
+    } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { Menu } from "../../context/MnueContext";
@@ -20,7 +33,7 @@ export default function SideBar() {
     {
       name: "Managment Drivers",
       path: "driver",
-      icon: faUsers,
+      icon: faCar,
       roles: ["admin" , "employee"],
     },
     {
@@ -32,64 +45,64 @@ export default function SideBar() {
     {
       name: "Managment Employee",
       path: "employee",
-      icon: faUser,
+      icon: faUserTie,
       roles: ["admin"],
     },
     {
       name: "Free Wallet",
       path: "wallet",
-      icon: faUsers,
+      icon: faWallet,
       roles: ["admin", "employee"],
     },
     {
       name: "Audit Logs",
       path: "auditLog",
-      icon: faUsers,
+      icon: faClipboardList,
       roles: ["admin"],
     },
     
     {
       name: "Managment Trips",
       path: "trips",
-      icon: faUsers,
+      icon: faRoute,
       roles: ["admin", "employee"],
     },
      {
       name: "Managment Booking",
       path: "booking",
-      icon: faUsers,
+      icon: faTicket,
       roles: ["admin", "employee"],
     },
     {
 
       name: "Reports & Analytics",
       path: "Reports",
-      icon: faUsers,
+      icon: faChartLine,
       roles: ["admin", "employee"],
     },
      
     {
       name: "Managment Complaints",
       path: "complaints",
-      icon: faUsers,
+      icon: faCommentDots,
       roles: ["admin", "employee"],
     },
     {
       name: "View Rating",
       path: "rating",
-      icon: faUsers,
+      icon: faStar,
       roles: ["admin", "employee"],
     },
     {
       name: "Rate Commission",
       path: "rateCommission",
-      icon: faUsers,
+      icon: faPercent,
       roles: ["admin"],
     },
         {
       name: "Revenue",
       path: "RevenueR",
-      icon: faUsers,
+      icon: faMoneyBillTrendUp,
       roles: ["admin", "employee"],
     }
     

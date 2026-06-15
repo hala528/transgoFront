@@ -62,7 +62,7 @@ align-items: center;
 .orange { background: #ea580c; }
 
 
-.wallet-box {
+.wallett-box {
   background: #1e1b4b;
   padding: 20px;
   border-radius: 15px;
@@ -93,7 +93,7 @@ align-items: center;
 }
 
 /* كرت السائق */
-.driver-card {
+.driverr-card {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -103,13 +103,13 @@ align-items: center;
   margin: 15px 0;
 }
 
-.driver-card img {
+.driverr-card img {
   width: 200px;
   height: 200px;
   border-radius: 30px;
 }
 
-.driver-details {
+.driverr-details {
   display: flex;
   gap: 10px;
 }
@@ -146,7 +146,7 @@ align-items: center;
 }
 
 /* التفاصيل */
-.driver-details {
+.driverr-details {
   display: flex;
   gap: 10px;
   margin-top: 5px;

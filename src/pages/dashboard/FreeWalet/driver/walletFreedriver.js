@@ -142,7 +142,7 @@ export default function WalletDriver() {
         </Button>
       </Link>
       </div>
-      <div className="wallet-box">
+      <div className="wallett-box">
        
       
            <Form.Control
@@ -168,7 +168,7 @@ export default function WalletDriver() {
 
         {/* 👤 الكروت */}
         {drivers.map((item) => (
-          <div key={item.user_id} className="driver-card">
+          <div key={item.user_id} className="driverr-card">
             <img
               src={`${IMAGE_BASE}/${item.driver_profile?.personal_photo}`}
               alt="driver"
@@ -176,7 +176,7 @@ export default function WalletDriver() {
 
             <div className="driver-info">
               <h3 style={{color:'white'}}>Full Name: {item.full_name}</h3>
-              <div className="driver-details">
+              <div className="driverr-details">
                 <span className="balance">
                    {item.wallet?.balance} $
                 </span>

@@ -192,65 +192,7 @@ export default function Complaints() {
 
         </div>
 
-        {/* STATS */}
-        <div className="complaints-stats">
-
-          <div className="complaint-stat-card">
-
-            <span>
-              Total Complaints
-            </span>
-
-            <h3>
-              {
-                summary.complaint_count || 0
-              }
-            </h3>
-
-          </div>
-
-          <div className="complaint-stat-card">
-
-            <span>
-              Current Page
-            </span>
-
-            <h3>
-              {
-                pagination.current_page ||
-                1
-              }
-            </h3>
-
-          </div>
-
-          <div className="complaint-stat-card">
-
-            <span>
-              Per Page
-            </span>
-
-            <h3>
-              {
-                pagination.per_page || 0
-              }
-            </h3>
-
-          </div>
-
-          <div className="complaint-stat-card">
-
-            <span>
-              Filtered Results
-            </span>
-
-            <h3>
-              {complaints.length}
-            </h3>
-
-          </div>
-
-        </div>
+      
 
         {/* FILTERS */}
         <Card className="filters-card p-3 mb-4">
@@ -267,30 +209,13 @@ export default function Complaints() {
 
           </div>
 
-          <Row className="g-3">
+          <Row className="g-4">
 
             {/* SEARCH */}
-            <Col md={3}>
-
-              <Form.Control
-               style={{
-                color: "white",
-              background: "rgba(255,255,255,0.08)",
-              }}
-                type="text"
-                placeholder="Search by code..."
-                value={search}
-                onChange={(e) =>
-                  setSearch(
-                    e.target.value
-                  )
-                }
-              />
-
-            </Col>
+           
 
             {/* STATUS */}
-            <Col md={2}>
+            <Col md={3}>
 
               <Form.Select
                style={{
@@ -326,7 +251,7 @@ export default function Complaints() {
             </Col>
 
             {/* ROLE */}
-            <Col md={2}>
+            <Col md={3}>
 
               <Form.Select
                style={{
