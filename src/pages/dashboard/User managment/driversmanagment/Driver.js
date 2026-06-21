@@ -42,7 +42,7 @@ export default function ManagmentDriver() {
       <h2 style={{ color: "white", padding: 5 }}>Driver Pages :</h2>
 
       {/* 🔹 Filters */}
-      <div className="card-driver d-flex justify-content-between align-items-center px-3 mb-3">
+      <div className="drv-filters d-flex justify-content-between align-items-center flex-wrap gap-3">
         <Link to={'driver.id'}>
           <Button
             style={{
@@ -88,87 +88,83 @@ export default function ManagmentDriver() {
       <Row>
         {drivers.map((driver) => (
           <Col md={4} key={driver.user_id} className="mb-3">
-            <Card className="driver-card p-3">
+           <Card className="drv-card">
+  <div className="drv-card-header">
+    <div>
+      <span className="drv-id">
+        #{driver.user_id}
+      </span>
+    </div>
 
-              {/* Header */}
-              <div className="header d-flex justify-content-between">
-                <span>ID: {driver.user_id}</span>
-                <span>{driver.created_at?.slice(0, 10)}</span>
-              </div>
+    <Badge
+      bg={
+        driver.account_status === 1
+          ? "success"
+          : "danger"
+      }
+    >
+      {driver.account_status === 1
+        ? "Active"
+        : "Inactive"}
+    </Badge>
+  </div>
 
-              {/* Body */}
-              <Row className="align-items-center mt-2">
-                <Col>
-                  <h5>{driver.full_name}</h5>
+  <div className="drv-profile">
+    <Image
+      src={
+        driver.driver_profile?.personal_photo
+          ? `${IMAGE_BASE}/${driver.driver_profile.personal_photo}`
+          : person
+      }
+      roundedCircle
+      className="drv-avatar"
+    />
 
-                  <p>📞 {driver.phone}</p>
-                  <p>✉️ {driver.email}</p>
+    <div className="drv-info">
+      <h5>{driver.full_name}</h5>
 
-                  <p>
-                    rating:
-                    <span className="stars ms-2">
-                      {renderStars(driver.rating)}
-                    </span>
-                  </p>
+      <p>📞 {driver.phone}</p>
 
-                  <div className="d-flex gap-2">
-                    <Badge bg="secondary">driver</Badge>
+      <p>✉️ {driver.email}</p>
 
-                    <Badge
-                      bg={
-                        driver.account_status === 1 ? "success" : "danger"
-                      }
-                    >
-                      {driver.account_status === 1
-                        ? "active"
-                        : "inactive"}
-                    </Badge>
+      <div className="drv-rating">
+        {renderStars(driver.rating)}
+        <span>
+          ({driver.rating || 0})
+        </span>
+      </div>
+    </div>
+  </div>
 
-                    
-                  </div>
-                </Col>
+  <div className="drv-wallet">
+    <div>
+      <span>Wallet</span>
 
-                <Col md={4} className="text-center">
-                  <Image
-                    src={
-                      driver.driver_profile?.personal_photo
-                        ? `${IMAGE_BASE}/${driver.driver_profile.personal_photo}`
-                        : person
-                    }
-                    roundedCircle
-                    className="driver-img"
-                  />
-                </Col>
-              </Row>
+      <strong>
+        {driver.wallet?.balance || 0} L.E
+      </strong>
+    </div>
 
-              {/* Wallet */}
-              <div className="wallet-box p-2">
-                <h6>Wallet</h6>
-                <p>
-                  Balance: {driver.wallet?.balance || 0} L.E
-                </p>
-                <p>
-                  Address: {driver.driver_profile?.address || "-"}
-                </p>
-              </div>
+    <div>
+      <span>Address</span>
 
-              {/* Button */}
-              <div >
-                <Link to={`details/${driver.user_id}`}>
-                  <Button
-                    style={{
-                      background:
-                        "linear-gradient(90deg, var(--primary-blue), var(--primary-purple))",
-                      width: "180px",
-                      border: "none",
-                    }}
-                    size="sm"
-                  >
-                    view details
-                  </Button>
-                </Link>
-              </div>
-            </Card>
+      <strong>
+        {driver.driver_profile?.address ||
+          "-"}
+      </strong>
+    </div>
+  </div>
+
+  <div className="drv-footer">
+    <Link
+      to={`details/${driver.user_id}`}
+    >
+      <Button className="drv-btn">
+        View Details
+      </Button>
+    </Link>
+  </div>
+</Card>
           </Col>
         ))}
       </Row>

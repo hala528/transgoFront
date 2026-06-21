@@ -1,6 +1,6 @@
-export const beasURL = "http://127.0.0.1:8000/api/v1";
+export const beasURL = "https://alkhader.softup.agency/api/v1";
 
-export const IMAGE_BASE = "http://127.0.0.1:8000";
+export const IMAGE_BASE = "https://alkhader.softup.agency";
 export const GOOGLE_MAPS_API_KEY = "AIzaSyACSWABcipQQCG6r95SkwrUjctdU5dFo0A";
 // Auth
 export const LOGIN = "admin/login";

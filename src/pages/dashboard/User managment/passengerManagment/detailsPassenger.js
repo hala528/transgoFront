@@ -4,7 +4,7 @@ import { Row, Col, Button, Image, Spinner } from "react-bootstrap";
 import {
   beasURL,
   GET_PASSENGER_DETAILS,
-  TOGGLE_PASSENGER_STATUS, // endpoint
+  TOGGLE_PASSENGER_STATUS,
 } from "../../../../api/api";
 
 import personl from "../../../../assest/personal.png";
@@ -19,7 +19,7 @@ export default function DetailsPassenger() {
 
   function renderStars(rating = 0) {
     const totalStars = 5;
-    const fullStars = Math.floor(rating);
+    const fullStars = Math.round(Number(rating));
     const emptyStars = totalStars - fullStars;
 
     return (
@@ -30,26 +30,26 @@ export default function DetailsPassenger() {
     );
   }
 
-  // جلب البيانات
-  const fetchPassenger = () => {
-    setLoading(true);
+  const fetchPassenger = async () => {
+    try {
+      setLoading(true);
 
-    Axios.get(`${beasURL}/${GET_PASSENGER_DETAILS(id)}`)
-      .then((res) => {
-        setPassenger(res.data?.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+      const res = await Axios.get(
+        `${beasURL}/${GET_PASSENGER_DETAILS(id)}`
+      );
+
+      setPassenger(res.data?.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchPassenger();
   }, [id]);
 
-  // تغيير الحالة
   const handleToggleStatus = async () => {
     try {
       setStatusLoading(true);
@@ -58,191 +58,295 @@ export default function DetailsPassenger() {
         `${beasURL}/${TOGGLE_PASSENGER_STATUS(id)}`
       );
 
-      console.log(res.data);
+      const newStatus =
+        res.data?.data?.account_status ??
+        (passenger?.account_status === 1 ? 0 : 1);
 
-      // تحديث الحالة مباشرة بدون reload
       setPassenger((prev) => ({
         ...prev,
-        basic_information: {
-          ...prev.basic_information,
-          account_status:
-            res.data?.data?.account_status === 1
-              ? "active"
-              : "inactive",
-        },
+        account_status: newStatus,
       }));
     } catch (error) {
       console.log(error);
     } finally {
       setStatusLoading(false);
     }
-  }; if (loading) { 
-                return (
-                   <div className="d-flex justify-content-center align-items-center"
-                    style={{ height: "50vh" }}> 
-                    <Spinner animation="border" variant="light" />
-                     </div> 
-                    ); }
-                     if (!passenger)
-                      { return <h3 style={{ color: "white" }}>
-                     Passenger not found</h3>;
-                      }
-                      const { basic_information, 
-                        account_details, 
-                        account_info, 
-       bookings } = passenger;
-            return (
-               <div className="w-100 p-2"> 
-               {/* 🔙 Back */}
-        <div className="d-flex align-items-center px-3">
-           <span className="td-back" onClick={() => window.history.back()}> ← </span>
-            <h2 style={{ color: "white", padding: 5 }}> Passenger Details : </h2>
-                 </div> 
-         {/* 🔷 Main Info */}
-               <div
-  className="card-details d-flex px-3 position-relative"
->
-              <Row className="gap-3"> <Col xs={5} md={4}> 
-            <Image src={basic_information?.profile_photo || personl} roundedCircle 
-       style={{ width: "120px", height: "120px", border: "4px solid #4f46e5" }}
-         /> 
-         </Col>
-              <Col>
-         <h5 style={{ color: "white" }}> Full Name : {basic_information?.full_name} 
-     </h5>
-       <div className="d-flex gap-2 mb-2"> 
-               <Button 
-    style={{ background: "#4f46e5", borderRadius: "100px", border: "none" }} > 
-     Passenger </Button>
-      <Button
-     style={{ background: basic_information?.account_status === "active" ? "green" : "red", borderRadius: "100px", border: "none" }} >
-    {basic_information?.account_status}
-      </Button> 
-       </div>
-          <p style={{ color: "white" }}> Phone : {basic_information?.mobile_number}
-         </p>
-         <p style={{ color: "white" }}>
-  Email : {basic_information?.email}
-</p>
+  };
 
-<Button
-  onClick={handleToggleStatus}
-  disabled={statusLoading}
-  style={{
-    position: "absolute",
-    bottom: "20px",
-    right: "20px",
-    background:
-      basic_information?.account_status === "active"
-        ? "red"
-        : "green",
-    border: "none",
-    width: "200px",
-  }}
->
-  {statusLoading
-    ? "Loading..."
-    : basic_information?.account_status === "active"
-    ? "Deactivate Account"
-    : "Activate Account"}
-</Button>
- </Col>
-    
-        </Row>
-           </div>
-        {/* 🔷 Cards */}
-        <div className="d-flex gap-3 p-2 flex-wrap">
-         {/* 🟦 Account Details */} 
-        <div className="card-account flex-fill p-3">
-           <h5 className="card-title">Account Details
-         </h5> <div className="info-row"> <span>ID</span> 
-          <span>{account_details?.id}</span>
-          </div> <div className="info-row">
-           <span>Name</span>
-          <span>{account_details?.name}</span>
-            </div> 
-          <div className="info-row">
-               <span>Phone</span>
-                 <span>{account_details?.phone}</span>
-                         </div>
-               <div className="info-row">
-              <span>Email</span> 
-                <span>{account_details?.email}</span> 
-                  </div>
-               <div className="info-row"> 
-             <span>Wallet</span> 
-                                                                  
-                   <span>{account_details?.wallet_amount} $</span> 
-                 </div>
-               <div className="info-row">
-               <span>Completed Trips</span>
-         <span>{basic_information?.completed_trips_count}</span> 
-               </div> <div className="info-row"> 
-                   <span>Cancelled Trips</span> 
-         <span>{basic_information?.cancelled_trips_count}</span> 
-                   </div>
-                   </div> 
-                 {/* 🟪 Account Info */} 
-                     <div className="card-create flex-fill p-3">
-              <h5 className="card-title">Account Info</h5> 
-                 <div className="info-row">
-                   <span>Status</span>
-               <span style={{ color: "lightgreen" }}> {account_info?.status?.text} </span>
-        </div> 
-        <div className="info-row"> 
-       <span>Rating</span> 
-                 <span style={{ color: "#facc15", fontSize: "18px" }}>
-  {renderStars(basic_information?.average_rating)} 
-                   </span> </div> <div className="info-row">
-                <span>Registration</span>
-         <span>{account_info?.registration_method_text}</span>
-     </div> 
-      <div className="info-row">
-      <span>Created At</span>
-        <span>{account_info?.created_at}</span> 
+  if (loading) {
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "50vh" }}
+      >
+        <Spinner animation="border" variant="light" />
       </div>
-      <div className="info-row">
-       <span>Complaints</span> 
-<span>{account_info?.number_of_complaints}</span>
-    </div>
-    </div> 
-{/* 🟧 Bookings */} 
-               {bookings?.length > 0 ? ( bookings.map((booking) => (
-                 <div key={booking.booking_id} className="card-account flex-fill p-3">
-                   <h5 className="card-title">Booking #{booking.booking_id}</h5> 
-                   <div className="info-row">
-                     <span>Trip ID</span>
-                      <span>{booking.trip_id}</span>
-                       </div>
-                        <div className="info-row"> 
-                          <span>Date</span>
-                           <span>{new Date(booking.date).toLocaleString()}</span>
-                            </div>
-                             <div className="info-row"> 
-                              <span>Type</span>
-                               <span>{booking.type}</span>
-                                </div>
-                                 <div className="info-row"> 
-                                  <span>Status</span> 
-                                  <span>{booking.status?.name}</span>
-                                   </div> 
+    );
+  }
+
+  if (!passenger) {
+    return (
+      <h3 style={{ color: "white" }}>
+        Passenger not found
+      </h3>
+    );
+  }
+
+  return (
+    <div className="w-100 p-2">
+      {/* Back */}
+      <div className="d-flex align-items-center px-3">
+        <span
+          className="td-back"
+          onClick={() => window.history.back()}
+        >
+          ←
+        </span>
+
+        <h2 style={{ color: "white", padding: 5 }}>
+          Passenger Details :
+        </h2>
+      </div>
+
+      {/* Main Info */}
+      <div className="card-details d-flex px-3 position-relative">
+        <Row className=" w-100">
+          <Col xs={4} md={2}>
+            <Image
+              src={personl}
+              roundedCircle
+              style={{
+                width: "120px",
+                height: "120px",
+                border: "4px solid #4f46e5",
+              }}
+            />
+          </Col>
+
+          <Col>
+            <h5 style={{ color: "white" }}>
+              Full Name : {passenger?.full_name}
+            </h5>
+
+            <div className="d-flex gap-2 mb-2">
+              <Button
+                style={{
+                  background: "#4f46e5",
+                  borderRadius: "100px",
+                  border: "none",
+                  width: "150px",
+                }}
+              >
+                {passenger?.roles?.[0]?.name || "Passenger"}
+              </Button>
+
+              <Button
+                style={{
+                  background:
+                    passenger?.account_status === 1
+                      ? "green"
+                      : "red",
+                  borderRadius: "100px",
+                  border: "none",
+                  width: "150px",
+                }}
+              >
+                {passenger?.account_status === 1
+                  ? "active"
+                  : "inactive"}
+              </Button>
+            </div>
+
+            <p style={{ color: "white" }}>
+              Phone : {passenger?.phone}
+            </p>
+
+            <p style={{ color: "white" }}>
+              Email : {passenger?.email}
+            </p>
+
+            <Button
+              onClick={handleToggleStatus}
+              disabled={statusLoading}
+              style={{
+                position: "absolute",
+                bottom: "20px",
+                right: "20px",
+                background:
+                  passenger?.account_status === 1
+                    ? "red"
+                    : "green",
+                border: "none",
+                width: "200px",
+              }}
+            >
+              {statusLoading
+                ? "Loading..."
+                : passenger?.account_status === 1
+                ? "Deactivate Account"
+                : "Activate Account"}
+            </Button>
+          </Col>
+        </Row>
+      </div>
+
+      {/* Info Cards */}
+      <div className="d-flex gap-3 p-2 flex-wrap">
+        {/* Account Details */}
+        <div className="card-account flex-fill p-3">
+          <h5 className="card-title">Account Details</h5>
+
           <div className="info-row">
-             <span>Payment</span>
-              <span>{booking.payment_method}</span>
-               </div> <div className="info-row">
-                 <span>From</span>
-                  <span>{booking.route?.from}</span>
-                   </div> <div className="info-row"> 
-                    <span>To</span> 
-                    <span>{booking.route?.to}</span> 
-                    </div>
-                     </div>
-                      )) ) 
-                      : ( <div className="card-account flex-fill p-3">
-                         <h5 className="card-title">Bookings</h5> 
-                         <p>No bookings available</p> 
-                         </div> )}
-                          </div>
-                           </div>
-                            );
-                           }
+            <span>User ID</span>
+            <span>{passenger?.user_id}</span>
+          </div>
+
+          <div className="info-row">
+            <span>Full Name</span>
+            <span>{passenger?.full_name}</span>
+          </div>
+
+          <div className="info-row">
+            <span>Phone</span>
+            <span>{passenger?.phone}</span>
+          </div>
+
+          <div className="info-row">
+            <span>Email</span>
+            <span>{passenger?.email}</span>
+          </div>
+
+          <div className="info-row">
+            <span>Wallet Balance</span>
+            <span>
+              {passenger?.wallet?.balance || "0.00"} $
+            </span>
+          </div>
+
+          <div className="info-row">
+            <span>Role</span>
+            <span>
+              {passenger?.roles?.map((r) => r.name).join(", ")}
+            </span>
+          </div>
+        </div>
+
+        {/* Account Info */}
+        <div className="card-create flex-fill p-3">
+          <h5 className="card-title">Account Info</h5>
+
+          <div className="info-row">
+            <span>Status</span>
+
+            <span
+              style={{
+                color:
+                  passenger?.account_status === 1
+                    ? "lightgreen"
+                    : "red",
+              }}
+            >
+              {passenger?.account_status === 1
+                ? "Active"
+                : "Inactive"}
+            </span>
+          </div>
+
+          <div className="info-row">
+            <span>Rating</span>
+
+            <span
+              style={{
+                color: "#facc15",
+                fontSize: "18px",
+              }}
+            >
+              {renderStars(passenger?.rating)}
+            </span>
+          </div>
+
+          <div className="info-row">
+            <span>Rating Value</span>
+            <span>{passenger?.rating}</span>
+          </div>
+
+          <div className="info-row">
+            <span>Registration Type</span>
+            <span>{passenger?.registration_type}</span>
+          </div>
+
+          <div className="info-row">
+            <span>Must Change Password</span>
+            <span>
+              {passenger?.must_change_password
+                ? "Yes"
+                : "No"}
+            </span>
+          </div>
+
+          <div className="info-row">
+            <span>Created At</span>
+            <span>
+              {new Date(
+                passenger?.created_at
+              ).toLocaleString()}
+            </span>
+          </div>
+
+          <div className="info-row">
+            <span>Updated At</span>
+            <span>
+              {new Date(
+                passenger?.updated_at
+              ).toLocaleString()}
+            </span>
+          </div>
+
+          <div className="info-row">
+            <span>Rating Updated</span>
+            <span>
+              {passenger?.rating_last_updated || "-"}
+            </span>
+          </div>
+        </div>
+
+        {/* Wallet Details */}
+        <div className="card-account flex-fill p-3">
+          <h5 className="card-title">Wallet Details</h5>
+
+          <div className="info-row">
+            <span>Wallet ID</span>
+            <span>{passenger?.wallet?.wallet_id}</span>
+          </div>
+
+          <div className="info-row">
+            <span>Balance</span>
+            <span>{passenger?.wallet?.balance} $</span>
+          </div>
+
+          <div className="info-row">
+            <span>Created At</span>
+            <span>
+              {passenger?.wallet?.created_at
+                ? new Date(
+                    passenger.wallet.created_at
+                  ).toLocaleString()
+                : "-"}
+            </span>
+          </div>
+
+          <div className="info-row">
+            <span>Updated At</span>
+            <span>
+              {passenger?.wallet?.updated_at
+                ? new Date(
+                    passenger.wallet.updated_at
+                  ).toLocaleString()
+                : "-"}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

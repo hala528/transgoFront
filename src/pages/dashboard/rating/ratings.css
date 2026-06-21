@@ -1,167 +1,338 @@
-.ratings-page {
-  padding: 24px;
+.rm-page {
  
   min-height: 100vh;
+ 
+  color: #fff;
 }
 
-.page-header h2 {
-  margin-bottom: 20px;
+.rm-header {
+  margin-bottom: 24px;
 }
 
-.filters-card {
-  background: #1e1b4b;
-  padding: 20px;
-  border-radius: 14px;
+.rm-header h2 {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+/* ==========================
+   Filters
+========================== */
+
+.rm-filters {
   display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 15px rgba(0,0,0,.05);
-}
-
-.filters-card select,
-.filters-card input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #2c2f4a;
-  color: white;
-}
-
-.filters-card button {
-  background: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-  color: white;
-  border: none;
-  padding: 0 20px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.ratings-layout {
-  display: grid;
-  grid-template-columns: 350px 1fr;
-  gap: 20px;
-}
-
-.ratings-sidebar {
-  background: #1e1b4b;
-  border-radius: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
   padding: 20px;
-  height: fit-content;
+  margin-bottom: 24px;
+
+  background: #1e1b4b;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
 }
 
-.rating-user-card {
-  padding: 15px;
-  border: 1px solid #eee;
+.rm-filters select,
+.rm-filters input {
+  height: 46px;
+  min-width: 180px;
+
+  padding: 0 14px;
+
+  border: 1px solid rgba(255,255,255,.1);
   border-radius: 12px;
-  margin-top: 10px;
+
+  background: #0f172a;
+  color: #fff;
+}
+
+.rm-filters button {
+  height: 46px;
+  padding: 0 24px;
+
+  border: none;
+  border-radius: 12px;
+
+  font-weight: 600;
   cursor: pointer;
-  transition: .2s;
+
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+  );
 }
 
-.rating-user-card:hover {
-  background: rgba(255, 255, 255, 0.08);
+/* ==========================
+   Layout
+========================== */
+
+.rm-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  padding: 20px 0px;
+  
 }
 
-.ratings-content {
+.rm-sidebar {
+  background: #1e1b4b;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,.08);
+
+}
+
+.rm-content {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.summary-grid {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 15px;
-}
+/* ==========================
+   User Cards
+========================== */
 
-.summary-card {
-  background: #1e1b4b;
-  padding: 20px;
+.rm-user-card {
+  margin-top: 12px;
+  padding: 16px;
+
   border-radius: 14px;
-  text-align: center;
-}
 
-.summary-card h2 {
-  margin-top: 10px;
-  color: #2563eb;
-}
+  background: #0f172a;
+  border: 1px solid rgba(255,255,255,.08);
 
-.profile-card {
-  background: #1e1b4b;
-  padding: 20px;
-  border-radius: 14px;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.profile-card img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-}
-
-.breakdown-card,
-.table-card {
-  background: #1e1b4b;
-  padding: 20px;
-  border-radius: 14px;
-}
-
-.breakdown-grid {
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-  margin-top: 20px;
-  gap: 10px;
-}
-
-.breakdown-grid div {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 15px;
-  text-align: center;
-  border-radius: 10px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-}
-
-th,
-td {
-  padding: 14px;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-}
-
-.status-visible {
-  background: #dcfce7;
-  color: #15803d;
-  padding: 6px 12px;
-  border-radius: 20px;
-}
-
-.status-hidden {
-  background: #fee2e2;
-  color: #dc2626;
-  padding: 6px 12px;
-  border-radius: 20px;
-}
-
-.toggle-btn {
-  border: none;
-  background: #2563eb;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 8px;
+  transition: .25s;
   cursor: pointer;
 }
 
-.empty-state {
-  background: white;
-  border-radius: 14px;
-  padding: 80px;
+.rm-user-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #2563eb;
+
+  box-shadow:
+    0 10px 25px rgba(37,99,235,.2);
+}
+
+.rm-user-card h4 {
+  margin: 8px 0;
+}
+
+/* ==========================
+   Stats
+========================== */
+
+.rm-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 16px;
+}
+
+.rm-stat-card {
+  background: #1e1b4b;
+
+  padding: 24px;
+
+  border-radius: 18px;
+
   text-align: center;
-  color: #888;
+
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.rm-stat-card span {
+  color: #94a3b8;
+}
+
+.rm-stat-card h2 {
+  margin-top: 12px;
+  font-size: 32px;
+  color: #38bdf8;
+}
+
+/* ==========================
+   Profile
+========================== */
+
+.rm-profile {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  padding: 24px;
+
+  border-radius: 20px;
+
+  background: #1e1b4b;
+
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.rm-profile img {
+  width: 110px;
+  height: 110px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 4px solid #2563eb;
+}
+
+.rm-profile h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+/* ==========================
+   Breakdown
+========================== */
+
+.rm-breakdown {
+  background: #1e1b4b;
+  padding: 24px;
+  border-radius: 20px;
+}
+
+.rm-breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.rm-breakdown-grid div {
+  background: #0f172a;
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  padding: 18px;
+
+  border-radius: 14px;
+
+  text-align: center;
+}
+
+/* ==========================
+   Table
+========================== */
+
+.rm-table-card {
+  background: #1e1b4b;
+  padding: 24px;
+  border-radius: 20px;
+}
+
+.rm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rm-table th {
+  background: #0f172a;
+  color: #cbd5e1;
+}
+
+.rm-table th,
+.rm-table td {
+  padding: 14px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.rm-table tr:hover {
+  background: rgba(255,255,255,.03);
+}
+
+/* ==========================
+   Status
+========================== */
+
+.rm-badge-visible {
+  background: rgba(34,197,94,.15);
+  color: #22c55e;
+
+  padding: 8px 14px;
+  border-radius: 30px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.rm-badge-hidden {
+  background: rgba(239,68,68,.15);
+  color: #ef4444;
+
+  padding: 8px 14px;
+  border-radius: 30px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ==========================
+   Buttons
+========================== */
+
+.rm-toggle-btn {
+  border: none;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+  );
+
+  color: white;
+
+  padding: 10px 16px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+/* ==========================
+   Empty State
+========================== */
+
+.rm-empty-state {
+  background: #1e1b4b;
+  border-radius: 20px;
+  padding: 100px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width: 992px) {
+  .rm-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .rm-stats-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .rm-breakdown-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .rm-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rm-breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rm-profile {
+    flex-direction: column;
+    text-align: center;
+  }
 }

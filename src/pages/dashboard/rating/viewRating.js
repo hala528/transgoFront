@@ -78,14 +78,14 @@ const getRatingDetails = async (
     setLoading(true);
 
     const res = await Axios.get(
-      RATINGS_DETAILS,
-      {
-        data: {
-          user_type: userType,
-          user_id: userId,
-        },
-      }
-    );
+  RATINGS_DETAILS,
+  {
+    params: {
+      user_type: userType,
+      user_id: userId,
+    },
+  }
+);
 
     setDetails(res.data.data);
 
@@ -144,14 +144,14 @@ const getLowRatedDrivers =
 
 
   return (
-    <div classname='w-100 p-2'>
-    <div className="ratings-page">
+    <div className='w-100 p-2'>
+    <div className="rm-page">
 
-      <div className="page-header">
-        <h2>Ratings Management</h2>
+      <div className="rm-header">
+        <h2>Ratings Management :</h2>
       </div>
 
-      <div className="filters-card">
+      <div className="rm-filters">
 
         <select
   value={filters.user_type}
@@ -215,7 +215,7 @@ const getLowRatedDrivers =
 </button>
 
       </div>
-      <div className="table-card">
+      <div className="rm-table-card">
 
   <h3>
     Low Rated Drivers
@@ -231,8 +231,8 @@ const getLowRatedDrivers =
       (driver) => (
         <div
           key={driver.user_id}
-          className="rating-user-card"
-        >
+           className="rm-user-card">
+        
           <h4>
             {driver.full_name}
           </h4>
@@ -248,19 +248,19 @@ const getLowRatedDrivers =
 
 </div>
 
-      <div className="ratings-layout">
+      <div className="rm-layout">
 
-        <div className="ratings-sidebar">
+        <div className="rm-sidebar">
 
           <h3>Ratings List</h3>
 
           {ratingsList.map((item) => (
             <div
               key={item.rating_id}
-              className="rating-user-card"
-              onClick={() =>
+             className="rm-user-card"
+             onClick={() =>
   getRatingDetails(
-    item.user_id,
+    item.rated_user?.user_id,
     item.user_type
   )
 }
@@ -292,17 +292,17 @@ const getLowRatedDrivers =
           ))}
         </div>
 
-        <div className="ratings-content">
+       <div className="rm-content">
 
           {!selectedUser ? (
-            <div className="empty-state">
+            <div className="rm-empty-state">
               Select User To View Details
             </div>
           ) : (
             <>
-              <div className="summary-grid">
+             <div className="rm-stats-grid">
 
-                <div className="summary-card">
+                <div className="rm-stat-card">
                   <span>Average Rating</span>
                   <h2>
                     {details?.summary
@@ -310,14 +310,14 @@ const getLowRatedDrivers =
                   </h2>
                 </div>
 
-                <div className="summary-card">
+                <div className="rm-stat-card">
                   <span>Total Ratings</span>
                   <h2>
                     {details.summary.total_ratings}
                   </h2>
                 </div>
 
-                <div className="summary-card">
+                <div className="rm-stat-card">
                   <span>Visible</span>
                   <h2>
                     {
@@ -327,7 +327,7 @@ const getLowRatedDrivers =
                   </h2>
                 </div>
 
-                <div className="summary-card">
+                <div className="rm-stat-card">
                   <span>Hidden</span>
                   <h2>
                     {
@@ -338,7 +338,7 @@ const getLowRatedDrivers =
                 </div>
 
               </div>
-<div className="profile-card">
+<div className="rm-profile">
 
   <img
     src={
@@ -393,11 +393,11 @@ const getLowRatedDrivers =
 
 </div>
 
-              <div className="breakdown-card">
+            <div className="rm-breakdown">
 
                 <h3>Ratings Breakdown</h3>
 
-                <div className="breakdown-grid">
+                <div className="rm-breakdown-grid">
 
                   <div>
                     ⭐ 1 (
@@ -447,7 +447,7 @@ const getLowRatedDrivers =
                 </div>
               </div>
 
-              <div className="table-card">
+              <div className="rm-table-card">
 
                 <h3>Ratings History</h3>
 
@@ -499,8 +499,8 @@ const getLowRatedDrivers =
                             <span
                               className={
                                 rating.is_visible
-                                  ? "status-visible"
-                                  : "status-hidden"
+                                  ? "rm-badge-visible"
+                                  : "rm-badge-hidden"
                               }
                             >
                               {rating.is_visible
@@ -511,7 +511,7 @@ const getLowRatedDrivers =
 
                           <td>
                             <button
-  className="toggle-btn"
+  className="rm-toggle-btn"
   onClick={() =>
     toggleVisibility(
       rating.rating_id
