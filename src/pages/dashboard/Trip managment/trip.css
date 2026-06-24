@@ -276,11 +276,11 @@
 
 /* completed */
 .t-status-completed {
-  background: rgba(147, 197, 253, 0.15);
-  color: #93c5fd;
+  background: rgba(74, 222, 128, 0.15);
+  color: #0ce21e;
 }
 .t-status-completed .t-status-dot {
-  background: #93c5fd;
+  background: #0ce21e;
 } 
 
 /* cancelled */
