@@ -183,7 +183,7 @@
 }
 
 .custom-input-driver,
-.custom-select {
+/* .custom-select {
   background: #0f172a !important;
 
   border: 1px solid
@@ -192,7 +192,7 @@
   color: white !important;
 
   border-radius: 12px !important;
-}
+} */
 
 .custom-input-driver::placeholder {
   color: #94a3b8;

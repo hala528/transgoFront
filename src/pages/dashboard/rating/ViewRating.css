@@ -1,7 +1,8 @@
 .vr-page {
+  width: 100%;
+  max-width: 100%;
   padding: 24px;
   min-height: 100vh;
- 
   color: #fff;
 }
 
@@ -39,7 +40,7 @@
 
 .vr-layout {
   display: grid;
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: 400px 1fr;
   gap: 20px;
 }
 
@@ -95,7 +96,7 @@
   background: #1e1b4b;
   padding: 20px;
   border-radius: 14px;
-
+}
 .vr-stat-card h2 {
   margin-top: 10px;
   color: #2563eb;
