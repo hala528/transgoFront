@@ -64,10 +64,10 @@ import AuditLog from "./pages/dashboard/Audit log/AuditLog";
 //rating
 import ViewRating from "./pages/dashboard/rating/viewRating";
 //rate commission
-import RateCommission from "./pages/dashboard/rate_commission/rate_commission"
+import RateCommission from "./pages/dashboard/rate_commission/rate_commission";
 
 
-
+import Notifi from "./pages/dashboard/Notifi/Notifi";
 
 
 // import TripTracking from './pages/dashboard/Trip managment/TripTracking';
@@ -97,8 +97,9 @@ function App() {
               <Route path="auditLog" element={<AuditLog />} />
                {/* Rate Commission */}
               <Route path="rateCommission" element={<RateCommission />} />
+              
             </Route>
-
+<Route> <Route path="Notifi" element={<Notifi />} /></Route>
             {/* ================= ADMIN + EMPLOYEE ================= */}
             <Route element={<RequireAuth allowedRole={["admin", "employee"]} />}>
               {/* Drivers */}

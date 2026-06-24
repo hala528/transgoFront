@@ -104,6 +104,12 @@ export default function SideBar() {
       path: "RevenueR",
       icon: faMoneyBillTrendUp,
       roles: ["admin", "employee"],
+    },
+      {
+      name: "Notifi",
+      path: "Notifi",
+      icon: faMoneyBillTrendUp,
+      roles: ["admin", "employee"],
     }
     
 

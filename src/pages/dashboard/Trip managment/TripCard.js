@@ -80,7 +80,7 @@ export default function TripCard({ trip, onCancel }) {
     </Link>
 
     {onCancel && (
-      <Button className="t-btn-cancel">
+      <Button className="t-btn-cancel" onClick={() => onCancel(trip.id)}>
         Cancel
       </Button>
     )}
