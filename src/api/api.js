@@ -86,3 +86,10 @@ export const DRIVER_EARNINGS_REPORT =
   export const Revenue =
   "admin/reports/revenue";
   export const SEND_NOTIFICATION = "admin/notifications";
+
+
+
+  export const VEHICLE_CATEGORIES = "admin/vehicle-categories";
+  export const EDIT_VEHICLE_CATEGORY = (id) => `admin/vehicle-categories/${id}`;
+  export const TOGGLE_VEHICLE_CATEGORY_STATUS = (id) =>
+  `admin/vehicle-categories/${id}/toggle-status`;

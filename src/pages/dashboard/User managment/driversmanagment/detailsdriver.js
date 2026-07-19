@@ -250,6 +250,7 @@ const handleToggleStatus = async () => {
               <span className="labele">Plate Number</span>
               <h6>{v.plate_number}</h6>
             </div>
+             
 
           </div>
 

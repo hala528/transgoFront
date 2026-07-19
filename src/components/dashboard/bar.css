@@ -1,94 +1,209 @@
+/* ===========================
+        TOP BAR
+=========================== */
+
 .top-bar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     height: 70px;
-    background: radial-gradient(circle at top left, var(--bg-gradient-start));
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    
-   
+
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-between; 
-    
-    padding: 0 30px; 
-    color: white;
+
+    padding: 0 30px;
+
+    background: radial-gradient(circle at top left,
+            var(--bg-gradient-start),
+            var(--bg-dark));
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .25);
 }
 
+.bar-text {
+    background: linear-gradient(90deg,
+            var(--primary-blue),
+            var(--primary-purple));
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    font-size: 34px;
+    font-weight: bold;
+}
 
 .user-dropdown .btn-primary {
-    background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple)) !important;
+    background: linear-gradient(90deg,
+            var(--primary-blue),
+            var(--primary-purple)) !important;
+
     border: none;
-    min-width: 150px;
+    min-width: 160px;
 }
 
-.bar-text{
-   
-  background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 35px;
-  font-weight: bold;
- 
-}
-.mune-bar{
+.menu-bar {
     display: flex;
     align-items: center;
-  
 }
 
-.side-bar{
+/* ===========================
+        SIDEBAR
+=========================== */
+
+.side-bar {
+
+    position: fixed;
     top: 70px;
     left: 0;
-    background: radial-gradient(circle at top left, var(--bg-gradient-start), var(--bg-dark));
-    z-index: 1;
 
-    /* التعديل هنا */
+    width: 270px;
     height: calc(100vh - 70px);
+
+    background: #1e1b4b;
+
     overflow-y: auto;
     overflow-x: hidden;
 
-    width: 250px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
-    padding: 0 20px;
+    transition: .35s;
+
+    box-shadow:
+        8px 0 25px rgba(0, 0, 0, .35);
+
+    padding: 20px 14px;
+
+    z-index: 999;
 }
-.side-bar-link{
-    color:white;
-    font-size: 15px;
-    transition: 0.3s;
-    padding: 10px 8px;
-    margin: 0 8px;
-    border-radius: 6px;
+
+/* Scroll */
+
+.side-bar::-webkit-scrollbar {
+    width: 6px;
 }
-.side-bar-link.active{
-    background: linear-gradient(
-        90deg,
-        var(--primary-blue),
-        var(--primary-purple)
-    );
+
+.side-bar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.15);
+    border-radius: 20px;
+}
+
+.side-bar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Welcome */
+
+.subtitlebar {
+
+    font-size: 17px;
+
+    color: #d6dcff;
+
+    font-weight: bold;
+
+    margin-bottom: 22px;
+
+    padding-left: 12px;
+}
+
+/* Links */
+
+.side-bar-link {
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    color: #d5dbff;
+
+    text-decoration: none;
+
+    padding: 14px 14px;
+
+    margin-bottom: 10px;
+
+    border-radius: 12px;
+
+    transition: .30s;
+}
+
+.side-bar-link svg {
+
+    width: 22px;
+    font-size: 18px;
+
+    flex-shrink: 0;
+
+    transition: .3s;
+}
+
+/* Hover */
+
+.side-bar-link:hover {
+
+    background: rgba(255,255,255,.08);
+
     color: white;
+
+    transform: translateX(5px);
 }
-.side-bar .active:hover{
+
+.side-bar-link:hover svg {
+
+    color: #4ea8ff;
+}
+
+/* Active */
+
+.side-bar-link.active {
+
+    background: linear-gradient(90deg,
+            var(--primary-blue),
+            var(--primary-purple));
+
     color: white;
+
+    box-shadow: 0 10px 25px rgba(82,120,255,.35);
 }
-.side-bar-link:hover{
-   background: linear-gradient(
-  90deg,
-  rgba(var(--primary-bluee), 0.3),
-  rgba(var(--primary-purplee), 0.5)
-);
+
+.side-bar-link.active svg {
     color: white;
 }
 
-a{
+.side-bar-link.active::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: -14px;
+
+    top: 12%;
+
+    width: 5px;
+
+    height: 76%;
+
+    border-radius: 20px;
+
+    background: white;
+}
+
+.side-bar-link p {
+
+    margin: 0;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+a {
     text-decoration: none !important;
 }
-.subtitlebar{
-    font-size: 18px;
-    color: #cbd5f5;
-    font-weight: bold;
-   
-}
-

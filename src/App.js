@@ -68,6 +68,7 @@ import RateCommission from "./pages/dashboard/rate_commission/rate_commission";
 
 
 import Notifi from "./pages/dashboard/Notifi/Notifi";
+import Category from "./pages/dashboard/catorgy/VehicleCategories";
 
 
 // import TripTracking from './pages/dashboard/Trip managment/TripTracking';
@@ -131,6 +132,9 @@ function App() {
               {/* Complaints */}
               <Route path="complaints" element={<Complaints />} />
               <Route path="complaints/:id" element={<ComplanitDetails />} />
+              {/* Category */}
+              <Route path="category" element={<Category />} />
+             
 
               {/* Reports */}
               <Route path="Reports" element={<Reports />} />
@@ -145,7 +149,7 @@ function App() {
                <Route path="DriverEarnings" element={<DriverEarnings />} />
                <Route path="RevenueR" element={<RevenueR />} />
                 <Route path="RevenueReport" element={<RevenueReport />} />
-               RevenueReport
+             
             </Route>
 
             {/* ================= ERRORS ================= */}

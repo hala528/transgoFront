@@ -41,19 +41,25 @@ export default function ViewRating() {
   };
 
   const getRatingDetails = async (userId, userType) => {
-    try {
-      setLoading(true);
-      const res = await Axios.get(RATINGS_DETAILS, {
-        data: { user_type: userType, user_id: userId },
-      });
-      setDetails(res.data.data);
-      setSelectedUser(res.data.data.items[0]?.author);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    setLoading(true);
+
+    const res = await Axios.get(RATINGS_DETAILS, {
+      params: {
+        user_type: userType,
+        user_id: userId,
+      },
+    });
+
+    setDetails(res.data.data);
+    setSelectedUser(res.data.data.items[0]?.author);
+
+  } catch (err) {
+    console.log(err.response?.data || err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const getLowRatedDrivers = async () => {
     try {

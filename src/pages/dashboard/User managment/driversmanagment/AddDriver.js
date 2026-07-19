@@ -1,7 +1,7 @@
 import { Col, Form, Row } from "react-bootstrap";
 import { Axios } from "../../../../api/axios";
-import { ADDDRIVER, beasURL } from "../../../../api/api";
-import { useState } from "react";
+import { ADDDRIVER, beasURL, VEHICLE_CATEGORIES } from "../../../../api/api";
+import { useState, useEffect } from "react";
 import{ useNavigate } from "react-router-dom";
 
 
@@ -13,7 +13,8 @@ export default function AddDriver(){
   address: "",
   car_type: "",
   id_card:"",
-  seat_capacity:""
+  seat_capacity:"",
+   vehicle_category_id:""
 });
 
 const [files, setFiles] = useState({
@@ -27,6 +28,7 @@ const [files, setFiles] = useState({
 const [loading, setLoading] = useState(false);
 const [err, errset] = useState("");
 const [success, setSuccess] = useState("");
+const [categories, setCategories] = useState([]);
 const navigate = useNavigate();
 
 //handchange
@@ -60,12 +62,13 @@ async function handleSubmit(e) {
     data.append("car_type", form.car_type);
     data.append("id_card", form.id_card);
     data.append("seat_capacity", form.seat_capacity);
+    data.append("vehicle_category_id", form.vehicle_category_id)
    
    
     data.append("license_image", files.license_image);
     data.append("personal_photo", files.personal_photo);
     data.append("mechanical_car", files.mechanical_car);
-
+ 
    
     for (let i = 0; i < files.vehicle_images.length; i++) {
       data.append(`vehicle_images[${i}]`, files.vehicle_images[i]);
@@ -91,6 +94,35 @@ async function handleSubmit(e) {
     }
   }
 }
+useEffect(() => {
+
+  const getCategories = async () => {
+
+    try {
+
+      const res = await Axios.get(
+        `${beasURL}/${VEHICLE_CATEGORIES}`
+      );
+
+
+      setCategories(
+        res.data.data.items || []
+      );
+
+
+    } catch(err){
+
+      console.log(err);
+
+    }
+
+  };
+
+
+  getCategories();
+
+
+}, []);
     return(
         <div className="w-100 p-2">
              <h3 style={{color:'white', flex:1 ,padding:5}}>Add Driver :</h3>
@@ -229,6 +261,48 @@ async function handleSubmit(e) {
       color: 'white',
       background:'rgba(255, 255, 255, 0.15)' }}
           />
+        </Col>
+        <Col >
+        <Form.Select
+
+name="vehicle_category_id"
+
+value={form.vehicle_category_id}
+
+onChange={handleChange}
+
+className="custom-selectt"
+
+style={{
+  borderRadius:'3px',
+  color:'white',
+  background:'rgba(255,255,255,0.15)'
+}}
+
+>
+
+<option value="">
+Select Vehicle Category
+</option>
+
+
+{
+categories.map((item)=>(
+
+<option
+ key={item.category_id}
+ value={item.category_id}
+>
+
+{item.name}
+
+</option>
+
+))
+}
+
+
+</Form.Select>
         </Col>
         </Row>
         

@@ -48,6 +48,13 @@ export default function SideBar() {
       icon: faUserTie,
       roles: ["admin"],
     },
+
+    {
+      name: "Managment Category",
+      path: "category",
+      icon: faUserTie,
+      roles: ["admin"],
+    },
     {
       name: "Free Wallet",
       path: "wallet",
@@ -140,7 +147,7 @@ export default function SideBar() {
         className="side-bar pt-3"
         style={{
           left: windowSize < 768 ? (isOpen ? 0 : "-100%") : 0,
-          width: isOpen ? "270px" : "fit-content",
+          width: isOpen ? "280px" : "fit-content",
           position: windowSize < 768 ? "fixed" : "sticky",
         }}
       >
