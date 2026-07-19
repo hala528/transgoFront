@@ -40,10 +40,18 @@ export default function TripCard({ trip, onCancel }) {
     </span>
   </div>
 
-  <div className="t-item">
-    <FaCar />
-    <span>{trip.type || trip.trip_type}</span>
-  </div>
+<div className="t-item">
+  {trip.delayMinutes ? (
+    <span className="delay-pill">
+      ⏱ {trip.delayMinutes} min Delay
+    </span>
+  ) : (
+    <>
+      <FaCar />
+      <span>{trip.type || trip.trip_type}</span>
+    </>
+  )}
+</div>
 
 </div>
 

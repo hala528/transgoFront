@@ -291,6 +291,30 @@
 .t-status-canceled .t-status-dot {
   background: #f87171;
 } 
+.delay-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 12px;
+
+  border-radius: 999px;
+
+  color: #ffb347;
+
+  border: 1px solid rgba(255, 179, 71, 0.55);
+
+  background: rgba(255, 179, 71, 0.12);
+
+  box-shadow:
+    0 0 12px rgba(255, 179, 71, 0.35),
+    inset 0 0 10px rgba(255, 179, 71, 0.12);
+
+  font-weight: 600;
+  font-size: 13px;
+
+  backdrop-filter: blur(6px);
+}
 /* =========================
    CANCEL BUTTON
 ========================= */

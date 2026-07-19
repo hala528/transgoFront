@@ -144,6 +144,14 @@ backdrop-filter: blur(8px);
   background: #1f2937;
   transform: translateY(-1px);
 }
+.sidebar.full-width {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* .layout {
+    display: block;
+} */
 /* القائمة الجانبية الكروت والأنماط */
 .sidebar-section {
   display: flex;
@@ -741,9 +749,35 @@ backdrop-filter: blur(8px);
   width:100%;
 }
 .layout{
- display:grid;
+ display:block;
  grid-template-columns:2fr 1fr;
  gap:20px;
+}
+.tracking-btn-container {
+  display: flex;
+  justify-content: flex-end;   /* إلى اليمين */
+  margin-top: 15px;
+}
+
+.tracking-btn-container .t-btn-view {
+  width: 160px; /* أو auto إذا بدك حسب حجم النص */
+}
+.t-btn-view {
+  width: 100%;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  color: white;
+  font-weight: 600;
+
+  transition: .25s;
+}
+
+.t-btn-view:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59,130,246,.35);
 }
 
 /* SUMMARY CARDS */
@@ -783,10 +817,17 @@ backdrop-filter: blur(8px);
 }
 
 /* SIDEBAR */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.sidebar::-webkit-scrollbar{
+    width:7px;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+    background:#7c3aed;
+    border-radius:10px;
+}
+
+.sidebar::-webkit-scrollbar-track{
+    background:#171b2f;
 }
 
 /* DRIVER CARD */

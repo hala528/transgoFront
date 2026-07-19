@@ -17,16 +17,20 @@ export default function ManagmentDriver() {
   // ⭐ جلب البيانات مثل الموظفين
   useEffect(() => {
     Axios.get(`${beasURL}/${DRIVER}`, {
+      
       params: {
         search: filters.search,
         account_status: filters.account_status,
       },
     })
+    
       .then((res) => {
-        setDrivers(res.data.data.data);
-      })
+  console.log(JSON.stringify(res.data, null, 2));
+  setDrivers(res.data.data.data);
+})
       .catch((err) => console.log(err));
-  }, [filters]);
+  }, 
+  [filters]);
 
   function handleFilterChange(e) {
     setFilters({ ...filters, [e.target.name]: e.target.value });

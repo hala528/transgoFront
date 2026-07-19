@@ -29,56 +29,85 @@ export default function TripTracking() {
   });
 
   
-  React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await Axios.get(TRIP_TRACKING(id));
-        console.log("TRIP TRACK RESPONSE:", res.data);
-        setTripData(res.data.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  // React.useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await Axios.get(TRIP_TRACKING(id));
+  //       console.log("TRIP TRACK RESPONSE:", res.data);
+  //       setTripData(res.data.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
 
-    if (id) fetchData();
-  }, [id]);
+  //   if (id) fetchData();
+  // }, [id]);
+const fetchData = async () => {
+  try {
+    const res = await Axios.get(TRIP_TRACKING(id));
+    console.log("TRIP TRACK RESPONSE:", res.data);
+    setTripData(res.data.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+React.useEffect(() => {
+  if (id) {
+    fetchData();
+  }
+}, [id]);
+React.useEffect(() => {
+  if (!id) return;
 
-  
-  React.useEffect(() => {
-    if (logs.length > 0) {
-      const sorted = [...logs].sort(
-        (a, b) => new Date(a.recorded_at) - new Date(b.recorded_at)
-      );
+  const interval = setInterval(() => {
+    fetchData();
+  }, 5000);
 
-      setCarPosition({
-        lat: sorted[0].latitude,
-        lng: sorted[0].longitude,
-      });
-    }
-  }, [logs]);
+  return () => clearInterval(interval);
+}, [id]);
+  // const tracking = tripData?.tracking;
+  // React.useEffect(() => {
+  //   if (logs.length > 0) {
+  //     const sorted = [...logs].sort(
+  //       (a, b) => new Date(a.recorded_at) - new Date(b.recorded_at)
+  //     );
 
+  //     setCarPosition({
+  //       lat: sorted[0].latitude,
+  //       lng: sorted[0].longitude,
+  //     });
+  //   }
+  // }, [logs]);
+React.useEffect(() => {
+  if (!tracking?.last_position) return;
+
+  setCarPosition({
+    lat: tracking.last_position.latitude,
+    lng: tracking.last_position.longitude,
+  });
+}, [tracking?.last_position]);
  
-  React.useEffect(() => {
-    if (!logs.length) return;
+  // React.useEffect(() => {
+  //   if (!logs.length) return;
 
-    const sorted = [...logs].sort(
-      (a, b) => new Date(a.recorded_at) - new Date(b.recorded_at)
-    );
+  //   const sorted = [...logs].sort(
+  //     (a, b) => new Date(a.recorded_at) - new Date(b.recorded_at)
+  //   );
 
-    let i = 0;
+  //   let i = 0;
 
-    const interval = setInterval(() => {
-      if (i < sorted.length) {
-        setCarPosition({
-          lat: sorted[i].latitude,
-          lng: sorted[i].longitude,
-        });
-        i++;
-      }
-    }, 1500);
+  //   const interval = setInterval(() => {
+  //     if (i < sorted.length) {
+  //       setCarPosition({
+  //         lat: sorted[i].latitude,
+  //         lng: sorted[i].longitude,
+  //       });
+  //       i++;
+  //     }
+  //   }, 1500);
 
-    return () => clearInterval(interval);
-  }, [logs]);
+  //   return () => clearInterval(interval);
+  // }, [logs]);
 
   
   const routePath = React.useMemo(() => {
@@ -162,7 +191,7 @@ export default function TripTracking() {
       hour:"2-digit",
       minute:"2-digit",
       hour12:true,
-      timeZone:"UTC",
+      // timeZone:"UTC",
     })}`
  : "—"}
 
@@ -182,7 +211,7 @@ export default function TripTracking() {
       hour:"2-digit",
       minute:"2-digit",
       hour12:true,
-      timeZone:"UTC",
+      // timeZone:"UTC",
     })}`
  : "—"}
 
@@ -255,7 +284,7 @@ export default function TripTracking() {
       hour:"2-digit",
       minute:"2-digit",
       hour12:true,
-      timeZone:"UTC",
+      // timeZone:"UTC",
     })}`
  : "—"}
 
@@ -274,7 +303,7 @@ export default function TripTracking() {
       hour:"2-digit",
       minute:"2-digit",
       hour12:true,
-      timeZone:"UTC",
+      // timeZone:"UTC",
     })}`
  : "—"}
 
@@ -350,11 +379,11 @@ export default function TripTracking() {
       }
       zoom={8}
       options={{
-        zoomControl: true,
-        streetViewControl: false,
-        mapTypeControl: false,
-        fullscreenControl: false,
-      }}
+  zoomControl: true,
+  streetViewControl: false,
+  mapTypeControl: false,
+  fullscreenControl: true,
+}}
     >
 
       {/* 🔵 Start + End dynamically */}

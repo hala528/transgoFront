@@ -74,9 +74,10 @@ async function handleSubmit(e) {
       data.append(`vehicle_images[${i}]`, files.vehicle_images[i]);
     }
 
-    const res = await Axios.post(`${beasURL}/${ADDDRIVER}`, data, {
-      
-    });
+    const res = await Axios.post(`${beasURL}/${ADDDRIVER}`, data);
+
+console.log("Full Response:", res);
+console.log("Data:", res.data);
 
     setLoading(false);
     setSuccess(res.data.message || "تم إضافة السائق بنجاح");

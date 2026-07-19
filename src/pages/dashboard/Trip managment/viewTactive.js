@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   GoogleMap,
   Marker,
@@ -18,6 +19,7 @@ export default function LiveTrips() {
   // =========================
   // STATE
   // =========================
+  
   const [trips, setTrips] = useState([]);
   const [summary, setSummary] = useState({
     active_count: 0,
@@ -33,18 +35,23 @@ export default function LiveTrips() {
   // INITIAL FETCH
   // =========================
   const fetchTrips = async () => {
-    try {
-      const res = await Axios.get(TRIPS_TRACKING_ACTIVE);
-      const data = res.data?.data;
+  try {
+    const res = await Axios.get(TRIPS_TRACKING_ACTIVE);
 
-      setTrips(data.items || []);
-      setSummary(data.summary || {});
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    console.log("========== INITIAL RESPONSE ==========");
+    console.log(res);
+    console.log(res.data);
+
+    const data = res.data?.data;
+
+    setTrips(data.items || []);
+    setSummary(data.summary || {});
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchTrips();
@@ -92,12 +99,26 @@ export default function LiveTrips() {
   // =========================
   // CENTER MAP
   // =========================
-  const center = trips.length
-    ? {
-        lat: trips[0].current_position.latitude,
-        lng: trips[0].current_position.longitude,
-      }
-    : { lat: 33.5138, lng: 36.3481 };
+const firstTrip = trips.find(
+    t => t.current_position
+);
+
+// const center = firstTrip
+//     ? {
+//           lat: firstTrip.current_position.latitude,
+//           lng: firstTrip.current_position.longitude,
+//       }
+//     : {
+//           lat:33.5138,
+//           lng:36.3481,
+//       };
+
+const center = firstTrip
+  ? {
+      lat: firstTrip.current_position.latitude,
+      lng: firstTrip.current_position.longitude,
+    }
+  : { lat: 33.5138, lng: 36.3481 };
 
   // =========================
   // LOADING
@@ -139,43 +160,9 @@ export default function LiveTrips() {
       <div className="layout">
 
         {/* MAP */}
-        <div className="map-box">
-          {!isLoaded ? (
-            <p>Loading map...</p>
-          ) : (
-            <GoogleMap
-              mapContainerStyle={{ width: "100%", height: "100%" }}
-              center={center}
-              zoom={7}
-            >
-              {/* MARKERS */}
-              {trips.map((trip) => (
-                <Marker
-                  key={trip.trip_id}
-                  position={{
-                    lat: trip.current_position.latitude,
-                    lng: trip.current_position.longitude,
-                  }}
-                />
-              ))}
-
-              {/* ROUTES */}
-              {trips.map((trip) => (
-                <Polyline
-                  key={trip.trip_id}
-                  path={trip.route.points.map((p) => ({
-                    lat: p.latitude,
-                    lng: p.longitude,
-                  }))}
-                  options={{
-                    strokeColor: "#8b5cf6",
-                    strokeWeight: 4,
-                  }}
-                />
-              ))}
-            </GoogleMap>
-          )}
-        </div>
+        {/* <div className="map-box">
+         
+        </div> */}
 
         {/* SIDEBAR */}
         <div className="sidebar">
@@ -225,19 +212,49 @@ export default function LiveTrips() {
                 />
               </div>
 
-              <div className="progress-text">
-                {trip.progress_percent}%
-              </div>
+              {/* <div className="progress-text">
+
+    {trip.progress_percent}% •
+    {trip.current_position
+        ? `${trip.current_position.speed_kmh} km/h`
+        : "No GPS"}
+
+</div> */}
+{/* <div className="last-update">
+
+Last Update
+
+<br/>
+
+{trip.last_location_at ?? "No Location"}
+
+</div> */}
+{/* {!trip.has_live_location && (
+
+<div className="gps-off">
+
+No Live GPS
+
+</div>
+
+)} */}
 
               {/* DELAY */}
-              {trip.delay?.is_delayed && (
-                <div className="t-delay-box">
-                  <div className="t-delay-label">DELAY</div>
-                  <div className="t-delay-time">
-                    {trip.delay.minutes} min
-                  </div>
-                </div>
-              )}
+             {trip.delay?.is_delayed && (
+  <div className="t-delay-box">
+    <div className="t-delay-label">DELAY</div>
+    <div className="t-delay-time">
+      {trip.delay.minutes} min
+    </div>
+  </div>
+)}
+<div className="tracking-btn-container">
+  <Link to={`/dashboard/trips/${trip.trip_id}`}>
+    <button className="t-btn-view">
+      View Tracking
+    </button>
+  </Link>
+</div>
 
             </div>
           ))}

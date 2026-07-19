@@ -2,12 +2,12 @@
 import "./notifi.css";
 import { useState, useEffect } from "react";
 import { Axios } from "../../../api/axios";
-import { SEND_NOTIFICATION, GET_GOVERNORATES } from "../../../api/api";
+import { SEND_NOTIFICATION, GET_GOVERNORATES ,GET_PASSENGER} from "../../../api/api";
 export default function Notifi() {
   const [type, setType] = useState("general");
 const [success, setSuccess] = useState("");
 const [err, setErr] = useState("");
-
+const [passengers, setPassengers] = useState([]);
 const [title, setTitle] = useState("");
 const [body, setBody] = useState("");
 const [role, setRole] = useState("passenger");
@@ -78,6 +78,17 @@ const handleSend = async () => {
     }, 3000);
   }
 };
+useEffect(() => {
+  Axios.get(GET_PASSENGER)
+    .then((res) => {
+      console.log(res.data);
+
+      setPassengers(res.data?.data?.data || []);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}, []);
   return (
     <div className="notifications-page">
       {success && <span className="success">{success}</span>}
@@ -163,12 +174,18 @@ const handleSend = async () => {
           <div className="form-group">
             <label>User ID</label>
 
-          <input
-  type="number"
+    <select
   value={userId}
   onChange={(e) => setUserId(e.target.value)}
-  placeholder="Enter user id"
-/>
+>
+  <option value="">Select Passenger</option>
+
+  {passengers.map((user) => (
+    <option key={user.user_id} value={user.user_id}>
+      {user.full_name} - {user.phone}
+    </option>
+  ))}
+</select>
           </div>
         )}
 <button className="submit-btn" onClick={handleSend}>

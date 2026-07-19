@@ -6,7 +6,38 @@ import TripCard from "./TripCard";
 export default function DelayedTrips() {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);
+const formattedTrips = trips.map((trip) => ({
+  id: trip.trip_id,
 
+  status: trip.status?.key,          // أو trip.status?.name إذا بدك تعرض "نشطة"
+
+  from: trip.route?.from,
+  to: trip.route?.to,
+
+  driver: trip.driver_name,
+
+ driverPhone: trip?.driver?.phone,
+
+  driverImg: "",
+
+  carImg: "",
+
+  type: "",
+
+  time: trip.departure_at
+    ? new Date(trip.departure_at).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      })
+    : "",
+
+  date: trip.departure_at?.slice(0, 10),
+
+  delayMinutes: trip.delay?.minutes,
+
+  canCancel: false,
+}));
   useEffect(() => {
     
     async function fetchDelayed() {
@@ -22,7 +53,7 @@ export default function DelayedTrips() {
       
         console.log("FILTERED ITEMS FROM BACKEND:", res.data?.data?.items);
         const items = res.data?.data?.items || [];
-
+console.log(items[0]);
         setTrips(items);
       } catch (err) {
         console.log("ERROR:", err);
@@ -48,26 +79,13 @@ export default function DelayedTrips() {
 
   return (
     <>
-      {trips.map((trip) => (
-        <TripCard
-          key={trip.trip_id}
-          trip={{
-            id: trip.trip_id,
-            status: trip.status?.key, 
-            from: trip.departure?.from,
-            to: trip.departure?.to,
-            driver: trip.driver?.full_name,
-            driverPhone: trip.driver?.phone,
-            driverImg: trip.driver?.photo,
-            carImg: trip.vehicle?.image,
-            type: trip.trip_type,
-            time: trip.departure?.at,
-            date: trip.departure?.at?.slice(0, 10),
-            delayMinutes: trip.delay?.minutes,
-          }}
-          onCancel={() => {}}
-        />
-      ))}
+      {formattedTrips.map((trip) => (
+  <TripCard
+    key={trip.id}
+    trip={trip}
+    onCancel={() => {}}
+  />
+))}
     </>
   );
 }

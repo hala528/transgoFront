@@ -77,7 +77,7 @@ console.log("ITEMS:", res.data.data.items);
             hour: "2-digit",
             minute: "2-digit",
             hour12: true,
-            timeZone: "UTC",
+            // timeZone: "UTC",
           })
         : "",
 
@@ -130,7 +130,7 @@ console.log("ITEMS:", res.data.data.items);
         setFilter={setFilter}
         filtersList={[
           "All",
-          "pending",
+          // "pending",
           "accepted",
           "rejected",
           "canceled",
