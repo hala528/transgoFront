@@ -140,7 +140,7 @@ React.useEffect(() => {
             ←
           </span>
           <h1 className="main-title">
-            Trip Tracking #5
+            Trip Tracking #tripData?.trip_id 
           </h1>
         </div>
       </div>
@@ -268,7 +268,17 @@ React.useEffect(() => {
     <div className="info-row">
       <span>last_location_at</span>
       <span className="text-muted">
-        {tracking?.last_location_at || "—"}
+       {tracking?.last_location_at
+ ? `${tracking.last_location_at.slice(0,10)}
+    ${new Date(
+      tracking.last_location_at
+    ).toLocaleTimeString([],{
+      hour:"2-digit",
+      minute:"2-digit",
+      hour12:true,
+      // timeZone:"UTC",
+    })}`
+ : "—"}
       </span>
     </div>
 
@@ -377,7 +387,7 @@ React.useEffect(() => {
           lng: last?.longitude || 36.3481,
         }
       }
-      zoom={8}
+      zoom={15}
       options={{
   zoomControl: true,
   streetViewControl: false,

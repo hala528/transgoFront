@@ -52,7 +52,18 @@ export default function LiveTrips() {
     setLoading(false);
   }
 };
+ const formatDelay = (minutes) => {
+  if (!minutes || minutes <= 0) return "0 min";
 
+  const days = Math.floor(minutes / (60 * 24));
+  const hours = Math.floor((minutes % (60 * 24)) / 60);
+  const mins = minutes % 60;
+
+  if (days > 0) return `${days} days ${hours} h`;
+  if (hours > 0) return `${hours} hours ${mins} min`;
+
+  return `${mins} min`;
+};
   useEffect(() => {
     fetchTrips();
   }, []);
@@ -203,14 +214,14 @@ const center = firstTrip
               </div>
 
               {/* PROGRESS */}
-              <div className="progress">
+              {/* <div className="progress">
                 <div
                   className="progress-fill"
                   style={{
                     width: `${trip.progress_percent}%`,
                   }}
                 />
-              </div>
+              </div> */}
 
               {/* <div className="progress-text">
 
@@ -244,7 +255,7 @@ No Live GPS
   <div className="t-delay-box">
     <div className="t-delay-label">DELAY</div>
     <div className="t-delay-time">
-      {trip.delay.minutes} min
+        ({formatDelay(trip.delay?.minutes)})  {trip.delay?.minutes} min Delay
     </div>
   </div>
 )}

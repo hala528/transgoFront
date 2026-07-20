@@ -301,7 +301,7 @@ estimated_duration_minutes
             }
           : { lat: 33.5, lng: 36.3 }
       }
-      zoom={7}
+      zoom={15}
       markers={[
         routePoints[0] && {
           id: "start",

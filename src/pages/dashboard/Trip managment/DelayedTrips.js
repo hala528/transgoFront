@@ -5,6 +5,18 @@ import TripCard from "./TripCard";
 
 export default function DelayedTrips() {
   const [trips, setTrips] = useState([]);
+  const formatDelay = (minutes) => {
+  if (!minutes || minutes <= 0) return "0 min";
+
+  const days = Math.floor(minutes / (60 * 24));
+  const hours = Math.floor((minutes % (60 * 24)) / 60);
+  const mins = minutes % 60;
+
+  if (days > 0) return `${days} days ${hours} h`;
+  if (hours > 0) return `${hours} hours ${mins} min`;
+
+  return `${mins} min`;
+};
   const [loading, setLoading] = useState(false);
 const formattedTrips = trips.map((trip) => ({
   id: trip.trip_id,
@@ -34,7 +46,8 @@ const formattedTrips = trips.map((trip) => ({
 
   date: trip.departure_at?.slice(0, 10),
 
-  delayMinutes: trip.delay?.minutes,
+  delayMinutes: ` (${formatDelay(trip.delay?.minutes)})  ${trip.delay?.minutes}`,
+  // ${trip.delay?.minutes}
 
   canCancel: false,
 }));
