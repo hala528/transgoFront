@@ -140,7 +140,7 @@ React.useEffect(() => {
             ←
           </span>
           <h1 className="main-title">
-            Trip Tracking #tripData?.trip_id 
+            Trip Tracking #{tripData?.trip_id || "—"}
           </h1>
         </div>
       </div>

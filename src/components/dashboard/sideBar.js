@@ -1,135 +1,132 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../components/dashboard/bar.css";
-import { faCar,
-   
-    faUsers,
-     faUserTie, 
-     faWallet ,
-     faClipboardList,
-     faRoute,
-     faTicket,
-     faChartLine,
-     faCommentDots,
-     faStar,
-     faPercent,
-     faMoneyBillTrendUp
-    } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCar,
+  faUsers,
+  faUserTie,
+  faWallet,
+  faClipboardList,
+  faRoute,
+  faTicket,
+  faChartLine,
+  faCommentDots,
+  faStar,
+  faPercent,
+  faMoneyBillTrendUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 import { Menu } from "../../context/MnueContext";
 import { WindowSize } from "../../context/WindowContext";
 import Cookies from "universal-cookie";
 
 export default function SideBar() {
+  const { t, i18n } = useTranslation();
   const menu = useContext(Menu);
   const { windowSize } = useContext(WindowSize);
   const isOpen = menu.isOpen;
 
   const cookie = new Cookies();
-  const role = cookie.get("role"); 
+  const role = cookie.get("role");
 
   const links = [
-    
     {
-      name: "Managment Drivers",
+      key: "sidebar.drivers",
       path: "driver",
       icon: faCar,
-      roles: ["admin" , "employee"],
+      roles: ["admin", "employee"],
     },
     {
-      name: "Managment Passenger",
+      key: "sidebar.passengers",
       path: "passenger",
       icon: faUsers,
-      roles: ["admin" , "employee"],
+      roles: ["admin", "employee"],
     },
     {
-      name: "Managment Employee",
+      key: "sidebar.employees",
       path: "employee",
       icon: faUserTie,
       roles: ["admin"],
     },
-
     {
-      name: "Managment Category",
+      key: "sidebar.category",
       path: "category",
       icon: faUserTie,
       roles: ["admin"],
     },
     {
-      name: "Free Wallet",
+      key: "sidebar.wallet",
       path: "wallet",
       icon: faWallet,
       roles: ["admin", "employee"],
     },
     {
-      name: "Audit Logs",
+      key: "sidebar.auditLog",
       path: "auditLog",
       icon: faClipboardList,
       roles: ["admin"],
     },
-    
     {
-      name: "Managment Trips",
+      key: "sidebar.trips",
       path: "trips",
       icon: faRoute,
       roles: ["admin", "employee"],
     },
-     {
-      name: "Managment Booking",
+    {
+      key: "sidebar.booking",
       path: "booking",
       icon: faTicket,
       roles: ["admin", "employee"],
     },
     {
-
-      name: "Reports & Analytics",
+      key: "sidebar.reports",
       path: "Reports",
       icon: faChartLine,
       roles: ["admin", "employee"],
     },
-     
     {
-      name: "Managment Complaints",
+      key: "sidebar.complaints",
       path: "complaints",
       icon: faCommentDots,
       roles: ["admin", "employee"],
     },
     {
-      name: "View Rating",
+      key: "sidebar.rating",
       path: "rating",
       icon: faStar,
       roles: ["admin", "employee"],
     },
     {
-      name: "Rate Commission",
+      key: "sidebar.rateCommission",
       path: "rateCommission",
       icon: faPercent,
       roles: ["admin"],
     },
-        {
-      name: "Revenue",
+    {
+      key: "sidebar.revenue",
       path: "RevenueR",
       icon: faMoneyBillTrendUp,
       roles: ["admin", "employee"],
     },
-      {
-      name: "Notifi",
+    {
+      key: "sidebar.notifications",
       path: "Notifi",
       icon: faMoneyBillTrendUp,
       roles: ["admin", "employee"],
-    }
-    
-
+    },
   ];
 
- 
-  const filteredLinks = links.filter((link) =>
-    link.roles.includes(role)
-  );
+  const filteredLinks = links.filter((link) => link.roles.includes(role));
+
+  function changeLang(lng) {
+    i18n.changeLanguage(lng);
+    localStorage.setItem("lang", lng);
+    document.dir = lng === "ar" ? "rtl" : "ltr";
+  }
 
   return (
     <>
-      
       <div
         style={{
           position: "fixed",
@@ -142,7 +139,6 @@ export default function SideBar() {
         }}
       ></div>
 
-    
       <div
         className="side-bar pt-3"
         style={{
@@ -153,7 +149,7 @@ export default function SideBar() {
       >
         {isOpen && <p className="subtitlebar">You Are Welcome</p>}
 
-        {/*  عرض حسب الصلاحيات */}
+        {/* عرض حسب الصلاحيات */}
         {filteredLinks.map((link, index) => (
           <NavLink
             key={index}
@@ -165,10 +161,22 @@ export default function SideBar() {
               className="m-0"
               style={{ display: isOpen ? "block" : "none" }}
             >
-              {link.name}
+              {t(link.key)}
             </p>
           </NavLink>
         ))}
+
+        {/* زر تبديل اللغة */}
+        {/* {isOpen && (
+          <div className="d-flex gap-2 mt-3 px-2">
+            <button onClick={() => changeLang("ar")} className="side-bar-link">
+              عربي
+            </button>
+            <button onClick={() => changeLang("en")} className="side-bar-link">
+              EN
+            </button>
+          </div>
+        )} */}
       </div>
     </>
   );

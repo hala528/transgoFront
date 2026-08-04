@@ -14,7 +14,7 @@ import './pages/dashboard/Audit log/log.css';
 import './pages/dashboard/FreeWalet/wallet.css';
 import './pages/dashboard/User managment/driversmanagment/driver.css';
 import './pages/dashboard/rate_commission/commission.css'
-
+import "../src/locales/i18n";
 import App from './App';
 import { BrowserRouter as Router} from 'react-router-dom';
 import MenuContext from './context/MnueContext';

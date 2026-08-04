@@ -1,11 +1,137 @@
 
+// import { useState } from "react"
+// import { beasURL , RESETPASSWORD} from "../../api/api";
+// import LoadingSubmit from "../../components/laoding/loading";
+// import { Axios } from "../../api/axios";
+// import { useNavigate } from "react-router-dom";
+
+// export default function RestPassword(){
+//     //States
+//    const [form, setForm] = useState({
+//   email: "",
+//   password: "",
+//   password_confirmation: "",
+// });
+// const [success, setSuccess] = useState("");
+//        //loading 
+//        const [loading,setLoading] = useState(false);
+//        const navigate = useNavigate();
+//        //رسالة الخطا
+//         const[err,errset]=useState("")
+//        //handleChange 
+//        function handleChange(e){
+//    setForm({...form, [e.target.name]:e.target.value})
+   
+//        }
+//        //hand submit
+//     async function handleSubmit(e) {
+//   e.preventDefault();
+//   setLoading(true);
+//   errset("");
+//   setSuccess("");
+
+//   try {
+//     const res = await Axios.post(`${beasURL}/${RESETPASSWORD}`, form);
+
+//     setLoading(false);
+
+//     setSuccess(res.data.message || "تم تغيير كلمة المرور بنجاح");
+
+   
+//     setTimeout(() => {
+//      navigate("/login");
+//     }, 2000);
+
+//   } catch (err) {
+//     setLoading(false);
+
+//     if (err.response) {
+//       errset(err.response.data.message || "حدث خطأ");
+//     } else {
+//       errset("Server error");
+//     }
+//   }
+// }
+   
+//        return (
+//         <>
+//     {loading && <LoadingSubmit />}
+    
+//     <div className="login-page">
+//       <div className="login-card">
+
+//         {/* LEFT SIDE */}
+//        <div className="logo-box">
+  
+  
+// </div>
+
+//         {/* RIGHT SIDE */}
+//         <div className="login-right">
+//           <form className="form" onSubmit={handleSubmit}>
+
+//             <h2>Updata Your Password</h2>
+//             <p className="subtitle">Set a secure password for your first login</p>
+//            <div className="form-custom">
+//   <input
+//     name="email"
+//     type="email"
+//     value={form.email}
+//     onChange={handleChange}
+//     placeholder="Enter email"
+//     required
+//   />
+// </div>
+
+// <div className="form-custom">
+//   <input
+//     name="password"
+//     type="password"
+//     value={form.password}
+//     onChange={handleChange}
+//     placeholder="Enter new password"
+//     required
+//   />
+// </div>
+
+// <p className="subtitle">Confirm your password</p>
+
+// <div className="form-custom">
+//   <input
+//     name="password_confirmation"
+//     type="password"
+//     value={form.password_confirmation}
+//     onChange={handleChange}
+//     placeholder="Confirm password"
+//     required
+//   />
+// </div>
+
+         
+
+//             <button className="btn-login">Login →</button>
+
+           
+
+//             {success !== "" && <span className="success">{success}</span>}
+// {err !== "" && <span className="error">{err}</span>}
+//           </form>
+//         </div>
+
+//       </div>
+//     </div>
+//   </>
+// );
+//    } 
 import { useState } from "react"
 import { beasURL , RESETPASSWORD} from "../../api/api";
 import LoadingSubmit from "../../components/laoding/loading";
 import { Axios } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function RestPassword(){
+    const { t } = useTranslation();
     //States
    const [form, setForm] = useState({
   email: "",
@@ -35,7 +161,7 @@ const [success, setSuccess] = useState("");
 
     setLoading(false);
 
-    setSuccess(res.data.message || "تم تغيير كلمة المرور بنجاح");
+    setSuccess(res.data.message || t("auth.passwordResetSuccess"));
 
    
     setTimeout(() => {
@@ -46,9 +172,9 @@ const [success, setSuccess] = useState("");
     setLoading(false);
 
     if (err.response) {
-      errset(err.response.data.message || "حدث خطأ");
+      errset(err.response.data.message || t("addDriver.errorOccurred"));
     } else {
-      errset("Server error");
+      errset(t("addDriver.serverError"));
     }
   }
 }
@@ -70,15 +196,15 @@ const [success, setSuccess] = useState("");
         <div className="login-right">
           <form className="form" onSubmit={handleSubmit}>
 
-            <h2>Updata Your Password</h2>
-            <p className="subtitle">Set a secure password for your first login</p>
+            <h2>{t("auth.updateYourPassword")}</h2>
+            <p className="subtitle">{t("auth.setSecurePassword")}</p>
            <div className="form-custom">
   <input
     name="email"
     type="email"
     value={form.email}
     onChange={handleChange}
-    placeholder="Enter email"
+    placeholder={t("auth.enterEmail")}
     required
   />
 </div>
@@ -89,12 +215,12 @@ const [success, setSuccess] = useState("");
     type="password"
     value={form.password}
     onChange={handleChange}
-    placeholder="Enter new password"
+    placeholder={t("auth.enterNewPassword")}
     required
   />
 </div>
 
-<p className="subtitle">Confirm your password</p>
+<p className="subtitle">{t("auth.confirmYourPassword")}</p>
 
 <div className="form-custom">
   <input
@@ -102,14 +228,14 @@ const [success, setSuccess] = useState("");
     type="password"
     value={form.password_confirmation}
     onChange={handleChange}
-    placeholder="Confirm password"
+    placeholder={t("auth.confirmPassword")}
     required
   />
 </div>
 
          
 
-            <button className="btn-login">Login →</button>
+            <button className="btn-login">{t("auth.login")} →</button>
 
            
 
@@ -122,4 +248,4 @@ const [success, setSuccess] = useState("");
     </div>
   </>
 );
-   } 
+   }

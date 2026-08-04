@@ -1,6 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import { useState } from "react";
-
+import { useTranslation } from "react-i18next";
 export default function TopFilterBar({
   filter,
   setFilter,
@@ -26,6 +26,7 @@ setPaymentFilter,
 
 
 {
+  const { t } = useTranslation();
     const [openDropdown, setOpenDropdown] = useState(null);
 
   return (
@@ -54,7 +55,7 @@ setPaymentFilter,
               fontSize: "11px",
             }}
           >
-            {f.charAt(0).toUpperCase() + f.slice(1)}
+            {t(`filters.${f.toLowerCase()}`)}
           </Button>
         ))}
 
@@ -115,9 +116,9 @@ setPaymentFilter,
     className="custom-select"
     style={{ width: "150px" }}
   >
-    <option value="All">All</option>
-    <option value="Cash">Cash</option>
-    <option value="Electronic">Electronic</option>
+<option value="All">{t("common.all")}</option>
+<option value="Cash">{t("payment.cash")}</option>
+<option value="Electronic">{t("payment.electronic")}</option>
   </Form.Select>
 )}
 
@@ -140,7 +141,7 @@ setPaymentFilter,
   {/* SEARCH */}
   <Form.Control
     type="text"
-    placeholder="Search by ID or passenger..."
+   placeholder={t("booking.searchPlaceholder")}
     className="custom-input-driver"
     value={search}
     onChange={(e) => {

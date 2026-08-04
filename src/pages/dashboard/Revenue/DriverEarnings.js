@@ -1,12 +1,398 @@
+// import "./DriverEarnings.css";
+// import { useEffect, useState } from "react";
+// import { Axios } from "../../../api/axios";
+
+// import {
+//   DRIVER,
+//   DRIVER_EARNINGS_REPORT,
+// } from "../../../api/api";
+// export default function DriverEarnings() {
+//   const [loading, setLoading] =
+//   useState(false);
+  
+
+// const [driversList, setDriversList] =
+//   useState([]);
+
+// const [reportData, setReportData] =
+//   useState(null);
+//   const income = reportData?.summary?.total_trip_income || 0;
+// const commission = reportData?.summary?.total_commission_deducted || 0;
+// const profit = reportData?.summary?.total_net_driver_profit || 0;
+
+// const max = Math.max(income, commission, profit, 1);
+
+// const scale = (v) => (v / max) * 220;
+// const [showSource, setShowSource] = useState(false);
+// const [filters, setFilters] =
+//   useState({
+//     driver_name: "",
+//     date_from: "",
+//     date_to: "",
+//   });
+//   const fetchDrivers = async () => {
+//   try {
+//     const res = await Axios.get(
+//       DRIVER
+//     );
+
+//     setDriversList(
+//       res.data.data.data || []
+//     );
+//   } catch (error) {
+//     console.log(error);
+
+//     setDriversList([]);
+//   }
+// };
+// const fetchReport = async () => {
+
+//   setLoading(true);
+
+//   try {
+
+//     const res = await Axios.get(
+//       DRIVER_EARNINGS_REPORT,
+//       {
+//         params: {
+//           driver_name:
+//             filters.driver_name ||
+//             null,
+
+//           date_from:
+//             filters.date_from ||
+//             null,
+
+//           date_to:
+//             filters.date_to ||
+//             null,
+//         },
+//       }
+//     );
+
+//     console.log(res.data);
+
+//     setReportData(
+//       res.data.data
+//     );
+
+//   } catch (error) {
+
+//     console.log(error);
+
+//   } finally {
+
+//     setLoading(false);
+
+//   }
+// };
+// useEffect(() => {
+
+//   fetchDrivers();
+
+//   fetchReport();
+
+// }, []);
+//   return (
+//     <div className="earnings-page">
+
+//       {/* Filters */}
+//     <div className="filters">
+
+
+//   <div className="filter-box">
+//     <label>From Date</label>
+
+//     <input
+//       type="date"
+//       value={filters.date_from}
+//       onChange={(e) =>
+//         setFilters({
+//           ...filters,
+//           date_from:
+//             e.target.value,
+//         })
+//       }
+//     />
+//   </div>
+
+//   <div className="filter-box">
+//     <label>To Date</label>
+
+//     <input
+//       type="date"
+//       value={filters.date_to}
+//       onChange={(e) =>
+//         setFilters({
+//           ...filters,
+//           date_to:
+//             e.target.value,
+//         })
+//       }
+//     />
+//   </div>
+
+//   <div className="filter-box">
+//     <label>Driver</label>
+
+//  <select
+//   value={filters.driver_name}
+//   onChange={(e) =>
+//     setFilters({
+//       ...filters,
+//       driver_name: e.target.value,
+//     })
+//   }
+// >
+//   <option value="">All Drivers</option>
+
+//   {driversList.map((driver) => (
+//     <option
+//       key={driver.id}
+//       value={driver.id}
+//     >
+//       {driver.full_name}
+//     </option>
+//   ))}
+// </select>
+//   </div>
+//   <button
+//     className="apply-btn"
+//     onClick={fetchReport}
+//   >
+//     Apply Filters
+//   </button>
+
+// </div>
+
+//       {/* Summary Cards */}
+
+//       <div className="stats-grid">
+
+//         <div className="stat-card">
+//           <h2>
+//   {reportData?.summary
+//     ?.drivers_count || 0}
+// </h2>
+//           <p>Drivers</p>
+//         </div>
+
+//         <div className="stat-card success">
+//         <h2>
+//   {reportData?.summary
+//     ?.total_completed_trips || 0}
+// </h2>
+//           <p>Completed Trips</p>
+//         </div>
+
+//         <div className="stat-card blue">
+//         <h2>
+//   $
+//   {reportData?.summary
+//     ?.total_trip_income || 0}
+// </h2>
+//           <p>Total Income</p>
+//         </div>
+
+//         <div className="stat-card danger">
+//        <h2>
+//   $
+//   {reportData?.summary
+//     ?.total_commission_deducted || 0}
+// </h2>
+//           <p>Commission</p>
+//         </div>
+
+//         <div className="stat-card green">
+//        <h2>
+//   $
+//   {reportData?.summary
+//     ?.total_net_driver_profit || 0}
+// </h2>
+//           <p>Net Profit</p>
+//         </div>
+
+//       </div>
+
+//       {/* Chart + Info */}
+
+//       <div className="content-grid">
+
+//         <div className="chart-card">
+//           <h3>Driver Earnings Overview</h3>
+
+//        <div className="bars">
+
+//   <div className="bar-wrapper">
+//     <div
+//       className="bar income"
+//       style={{ height: `${scale(income)}px` }}
+//     />
+//     <span>Total Income</span>
+//   </div>
+
+//   <div className="bar-wrapper">
+//     <div
+//       className="bar commission"
+//       style={{ height: `${scale(commission)}px` }}
+//     />
+//     <span>Commission</span>
+//   </div>
+
+//   <div className="bar-wrapper">
+//     <div
+//       className="bar profit"
+//       style={{ height: `${scale(profit)}px` }}
+//     />
+//     <span>Net Profit</span>
+//   </div>
+
+// </div>
+//         </div>
+
+//      <div className="info-card">
+//   <h3>Report Information</h3>
+
+//   <div className="info-row">
+//     <span>Included Statuses</span>
+//     <strong>
+//       {reportData?.source?.included_trip_statuses?.join(", ") || "-"}
+//     </strong>
+//   </div>
+
+//   <div className="info-row">
+//     <span>Excluded Statuses</span>
+//     <strong>
+//       {reportData?.source?.excluded_trip_statuses?.join(", ") || "-"}
+//     </strong>
+//   </div>
+
+//   <div className="info-row">
+//     <span>Income Field</span>
+//     <strong>
+//       {reportData?.source?.income_field || "-"}
+//     </strong>
+//   </div>
+
+//   <div className="info-row">
+//     <span>Commission Field</span>
+//     <strong>
+//       {reportData?.source?.commission_field || "-"}
+//     </strong>
+//   </div>
+
+//   <div className="info-row">
+//     <span>Net Profit Field</span>
+//     <strong>
+//       {reportData?.source?.net_profit_field || "-"}
+//     </strong>
+//   </div>
+
+//   <div className="info-row">
+//     <span>Date Field</span>
+//     <strong>
+//       {reportData?.source?.date_field || "-"}
+//     </strong>
+//   </div>
+
+//   <div className="info-row">
+//     <span>Generated At</span>
+//     <strong>
+//       {reportData?.generated_at
+//         ? new Date(reportData.generated_at).toLocaleString()
+//         : "-"}
+//     </strong>
+//   </div>
+// </div>
+
+//       </div>
+
+//       {/* Table */}
+
+//       <div className="table-card">
+
+//         <h3>Drivers Earnings Details</h3>
+
+//         <table>
+//           <thead>
+//             <tr>
+//               <th>#</th>
+//               <th>Driver</th>
+//               <th>Phone</th>
+//               <th>Total Trips</th>
+//               <th>Total Income</th>
+//               <th>Commission</th>
+//               <th>Net Profit</th>
+//             </tr>
+//           </thead>
+
+//       <tbody>
+
+// {loading ? (
+
+// <tr>
+//   <td colSpan="7">
+//     Loading...
+//   </td>
+// </tr>
+
+// ) : (
+
+// reportData?.items?.map(
+// (item,index) => (
+
+// <tr key={item.driver.id}>
+
+// <td>{index + 1}</td>
+
+// <td>
+//   {item.driver.full_name}
+// </td>
+
+// <td>
+//   {item.driver.phone}
+// </td>
+
+// <td>
+//   {item.total_trips}
+// </td>
+
+// <td>
+//   {item.total_trip_income}
+// </td>
+
+// <td>
+//   {item.commission_deducted}
+// </td>
+
+// <td className="profit-text">
+//   {item.net_profit}
+// </td>
+
+// </tr>
+
+// ))
+// )}
+
+// </tbody>
+//         </table>
+
+//       </div>
+
+//     </div>
+//   );
+// }
 import "./DriverEarnings.css";
 import { useEffect, useState } from "react";
 import { Axios } from "../../../api/axios";
+import { useTranslation } from "react-i18next";
 
 import {
   DRIVER,
   DRIVER_EARNINGS_REPORT,
 } from "../../../api/api";
 export default function DriverEarnings() {
+  const { t } = useTranslation();
   const [loading, setLoading] =
   useState(false);
   
@@ -101,7 +487,7 @@ useEffect(() => {
 
 
   <div className="filter-box">
-    <label>From Date</label>
+    <label>{t("driverEarnings.fromDate")}</label>
 
     <input
       type="date"
@@ -117,7 +503,7 @@ useEffect(() => {
   </div>
 
   <div className="filter-box">
-    <label>To Date</label>
+    <label>{t("driverEarnings.toDate")}</label>
 
     <input
       type="date"
@@ -133,7 +519,7 @@ useEffect(() => {
   </div>
 
   <div className="filter-box">
-    <label>Driver</label>
+    <label>{t("bookingDetails.driver")}</label>
 
  <select
   value={filters.driver_name}
@@ -144,7 +530,7 @@ useEffect(() => {
     })
   }
 >
-  <option value="">All Drivers</option>
+  <option value="">{t("driverEarnings.allDrivers")}</option>
 
   {driversList.map((driver) => (
     <option
@@ -160,7 +546,7 @@ useEffect(() => {
     className="apply-btn"
     onClick={fetchReport}
   >
-    Apply Filters
+    {t("driverEarnings.applyFilters")}
   </button>
 
 </div>
@@ -174,7 +560,7 @@ useEffect(() => {
   {reportData?.summary
     ?.drivers_count || 0}
 </h2>
-          <p>Drivers</p>
+          <p>{t("driverEarnings.drivers")}</p>
         </div>
 
         <div className="stat-card success">
@@ -182,7 +568,7 @@ useEffect(() => {
   {reportData?.summary
     ?.total_completed_trips || 0}
 </h2>
-          <p>Completed Trips</p>
+          <p>{t("driverEarnings.completedTrips")}</p>
         </div>
 
         <div className="stat-card blue">
@@ -191,7 +577,7 @@ useEffect(() => {
   {reportData?.summary
     ?.total_trip_income || 0}
 </h2>
-          <p>Total Income</p>
+          <p>{t("driverEarnings.totalIncome")}</p>
         </div>
 
         <div className="stat-card danger">
@@ -200,7 +586,7 @@ useEffect(() => {
   {reportData?.summary
     ?.total_commission_deducted || 0}
 </h2>
-          <p>Commission</p>
+          <p>{t("driverEarnings.commission")}</p>
         </div>
 
         <div className="stat-card green">
@@ -209,7 +595,7 @@ useEffect(() => {
   {reportData?.summary
     ?.total_net_driver_profit || 0}
 </h2>
-          <p>Net Profit</p>
+          <p>{t("driverEarnings.netProfit")}</p>
         </div>
 
       </div>
@@ -219,7 +605,7 @@ useEffect(() => {
       <div className="content-grid">
 
         <div className="chart-card">
-          <h3>Driver Earnings Overview</h3>
+          <h3>{t("driverEarnings.overviewTitle")}</h3>
 
        <div className="bars">
 
@@ -228,7 +614,7 @@ useEffect(() => {
       className="bar income"
       style={{ height: `${scale(income)}px` }}
     />
-    <span>Total Income</span>
+    <span>{t("driverEarnings.totalIncome")}</span>
   </div>
 
   <div className="bar-wrapper">
@@ -236,7 +622,7 @@ useEffect(() => {
       className="bar commission"
       style={{ height: `${scale(commission)}px` }}
     />
-    <span>Commission</span>
+    <span>{t("driverEarnings.commission")}</span>
   </div>
 
   <div className="bar-wrapper">
@@ -244,59 +630,59 @@ useEffect(() => {
       className="bar profit"
       style={{ height: `${scale(profit)}px` }}
     />
-    <span>Net Profit</span>
+    <span>{t("driverEarnings.netProfit")}</span>
   </div>
 
 </div>
         </div>
 
      <div className="info-card">
-  <h3>Report Information</h3>
+  <h3>{t("driverEarnings.reportInfo")}</h3>
 
   <div className="info-row">
-    <span>Included Statuses</span>
+    <span>{t("driverEarnings.includedStatuses")}</span>
     <strong>
       {reportData?.source?.included_trip_statuses?.join(", ") || "-"}
     </strong>
   </div>
 
   <div className="info-row">
-    <span>Excluded Statuses</span>
+    <span>{t("driverEarnings.excludedStatuses")}</span>
     <strong>
       {reportData?.source?.excluded_trip_statuses?.join(", ") || "-"}
     </strong>
   </div>
 
   <div className="info-row">
-    <span>Income Field</span>
+    <span>{t("driverEarnings.incomeField")}</span>
     <strong>
       {reportData?.source?.income_field || "-"}
     </strong>
   </div>
 
   <div className="info-row">
-    <span>Commission Field</span>
+    <span>{t("driverEarnings.commissionField")}</span>
     <strong>
       {reportData?.source?.commission_field || "-"}
     </strong>
   </div>
 
   <div className="info-row">
-    <span>Net Profit Field</span>
+    <span>{t("driverEarnings.netProfitField")}</span>
     <strong>
       {reportData?.source?.net_profit_field || "-"}
     </strong>
   </div>
 
   <div className="info-row">
-    <span>Date Field</span>
+    <span>{t("driverEarnings.dateField")}</span>
     <strong>
       {reportData?.source?.date_field || "-"}
     </strong>
   </div>
 
   <div className="info-row">
-    <span>Generated At</span>
+    <span>{t("driverEarnings.generatedAt")}</span>
     <strong>
       {reportData?.generated_at
         ? new Date(reportData.generated_at).toLocaleString()
@@ -311,18 +697,18 @@ useEffect(() => {
 
       <div className="table-card">
 
-        <h3>Drivers Earnings Details</h3>
+        <h3>{t("driverEarnings.tableTitle")}</h3>
 
         <table>
           <thead>
             <tr>
               <th>#</th>
-              <th>Driver</th>
-              <th>Phone</th>
-              <th>Total Trips</th>
-              <th>Total Income</th>
-              <th>Commission</th>
-              <th>Net Profit</th>
+              <th>{t("bookingDetails.driver")}</th>
+              <th>{t("bookingDetails.phone")}</th>
+              <th>{t("driverEarnings.totalTrips")}</th>
+              <th>{t("driverEarnings.totalIncome")}</th>
+              <th>{t("driverEarnings.commission")}</th>
+              <th>{t("driverEarnings.netProfit")}</th>
             </tr>
           </thead>
 
@@ -332,7 +718,7 @@ useEffect(() => {
 
 <tr>
   <td colSpan="7">
-    Loading...
+    {t("common.loading")}
   </td>
 </tr>
 
