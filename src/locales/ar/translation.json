@@ -66,6 +66,7 @@
   "createdTime": "وقت الإنشاء",
   "reason": "السبب",
   "totalAmount": "المبلغ الإجمالي",
+  "paymentStatus": "حالة الدفع",
   "pickupPoint": "نقطة الانطلاق",
   "pointName": "اسم النقطة",
   "governorate": "المحافظة",
@@ -614,5 +615,12 @@
   "days": "يوم",
   "hoursShort": "س",
   "hoursFull": "ساعة"
+},
+"status": {
+  "completed": "منتهي",
+  "accepted": "مقبول",
+  "rejected": "مرفوض",
+  "canceled": "ملغي",
+  "pending": "معلق"
 }
 }

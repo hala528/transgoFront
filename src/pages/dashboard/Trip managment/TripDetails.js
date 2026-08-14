@@ -499,7 +499,7 @@ import {
 } from "react-icons/fa";
 
 export default function TripDetails() {
-  const { t } = useTranslation();
+  const { t ,i18n} = useTranslation();
   const { id } = useParams();
 const [success, setSuccess] = useState("");
 const [err, setErr] = useState("");
@@ -563,7 +563,7 @@ const path = trip?.route?.polyline
     }
 
     getTrip();
-  }, [id]);
+  }, [id,i18n.language  ]);
 
   if (loading) return <div className="empty-state">{t("tripDetails.loading")}</div>;
   if (!trip) return <div className="empty-state">{t("tripDetails.notFound")}</div>;
@@ -601,11 +601,15 @@ const arrivalRaw = trip.general?.expected_arrival_at;
           <h2>
             {t("tripDetails.tripId", { id })}
 
-            <span className={`t-status t-status-${status}`}>
+            {/* <span className={`t-status t-status-${status}`}>
               <span className="t-status-dot"></span>
             {trip.status?.key}
 
-            </span>
+            </span> */}
+            <span className={`t-status t-status-${status}`}>
+  <span className="t-status-dot"></span>
+  {i18n.language === "ar" ? trip.status?.name : trip.status?.key}
+</span>
 
           </h2>
         </div>
@@ -858,15 +862,20 @@ const arrivalRaw = trip.general?.expected_arrival_at;
         {/* Payment */}
         <td>
           {/* {b.payment?.amount} */}
-           ({b.payment?.method})
+           ({b.payment?.method_display})
         </td>
 
         {/* Status */}
         <td>
-          <span className={`t-status t-status-${b.status?.key}`}>
+          {/* <span className={`t-status t-status-${b.status?.key}`}>
             <span className="t-status-dot"></span>
             {b.status?.key}
-          </span>
+          
+          </span> */}
+          <span className={`t-status t-status-${b.status?.key}`}>
+  <span className="t-status-dot"></span>
+  {i18n.language === "ar" ? b.status?.name : b.status?.key}
+</span>
         </td>
 
         {/* Attendance

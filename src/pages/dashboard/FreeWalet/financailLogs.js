@@ -140,7 +140,7 @@ import { beasURL , GET_WALLET} from "../../../api/api";
 import { useTranslation } from "react-i18next";
 
 export default function FinancailLogs() {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
   const [search, setSearch] = useState("");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
@@ -179,7 +179,7 @@ export default function FinancailLogs() {
     }, 500);
 
     return () => clearTimeout(delay);
-  }, [search, dateFrom, dateTo]);
+  }, [search, dateFrom, dateTo,i18n.language]);
 
   return (
     <div className="w-100 p-2 ">
@@ -255,7 +255,7 @@ export default function FinancailLogs() {
 
             <div className="log-body">
               <p>{t("walletDriver.reference")}: {item.transaction_reference}</p>
-              <p>{t("booking.status")}: {item.status}</p>
+              <p>{t("booking.status")}: {item.status_display}</p>
               <p>{t("walletDriver.before")}: {item.balance_before} $</p>
               <p>{t("walletDriver.after")}: {item.balance_after} $</p>
               <p>{t("walletDriver.by")}: {item.performer.full_name}</p>

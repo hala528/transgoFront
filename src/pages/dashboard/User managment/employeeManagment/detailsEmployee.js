@@ -307,7 +307,7 @@ import personl from "../../../../assest/personal.png";
 import { useTranslation } from "react-i18next";
 
 export default function DetailsEmployee() {
-  const { t } = useTranslation();
+  const { t ,i18n} = useTranslation();
   const { id } = useParams();
   const [employee, setEmployee] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -376,7 +376,7 @@ function handleUpdate() {
         console.log(err);
         setLoading(false);
       });
-  }, [id]);
+  }, [id,i18n.language]);
 
  
   if (loading) {
@@ -437,7 +437,7 @@ function handleUpdate() {
                     border: "none"
                   }}
                 >
-                  {employee.roles[0]?.name}
+                  {employee.roles[0]?.name_display}
                 </Button>
 
                 <Button
@@ -497,7 +497,7 @@ function handleUpdate() {
 
           <div className="info-row">
             <span>{t("detailsEmployee.role")}</span>
-            <span>{employee.roles[0]?.name}</span>
+            <span>{employee.roles[0]?.name_display}</span>
           </div>
         </div>
 
@@ -517,7 +517,7 @@ function handleUpdate() {
             <div className="info-row">
               <span>{t("detailsEmployee.role")}</span>
               <span className="badge-role">
-                {employee.roles[0]?.name}
+                {employee.roles[0]?.name_display}
               </span>
             </div>
 

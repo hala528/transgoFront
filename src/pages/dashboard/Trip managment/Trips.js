@@ -217,7 +217,7 @@ import TopFilterBar from "../../../components/dashboard/TopFilterBar";
 import TripCard from "./TripCard";
 
 export default function Trips() {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [activeView, setActiveView] = useState("");
@@ -299,7 +299,7 @@ console.log("FULL RESPONSE:", res);
     }, 30000);
 
     return () => clearInterval(interval);
-  }, [search, filter, date]);
+  }, [search, filter, date,i18n.language]);
 
   // const getImage = (path) =>
   //   path ? `${IMAGE_BASE}/${path}` : "";
@@ -309,12 +309,16 @@ console.log("FULL RESPONSE:", res);
 
     return {
       id: trip?.trip_id,
-      status: trip?.status?.key,
+     
+       status: trip?.status?.key,
+    statusDisplay: i18n.language === "ar" 
+      ? trip?.status?.name 
+      : trip?.status?.key,
       statusColor: trip?.status?.color,
       from: trip?.departure?.from,
       to: trip?.departure?.to,
       driver: trip?.driver?.full_name,
-      type: trip?.trip_type,
+      type: trip?.trip_type_display,
  driverPhone: trip?.driver?.phone,
    time: rawDate
   ? new Date(rawDate).toLocaleTimeString([], {

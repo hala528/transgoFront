@@ -597,7 +597,7 @@ import { Axios } from "../../api/axios";
 import { beasURL, GET_COMPLAINT_DETAILS , UPDATE_COMPLAINT_STATUS } from "../../api/api";
 
 export default function ComplanitDetails() {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
 
   const { id } = useParams();
 
@@ -615,7 +615,7 @@ export default function ComplanitDetails() {
 
     fetchComplaintDetails();
 
-  }, []);
+  }, [i18n.language]);
 
   const fetchComplaintDetails = async () => {
 
@@ -748,7 +748,7 @@ const getStatusVariant = (
 
           {
             complaint.complaint_info
-              .status
+              .status_display
           }
 
         </Badge>
@@ -811,7 +811,7 @@ const getStatusVariant = (
                     {
                       complaint
                         .complaint_info
-                        .complaint_type
+                        .complaint_type_display
                     }
                   </h6>
 

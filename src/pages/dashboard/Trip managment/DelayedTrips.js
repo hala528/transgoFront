@@ -109,7 +109,7 @@ import { DELAYED_TRIPS } from "../../../api/api";
 import TripCard from "./TripCard";
 
 export default function DelayedTrips() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [trips, setTrips] = useState([]);
   const formatDelay = (minutes) => {
   if (!minutes || minutes <= 0) return `0 ${t("trips.min")}`;
@@ -127,7 +127,9 @@ export default function DelayedTrips() {
 const formattedTrips = trips.map((trip) => ({
   id: trip.trip_id,
 
-  status: trip.status?.key,          // أو trip.status?.name إذا بدك تعرض "نشطة"
+ 
+  status: trip.status?.key,
+  statusDisplay: i18n.language === "ar" ? trip.status?.name : trip.status?.key,        // أو trip.status?.name إذا بدك تعرض "نشطة"
 
   from: trip.route?.from,
   to: trip.route?.to,
@@ -182,7 +184,7 @@ console.log(items[0]);
     }
 
     fetchDelayed();
-  }, []);
+  }, [i18n.language]);
 
   if (loading) {
     return <div style={{ color: "#cbd5f5" }}>{t("trips.loading")}</div>;

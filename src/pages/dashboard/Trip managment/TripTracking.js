@@ -583,7 +583,7 @@ import { GoogleMap, Marker, Polyline, useJsApiLoader } from "@react-google-maps/
 import polyline from "@mapbox/polyline";
 
 export default function TripTracking() {
-  const { t } = useTranslation();
+ const { t, i18n } = useTranslation();
   const { id } = useParams();
 
   const [tripData, setTripData] = React.useState(null);
@@ -662,7 +662,7 @@ React.useEffect(() => {
     lat: tracking.last_position.latitude,
     lng: tracking.last_position.longitude,
   });
-}, [tracking?.last_position]);
+}, [tracking?.last_position, i18n.language]);
  
   // React.useEffect(() => {
   //   if (!logs.length) return;
@@ -729,13 +729,9 @@ React.useEffect(() => {
   {/* STATUS */}
   <div className="top-card">
     <span className="card-label">{t("tripTracking.tripStatus")}</span>
-    <span
- className={`t-status t-status-${tripData?.status?.key}`}
->
- <span className="t-status-dot"></span>
-
- {tripData?.status?.name || "—"}
-
+  <span className={`t-status t-status-${tripData?.status?.key}`}>
+  <span className="t-status-dot"></span>
+  {(i18n.language === "ar" ? tripData?.status?.name : tripData?.status?.key) || "—"}
 </span>
   </div>
 

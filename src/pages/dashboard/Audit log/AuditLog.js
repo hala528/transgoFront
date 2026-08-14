@@ -189,7 +189,7 @@ import {  Form } from 'react-bootstrap';
 import { useTranslation } from "react-i18next";
 
 export default function AuditLog() {
-    const { t } = useTranslation();
+    const { t,i18n } = useTranslation();
     const [logs, setLogs] = useState([]);
 const [loading, setLoading] = useState(true);
 const [search, setSearch] = useState("");
@@ -215,7 +215,7 @@ useEffect(() => {
   };
 
   fetchLogs();
-}, [search, dateFrom, dateTo]);
+}, [search, dateFrom, dateTo,i18n.language]);
 if (loading) {
   return <h3 style={{ color: "white" }}>{t("common.loading")}</h3>;
 }
@@ -248,9 +248,9 @@ const logsShow = logs.map((log) => {
         </div>
 
         <div className="log-content">
-          <h5>{log.action_label}</h5>
+          <h5>{log.action_label_display}</h5>
 
-          <p>{log.description}</p>
+          <p>{log.description_display}</p>
 
           {/* 🔥 عرض التغييرات */}
           {before && after && (

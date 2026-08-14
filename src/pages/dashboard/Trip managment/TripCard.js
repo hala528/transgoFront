@@ -108,7 +108,7 @@ import { IMAGE_BASE } from "../../../api/api";
 import { FaClock, FaUser, FaRoute, FaCar } from "react-icons/fa";
 
 export default function TripCard({ trip, onCancel }) {
-  const { t } = useTranslation();
+  const { t ,i18n} = useTranslation();
   const statusKey = (trip.status || "unknown").toLowerCase();
 
   return (
@@ -121,10 +121,14 @@ export default function TripCard({ trip, onCancel }) {
     {t("trips.tripId", { id: trip.id || trip.trip_id })}
   </span>
 
-  <span className={`t-status t-status-${statusKey}`}>
+  {/* <span className={`t-status t-status-${statusKey}`}>
     <span className="t-status-dot"></span>
     {trip.status}
-  </span>
+  </span> */}
+  <span className={`t-status t-status-${statusKey}`}>
+  <span className="t-status-dot"></span>
+  {trip.statusDisplay}
+</span>
 
 </div>
 
@@ -153,7 +157,7 @@ export default function TripCard({ trip, onCancel }) {
   ) : (
     <>
       <FaCar />
-      <span>{trip.type || trip.trip_type}</span>
+      <span>{trip.type || trip.trip_type_display}</span>
     </>
   )}
 </div>

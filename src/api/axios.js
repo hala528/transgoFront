@@ -9,12 +9,25 @@ export const Axios = axios.create({
 });
 
 
+// Axios.interceptors.request.use((config) => {
+
+//   const token = cookie.get("transtop");
+
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+
+//   return config;
+// });
 Axios.interceptors.request.use((config) => {
   const token = cookie.get("transtop");
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
+  const lang = localStorage.getItem("lang") || "ar";
+  config.headers["Accept-Language"] = lang;
 
   return config;
 });

@@ -940,8 +940,8 @@ import {
 } from "../../../api/api";
 
 function DriversPerformance() {
-  const { t } = useTranslation();
-
+  // const { t } = useTranslation();
+const { t, i18n } = useTranslation();
   const [loading, setLoading] =
     useState(false);
 
@@ -1085,7 +1085,7 @@ useEffect(() => {
 
   fetchGovernorates();
 
-}, []);
+}, [ i18n.language]);
   
 
   const totalDrivers =
@@ -1696,18 +1696,13 @@ useEffect(() => {
 
           {/* performance */}
 
-          <td>
-
-            <span
-              className={`performance-badge ${driver.summary.performance_classification.toLowerCase()}`}
-            >
-              {
-                driver.summary
-                  .performance_classification
-              }
-            </span>
-
-          </td>
+         <td>
+  <span
+    className={`performance-badge ${driver.summary.performance_classification.toLowerCase()}`}
+  >
+    {driver.summary.performance_classification_display}
+  </span>
+</td>
 
           {/* total_rides */}
 

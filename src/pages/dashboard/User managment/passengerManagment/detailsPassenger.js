@@ -364,7 +364,7 @@ import { Axios } from "../../../../api/axios";
 import { useTranslation } from "react-i18next";
 
 export default function DetailsPassenger() {
-  const { t } = useTranslation();
+  const { t ,i18n} = useTranslation();
   const { id } = useParams();
 
   const [passenger, setPassenger] = useState(null);
@@ -402,7 +402,7 @@ export default function DetailsPassenger() {
 
   useEffect(() => {
     fetchPassenger();
-  }, [id]);
+  }, [id,i18n.language]);
 
   const handleToggleStatus = async () => {
     try {
@@ -491,7 +491,7 @@ export default function DetailsPassenger() {
                   width: "150px",
                 }}
               >
-                {passenger?.roles?.[0]?.name || t("notifi.passenger")}
+                {passenger?.roles?.[0]?.name_display || t("notifi.passenger")}
               </Button>
 
               <Button
@@ -580,7 +580,7 @@ export default function DetailsPassenger() {
           <div className="info-row">
             <span>{t("detailsEmployee.role")}</span>
             <span>
-              {passenger?.roles?.map((r) => r.name).join(", ")}
+              {passenger?.roles?.map((r) => r.name_display).join(", ")}
             </span>
           </div>
         </div>

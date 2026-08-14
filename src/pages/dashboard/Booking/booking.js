@@ -261,7 +261,8 @@ import { useTranslation } from "react-i18next";
 export default function Booking() {
   const [expandedTrip, setExpandedTrip] = useState(null);
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");
   const [date, setDate] = useState("");
@@ -347,9 +348,12 @@ console.log("ITEMS:", res.data.data.items);
       id: b.booking_id,
       passenger_name: b.passenger_name,
       seats: b.seats_reserved,
-      payment_method:
-        b.payment_method === "cash" ? "Cash" : "Electronic",
+      // payment_method:
+      //   b.payment_method === "cash" ? "Cash" : "Electronic",
+      // status: b.status,
+      payment_method: b.payment_method_display,
       status: b.status,
+      status_display: b.status_display,
       amount: b.total_amount,
       date: b.created_at,
     });
@@ -367,10 +371,12 @@ console.log("ITEMS:", res.data.data.items);
   }
 
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   getBookings();
+  // }, [filter, search, date, paymentFilter]);
+useEffect(() => {
     getBookings();
-  }, [filter, search, date, paymentFilter]);
-
+  }, [filter, search, date, paymentFilter, i18n.language]);
   const filteredTrips = trips;
 
   return (
@@ -473,9 +479,13 @@ console.log("ITEMS:", res.data.data.items);
                   <span>{b.passenger_name}</span>
                   <span>{b.seats}</span>
                   <span>{b.payment_method}</span>
-<span className={`t-status t-status-${b.status.toLowerCase()}`}>
+{/* <span className={`t-status t-status-${b.status.toLowerCase()}`}>
   <span className="t-status-dot"></span>
   {b.status}
+</span> */}
+<span className={`t-status t-status-${b.status.toLowerCase()}`}>
+  <span className="t-status-dot"></span>
+  {b.status_display}
 </span>
 
                   <span>{b.amount?.toLocaleString()} {t("common.currency")}</span>

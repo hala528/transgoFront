@@ -495,7 +495,8 @@ import {
 } from "lucide-react";
 
 function ComplaintsReport() {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
+const { t, i18n } = useTranslation();                  
 
   const [loading, setLoading] = useState(false);
 
@@ -586,7 +587,7 @@ function ComplaintsReport() {
 
   useEffect(() => {
     fetchReport();
-  }, []);
+  }, [i18n.language  ]);
 
   return (
     <div className="complaints-report">
@@ -730,7 +731,7 @@ function ComplaintsReport() {
               breakdown.by_status.map((item, index) => (
                 <div className="breakdown-item" key={index}>
                   <div className="item-top">
-                    <span>{item.status}</span>
+                    <span>{item.status_display}</span>
                     <div className="item-right">
                       <span>{item.count}</span>
                       <strong>{item.percentage}%</strong>
@@ -760,7 +761,7 @@ function ComplaintsReport() {
               breakdown.by_type.map((item, index) => (
                 <div className="breakdown-item" key={index}>
                   <div className="item-top">
-                    <span>{item.type}</span>
+                    <span>{item.type_display}</span>
                     <div className="item-right">
                       <span>{item.count}</span>
                       <strong>{item.percentage}%</strong>
@@ -790,7 +791,7 @@ function ComplaintsReport() {
               breakdown.by_complainant_type.map((item, index) => (
                 <div className="breakdown-item" key={index}>
                   <div className="item-top">
-                    <span>{item.complainant_type}</span>
+                    <span>{item.complainant_type_display}</span>
                     <div className="item-right">
                       <span>{item.count}</span>
                       <strong>{item.percentage}%</strong>
@@ -798,7 +799,7 @@ function ComplaintsReport() {
                   </div>
                   <div className="progress-bar">
                     <div
-                      className={`progress ${getProgressColor(item.complainant_type)}`}
+                      className={`progress ${getProgressColor(item.complainant_type_display)}`}
                       style={{ width: `${item.percentage}%` }}
                     ></div>
                   </div>
@@ -945,7 +946,7 @@ function ComplaintsReport() {
                     </div>
                   </td>
                   <td>
-                    <span className="type-badge">{item.complaint_type}</span>
+                    <span className="type-badge">{item.complaint_type_display}</span>
                   </td>
                   <td>
                     <span className={`status ${item.status}`}>{item.status}</span>

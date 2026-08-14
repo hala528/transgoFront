@@ -573,7 +573,7 @@ useEffect(() => {
 
         <div className="stat-card blue">
         <h2>
-  $
+  ل.س
   {reportData?.summary
     ?.total_trip_income || 0}
 </h2>
@@ -582,7 +582,7 @@ useEffect(() => {
 
         <div className="stat-card danger">
        <h2>
-  $
+   ل.س
   {reportData?.summary
     ?.total_commission_deducted || 0}
 </h2>
@@ -591,7 +591,7 @@ useEffect(() => {
 
         <div className="stat-card green">
        <h2>
-  $
+   ل.س
   {reportData?.summary
     ?.total_net_driver_profit || 0}
 </h2>

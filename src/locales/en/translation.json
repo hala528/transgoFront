@@ -66,6 +66,7 @@
   "createdTime": "Created Time",
   "reason": "Reason",
   "totalAmount": "Total Amount",
+  "paymentStatus": "Payment Status",
   "pickupPoint": "Pickup Point",
   "pointName": "Point Name",
   "governorate": "Governorate",
@@ -615,5 +616,11 @@
   "days": "days",
   "hoursShort": "h",
   "hoursFull": "hours"
+},"status": {
+  "completed": "completed",
+  "accepted": "accepted",
+  "rejected": "rejected",
+  "canceled": "canceled",
+  "pending": "pending"
 }
 }

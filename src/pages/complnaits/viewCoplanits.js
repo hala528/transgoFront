@@ -559,7 +559,7 @@ import { Axios } from "../../api/axios";
 import { Link } from "react-router-dom";
 
 export default function Complaints() {
-  const { t } = useTranslation();
+  const { t,i18n } = useTranslation();
 
   // STATES
   const [complaints, setComplaints] = useState([]);
@@ -662,6 +662,7 @@ export default function Complaints() {
     roleFilter,
     fromDate,
     toDate,
+    i18n.language
   ]);
 
   // STATUS COLORS
@@ -927,7 +928,7 @@ export default function Complaints() {
                           )}
                         >
 
-                          {item.status}
+                          {item.status_display}
 
                         </Badge>
 
@@ -960,7 +961,7 @@ export default function Complaints() {
 
                           <span>
                             {
-                              item.complainant_role
+                              item.complainant_role_display
                             }
                           </span>
 

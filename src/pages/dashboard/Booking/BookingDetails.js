@@ -310,8 +310,8 @@ import { useTranslation } from "react-i18next";
 
 export default function BookingDetails() {
   const { id } = useParams();
-  const { t } = useTranslation();
-
+  // const { t } = useTranslation();
+const { t, i18n } = useTranslation();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -337,7 +337,11 @@ export default function BookingDetails() {
   useEffect(() => {
     async function fetchDetails() {
       try {
+        // const res = await Axios.get(BOOKING_DETAILS(id));
         const res = await Axios.get(BOOKING_DETAILS(id));
+        console.log("LANG SENT:", i18n.language);
+        console.log("REQUEST HEADERS:", res.config.headers);
+        console.log("STATUS NAME FROM API:", res.data.data.booking_info.status.name);
         setData(res.data.data);
 
         console.log("FULL RESPONSE:", res);
@@ -350,8 +354,10 @@ export default function BookingDetails() {
       }
     }
 
-    fetchDetails();
-  }, [id]);
+  //   fetchDetails();
+  // }, [id]);
+  fetchDetails();
+  }, [id, i18n.language]);
 
   if (loading) return <div className="empty-state">{t("common.loading")}</div>;
   if (!data) return <div className="empty-state">{t("common.noData")}</div>;
@@ -387,10 +393,19 @@ export default function BookingDetails() {
           <h2>
             {t("bookingDetails.booking")} #{booking_info.booking_id}
 
-            <span className={`t-status t-status-${booking_info.status.key}`}>
+            {/* <span className={`t-status t-status-${booking_info.status.key}`}>
               <span className="t-status-dot"></span>
               {booking_info.status.key}
-            </span>
+            </span> */}
+            {/* <span className={`t-status t-status-${booking_info.status.key}`}>
+  <span className="t-status-dot"></span>
+  {booking_info.status.name}
+  
+</span> */}
+<span className={`t-status t-status-${booking_info.status.key}`}>
+  <span className="t-status-dot"></span>
+  {i18n.language === "ar" ? booking_info.status.name : booking_info.status.key}
+</span>
           </h2>
         </div>
       </div>
@@ -429,7 +444,8 @@ export default function BookingDetails() {
                       : "status-green"
                   }
                 >
-                  {passenger_info.attendance_status}
+                  {/* {passenger_info.attendance_status} */}
+                  {passenger_info.attendance_status_display}
                 </strong>
               </div>
             </div>
@@ -451,10 +467,10 @@ export default function BookingDetails() {
                 <strong>{booking_info.booking_code}</strong>
               </div>
 
-              <div className="td-info-box">
+              {/* <div className="td-info-box">
                 <span>{t("bookingDetails.bookingType")}</span>
                 <strong>{booking_info.booking_type}</strong>
-              </div>
+              </div> */}
 
               <div className="td-info-box">
                 <span>{t("bookingDetails.createdDate")}</span>
@@ -468,7 +484,8 @@ export default function BookingDetails() {
 
               <div className="td-info-box">
                 <span>{t("booking.payment")}</span>
-                <strong>{booking_info.payment_method}</strong>
+                {/* <strong>{booking_info.payment_method}</strong> */}
+                <strong>{booking_info.payment_method_display}</strong>
               </div>
 
               <div className="td-info-box">
@@ -483,15 +500,15 @@ export default function BookingDetails() {
                 <strong>{booking_info.total_amount}</strong>
               </div>
 
-              <div className="td-info-box">
-                <span>{t("booking.status")}</span>
-                <strong>
-                  <span className={`t-status t-status-${booking_info.status.key}`}>
-                    <span className="t-status-dot"></span>
-                    {booking_info.status.key}
-                  </span>
-                </strong>
-              </div>
+       <div className="td-info-box">
+  <span>{t("bookingDetails.paymentStatus")}</span>
+  <strong>
+    <span className={`t-status t-status-${booking_info.payment_status}`}>
+      <span className="t-status-dot"></span>
+      {booking_info.payment_status_display}
+    </span>
+  </strong>
+</div>
 
             </div>
           </div>
@@ -533,8 +550,11 @@ export default function BookingDetails() {
 
                 <div className="td-row">
                   <span className="td-label">{t("booking.status")}</span>
-                  <strong className="td-status-green">
+                  {/* <strong className="td-status-green">
                     {pickup_point_info.point_status}
+                  </strong> */}
+                  <strong className="td-status-green">
+                    {pickup_point_info.point_status_display}
                   </strong>
                 </div>
 
