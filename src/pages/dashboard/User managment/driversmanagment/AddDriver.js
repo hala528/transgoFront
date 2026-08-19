@@ -373,6 +373,8 @@ const [files, setFiles] = useState({
 const [loading, setLoading] = useState(false);
 const [err, errset] = useState("");
 const [success, setSuccess] = useState("");
+const [showPasswordModal, setShowPasswordModal] = useState(false);
+const [temporaryPassword, setTemporaryPassword] = useState("");
 const [categories, setCategories] = useState([]);
 const navigate = useNavigate();
 
@@ -425,10 +427,12 @@ console.log("Full Response:", res);
 console.log("Data:", res.data);
 
     setLoading(false);
-    setSuccess(res.data.message || t("addDriver.addSuccess"));
-    setTimeout(() => {
-      navigate("/dashboard/driver");
-    }, 2000);
+
+const password = res.data?.data?.temporary_password;
+
+setTemporaryPassword(password || "");
+setSuccess(res.data.message || t("addDriver.addSuccess"));
+setShowPasswordModal(true);
 
   } catch (err) {
     setLoading(false);
@@ -683,6 +687,49 @@ categories.map((item)=>(
 </button>
 {success && <span className="success">{success}</span>}
 {err && <span className="error">{err}</span>}
+{showPasswordModal && (
+  <div className="password-modal-overlay">
+    <div className="password-modal">
+
+      <div className="password-modal-icon">
+        ✓
+      </div>
+
+      <h3>تمت إضافة السائق بنجاح</h3>
+
+      <p className="password-modal-description">
+        تم إنشاء حساب السائق بنجاح.
+        <br />
+        يرجى حفظ كلمة المرور التالية وإعطاؤها للسائق.
+      </p>
+
+      <div className="password-box">
+        <span className="password-label">
+          كلمة المرور المؤقتة
+        </span>
+
+        <div className="password-value">
+          {temporaryPassword}
+        </div>
+      </div>
+
+      <p className="password-warning">
+        ⚠️ احرص على حفظ كلمة المرور قبل المتابعة.
+      </p>
+
+      <button
+        className="password-modal-btn"
+        onClick={() => {
+          setShowPasswordModal(false);
+          navigate("/dashboard/driver");
+        }}
+      >
+        موافق
+      </button>
+
+    </div>
+  </div>
+)}
         </div>
     )
 }
