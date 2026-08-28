@@ -422,14 +422,16 @@ export default function WalletDriver() {
         {/* 👤 الكروت */}
         {drivers.map((item) => (
           <div key={item.user_id} className="wallet-user-card driverr-card">
-            <img
-              src={`${IMAGE_BASE}/${item.driver_profile?.personal_photo}`}
-              alt="driver"
-            />
+            <div className="wallet-user-photo">
+              <img src={`${IMAGE_BASE}/${item.driver_profile?.personal_photo}`} alt={item.full_name} />
+            </div>
 
             <div className="wallet-user-info driver-info">
               <h3 style={{color:'white'}}>{t("walletDriver.fullName")}: {item.full_name}</h3>
               <div className="wallet-badges driverr-details">
+                <span className="wallet-role-badge">
+                  {t("booking.driver")}
+                </span>
                 <span className="balance">
                    {item.wallet?.balance} $
                 </span>
@@ -444,8 +446,8 @@ export default function WalletDriver() {
                   {item.account_status ? t("vehicleCategories.active") : t("vehicleCategories.inactive")}
                 </span>
               </div>
-              <p className="driver-email"> {t("walletDriver.email")}: {item.email}</p>
               <p className="driver-phone"> {t("bookingDetails.phone")}: {item.phone}</p>
+              <p className="driver-email"> {t("walletDriver.email")}: {item.email}</p>
 
               
 

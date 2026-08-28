@@ -265,6 +265,7 @@ import {
 import { Modal, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import personalImage from "../../../../assest/personal.png";
 
 export default function WalletPassenger() {
   const { t } = useTranslation();
@@ -426,7 +427,9 @@ export default function WalletPassenger() {
         {/* 👤 Cards */}
         {passengers.map((item) => (
           <div key={item.user_id} className="wallet-user-card driverr-card">
-           
+            <div className="wallet-user-photo">
+              <img src={personalImage} alt={item.full_name} />
+            </div>
 
             <div className="wallet-user-info driver-info">
               <h3 style={{ color: "white" }}>
@@ -434,6 +437,9 @@ export default function WalletPassenger() {
               </h3>
 
               <div className="wallet-badges driver-details">
+                <span className="wallet-role-badge">
+                  {t("notifi.passenger")}
+                </span>
                 <span className="balance">
                   💰 {item.wallet?.balance || 0} $
                 </span>
@@ -449,11 +455,11 @@ export default function WalletPassenger() {
                 </span>
               </div>
 
-              <p className="driver-email">
-                {t("walletDriver.email")}: {item.email}
-              </p>
               <p className="driver-phone">
                 {t("bookingDetails.phone")}: {item.phone}
+              </p>
+              <p className="driver-email">
+                {t("walletDriver.email")}: {item.email}
               </p>
 
               <button

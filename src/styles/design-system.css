@@ -121,3 +121,39 @@
   .dashboard-content :is(table, .custom-table) thead th,
   .dashboard-content :is(table, .custom-table) tbody td { padding: 11px 12px; }
 }
+
+/* Unified project button palette. */
+.App button:not(.sidebar-backdrop):not(.btn-close),
+.App .btn:not(.btn-close),
+.App input[type="button"],
+.App input[type="submit"] {
+  border-color: transparent !important;
+  background: linear-gradient(90deg, var(--primary-blue), var(--primary-purple)) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 22px rgba(var(--primary-bluee), .2);
+  transition: filter .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.App button:not(.sidebar-backdrop):not(.btn-close):hover,
+.App .btn:not(.btn-close):hover,
+.App input[type="button"]:hover,
+.App input[type="submit"]:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 11px 28px rgba(var(--primary-purplee), .25);
+}
+
+.App button:not(.sidebar-backdrop):not(.btn-close):focus-visible,
+.App .btn:not(.btn-close):focus-visible {
+  outline: 3px solid rgba(var(--primary-bluee), .35);
+  outline-offset: 2px;
+}
+
+.App button:disabled,
+.App .btn:disabled {
+  filter: grayscale(.25);
+  opacity: .55;
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+}
