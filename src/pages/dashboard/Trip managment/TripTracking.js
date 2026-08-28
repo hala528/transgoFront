@@ -969,17 +969,36 @@ React.useEffect(() => {
 }}
     >
 
-      {/* 🔵 Start + End dynamically */}
-      {routePoints.map((p) => (
-        <Marker
-          key={p.point_id}
-          position={{
-            lat: p.latitude,
-            lng: p.longitude,
-          }}
-          label={p.type === "start" ? "A" : "B"}
-        />
-      ))}
+     {routePoints.map((p) => {
+  const isStart = p.type === "start";
+  const isEnd = p.type === "end";
+  const isStop = p.type === "stop";
+
+  return (
+    <Marker
+      key={p.point_id}
+      position={{
+        lat: p.latitude,
+        lng: p.longitude,
+      }}
+      label={
+        isStart
+          ? { text: "A", color: "#fff", fontWeight: "bold" }
+          : isEnd
+          ? { text: "B", color: "#fff", fontWeight: "bold" }
+          : undefined // نقاط التوقف بلا أي حرف
+      }
+      icon={
+        isStop
+          ? {
+              url: "https://maps.google.com/mapfiles/ms/icons/purple-dot.png",
+              scaledSize: new window.google.maps.Size(40, 40),
+            }
+          : undefined // start و end بيضلوا بالأيقونة الافتراضية الحمرا
+      }
+    />
+  );
+})}
 
       {/*  Car Marker (moving) */}
       {carPosition && (

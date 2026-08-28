@@ -176,13 +176,13 @@ function handleFilterChange(e) {
   ));
 
   return (
-    <div className="w-100 p-2">
+    <div className="user-list-page w-100 p-2">
       <h2 style={{ color: 'white', flex: 1, padding: 5 }}>
         {t("managmentEmployee.pageTitle")}
       </h2>
 
-      <div className="card-driver d-flex justify-content-between align-items-center px-3">
-        <Link to={'employee.id'}>
+      <div className="user-list-filters card-driver d-flex justify-content-between align-items-center px-3">
+        <Link className="user-list-add" to={'employee.id'}>
           <Button
             style={{
               background: 'linear-gradient(90deg, var(--primary-blue), var(--primary-purple))',
@@ -194,7 +194,7 @@ function handleFilterChange(e) {
             + {t("managmentEmployee.addEmployee")}
           </Button>
         </Link>
-        <div className="d-flex align-items-center gap-2">
+        <div className="user-list-filter-fields d-flex align-items-center gap-2">
             <Form.Select name="role" onChange={handleFilterChange} className='custom-select'>
   <option value="">{t("managmentEmployee.allRoles")}</option>
   <option value="admin">{t("appUsageReport.admin")}</option>
@@ -222,7 +222,8 @@ function handleFilterChange(e) {
        
       </div>
 
-      <Table className="custom-table" bordered hover striped>
+      <div className="user-table-shell" role="region" aria-label={t("managmentEmployee.pageTitle")} tabIndex="0">
+      <Table className="custom-table user-data-table" bordered hover striped>
         <thead>
           <tr>
             <th>{t("booking.id")}</th>
@@ -237,6 +238,7 @@ function handleFilterChange(e) {
 
         <tbody>{userShow}</tbody>
       </Table>
+      </div>
     </div>
   );
 }

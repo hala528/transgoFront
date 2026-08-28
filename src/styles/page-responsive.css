@@ -3,6 +3,47 @@
 .dashboard-content :is(.td-map-container, .map-container, .map-wrapper, .map-wrapper-placeholder) { max-width: 100%; min-width: 0; }
 .dashboard-content :is(.custom-table, .td-booking-table, .vr-table) { display: table; max-width: 100%; }
 
+.user-table-shell {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: rgba(17, 24, 45, .72);
+  box-shadow: var(--shadow-sm);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.user-table-shell:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, .35);
+  outline-offset: 3px;
+}
+
+.user-table-shell .user-data-table {
+  width: 100%;
+  min-width: 760px;
+  margin: 0;
+  border: 0 !important;
+  border-radius: 0;
+}
+
+.user-table-shell .user-data-table th:first-child,
+.user-table-shell .user-data-table td:first-child {
+  padding-inline-start: 18px;
+}
+
+.user-table-shell .user-data-table th:last-child,
+.user-table-shell .user-data-table td:last-child {
+  padding-inline-end: 18px;
+}
+
+.user-list-filter-fields {
+  min-width: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end !important;
+}
+
 @media (max-width: 1199.98px) {
   .dashboard-content :is(.cards, .card-items, .t-card-horizontal) { flex-wrap: wrap; }
   .dashboard-content .card-wallet { flex: 1 1 calc(33.333% - 20px); width: auto; min-width: 170px; }
@@ -21,6 +62,17 @@
   .dashboard-content .card-driver { height: auto !important; min-height: 0; padding: 14px !important; }
   .dashboard-content .card-driver > div { width: 100%; flex-wrap: wrap; justify-content: stretch !important; }
   .dashboard-content .card-driver :is(.custom-select, .custom-input-driver, button, a) { width: 100% !important; flex: 1 1 100%; }
+  .dashboard-content .user-list-page { padding: 6px !important; }
+  .dashboard-content .user-list-page > h2 { padding-inline: 4px !important; font-size: 22px; }
+  .dashboard-content .user-list-filters { display: block !important; }
+  .dashboard-content .user-list-filter-fields { display: grid !important; grid-template-columns: 1fr; width: 100%; }
+  .dashboard-content .user-list-add { display: block; width: 100%; margin-bottom: 10px; }
+  .dashboard-content .user-list-add button { width: 100% !important; }
+  .user-table-shell { border-radius: 14px; }
+  .user-table-shell .user-data-table { min-width: 700px; font-size: 12px; }
+  .user-table-shell .user-data-table :is(th, td) { padding: 11px 10px !important; }
+  .user-table-shell .user-data-table td:last-child { position: sticky; inset-inline-end: 0; background: #11182d !important; box-shadow: -8px 0 16px rgba(0, 0, 0, .16); }
+  html[dir="rtl"] .user-table-shell .user-data-table td:last-child { box-shadow: 8px 0 16px rgba(0, 0, 0, .16); }
   .dashboard-content .card-details { height: auto !important; min-height: 160px; padding: 16px !important; }
   .dashboard-content :is(.card-account, .card-create) { flex: 1 1 100% !important; min-width: 0 !important; }
   .dashboard-content .info-row { align-items: flex-start; gap: 10px; }

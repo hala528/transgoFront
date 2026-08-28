@@ -57,14 +57,14 @@ const userShow = user.map((u) => (
   ));
 
   return (
-    <div className="w-100 p-2">
+    <div className="user-list-page w-100 p-2">
       <h2 style={{ color: 'white', flex: 1, padding: 5 }}>
         {t("passengerPage.pageTitle")}
       </h2>
 
-      <div className="card-driver d-flex justify-content-between align-items-center px-3">
+      <div className="user-list-filters card-driver d-flex justify-content-between align-items-center px-3">
         
-        <div className="d-flex align-items-center gap-2 justify-content-center">
+        <div className="user-list-filter-fields d-flex align-items-center gap-2 justify-content-center">
            
 <Form.Select name="account_status" onChange={handleFilterChange} className='custom-select'>
   <option value="">{t("managmentEmployee.allStatuses")}</option>
@@ -101,7 +101,8 @@ const userShow = user.map((u) => (
        
       </div>
 
-      <Table className="custom-table" bordered hover striped>
+      <div className="user-table-shell" role="region" aria-label={t("passengerPage.pageTitle")} tabIndex="0">
+      <Table className="custom-table user-data-table" bordered hover striped>
         <thead>
           <tr>
             <th>{t("booking.id")}</th>
@@ -115,6 +116,7 @@ const userShow = user.map((u) => (
 
         <tbody>{userShow}</tbody>
       </Table>
+      </div>
     </div>
   );
 }
