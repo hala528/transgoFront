@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-
 import "./css/components/alerts.css";
 import "./css/components/loading.css";
 import "./pages/Auth/Auths.css";
 import "./pages/dashboard/User managment/cssUser/user.css";
 import './css/components/button.css';
 import './pages/dashboard/Trip managment/trip.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './pages/dashboard/User managment/cssUser/details.css';
 import './pages/dashboard/Audit log/log.css';
 import './pages/dashboard/FreeWalet/wallet.css';

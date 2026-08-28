@@ -9,16 +9,7 @@ export const Axios = axios.create({
 });
 
 
-// Axios.interceptors.request.use((config) => {
 
-//   const token = cookie.get("transtop");
-
-//   if (token) {
-//     config.headers.Authorization = `Bearer ${token}`;
-//   }
-
-//   return config;
-// });
 Axios.interceptors.request.use((config) => {
   const token = cookie.get("transtop");
 

@@ -1,4 +1,50 @@
-.dashboard{
-    min-height: 1000vh;
-    background-color: #020617;
+.dashboard-shell {
+    height: 100dvh;
+    min-height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle at 85% 0%, rgba(99, 102, 241, .09), transparent 32%), var(--bg-dark);
+}
+
+.dashboard {
+    display: block;
+    height: 100dvh;
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
+}
+
+.dashboard-content {
+    position: fixed;
+    top: var(--topbar-height);
+    bottom: 0;
+    inset-inline-end: 0;
+    z-index: 1;
+    min-width: 0;
+    width: calc(100% - 82px);
+    height: auto;
+    min-height: 0;
+    padding: clamp(10px, 1.5vw, 22px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    scroll-padding-top: clamp(10px, 1.5vw, 22px);
+    margin: 0;
+    transition: width .28s cubic-bezier(.4, 0, .2, 1);
+}
+
+.dashboard-shell.sidebar-expanded .dashboard-content {
+    width: calc(100% - 286px);
+}
+
+@media (max-width: 767.98px) {
+    .dashboard-content {
+        width: 100%;
+        inset-inline-start: 0;
+    }
+
+    .dashboard-shell.sidebar-expanded .dashboard-content {
+        width: 100%;
+    }
 }

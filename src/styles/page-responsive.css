@@ -1,0 +1,96 @@
+/* Feature-level responsive rules. Loaded last to resolve legacy fixed layouts. */
+.dashboard-content :is(.page, .vr-page, .trip-details-page) { width: 100%; max-width: 100%; min-width: 0; }
+.dashboard-content :is(.td-map-container, .map-container, .map-wrapper, .map-wrapper-placeholder) { max-width: 100%; min-width: 0; }
+.dashboard-content :is(.custom-table, .td-booking-table, .vr-table) { display: table; max-width: 100%; }
+
+@media (max-width: 1199.98px) {
+  .dashboard-content :is(.cards, .card-items, .t-card-horizontal) { flex-wrap: wrap; }
+  .dashboard-content .card-wallet { flex: 1 1 calc(33.333% - 20px); width: auto; min-width: 170px; }
+  .dashboard-content :is(.t-section-left, .t-section-center) { width: auto; flex: 1 1 280px; margin-inline-start: 0; }
+  .dashboard-content :is(.td-grid, .vr-layout, .main-layout-grid) { grid-template-columns: 1fr !important; }
+  .dashboard-content .td-info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dashboard-content :is(.filters-grid, .app-filters-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .dashboard-content .tabs { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; }
+  .dashboard-content .tabs .tab { flex: 0 0 auto; white-space: nowrap; }
+}
+
+@media (max-width: 767.98px) {
+  .dashboard-content :is(.page, .vr-page, .trip-details-page, .notifications-page, .complaints-page) { padding: 10px !important; }
+
+  /* User management and details */
+  .dashboard-content .card-driver { height: auto !important; min-height: 0; padding: 14px !important; }
+  .dashboard-content .card-driver > div { width: 100%; flex-wrap: wrap; justify-content: stretch !important; }
+  .dashboard-content .card-driver :is(.custom-select, .custom-input-driver, button, a) { width: 100% !important; flex: 1 1 100%; }
+  .dashboard-content .card-details { height: auto !important; min-height: 160px; padding: 16px !important; }
+  .dashboard-content :is(.card-account, .card-create) { flex: 1 1 100% !important; min-width: 0 !important; }
+  .dashboard-content .info-row { align-items: flex-start; gap: 10px; }
+  .dashboard-content .info-row > :last-child { max-width: 58%; overflow-wrap: anywhere; text-align: end; }
+
+  /* Audit log */
+  .dashboard-content :is(.log-card, .log-header) { align-items: flex-start !important; flex-direction: column; }
+  .dashboard-content :is(.log-left, .user-box) { width: 100%; justify-content: flex-start; }
+  .dashboard-content .log-right { width: 100%; text-align: start; }
+  .dashboard-content :is(.card-log, .card-logg) { height: auto; min-height: 70px; }
+
+  /* Wallets */
+  .dashboard-content .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .dashboard-content :is(.card-wallet, .card-click) { width: 100%; min-width: 0; height: auto; min-height: 155px; padding: 16px; }
+  .dashboard-content .card-items { height: auto; padding: 14px; }
+  .dashboard-content .search-box { align-items: stretch; }
+  .dashboard-content .search-box input { min-width: 0; }
+  .dashboard-content .search-box button { flex: 0 0 auto; padding-inline: 14px; }
+  .dashboard-content .driverr-card { align-items: flex-start; flex-direction: column; }
+  .dashboard-content .driverr-card img { width: min(100%, 180px); height: auto; aspect-ratio: 1; margin-inline: auto; }
+  .dashboard-content .driverr-details { width: 100%; flex-wrap: wrap; }
+  .dashboard-content :is(.charge-btn, .submit-btn) { width: 100%; }
+
+  /* Trips and maps */
+  .dashboard-content .t-card-horizontal { align-items: stretch; flex-direction: column; padding: 14px; }
+  .dashboard-content :is(.t-section-left, .t-section-center) { width: 100%; padding: 0; margin: 0; border: 0; }
+  .dashboard-content .t-id { font-size: clamp(25px, 9vw, 38px); }
+  .dashboard-content :is(.t-card-header, .td-header, .td-header-actions) { align-items: flex-start; flex-wrap: wrap; gap: 10px; }
+  .dashboard-content .td-info-grid { grid-template-columns: 1fr; }
+  .dashboard-content .td-map-container { height: clamp(260px, 55vh, 380px); }
+  .dashboard-content .td-vehicle-img { width: 100%; max-width: 300px; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+
+  /* Bookings */
+  .dashboard-content :is(.b-trip-header, .trip-header) { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .dashboard-content :is(.b-trip-left, .b-trip-right) { width: 100%; flex-wrap: wrap; }
+  .dashboard-content .b-trip-right { justify-content: space-between; }
+  .dashboard-content :is(.b-table, .bookings-table) { width: 100%; overflow-x: auto; scrollbar-width: thin; }
+  .dashboard-content :is(.b-table-head, .b-table-row, .table-head, .table-row) { width: max-content; min-width: 680px; }
+  .dashboard-content .td-pickup-map-layout { flex-direction: column; }
+  .dashboard-content .td-pickup-list { width: 100%; }
+
+  /* Ratings and notifications */
+  .dashboard-content .vr-filters-bar { align-items: stretch; flex-direction: column; }
+  .dashboard-content .vr-filters-bar :is(select, input, button) { width: 100%; }
+  .dashboard-content .vr-profile-card { align-items: flex-start; flex-direction: column; }
+  .dashboard-content .vr-profile-card img { width: 72px; height: 72px; }
+  .dashboard-content .vr-table-card { overflow-x: auto; }
+  .dashboard-content .type-selector { display: grid; grid-template-columns: 1fr 1fr; }
+  .dashboard-content .type-selector button { width: 100%; }
+
+  /* Commission, complaints, reports and revenues */
+  .dashboard-content .commission-info { gap: 16px; flex-direction: column; }
+  .dashboard-content .modal-overlay { padding: 12px; }
+  .dashboard-content .modal-overlay .modal-content { width: 100%; max-height: calc(100dvh - 24px); padding: 18px; overflow-y: auto; }
+  .dashboard-content :is(.complaint-top, .complaint-actions, .table-header, .chart-header, .topbar) { align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  .dashboard-content .complaint-info { align-items: flex-start; }
+  .dashboard-content :is(.charts, .breakdown-grid, .extra-stats, .cards-grid, .summary-grid) { grid-template-columns: 1fr !important; }
+  .dashboard-content :is(.filters, .filters-grid, .app-filters-grid) { grid-template-columns: 1fr !important; }
+  .dashboard-content :is(.bar-chart, .days-chart) { min-width: 560px; }
+  .dashboard-content :is(.chart-box, .days-chart) { overflow-x: auto; }
+}
+
+@media (max-width: 479.98px) {
+  .dashboard-content .cards { grid-template-columns: 1fr; }
+  .dashboard-content .search-box { flex-direction: column; gap: 8px; }
+  .dashboard-content .search-box :is(input, button) { width: 100%; border-radius: 10px; }
+  .dashboard-content .amount-box { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+  .dashboard-content .type-selector { grid-template-columns: 1fr; }
+  .dashboard-content .modal-actions { flex-direction: column-reverse; }
+  .dashboard-content .modal-actions button { width: 100%; }
+  .dashboard-content .info-row { flex-direction: column; }
+  .dashboard-content .info-row > :last-child { max-width: 100%; text-align: start; }
+}

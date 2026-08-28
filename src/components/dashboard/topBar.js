@@ -1,321 +1,103 @@
-// import { faBars, faUserCircle } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { Menu } from "../../context/MnueContext";
-// import { useContext, useEffect, useState } from "react";
-// import { useTranslation } from "react-i18next";
-// import { DropdownButton, Dropdown, Modal, Button } from "react-bootstrap";
-// import { useNavigate } from "react-router-dom";
-// import Cookies from "universal-cookie";
-// import { Axios } from "../../api/axios";
-// import { LOGOUT, beasURL ,  GET_PROFILE} from "../../api/api";
-// import LanguageSwitcher from "../../components/LanguageSwitcher";
-// export default function TopBar() {
-//   const menu = useContext(Menu);
-//   const setIsOpen = menu.setIsOpen;
-//  const isOpen = menu.isOpen;
-//   const [name, setName] = useState("");
-//   const [showProfile, setShowProfile] = useState(false);
-//  const { t, i18n } = useTranslation();
-//   const [profile, setProfile] = useState({
-//     photo: null,
-//     name: "",
-//     email: "",
-//     phone_number: "",
-//   });
-
-//   const navigate = useNavigate();
-//   const cookie = new Cookies();
-//   const user = cookie.get("user");
-
-//   useEffect(() => {
-//     if (user) {
-//       setName(user.full_name);
-//     } else {
-//       navigate("/login");
-//     }
-//   }, [user, navigate]);
-
-//   // logout
-//   async function handelLogout() {
-//     try {
-//       await Axios.post(`${beasURL}/${LOGOUT}`, {});
-//       window.location.href = "/login";
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-
-//   // get profile
-//   async function getProfile() {
-//     try {
-//       const res = await Axios.get(`${beasURL}/${GET_PROFILE}`);
-//       setProfile(res.data.data);
-//       setShowProfile(true);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-//  function changeLang(lng) {
-//     i18n.changeLanguage(lng);
-//     localStorage.setItem("lang", lng);
-//     document.dir = lng === "ar" ? "rtl" : "ltr";
-//   }
-//   return (
-//     <div className="top-bar">
-//       {/* left side */}
-//       <div className="d-flex align-items-center gap-4">
-//         <h3 className="bar-text mb-0">TransGo</h3>
-
-//         <FontAwesomeIcon
-//           onClick={() => setIsOpen((prev) => !prev)}
-//           cursor="pointer"
-//           icon={faBars}
-//         />
-//       </div>
-
-//       {/* right side */}
-//       <div className="d-flex align-items-center gap-3">
-//          {isOpen && <LanguageSwitcher />}
-//         {/* profile icon */}
-//         <FontAwesomeIcon
-//           icon={faUserCircle}
-//           size="2x"
-//           cursor="pointer"
-//           onClick={getProfile}
-//         />
-
-//         {/* dropdown */}
-//         <div className="user-dropdown">
-//           <DropdownButton
-//             id="dropdown-basic-button"
-//             variant="primary"
-//             title={name}
-//           >
-//             <Dropdown.Item onClick={handelLogout}>
-//               Logout
-//             </Dropdown.Item>
-//           </DropdownButton>
-        
-//         </div>
-//       </div>
-
-//       {/* Profile Modal */}
-//       <Modal 
-//         show={showProfile}
-//         onHide={() => setShowProfile(false)}
-//         centered
-//       >
-//         <Modal.Header style={{
-//             background:'#020617',
-//             color:'white'
-//           }} closeButton>
-//           <Modal.Title >User Profile</Modal.Title>
-//         </Modal.Header>
-
-//         <Modal.Body className="text-center" style={{
-//           background:'#1e1b4b',
-//           color:'white'
-//         }}>
-//           {profile.photo ? (
-//             <img
-//               src={profile.photo}
-//               alt="profile"
-//               width="100"
-//               height="100"
-//               className="rounded-circle mb-3"
-//             />
-//           ) : (
-//             <FontAwesomeIcon
-//               icon={faUserCircle}
-//               size="5x"
-//               className="text-secondary mb-3"
-//             />
-//           )}
-
-//           <p>
-//             <strong>Name:</strong> {profile.name}
-//           </p>
-
-//           <p>
-//             <strong>Email:</strong> {profile.email}
-//           </p>
-
-//           <p>
-//             <strong>Phone:</strong> {profile.phone_number}
-//           </p>
-//         </Modal.Body>
-
-//         <Modal.Footer style={{
-//             background:'#020617',
-//             color:'white'
-//           }}>
-//           <Button
-//             variant="secondary"
-//             onClick={() => setShowProfile(false)}
-//           >
-//             Close
-//           </Button>
-//         </Modal.Footer>
-//       </Modal>
-//     </div>
-//   );
-// }
-import { faBars, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faChevronDown, faRightFromBracket, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Menu } from "../../context/MnueContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { Button, Modal } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { DropdownButton, Dropdown, Modal, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { Axios } from "../../api/axios";
-import { LOGOUT, beasURL ,  GET_PROFILE} from "../../api/api";
-import LanguageSwitcher from "../../components/LanguageSwitcher";
+import { GET_PROFILE, LOGOUT, beasURL } from "../../api/api";
+import { Menu } from "../../context/MnueContext";
+import { dashboardNavigation } from "../../config/dashboardNavigation";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 export default function TopBar() {
-  const menu = useContext(Menu);
-  const setIsOpen = menu.setIsOpen;
- const isOpen = menu.isOpen;
-  const [name, setName] = useState("");
-  const [showProfile, setShowProfile] = useState(false);
- const { t } = useTranslation();
-  const [profile, setProfile] = useState({
-    photo: null,
-    name: "",
-    email: "",
-    phone_number: "",
-  });
-
+  const { isOpen, setIsOpen } = useContext(Menu);
+  const { t } = useTranslation();
+  const location = useLocation();
   const navigate = useNavigate();
-  const cookie = new Cookies();
+  const cookie = useMemo(() => new Cookies(), []);
   const user = cookie.get("user");
+  const role = cookie.get("role");
+  const [showProfile, setShowProfile] = useState(false);
+  const [profile, setProfile] = useState({ photo: null, name: "", email: "", phone_number: "" });
+
+  const activeNavigation = dashboardNavigation.find((item) =>
+    location.pathname.toLowerCase().includes(`/dashboard/${item.path.toLowerCase()}`)
+  );
+  const pageTitle = activeNavigation ? t(activeNavigation.key) : t("topBar.dashboard", "Dashboard");
+  const displayName = user?.full_name || t("topBar.user", "User");
+  const roleLabel = role === "admin" ? t("appUsageReport.admin", "Admin") : t("appUsageReport.employee", "Employee");
 
   useEffect(() => {
-    if (user) {
-      setName(user.full_name);
-    } else {
-      navigate("/login");
-    }
+    if (!user) navigate("/login");
   }, [user, navigate]);
 
-  // logout
-  async function handelLogout() {
+  async function handleLogout() {
     try {
       await Axios.post(`${beasURL}/${LOGOUT}`, {});
+    } catch (error) {
+      console.error(error);
+    } finally {
       window.location.href = "/login";
-    } catch (err) {
-      console.log(err);
     }
   }
 
-  // get profile
   async function getProfile() {
     try {
-      const res = await Axios.get(`${beasURL}/${GET_PROFILE}`);
-      setProfile(res.data.data);
+      const response = await Axios.get(`${beasURL}/${GET_PROFILE}`);
+      setProfile(response.data.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
       setShowProfile(true);
-    } catch (err) {
-      console.log(err);
     }
   }
 
   return (
-    <div className="top-bar">
-      {/* left side */}
-      <div className="d-flex align-items-center gap-4">
-        <h3 className="bar-text mb-0">TransGo</h3>
-
-        <FontAwesomeIcon
-          onClick={() => setIsOpen((prev) => !prev)}
-          cursor="pointer"
-          icon={faBars}
-        />
-      </div>
-
-      {/* right side */}
-      <div className="d-flex align-items-center gap-3">
-          {isOpen && <LanguageSwitcher />}
-        {/* profile icon */}
-        <FontAwesomeIcon
-          icon={faUserCircle}
-          size="2x"
-          cursor="pointer"
-          onClick={getProfile}
-        />
-
-        {/* dropdown */}
-        <div className="user-dropdown">
-          <DropdownButton
-            id="dropdown-basic-button"
-            variant="primary"
-            title={name}
-          >
-            <Dropdown.Item onClick={handelLogout}>
-              {t("topBar.logout")}
-            </Dropdown.Item>
-          </DropdownButton>
-        
+    <header className="top-bar">
+      <div className="top-bar-leading">
+        <button type="button" className="menu-toggle" onClick={() => setIsOpen((value) => !value)}
+          aria-label={t("topBar.toggleMenu", "Toggle navigation menu")} aria-expanded={isOpen}>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+        <div className="page-heading">
+          <span className="page-heading-eyebrow">TransGo</span>
+          <h1>{pageTitle}</h1>
         </div>
       </div>
 
-      {/* Profile Modal */}
-      <Modal 
-        show={showProfile}
-        onHide={() => setShowProfile(false)}
-        centered
-      >
-        <Modal.Header style={{
-            background:'#020617',
-            color:'white'
-          }} closeButton>
-          <Modal.Title >{t("topBar.userProfile")}</Modal.Title>
-        </Modal.Header>
+      <div className="top-bar-actions">
+        <LanguageSwitcher />
+        <button type="button" className="profile-trigger" onClick={getProfile}>
+          <span className="profile-avatar" aria-hidden="true">
+            {profile.photo ? <img src={profile.photo} alt="" /> : <FontAwesomeIcon icon={faUserCircle} />}
+          </span>
+          <span className="profile-copy"><strong>{displayName}</strong><small>{roleLabel}</small></span>
+          <FontAwesomeIcon className="profile-chevron" icon={faChevronDown} />
+        </button>
+        <button type="button" className="logout-button" onClick={handleLogout}
+          aria-label={t("topBar.logout")} title={t("topBar.logout")}>
+          <FontAwesomeIcon icon={faRightFromBracket} />
+        </button>
+      </div>
 
-        <Modal.Body className="text-center" style={{
-          background:'#1e1b4b',
-          color:'white'
-        }}>
-          {profile.photo ? (
-            <img
-              src={profile.photo}
-              alt="profile"
-              width="100"
-              height="100"
-              className="rounded-circle mb-3"
-            />
-          ) : (
-            <FontAwesomeIcon
-              icon={faUserCircle}
-              size="5x"
-              className="text-secondary mb-3"
-            />
-          )}
-
-          <p>
-            <strong>{t("detailsEmployee.fullName")}:</strong> {profile.name}
-          </p>
-
-          <p>
-            <strong>{t("walletDriver.email")}:</strong> {profile.email}
-          </p>
-
-          <p>
-            <strong>{t("bookingDetails.phone")}:</strong> {profile.phone_number}
-          </p>
+      <Modal show={showProfile} onHide={() => setShowProfile(false)} centered contentClassName="profile-modal">
+        <Modal.Header closeButton><Modal.Title>{t("topBar.userProfile")}</Modal.Title></Modal.Header>
+        <Modal.Body>
+          <div className="profile-modal-hero">
+            <div className="profile-modal-avatar">
+              {profile.photo ? <img src={profile.photo} alt={profile.name || displayName} /> : <FontAwesomeIcon icon={faUserCircle} />}
+            </div>
+            <div><h3>{profile.name || displayName}</h3><span>{roleLabel}</span></div>
+          </div>
+          <dl className="profile-details">
+            <div><dt>{t("walletDriver.email")}</dt><dd>{profile.email || "—"}</dd></div>
+            <div><dt>{t("bookingDetails.phone")}</dt><dd>{profile.phone_number || "—"}</dd></div>
+          </dl>
         </Modal.Body>
-
-        <Modal.Footer style={{
-            background:'#020617',
-            color:'white'
-          }}>
-          <Button
-            variant="secondary"
-            onClick={() => setShowProfile(false)}
-          >
-            {t("walletDriver.close")}
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer><Button variant="outline-light" onClick={() => setShowProfile(false)}>{t("walletDriver.close")}</Button></Modal.Footer>
       </Modal>
-    </div>
+    </header>
   );
 }

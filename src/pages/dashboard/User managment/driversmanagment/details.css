@@ -322,3 +322,638 @@
   object-fit: contain;
   border-radius: 20px;
 }
+/* =========================================================
+   DRIVER DETAILS - RESPONSIVE GRID
+   Desktop  → 4 stats / 2 main cards
+   Tablet   → 2 stats / 1 main card
+   Mobile   → 1 stat / 1 main card
+   ========================================================= */
+
+
+/* =========================================================
+   TOP STATS
+   ========================================================= */
+
+.top-state {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  width: 100%;
+}
+
+
+/* =========================================================
+   MAIN CARDS
+   ========================================================= */
+
+.cards-gridee {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+
+/* =========================================================
+   VEHICLE INFORMATION
+   ========================================================= */
+
+.vehiclee-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+
+.gallerye {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  width: 100%;
+}
+
+
+/* =========================================================
+   TABLET
+   768px - 991px
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+  /* ---------- Header ---------- */
+
+  .top-carde {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .top-contente {
+    gap: 20px;
+  }
+
+  .driver-avatare img {
+    width: 110px;
+    height: 110px;
+    border-width: 4px;
+  }
+
+  .drivere-main-info {
+    min-width: 0;
+  }
+
+  .namee-row {
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .namee-row h2 {
+    font-size: 22px;
+  }
+
+
+  /* ---------- Personal Information ---------- */
+
+  .info-gride {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .info-gride div {
+    padding: 11px;
+    min-width: 0;
+  }
+
+  .info-gride span {
+    overflow-wrap: anywhere;
+    font-size: 13px;
+  }
+
+
+  /* ---------- Account Button ---------- */
+
+  .info-gride button {
+    width: 100% !important;
+    max-width: none !important;
+    grid-column: 1 / -1;
+  }
+
+
+  /* ---------- Statistics ---------- */
+
+  .top-state {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .mini-state {
+    padding: 15px;
+    border-radius: 17px;
+  }
+
+  .state-left {
+    min-width: 0;
+  }
+
+  .state-left span {
+    font-size: 13px;
+  }
+
+  .mini-state h4 {
+    font-size: 24px;
+  }
+
+
+  /* ---------- Main Cards ---------- */
+
+  .cards-gridee {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .section-cardee {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+
+  /* ---------- Vehicle ---------- */
+
+  .vehiclee-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+  }
+
+
+  /* ---------- Gallery ---------- */
+
+  .gallerye {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .gallery-imge {
+    height: 160px;
+  }
+
+
+  /* ---------- Documents ---------- */
+
+  .documente-item {
+    gap: 12px;
+  }
+
+  .documente-item span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+
+  /* ---------- Ratings ---------- */
+
+  .rating-wrapper {
+    gap: 20px;
+  }
+
+  .rating-scoree {
+    min-width: 150px;
+  }
+
+  .rating-scoree h1 {
+    font-size: 55px;
+  }
+
+
+  /* ---------- Financial ---------- */
+
+  .financial-item {
+    padding: 15px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   أقل من 768px
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  /* ---------- Page ---------- */
+
+  .driver-page {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+
+  /* ---------- Page Header ---------- */
+
+  .w-100.p-2 > .d-flex {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+
+  .w-100.p-2 > .d-flex h2 {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .td-back {
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+
+  /* =====================================================
+     HEADER
+     ===================================================== */
+
+  .top-carde {
+    padding: 18px;
+    border-radius: 18px;
+    margin-bottom: 18px;
+  }
+
+  .top-contente {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+
+  /* ---------- Driver Image ---------- */
+
+  .driver-avatare {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .driver-avatare img {
+    width: 100px;
+    height: 100px;
+    border-width: 4px;
+  }
+
+
+  /* ---------- Driver Info ---------- */
+
+  .drivere-main-info {
+    width: 100%;
+  }
+
+  .namee-row {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+
+  .namee-row h2 {
+    font-size: 20px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+
+  /* =====================================================
+     PERSONAL INFO
+     ===================================================== */
+
+  .info-gride {
+    grid-template-columns: 1fr;
+    gap: 9px;
+    width: 100%;
+  }
+
+  .info-gride div {
+    padding: 12px;
+    border-radius: 12px;
+    text-align: left;
+
+    min-width: 0;
+    width: 100%;
+  }
+
+  .info-gride span {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+
+
+  /* Account status button */
+
+  .info-gride button {
+    width: 100% !important;
+    max-width: none !important;
+    margin-top: 2px;
+  }
+
+
+  /* =====================================================
+     TOP STATS
+     ===================================================== */
+
+  .top-state {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .mini-state {
+    padding: 13px;
+    border-radius: 15px;
+
+    min-width: 0;
+  }
+
+  .state-left {
+    gap: 7px;
+    min-width: 0;
+  }
+
+  .state-left svg {
+    flex-shrink: 0;
+  }
+
+  .state-left span {
+    font-size: 11px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mini-state h4 {
+    font-size: 21px;
+  }
+
+
+  /* =====================================================
+     MAIN CARDS
+     ===================================================== */
+
+  .cards-gridee {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .section-cardee {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .section-header-e {
+    margin-bottom: 15px;
+  }
+
+  .section-header-e h4 {
+    font-size: 18px;
+  }
+
+
+  /* =====================================================
+     VEHICLE
+     ===================================================== */
+
+  .vehiclee-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .vehiclee-grid h6 {
+    margin-top: 4px;
+    overflow-wrap: anywhere;
+  }
+
+  .labele {
+    font-size: 12px;
+  }
+
+
+  /* =====================================================
+     GALLERY
+     ===================================================== */
+
+  .gallerye {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .gallery-imge {
+    height: 130px;
+    border-radius: 12px;
+  }
+
+
+  /* =====================================================
+     DOCUMENTS
+     ===================================================== */
+
+  .documente-list {
+    gap: 10px;
+  }
+
+  .documente-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+
+    padding: 13px;
+    border-radius: 13px;
+  }
+
+  .documente-item > span {
+    grid-column: 1 / -1;
+
+    font-size: 13px;
+  }
+
+  .documente-item .badge {
+    justify-self: start;
+  }
+
+  .documente-item button {
+    justify-self: end;
+  }
+
+
+  /* =====================================================
+     RATINGS
+     ===================================================== */
+
+  .rating-wrapper {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .rating-scoree {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .rating-scoree h1 {
+    font-size: 52px;
+  }
+
+  .reviews-list {
+    width: 100%;
+  }
+
+  .review-box {
+    padding: 13px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+
+  /* =====================================================
+     FINANCIAL
+     ===================================================== */
+
+  .financial-box {
+    gap: 10px;
+  }
+
+  .financial-item {
+    padding: 14px;
+    border-radius: 13px;
+  }
+
+  .financial-item h5 {
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .financial-item span {
+    font-size: 13px;
+  }
+
+
+  /* =====================================================
+     MODAL
+     ===================================================== */
+
+  .custom-modal-body {
+    padding: 12px;
+  }
+
+  .modal-image {
+    max-height: 70vh;
+    border-radius: 12px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   أقل من 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .top-carde {
+    padding: 14px;
+  }
+
+  .driver-avatare img {
+    width: 85px;
+    height: 85px;
+  }
+
+  .namee-row h2 {
+    font-size: 18px;
+  }
+
+
+  /* Stats → بطاقة واحدة */
+  .top-state {
+    grid-template-columns: 1fr;
+  }
+
+  .mini-state {
+    min-height: 58px;
+  }
+
+  .mini-state h4 {
+    font-size: 22px;
+  }
+
+
+  /* Gallery → صورتان في الصف */
+  .gallerye {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gallery-imge {
+    height: 115px;
+  }
+
+
+  /* Documents */
+
+  .documente-item {
+    grid-template-columns: 1fr;
+  }
+
+  .documente-item .badge,
+  .documente-item button {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+
+  /* Financial */
+
+  .financial-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+
+  /* Modal */
+
+  .modal-image {
+    max-height: 60vh;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL MOBILE
+   أقل من 360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .w-100.p-2 > .d-flex h2 {
+    font-size: 18px;
+  }
+
+  .top-carde {
+    padding: 12px;
+  }
+
+  .section-cardee {
+    padding: 13px;
+  }
+
+  .state-left span {
+    font-size: 10px;
+  }
+
+  .mini-state h4 {
+    font-size: 19px;
+  }
+
+  .gallery-imge {
+    height: 100px;
+  }
+}

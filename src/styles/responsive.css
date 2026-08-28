@@ -1,0 +1,258 @@
+/*
+ * Central responsive layer
+ * Breakpoints follow Bootstrap: phone < 576, tablet < 992, desktop >= 992.
+ * Page-specific CSS owns colors; this file owns layout behavior.
+ */
+
+:root {
+  --topbar-height: 76px;
+  --page-gutter: clamp(12px, 2vw, 28px);
+  --touch-target: 44px;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg-dark);
+}
+
+img,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+}
+
+.dashboard-content > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.dashboard-content :is(.table-responsive, .table-box, .custom-table) {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.dashboard-content :is(.table-box, .custom-table) table,
+.dashboard-content > table {
+  min-width: 100%;
+}
+
+.dashboard-content :is(.modal-content, .commission-container) {
+  max-width: 100%;
+}
+
+@media (max-width: 991.98px) {
+  .dashboard-content {
+    font-size: 14px;
+  }
+
+  .dashboard-content :is(.td-layout, .vr-layout, .tracking-layout, .charts, .breakdown-grid) {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-content :is(.vr-stats-grid, .complaints-stats, .summary-grid, .stats-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .dashboard-content :is(.vr-breakdown-grid, .app-filters-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .dashboard-content .top-cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --topbar-height: 64px;
+    --page-gutter: 12px;
+  }
+
+  .dashboard-content > :is(.p-2, .p-3, .p-4),
+  .dashboard-content :is(
+    .complaint-details-page,
+    .complaints-page,
+    .reports-page,
+    .drivers-page,
+    .complaints-report,
+    .notifications-page
+  ) {
+    padding: var(--page-gutter) !important;
+  }
+
+  .dashboard-content .row {
+    max-width: 100%;
+    margin-inline: 0;
+  }
+
+  .dashboard-content :is(
+    .card-driver,
+    .filters,
+    .filter-row,
+    .report-header,
+    .table-header,
+    .complaints-header,
+    .details-header,
+    .page-header,
+    .commission-header,
+    .log-card,
+    .log-header,
+    .driverr-card,
+    .vr-profile-card,
+    .type-selector
+  ) {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .dashboard-content :is(.filters, .filter-row, .card-driver) > * {
+    flex: 1 1 min(100%, 190px);
+  }
+
+  .dashboard-content :is(.filters, .filter-row, .card-driver) :is(input, select, button) {
+    width: 100% !important;
+  }
+
+  .dashboard-content :is(.vr-stats-grid, .complaints-stats, .summary-grid, .stats-grid, .vr-breakdown-grid, .app-filters-grid) {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-content :is(.td-grid, .details-grid, .booking-grid) {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-content :is(.table-box, .table-responsive, .vr-table-card, .history-card) {
+    overflow-x: auto;
+  }
+
+  .dashboard-content :is(.b-table, .td-card) {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .dashboard-content :is(.b-table-head, .b-table-row) {
+    min-width: 680px;
+  }
+
+  .dashboard-content .top-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .dashboard-content .main-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-content table {
+    width: max-content;
+    min-width: 100%;
+    font-size: 13px;
+  }
+
+  .dashboard-content :is(th, td) {
+    white-space: nowrap;
+  }
+
+  .dashboard-content .driverr-card img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+  }
+
+  .dashboard-content .charge-btn {
+    width: 100%;
+  }
+
+  .dashboard-content .commission-card h1 {
+    font-size: clamp(42px, 15vw, 64px);
+  }
+
+  .dashboard-content .modal-content {
+    width: calc(100vw - 24px);
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+  }
+
+  .modal-dialog {
+    width: calc(100% - 24px);
+    margin: 12px auto;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .login-page {
+    min-height: 100dvh;
+    height: auto;
+    padding: 12px;
+  }
+
+  .login-card {
+    width: 100%;
+  }
+
+  .login-right {
+    padding: 24px 18px;
+  }
+
+  .logo-box {
+    display: none;
+  }
+
+  .otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .otp-container input {
+    width: 42px;
+    height: 48px;
+    margin: 2px;
+    font-size: 24px;
+  }
+
+  .dashboard-content :is(.card, .details-card, .notification-card, .commission-card, .history-card) {
+    padding: 14px !important;
+  }
+
+  .dashboard-content :is(.page-header, .details-header, .commission-header) > * {
+    width: 100%;
+  }
+
+  .dashboard-content :is(.send-btn, .edit-btn) {
+    min-height: var(--touch-target);
+  }
+
+  .dashboard-content .vr-empty-state {
+    padding: 36px 16px;
+  }
+
+  .dashboard-content .top-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

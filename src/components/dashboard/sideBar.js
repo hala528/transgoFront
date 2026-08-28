@@ -1,183 +1,49 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../../components/dashboard/bar.css";
-import {
-  faCar,
-  faUsers,
-  faUserTie,
-  faWallet,
-  faClipboardList,
-  faRoute,
-  faTicket,
-  faChartLine,
-  faCommentDots,
-  faStar,
-  faPercent,
-  faMoneyBillTrendUp,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
+import Cookies from "universal-cookie";
 import { Menu } from "../../context/MnueContext";
 import { WindowSize } from "../../context/WindowContext";
-import Cookies from "universal-cookie";
+import { dashboardNavigation } from "../../config/dashboardNavigation";
+import "./bar.css";
 
 export default function SideBar() {
-  const { t, i18n } = useTranslation();
-  const menu = useContext(Menu);
+  const { t } = useTranslation();
+  const { isOpen, setIsOpen } = useContext(Menu);
   const { windowSize } = useContext(WindowSize);
-  const isOpen = menu.isOpen;
-
-  const cookie = new Cookies();
-  const role = cookie.get("role");
-
-  const links = [
-    {
-      key: "sidebar.drivers",
-      path: "driver",
-      icon: faCar,
-      roles: ["admin", "employee"],
-    },
-    {
-      key: "sidebar.passengers",
-      path: "passenger",
-      icon: faUsers,
-      roles: ["admin", "employee"],
-    },
-    {
-      key: "sidebar.employees",
-      path: "employee",
-      icon: faUserTie,
-      roles: ["admin"],
-    },
-    {
-      key: "sidebar.category",
-      path: "category",
-      icon: faUserTie,
-      roles: ["admin"],
-    },
-    {
-      key: "sidebar.wallet",
-      path: "wallet",
-      icon: faWallet,
-      roles: ["admin", "employee"],
-    },
-    {
-      key: "sidebar.auditLog",
-      path: "auditLog",
-      icon: faClipboardList,
-      roles: ["admin"],
-    },
-    {
-      key: "sidebar.trips",
-      path: "trips",
-      icon: faRoute,
-      roles: ["admin", "employee"],
-    },
-    {
-      key: "sidebar.booking",
-      path: "booking",
-      icon: faTicket,
-      roles: ["admin", "employee"],
-    },
-    {
-      key: "sidebar.reports",
-      path: "Reports",
-      icon: faChartLine,
-      roles: ["admin", "employee"],
-    },
-    {
-      key: "sidebar.complaints",
-      path: "complaints",
-      icon: faCommentDots,
-      roles: ["admin", "employee"],
-    },
-    {
-      key: "sidebar.rating",
-      path: "rating",
-      icon: faStar,
-      roles: ["admin", "employee"],
-    },
-    {
-      key: "sidebar.rateCommission",
-      path: "rateCommission",
-      icon: faPercent,
-      roles: ["admin"],
-    },
-    {
-      key: "sidebar.revenue",
-      path: "RevenueR",
-      icon: faMoneyBillTrendUp,
-      roles: ["admin", "employee"],
-    },
-    {
-      key: "sidebar.notifications",
-      path: "Notifi",
-      icon: faMoneyBillTrendUp,
-      roles: ["admin", "employee"],
-    },
-  ];
-
-  const filteredLinks = links.filter((link) => link.roles.includes(role));
-
-  function changeLang(lng) {
-    i18n.changeLanguage(lng);
-    localStorage.setItem("lang", lng);
-    document.dir = lng === "ar" ? "rtl" : "ltr";
-  }
+  const role = new Cookies().get("role");
+  const filteredLinks = dashboardNavigation.filter((link) => link.roles.includes(role));
+  const isMobile = windowSize < 768;
+  const roleLabel = role === "admin" ? t("appUsageReport.admin", "Admin") : t("appUsageReport.employee", "Employee");
 
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          top: "70px",
-          left: "0",
-          width: "100%",
-          height: "100vh",
-          backgroundColor: "rgba(0,0,0,0.5)",
-          display: windowSize < 768 && isOpen ? "block" : "none",
-        }}
-      ></div>
-
-      <div
-        className="side-bar pt-3"
-        style={{
-          left: windowSize < 768 ? (isOpen ? 0 : "-100%") : 0,
-          width: isOpen ? "280px" : "fit-content",
-          position: windowSize < 768 ? "fixed" : "sticky",
-        }}
-      >
-        {isOpen && <p className="subtitlebar">You Are Welcome</p>}
-
-        {/* عرض حسب الصلاحيات */}
-        {filteredLinks.map((link, index) => (
-          <NavLink
-            key={index}
-            to={link.path}
-            className="d-flex align-items-center gap-2 side-bar-link"
-          >
-            <FontAwesomeIcon icon={link.icon} />
-            <p
-              className="m-0"
-              style={{ display: isOpen ? "block" : "none" }}
-            >
-              {t(link.key)}
-            </p>
-          </NavLink>
-        ))}
-
-        {/* زر تبديل اللغة */}
-        {/* {isOpen && (
-          <div className="d-flex gap-2 mt-3 px-2">
-            <button onClick={() => changeLang("ar")} className="side-bar-link">
-              عربي
-            </button>
-            <button onClick={() => changeLang("en")} className="side-bar-link">
-              EN
-            </button>
-          </div>
-        )} */}
-      </div>
+      <button type="button" className={`sidebar-backdrop ${isMobile && isOpen ? "show" : ""}`}
+        onClick={() => setIsOpen(false)} aria-label={t("topBar.closeMenu", "Close navigation menu")}
+        tabIndex={isMobile && isOpen ? 0 : -1} />
+      <aside className={`side-bar ${isOpen ? "is-open" : "is-collapsed"} ${isMobile ? "is-mobile" : ""}`}
+        aria-label={t("sidebar.navigation", "Dashboard navigation")}>
+        <div className="sidebar-brand">
+          <span className="sidebar-logo"><FontAwesomeIcon icon={faLocationDot} /></span>
+          <span className="sidebar-brand-copy"><strong>TransGo</strong><small>Control Center</small></span>
+        </div>
+        <div className="sidebar-section-label">{t("sidebar.mainMenu", "Main menu")}</div>
+        <nav className="sidebar-nav">
+          {filteredLinks.map((link) => (
+            <NavLink key={link.key} to={link.path} onClick={() => isMobile && setIsOpen(false)}
+              className="side-bar-link" title={!isOpen ? t(link.key) : undefined}>
+              <span className="sidebar-link-icon"><FontAwesomeIcon icon={link.icon} /></span>
+              <span className="sidebar-link-label">{t(link.key)}</span>
+            </NavLink>
+          ))}
+        </nav>
+        <div className="sidebar-footer">
+          <span className="sidebar-footer-icon"><FontAwesomeIcon icon={faShieldHalved} /></span>
+          <span className="sidebar-footer-copy"><small>{t("sidebar.signedInAs", "Signed in as")}</small><strong>{roleLabel}</strong></span>
+        </div>
+      </aside>
     </>
   );
 }

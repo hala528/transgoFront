@@ -69,6 +69,9 @@ import RateCommission from "./pages/dashboard/rate_commission/rate_commission";
 
 import Notifi from "./pages/dashboard/Notifi/Notifi";
 import Category from "./pages/dashboard/catorgy/VehicleCategories";
+import "./styles/responsive.css";
+import "./styles/design-system.css";
+import "./styles/page-responsive.css";
 
 
 // import TripTracking from './pages/dashboard/Trip managment/TripTracking';

@@ -1,368 +1,875 @@
-/* ===========================
-   DRIVER MANAGEMENT
-=========================== */
-
-.drv-card {
-  background: #1e1b4b !important;
-
-  border: 1px solid
-    rgba(255, 255, 255, 0.08);
-
-  border-radius: 22px !important;
-
-  padding: 20px;
-
-  color: white;
-
-  transition: 0.3s;
-
-  overflow: hidden;
-
-  height: 100%;
-}
-
-.drv-card:hover {
-  transform: translateY(-6px);
-
-  border-color: #3b82f6;
-
-  box-shadow:
-    0 20px 35px
-    rgba(59, 130, 246, 0.2);
-}
-
-.drv-card-header {
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  margin-bottom: 18px;
-}
-
-.drv-id {
-  color: #94a3b8;
-
-  font-size: 14px;
-
-  font-weight: 600;
-}
-
-.drv-profile {
-  display: flex;
-
-  gap: 15px;
-
-  align-items: center;
-}
-
+/* =========================== DRIVER MANAGEMENT =========================== */
+ .drv-card {
+   background: #1e1b4b !important; 
+   border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px !important; 
+    padding: 20px;
+     color: white;
+      transition: 0.3s;
+   overflow: hidden;
+   height: 100%; }
+   .drv-card:hover {
+   transform: translateY(-6px);
+   border-color: #3b82f6;
+   box-shadow: 0 20px 35px rgba(59, 130, 246, 0.2);
+   }
+   .drv-card-header {
+     display: flex;
+     justify-content: space-between;
+   align-items: center;
+   margin-bottom: 18px; 
+  } 
+  .drv-id {
+   color: #94a3b8;
+ font-size: 14px; 
+ font-weight: 600;
+ } 
+ .drv-profile {
+ display: flex;
+  gap: 15px; 
+  align-items: center; 
+} 
 .drv-avatar {
-  width: 95px !important;
-
-  height: 95px !important;
-
-  object-fit: cover;
-
+ width: 95px !important; 
+ height: 95px !important; 
+ object-fit: cover;
   border: 4px solid #2563eb;
+ } 
+ .drv-info { 
+  flex: 1; 
+} 
+.drv-info h5 { 
+  margin-bottom: 10px; 
+  font-weight: 700; 
 }
-
-.drv-info {
-  flex: 1;
-}
-
-.drv-info h5 {
-  margin-bottom: 10px;
-
-  font-weight: 700;
-}
-
-.drv-info p {
-  margin-bottom: 5px;
-
+ .drv-info p {
+ margin-bottom: 5px;
   color: #cbd5e1;
-
-  font-size: 14px;
-}
-
-.drv-rating {
-  margin-top: 8px;
-
-  color: #facc15;
-
-  font-size: 18px;
-
-  display: flex;
-
-  gap: 8px;
-
-  align-items: center;
-}
-
-.drv-rating span {
+   font-size: 14px; 
+  } 
+  .drv-rating {
+     margin-top: 8px; 
+     color: #facc15;
+      font-size: 18px;
+       display: flex;
+   gap: 8px;
+    align-items: center;
+   } 
+   .drv-rating span {
+   color: #94a3b8; 
+   font-size: 13px;
+   } 
+   .drv-wallet {
+   margin-top: 20px;
+    background: #0f172a; 
+    border-radius: 14px;
+     padding: 16px; 
+     display: flex;
+      justify-content: space-between;
+     gap: 15px; } 
+    .drv-wallet div {
+     display: flex;
+   flex-direction: column;
+   }
+ .drv-wallet span { 
   color: #94a3b8;
-
-  font-size: 13px;
+   font-size: 12px;
+   } 
+   .drv-wallet strong {
+     margin-top: 4px;
+      font-size: 15px;
+     } 
+  .drv-footer {
+     margin-top: 20px;
+     }
+   .drv-btn {
+     width: 100%;
+      border: none !important;
+       border-radius: 12px !important;
+        padding: 10px !important; 
+        font-weight: 600 !important;
+         background: linear-gradient( 135deg, #2563eb, #7c3aed ) !important;
+         } 
+         .drv-btn:hover { 
+        opacity: 0.9;
+       }
+       /* =========================== FILTERS =========================== */ 
+      .drv-filters { 
+      background: #1e1b4b;
+       border-radius: 18px; 
+      padding: 20px;
+       margin-bottom: 24px; 
+       border: 1px solid rgba(255, 255, 255, 0.08);
+       }
+       .drv-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 !important;
 }
 
-.drv-wallet {
-  margin-top: 20px;
-
-  background: #0f172a;
-
-  border-radius: 14px;
-
-  padding: 16px;
-
-  display: flex;
-
-  justify-content: space-between;
-
-  gap: 15px;
+.drv-grid > [class*="col"] {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
 }
 
-.drv-wallet div {
-  display: flex;
 
-  flex-direction: column;
+/* Tablet */
+@media (max-width: 991px) {
+  .drv-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-.drv-wallet span {
-  color: #94a3b8;
 
-  font-size: 12px;
+/* Mobile */
+@media (max-width: 767px) {
+  .drv-grid {
+    grid-template-columns: 1fr;
+  }
 }
+        .custom-input-driver,
+         /* .custom-select { background: #0f172a !important; border: 1px solid rgba(255, 255, 255, 0.08) !important; color: white !important; border-radius: 12px !important; } */ 
+         .custom-input-driver::placeholder { color: #94a3b8; } 
+         /* =========================== RESPONSIVE =========================== */
+          @media (max-width: 768px) {
+         .drv-profile { flex-direction: column;
+           text-align: center; 
+          } 
+        .drv-wallet {
+           flex-direction: column;
+           } 
+          }
+         .password-modal-overlay {
+           position: fixed;
+            inset: 0; 
+            background: rgba(0, 0, 0, 0.65);
+           backdrop-filter:
+            blur(4px);
+             display: flex;
+              align-items: center; 
+              justify-content: center; 
+              z-index: 9999;
+             }
+         .password-modal {
+           width: 430px;
+            max-width: 90%;
+             background: #ffffff;
+              border-radius: 16px;
+               padding: 32px; 
+               text-align: center; 
+               box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+         animation: passwordModalShow 0.25s ease;
+         }
+       @keyframes passwordModalShow {
+         from {
+           opacity: 0;
+           
+           transform: translateY(-15px) scale(0.97); 
+          } to
+           { opacity: 1; 
+            transform: translateY(0) scale(1);
+           }
+           } 
+      .password-modal-icon { width: 58px; 
+        height: 58px;
+         margin: 0 auto 15px;
+          border-radius: 50%;
+           background: #e9f8ef;
+         color: #28a745;
+          display: flex;
+           align-items: center;
+            justify-content: center; 
+            font-size: 30px; 
+            font-weight: bold;
+           } 
+      .password-modal h3 {
+         margin: 0 0 12px; 
+         color: #333;
+          font-size: 22px;
+       font-weight: 700; 
+      }
+   .password-modal-description {
+     color: #666;
+      font-size: 14px;
+       line-height: 1.8;
+        margin-bottom: 22px;
+       }
+ .password-box {
+   background: #f7f3f8; 
+   border: 1px solid #e2d5e5;
+    border-radius: 10px;
+     padding: 15px 18px;
+      margin-bottom: 15px;
+     } 
+.password-label {
+   display: block;
+    color: #777;
+     font-size: 13px; 
+     margin-bottom: 8px; 
+    }
+ .password-value {
+   background: #ffffff; 
+   border: 1px dashed #1e1b4b;
+    border-radius: 7px;
+     padding: 12px;
+      color: #1e1b4b; 
+      font-size: 20px; 
+      font-weight: 700;
+       letter-spacing: 2px;
+        direction: ltr;
+         user-select: all;
+         } 
+  .password-warning { color: #a66b00; 
+    
+    font-size: 13px;
+     margin: 12px 0 22px; 
+    } 
+  .password-modal-btn {
+     width: 100%;
+      border: none;
+       border-radius: 8px;
+        padding: 12px;
+         background: linear-gradient( 135deg, #b35aa0, #1e1b4b );
+          color: white;
+     font-size: 16px;
+      font-weight: 600;
+       cursor: pointer;
+        transition: 0.2s ease;
+       } 
+  .password-modal-btn:hover {
+     transform: translateY(-1px); 
+     box-shadow: 0 5px 15px rgba(143, 61, 130, 0.3); }
+     /* =========================================================
+   DRIVER RESPONSIVE
+   يحافظ على تصميم اللابتوب الحالي ويضيف دعم Tablet / Mobile
+   ========================================================= */
 
-.drv-wallet strong {
-  margin-top: 4px;
 
-  font-size: 15px;
-}
+/* =========================
+   TABLET
+   769px - 1199px
+   ========================= */
 
-.drv-footer {
-  margin-top: 20px;
-}
+@media (min-width: 769px) and (max-width: 1199px) {
 
-.drv-btn {
-  width: 100%;
+  /* Driver Cards */
 
-  border: none !important;
+  .drv-card {
+    padding: 17px;
+    border-radius: 19px !important;
+  }
 
-  border-radius: 12px !important;
-
-  padding: 10px !important;
-
-  font-weight: 600 !important;
-
-  background: linear-gradient(
-    135deg,
-    #2563eb,
-    #7c3aed
-  ) !important;
-}
-
-.drv-btn:hover {
-  opacity: 0.9;
-}
-
-/* ===========================
-   FILTERS
-=========================== */
-
-.drv-filters {
-  background: #1e1b4b;
-
-  border-radius: 18px;
-
-  padding: 20px;
-
-  margin-bottom: 24px;
-
-  border: 1px solid
-    rgba(255, 255, 255, 0.08);
-}
-
-.custom-input-driver,
-/* .custom-select {
-  background: #0f172a !important;
-
-  border: 1px solid
-    rgba(255, 255, 255, 0.08) !important;
-
-  color: white !important;
-
-  border-radius: 12px !important;
-} */
-
-.custom-input-driver::placeholder {
-  color: #94a3b8;
-}
-
-/* ===========================
-   RESPONSIVE
-=========================== */
-
-@media (max-width: 768px) {
   .drv-profile {
-    flex-direction: column;
+    gap: 12px;
+  }
 
-    text-align: center;
+  .drv-avatar {
+    width: 78px !important;
+    height: 78px !important;
+    border-width: 3px;
+    flex-shrink: 0;
+  }
+
+  .drv-info h5 {
+    font-size: 16px;
+    margin-bottom: 7px;
+  }
+
+  .drv-info p {
+    font-size: 13px;
+    margin-bottom: 4px;
+    word-break: break-word;
+  }
+
+  .drv-rating {
+    font-size: 16px;
+    gap: 5px;
+  }
+
+  .drv-rating span {
+    font-size: 12px;
+  }
+
+  .drv-wallet {
+    padding: 13px;
+    gap: 10px;
+  }
+
+  .drv-wallet strong {
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  .drv-wallet span {
+    font-size: 11px;
+  }
+
+
+  /* Filters */
+
+  .drv-filters {
+    padding: 16px;
+    gap: 12px !important;
+  }
+
+  .drv-filters > div:last-child {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .custom-input-driver {
+    max-width: 100%;
+  }
+}
+
+
+/* =========================
+   SMALL TABLET
+   769px - 991px
+   ========================= */
+
+@media (min-width: 769px) and (max-width: 991px) {
+
+  .drv-profile {
+    align-items: flex-start;
+  }
+
+  .drv-avatar {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .drv-info h5 {
+    font-size: 15px;
+  }
+
+  .drv-info p {
+    font-size: 12px;
   }
 
   .drv-wallet {
     flex-direction: column;
-  }
-}
-.password-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(4px);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  z-index: 9999;
-}
-
-.password-modal {
-  width: 430px;
-  max-width: 90%;
-  background: #ffffff;
-
-  border-radius: 16px;
-  padding: 32px;
-
-  text-align: center;
-
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-
-  animation: passwordModalShow 0.25s ease;
-}
-
-@keyframes passwordModalShow {
-  from {
-    opacity: 0;
-    transform: translateY(-15px) scale(0.97);
+    gap: 10px;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+  .drv-wallet div {
+    width: 100%;
+  }
+
+
+  /* Add Driver */
+
+  .custom-input-driver,
+  .custom-selectt {
+    width: 100%;
   }
 }
 
-.password-modal-icon {
-  width: 58px;
-  height: 58px;
 
-  margin: 0 auto 15px;
+/* =========================================================
+   MOBILE
+   أقل من 768px
+   ========================================================= */
 
-  border-radius: 50%;
+@media (max-width: 768px) {
 
-  background: #e9f8ef;
-  color: #28a745;
+  /* =========================
+     General
+     ========================= */
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .w-100.p-2 {
+    padding: 10px !important;
+  }
 
-  font-size: 30px;
-  font-weight: bold;
+
+  /* =========================
+     Driver Management Title
+     ========================= */
+
+  .w-100.p-2 > h2 {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+
+
+  /* =========================
+     Filters
+     ========================= */
+
+  .drv-filters {
+    padding: 14px;
+    border-radius: 15px;
+
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch !important;
+
+    gap: 12px !important;
+  }
+
+  .drv-filters > a {
+    width: 100%;
+  }
+
+  .drv-filters > a button {
+    width: 100% !important;
+    height: 44px;
+  }
+
+  .drv-filters > div:last-child {
+    width: 100%;
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px !important;
+  }
+
+  .drv-filters .custom-input-driver,
+  .drv-filters .custom-select {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+
+  /* =========================
+     Driver Cards
+     ========================= */
+
+  .drv-card {
+    padding: 16px;
+    border-radius: 18px !important;
+  }
+
+  .drv-card-header {
+    margin-bottom: 15px;
+  }
+
+  .drv-id {
+    font-size: 13px;
+  }
+
+
+  /* =========================
+     Driver Profile
+     ========================= */
+
+  .drv-profile {
+    flex-direction: row;
+    text-align: left;
+
+    align-items: center;
+    gap: 12px;
+  }
+
+  .drv-avatar {
+    width: 75px !important;
+    height: 75px !important;
+
+    min-width: 75px;
+    min-height: 75px;
+
+    border-width: 3px;
+  }
+
+  .drv-info {
+    min-width: 0;
+  }
+
+  .drv-info h5 {
+    font-size: 16px;
+    margin-bottom: 7px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .drv-info p {
+    font-size: 12px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    max-width: 100%;
+  }
+
+  .drv-rating {
+    font-size: 16px;
+    gap: 5px;
+    margin-top: 6px;
+  }
+
+  .drv-rating span {
+    font-size: 11px;
+  }
+
+
+  /* =========================
+     Wallet
+     ========================= */
+
+  .drv-wallet {
+    margin-top: 15px;
+    padding: 13px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+  }
+
+  .drv-wallet div {
+    min-width: 0;
+  }
+
+  .drv-wallet span {
+    font-size: 11px;
+  }
+
+  .drv-wallet strong {
+    font-size: 13px;
+
+    overflow-wrap: anywhere;
+  }
+
+
+  /* =========================
+     Footer Button
+     ========================= */
+
+  .drv-footer {
+    margin-top: 15px;
+  }
+
+  .drv-btn {
+    padding: 9px !important;
+    font-size: 14px !important;
+  }
+
+
+  /* =========================
+     Add Driver
+     ========================= */
+
+  .subtitle-driver-bold {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 12px;
+  }
+
+  .subtitle-driver {
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+  }
+
+  .custom-input-driver,
+  .custom-selectt {
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  /* منع الـ Row من الخروج خارج الشاشة */
+
+  .w-100 .row {
+    margin-left: -6px;
+    margin-right: -6px;
+  }
+
+  .w-100 .row > [class*="col-"] {
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-bottom: 10px;
+  }
+
+
+  /* =========================
+     File Inputs
+     ========================= */
+
+  input[type="file"].custom-input-driver {
+    width: 100%;
+    min-height: 43px;
+
+    font-size: 13px;
+  }
+
+
+  /* =========================
+     Add Driver Button
+     ========================= */
+
+  .btn-login {
+    width: 100%;
+    min-height: 45px;
+
+    margin-top: 10px;
+  }
+
+
+  /* =========================
+     Messages
+     ========================= */
+
+  .success,
+  .error {
+    display: block;
+    margin-top: 10px;
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    word-break: break-word;
+  }
+
+
+  /* =========================
+     Password Modal
+     ========================= */
+
+  .password-modal-overlay {
+    padding: 15px;
+  }
+
+  .password-modal {
+    width: 100%;
+    max-width: 430px;
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 25px 18px;
+    border-radius: 15px;
+  }
+
+  .password-modal-icon {
+    width: 52px;
+    height: 52px;
+
+    font-size: 27px;
+  }
+
+  .password-modal h3 {
+    font-size: 19px;
+  }
+
+  .password-modal-description {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .password-value {
+    font-size: 18px;
+    padding: 11px;
+  }
+
+  .password-warning {
+    font-size: 12px;
+  }
+
+  .password-modal-btn {
+    min-height: 44px;
+    font-size: 15px;
+  }
 }
 
-.password-modal h3 {
-  margin: 0 0 12px;
 
-  color: #333;
-  font-size: 22px;
-  font-weight: 700;
+/* =========================================================
+   VERY SMALL MOBILE
+   أقل من 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  /* Driver title */
+
+  .w-100.p-2 > h2 {
+    font-size: 20px;
+  }
+
+
+  /* Card */
+
+  .drv-card {
+    padding: 14px;
+    border-radius: 16px !important;
+  }
+
+  .drv-profile {
+    gap: 10px;
+  }
+
+  .drv-avatar {
+    width: 65px !important;
+    height: 65px !important;
+
+    min-width: 65px;
+    min-height: 65px;
+  }
+
+  .drv-info h5 {
+    font-size: 14px;
+  }
+
+  .drv-info p {
+    font-size: 11px;
+  }
+
+  .drv-rating {
+    font-size: 14px;
+  }
+
+
+  /* Wallet */
+
+  .drv-wallet {
+    padding: 11px;
+    gap: 8px;
+  }
+
+  .drv-wallet span {
+    font-size: 10px;
+  }
+
+  .drv-wallet strong {
+    font-size: 12px;
+  }
+
+
+  /* Badge */
+
+  .drv-card-header .badge {
+    font-size: 10px;
+    padding: 5px 7px;
+  }
+
+
+  /* Password modal */
+
+  .password-modal {
+    padding: 22px 15px;
+  }
+
+  .password-modal h3 {
+    font-size: 18px;
+  }
+
+  .password-value {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
 }
 
-.password-modal-description {
-  color: #666;
-  font-size: 14px;
-  line-height: 1.8;
 
-  margin-bottom: 22px;
+/* =========================================================
+   EXTRA SMALL DEVICES
+   أقل من 360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .drv-profile {
+    gap: 8px;
+  }
+
+  .drv-avatar {
+    width: 58px !important;
+    height: 58px !important;
+
+    min-width: 58px;
+    min-height: 58px;
+  }
+
+  .drv-info h5 {
+    font-size: 13px;
+  }
+
+  .drv-info p {
+    font-size: 10px;
+  }
+
+  .drv-wallet {
+    grid-template-columns: 1fr;
+  }
+
+  .drv-btn {
+    font-size: 13px !important;
+  }
 }
+/* =========================================================
+   ADD DRIVER FORM GRID
+   ========================================================= */
 
-.password-box {
-  background: #f7f3f8;
-  border: 1px solid #e2d5e5;
+.driver-form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
 
-  border-radius: 10px;
-
-  padding: 15px 18px;
-
-  margin-bottom: 15px;
-}
-
-.password-label {
-  display: block;
-
-  color: #777;
-
-  font-size: 13px;
-
-  margin-bottom: 8px;
-}
-
-.password-value {
-  background: #ffffff;
-
-  border: 1px dashed #1e1b4b;
-
-  border-radius: 7px;
-
-  padding: 12px;
-
-  color: #1e1b4b;
-
-  font-size: 20px;
-  font-weight: 700;
-
-  letter-spacing: 2px;
-
-  direction: ltr;
-  user-select: all;
-}
-
-.password-warning {
-  color: #a66b00;
-
-  font-size: 13px;
-
-  margin: 12px 0 22px;
-}
-
-.password-modal-btn {
   width: 100%;
-
-  border: none;
-  border-radius: 8px;
-
-  padding: 12px;
-
-  background: linear-gradient(
-    135deg,
-    #b35aa0,
-    #1e1b4b
-  );
-
-  color: white;
-
-  font-size: 16px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
 }
 
-.password-modal-btn:hover {
-  transform: translateY(-1px);
 
-  box-shadow: 0 5px 15px rgba(143, 61, 130, 0.3);
+/* كل عنصر داخل الـ Grid */
+
+.driver-form-grid > div {
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* الحقول */
+
+.driver-form-grid .custom-input-driver,
+.driver-form-grid .custom-selectt {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box;
+   color: 'white',
+   
+  
+ 
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+  .driver-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .driver-form-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .driver-form-grid {
+    gap: 10px;
+  }
+
 }

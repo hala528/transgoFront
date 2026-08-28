@@ -12,7 +12,25 @@
     
 
     /*لون للكرت */
-      --card-bg: #1e1b4b;
+      --card-bg: #11182d;
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --accent: #8b5cf6;
+      --surface: #11182d;
+      --surface-raised: #161f38;
+      --surface-soft: rgba(255, 255, 255, .045);
+      --border-subtle: rgba(148, 163, 184, .13);
+      --text-primary: #f7f9fc;
+      --text-secondary: #c4cee0;
+      --text-muted: #7f8ca7;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #fb7185;
+      --radius-sm: 10px;
+      --radius-md: 15px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 10px 30px rgba(0, 0, 0, .16);
+      --shadow-lg: 0 26px 70px rgba(0, 0, 0, .35);
 }
 /*  للتحكم بالحجم بشكل اسهل */
 *{
@@ -20,7 +38,7 @@
 }
 /*لتوحيد الخط */
 body{
-    font-family: "Lato", sans-serif;
+    font-family: Inter, "Segoe UI", Tahoma, Arial, sans-serif;
 }
 /*الكل يكون اله نفس الكوتسنر حيث 0= لا يوجد مسافة من الاعلى ة الاشفا و الاوت تعني المسافة من اليسار ة اليني تكون افتراضية */
 .container{
@@ -31,15 +49,3 @@ body{
     height: 100vh;
 }
 /*مهم لترتيب العناصر */
-.row{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.row .col-12{
-    width: 100%;
-}
-.row .col-6{
-    width: 50%;
-}

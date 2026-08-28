@@ -1,0 +1,123 @@
+/* Shared visual language for dashboard feature pages. */
+.dashboard-content { color: var(--text-primary); }
+.dashboard-content :is(h1, h2, h3, h4, h5, h6) { color: var(--text-primary); letter-spacing: -.02em; }
+
+.dashboard-content :is(.reports-page, .drivers-page, .complaints-report, .notifications-page, .complaints-page) {
+  width: 100% !important;
+  max-width: 1600px !important;
+  margin-inline: auto;
+  background: transparent !important;
+}
+
+.dashboard-content :is(.card, .card-driver, .card-details, .card-account, .card-create, .td-card, .trip-card,
+  .b-trip-card, .filter-card, .filters-card, .notification-card, .commission-card, .history-card, .log-card,
+  .chart-box, .table-box, .stat-card, .summary-card, .breakdown-card, .vr-stat-card, .vr-profile-card,
+  .vr-breakdown-card, .vr-table-card, .complaint-card, .complaint-stat-card) {
+  color: var(--text-primary);
+  background: linear-gradient(145deg, rgba(22, 31, 56, .96), rgba(14, 21, 41, .96)) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+.dashboard-content :is(.card, .td-card, .b-trip-card, .complaint-card, .stat-card, .summary-card) {
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.dashboard-content :is(.card, .td-card, .b-trip-card, .complaint-card, .stat-card, .summary-card):hover {
+  border-color: rgba(129, 140, 248, .24) !important;
+  box-shadow: 0 16px 42px rgba(0, 0, 0, .22);
+}
+
+.dashboard-content :is(.filters, .filter-box, .app-filters-box, .drv-filters) {
+  padding: clamp(14px, 2vw, 22px) !important;
+  background: rgba(17, 24, 45, .72) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+}
+
+.dashboard-content :is(input, select, textarea, .form-control, .form-select, .custom-select, .custom-input-driver) {
+  min-height: 44px;
+  color: var(--text-primary) !important;
+  background-color: rgba(5, 10, 24, .68) !important;
+  border: 1px solid rgba(148, 163, 184, .18) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.dashboard-content :is(input, select, textarea, .form-control, .form-select):focus {
+  background-color: rgba(8, 14, 31, .9) !important;
+  border-color: rgba(129, 140, 248, .65) !important;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, .12) !important;
+  outline: 0;
+}
+.dashboard-content :is(input, textarea)::placeholder { color: #64748b !important; }
+.dashboard-content select option { color: #e5e7eb; background: #11182d; }
+
+.dashboard-content :is(.btn-primary, .apply-btn, .app-apply-btn, .send-btn, .edit-btn, .submit-btn,
+  .b-details-btn, .td-btn-action, .drv-btn) {
+  min-height: 42px;
+  padding: 9px 16px;
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
+  box-shadow: 0 9px 24px rgba(99, 102, 241, .23);
+  color: #fff !important;
+  font-weight: 700;
+  transition: filter .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.dashboard-content :is(.btn-primary, .apply-btn, .app-apply-btn, .send-btn, .edit-btn, .submit-btn,
+  .b-details-btn, .td-btn-action, .drv-btn):hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, .3);
+}
+
+.dashboard-content :is(table, .custom-table) {
+  margin-bottom: 0;
+  overflow: hidden;
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  border-color: var(--border-subtle) !important;
+  border-radius: var(--radius-md);
+}
+.dashboard-content :is(table, .custom-table) thead th {
+  padding: 13px 14px;
+  color: #9eacc5 !important;
+  background: rgba(255, 255, 255, .045) !important;
+  border-color: var(--border-subtle) !important;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+.dashboard-content :is(table, .custom-table) tbody td {
+  padding: 13px 14px;
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  border-color: rgba(148, 163, 184, .09) !important;
+  vertical-align: middle;
+}
+.dashboard-content :is(table, .custom-table) tbody tr { transition: background .18s ease; }
+.dashboard-content :is(table, .custom-table) tbody tr:hover > * { background: rgba(99, 102, 241, .055) !important; }
+
+.dashboard-content :is(.badge, [class*="status"], [class*="badge"]) { font-weight: 700; letter-spacing: .01em; }
+.dashboard-content :is(.page-header, .report-header, .details-header) { margin-bottom: 20px; }
+.dashboard-content :is(.page-header, .report-header, .details-header) :is(h1, h2) {
+  margin: 0;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+}
+
+.dashboard-content ::-webkit-scrollbar { width: 7px; height: 7px; }
+.dashboard-content ::-webkit-scrollbar-track { background: transparent; }
+.dashboard-content ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, .23); border-radius: 999px; }
+.dashboard-content ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, .38); }
+
+@media (max-width: 767.98px) {
+  .dashboard-content { padding: 8px; }
+  .dashboard-content :is(.card, .td-card, .b-trip-card, .filters, .filter-box, .app-filters-box) { border-radius: 16px !important; }
+  .dashboard-content :is(table, .custom-table) thead th,
+  .dashboard-content :is(table, .custom-table) tbody td { padding: 11px 12px; }
+}

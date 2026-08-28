@@ -1,4 +1,5 @@
-/* الخلفية العامة */
+
+
 .login-page{
     height: 100vh;
     display: flex;
@@ -8,7 +9,7 @@ padding: 20px;
     background: radial-gradient(circle at top left, var(--bg-gradient-start), var(--bg-dark));
 }
 
-/* الكارد */
+
 .login-card{
     
     display: flex;
@@ -27,12 +28,12 @@ padding: 20px;
     width: 50%;
   background-image:
      url(../../assest/logo.jpg);
-    background-position: center;/*مكان الصووة بالنسبة للتعنصر */
-    background-size: cover;/*تغطي كامل العنصر */
+    background-position: center;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
-/* LEFT */
+
 .login-left{
     flex: 1;
     display: flex;
@@ -49,7 +50,7 @@ padding: 20px;
     letter-spacing: 2px;
 }
 
-/* RIGHT */
+
 .login-right{
     flex: 1;
     padding: 40px;
@@ -75,7 +76,7 @@ padding: 20px;
      display: block;
   }
 
-/* الفورم */
+
  .form-custom input {
 padding: 20px 20px;
     outline: none;
@@ -112,7 +113,7 @@ padding: 20px 20px;
     transition: 0.3s;
    
   }
-/* forgot */
+
 .forgot{
     display: block;
     text-align: right;
@@ -122,7 +123,7 @@ padding: 20px 20px;
     cursor: pointer;
 }
 
-/* زر login */
+
 .btn-login{
     
     width: 100%;

@@ -3,7 +3,7 @@
   color: white;
   width: 100%;   
 }
-/* ===== TRIP CARD ===== */
+
 .b-trip-card{
   background: rgba(30, 27, 75, 0.65);
   border-radius: 14px;
@@ -50,7 +50,7 @@ font-size:15px;
   font-size:15px;
 }
 
-/*  (Route / Time / Driver) */
+
 .b-label{
   color:#19d341;
   font-weight:500;
@@ -64,7 +64,7 @@ font-size:15px;
     font-weight:700;
 }
 
-/*  السائق   */
+
 .b-value.driver{
   color:#ffffff;
   font-weight:800;
@@ -89,27 +89,27 @@ font-size:15px;
   align-items: center;
 }
 
-/* left side (labels) */
+
 .td-label {
   color: #9ca3af; /*  */
   font-size: 13px;
 }
 
-/* right side (values) */
+
 .td-value {
   color: #fff;
   font-weight: 600;
   text-align: right;
 }
 
-/* point name + icon */
+
 .td-point-name {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-/*  icon */
+
 .td-icon {
   color: #22c55e;
   font-size: 14px;
@@ -145,7 +145,7 @@ font-size:15px;
   align-items: stretch;
 }
 
-/* left info */
+
 .td-pickup-list {
   flex: 1;
   display: flex;
@@ -187,7 +187,7 @@ font-size:15px;
 }
 
 
-/* ===== RIGHT SIDE ===== */
+
 .b-trip-right{
   display:flex;
   align-items:center;
