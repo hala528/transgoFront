@@ -379,8 +379,8 @@ export default function WalletDriver() {
   };
 
   return (
-    <div className="w-100 p-2 ">
-      <div className="d-flex align-items-center justify-content-between px-3">
+    <div className="wallet-charge-page w-100 p-2">
+      <div className="wallet-charge-header d-flex align-items-center justify-content-between px-3">
       <h2 style={{ color: "white" }}>{t("walletDriver.chargingDriverWallet")}</h2>
       <Link to="/dashboard/wallet/logsdriver">
       <Button
@@ -395,7 +395,7 @@ export default function WalletDriver() {
         </Button>
       </Link>
       </div>
-      <div className="wallett-box">
+      <div className="wallet-search-panel wallett-box">
        
       
            <Form.Control
@@ -421,15 +421,15 @@ export default function WalletDriver() {
 
         {/* 👤 الكروت */}
         {drivers.map((item) => (
-          <div key={item.user_id} className="driverr-card">
+          <div key={item.user_id} className="wallet-user-card driverr-card">
             <img
               src={`${IMAGE_BASE}/${item.driver_profile?.personal_photo}`}
               alt="driver"
             />
 
-            <div className="driver-info">
+            <div className="wallet-user-info driver-info">
               <h3 style={{color:'white'}}>{t("walletDriver.fullName")}: {item.full_name}</h3>
-              <div className="driverr-details">
+              <div className="wallet-badges driverr-details">
                 <span className="balance">
                    {item.wallet?.balance} $
                 </span>

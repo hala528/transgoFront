@@ -463,9 +463,9 @@ export default function DetailsPassenger() {
       </div>
 
       {/* Main Info */}
-      <div className="card-details d-flex px-3 position-relative">
-        <Row className=" w-100">
-          <Col xs={4} md={2}>
+      <div className="passenger-profile-card card-details d-flex px-3">
+        <Row className="passenger-profile-row w-100 g-3">
+          <Col xs={12} sm={3} md={2} className="passenger-avatar-col">
             <Image
               src={personl}
               roundedCircle
@@ -477,12 +477,12 @@ export default function DetailsPassenger() {
             />
           </Col>
 
-          <Col>
+          <Col xs={12} sm={9} md={10} className="passenger-profile-info">
             <h5 style={{ color: "white" }}>
               {t("detailsEmployee.fullName")} : {passenger?.full_name}
             </h5>
 
-            <div className="d-flex gap-2 mb-2">
+            <div className="passenger-status-actions d-flex gap-2 mb-2">
               <Button
                 style={{
                   background: "#4f46e5",
@@ -520,18 +520,15 @@ export default function DetailsPassenger() {
             </p>
 
             <Button
+              className="passenger-toggle-status"
               onClick={handleToggleStatus}
               disabled={statusLoading}
               style={{
-                position: "absolute",
-                bottom: "20px",
-                 insetInlineEnd: "20px",
                 background:
                   passenger?.account_status === 1
                     ? "red"
                     : "green",
                 border: "none",
-                width: "200px",
               }}
             >
               {statusLoading
