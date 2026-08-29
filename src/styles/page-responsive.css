@@ -335,3 +335,205 @@
   .dashboard-content .wallet-badges { display: grid; grid-template-columns: 1fr; }
   .dashboard-content .wallet-badges :is(.wallet-role-badge, .balance, .status) { width: 100%; }
 }
+
+/* Trip details and live tracking */
+.dashboard-content :is(.trip-details-page, .trip-dashboard) {
+  width: 100%;
+  max-width: 1600px;
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.dashboard-content :is(.trip-details-page, .trip-dashboard) :is(.td-left, .td-right, .main-content-section, .sidebar-section, .td-card) {
+  min-width: 0;
+}
+
+.dashboard-content .trip-details-page .td-title-row,
+.dashboard-content .trip-dashboard .td-title-row {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.dashboard-content .trip-details-page .btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dashboard-content .trip-details-page :is(.td-info-box, .td-route-item, .td-driver, .td-card) {
+  overflow-wrap: anywhere;
+}
+
+.dashboard-content .td-booking-table-shell,
+.dashboard-content .trip-dashboard .table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  border-radius: 12px;
+}
+
+.dashboard-content .td-booking-table {
+  min-width: 820px;
+}
+
+.dashboard-content .trip-dashboard .top-card,
+.dashboard-content .trip-dashboard .sidebar-card,
+.dashboard-content .trip-dashboard .route-timeline-card,
+.dashboard-content .trip-dashboard .table-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-content .trip-dashboard .custom-dashboard-table {
+  min-width: 790px;
+}
+
+.dashboard-content .trip-dashboard .map-wrapper-placeholder {
+  width: 100%;
+  height: clamp(360px, 55vh, 620px);
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.dashboard-content .trip-dashboard .map-wrapper-placeholder > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.dashboard-content .trip-dashboard .point-info {
+  min-width: 0;
+}
+
+.dashboard-content .trip-dashboard .point-info :is(h4, p) {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1199.98px) {
+  .dashboard-content .trip-dashboard .top-cards-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .dashboard-content .trip-dashboard .sidebar-section {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .dashboard-content .trip-dashboard {
+    padding: 10px !important;
+  }
+
+  .dashboard-content :is(.trip-details-page, .trip-dashboard) .td-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .dashboard-content .trip-details-page .btn-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .dashboard-content .trip-details-page .btn-row :is(button, a) {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dashboard-content .trip-details-page .td-card,
+  .dashboard-content .trip-dashboard :is(.top-card, .sidebar-card, .route-timeline-card, .table-card) {
+    padding: 14px !important;
+  }
+
+  .dashboard-content .trip-details-page .td-route-top {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .dashboard-content .trip-details-page .td-route-top > :not(.td-badge-a):not(.td-badge-b):not(.td-badge-c) {
+    min-width: 0;
+  }
+
+  .dashboard-content .trip-details-page .td-driver-img {
+    width: 72px;
+    height: 72px;
+  }
+
+  .dashboard-content .trip-dashboard .top-cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px;
+  }
+
+  .dashboard-content .trip-dashboard .sidebar-section {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-content .trip-dashboard .info-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(90px, auto);
+    align-items: start;
+    gap: 10px;
+  }
+
+  .dashboard-content .trip-dashboard .info-row > :last-child {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-align: end;
+  }
+
+  .dashboard-content .trip-dashboard .map-wrapper-placeholder {
+    height: clamp(280px, 48vh, 400px);
+    border-radius: 12px;
+  }
+
+  .dashboard-content .trip-dashboard .timeline-body {
+    gap: 14px;
+  }
+
+  .dashboard-content .trip-dashboard .timeline-point {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .dashboard-content .trip-details-page .btn-row,
+  .dashboard-content .trip-dashboard .top-cards-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-content :is(.trip-details-page, .trip-dashboard) :is(.main-title, .td-title-row h2) {
+    font-size: 20px !important;
+    line-height: 1.4;
+  }
+
+  .dashboard-content .trip-details-page :is(.td-breadcrumb, .td-separator) {
+    display: none;
+  }
+
+  .dashboard-content .trip-details-page .td-map-container,
+  .dashboard-content .trip-dashboard .map-wrapper-placeholder {
+    height: 270px;
+  }
+
+  .dashboard-content .trip-dashboard .info-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-content .trip-dashboard .info-row > :last-child {
+    text-align: start;
+  }
+
+  .dashboard-content .trip-dashboard .timeline-body {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .dashboard-content .trip-dashboard .timeline-line-connector {
+    width: 100%;
+    min-height: 50px;
+  }
+}

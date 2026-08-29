@@ -815,6 +815,7 @@ const arrivalRaw = trip.general?.expected_arrival_at;
               {t("tripDetails.bookings", { count: bookings.length })}
             </h4>
 
+            <div className="td-booking-table-shell">
             <table className="td-booking-table">
 
               <thead>
@@ -900,6 +901,7 @@ const arrivalRaw = trip.general?.expected_arrival_at;
 </tbody>
 
             </table>
+            </div>
           </div>
 
         </div>

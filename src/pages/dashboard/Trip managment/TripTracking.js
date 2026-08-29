@@ -708,7 +708,7 @@ React.useEffect(() => {
   }, [tripData?.trip?.route_polyline, tracking?.route_polyline]);
 
   return (
-    <div className="trip-dashboard" dir="ltr">
+    <div className="trip-dashboard" dir={i18n.dir()}>
 
       {/* HEADER */}
      <div className="td-header">
