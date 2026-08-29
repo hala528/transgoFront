@@ -497,6 +497,7 @@ export default function ViewRating() {
               {/* Table */}
               <div className="vr-table-card">
                 <h3>{t("ratings.ratingsHistory")}</h3>
+                <div className="vr-table-shell">
                 <table className="vr-table">
                   <thead>
                     <tr>
@@ -532,6 +533,7 @@ export default function ViewRating() {
                     ))}
                   </tbody>
                 </table>
+                </div>
               </div>
             </>
           )}
